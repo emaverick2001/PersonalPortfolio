@@ -2,3 +2,21 @@
 {
     background-color: #800080;
 }
+
+.page-footer
+{
+	font-size: .875rem;
+	text-align: center;
+	background-color: #f7f7f7;
+}
+
+.page-footer a
+{
+	font-weight: 600;
+	color: #495057;
+}
+
+.page-footer a:focus, .page-footer a:hover
+{
+    color: #007bff;
+}
