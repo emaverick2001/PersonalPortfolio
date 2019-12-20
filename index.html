@@ -16,7 +16,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Collection of software projects and music performances by Debashis Biswas">
     
-    
     <title>Debashis Biswas</title>
     
     <!-- Bootstrap core CSS -->
@@ -42,37 +41,32 @@
         <div class="container">
             <!-- About Section -->
             <div id="about-section">
-                <div class="text-center pb-3">
-                    <h2>About</h2>
-                </div>
-            </div>
-            <div class="row justify-content-center align-items-center">
-                <div class="col-12 col-lg-7 text-center">
-                    <h4>
-                        Welcome to my website!
-                    </h4>
-                    <p class="lead">
-                        I'm Debashis, a student at Arizona State University dual majoring in Computer Science and Clarinet Performance.
-                        My goal is to use software to enhance how musicians practice and perform.
-                        On this website, you will find many of my software projects and music performances.
-                    </p>
-                    <h4 class="text-center">
-                        Contact
-                    </h4>
-                    <ul class="list-group list-group-horizontal-lg pb-3 pb-lg-0">
-                        <a class="list-group-item flex-fill text-center w-100" href="https://github.com/debashisbiswas" target="_blank">
-                            GitHub
-                        </a>
-                        <a class="list-group-item flex-fill text-center w-100" href="https://www.linkedin.com/in/d-biswas/" target="_blank">
-                            LinkedIn
-                        </a>
-                        <a class="list-group-item flex-fill text-center w-100" href="https://asu.joinhandshake.com/users/6970358" target="_blank">
-                            Handshake
-                        </a>
-                    </ul>
-                </div>
-                <div class="col-12 col-lg-4">
-                    <img class="rounded mx-auto d-block img-fluid" src="images/headshot_web.JPG">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-12 col-lg-7 text-center">
+                        <p class="lead text-lg-left">
+                            I'm Debashis, a student at Arizona State University dual majoring in Computer Science and Clarinet Performance.
+                            My goal is to use software to enhance how musicians practice and perform.
+                            On this website, you will find many of my software projects and music performances.
+                        </p>
+                        <h4>
+                            Contact
+                        </h4>
+                        <!-- TODO: These should be icons, not text -->
+                        <ul class="list-group list-group-horizontal-lg pb-3 pb-lg-0">
+                            <a class="list-group-item flex-fill text-center w-100" href="https://github.com/debashisbiswas" target="_blank">
+                                GitHub
+                            </a>
+                            <a class="list-group-item flex-fill text-center w-100" href="https://www.linkedin.com/in/d-biswas/" target="_blank">
+                                LinkedIn
+                            </a>
+                            <a class="list-group-item flex-fill text-center w-100" href="https://asu.joinhandshake.com/users/6970358" target="_blank">
+                                Handshake
+                            </a>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <img class="rounded mx-auto d-block img-fluid" src="images/headshot_web.JPG">
+                    </div>
                 </div>
             </div>
             
@@ -83,187 +77,245 @@
                 <div class="text-center pb-3">
                     <h2>Personal Projects</h2>
                 </div>
-                <div class="card-columns">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Scale Scrambler</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">HTML/CSS/JS + Bootstrap</h6>
-                            <p class="card-text">Responsive web app that randomizes fundamental exercises to supplement music practice</p>
-                            <a href="https://debashisbiswas.github.io/scales/" target="_blank" class="btn btn-primary">See project</a>
-                            <a href="https://github.com/debashisbiswas/scales" target="_blank" class="btn btn-primary">Source code</a>
+                <!-- TODO: These should all be the same height.
+                    Possibly reconfigure the layout such that the buttons are a full-width block grid at the bottom of each card -->
+                    <div class="card-deck">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">Scale Scrambler</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">HTML/CSS/JS + Bootstrap</h6>
+                                <p class="card-text">Responsive web app that randomizes fundamental exercises to supplement music practice</p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="https://debashisbiswas.github.io/scales/" target="_blank" class="btn btn-primary btn-block">See project</a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="https://github.com/debashisbiswas/scales" target="_blank" class="btn btn-primary btn-block">Source code</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Todoica</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Heroku + Node.js</h6>
-                            <p class="card-text">Synchronizes tasks between task manager applications Todoist and Habitica</p>
-                            <a href="https://github.com/debashisbiswas/todoica" target="_blank" class="btn btn-primary">Source code</a>
+                        
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">Todoica</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Heroku + Node.js</h6>
+                                <p class="card-text">Synchronizes tasks between task manager applications Todoist and Habitica</p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="https://github.com/debashisbiswas/todoica" target="_blank" class="btn btn-primary btn-block">Source code</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Bitmap Image Processor</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">C</h6>
-                            <p class="card-text">Multithreaded program that reads bitmap images and rewrites them with altered color data, dividing image processing between multiple threads</p>
-                            <a href="https://github.com/debashisbiswas/multithreaded_bmpreader" target="_blank" class="btn btn-primary">Source code</a>
+                        
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">Bitmap Image Processor</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">C</h6>
+                                <p class="card-text">Multithreaded program that reads bitmap images and rewrites them with altered color data, dividing image processing between multiple threads</p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="https://github.com/debashisbiswas/multithreaded_bmpreader" target="_blank" class="btn btn-primary btn-block">Source code</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Music Exercise Randomizer</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Python</h6>
-                            <p class="card-text">Randomizes fundamental exercises to supplement music practice</p>
-                            <a href="https://github.com/debashisbiswas/music-fundamentals" target="_blank" class="btn btn-primary">Source code</a>
+                        
+                        <!-- ROW DIVIDER -->
+                        <div class="w-100 pb-sm-3"></div>
+                        
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">Music Exercise Randomizer</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Python</h6>
+                                <p class="card-text">Randomizes fundamental exercises to supplement music practice</p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="col">
+                                    <a href="https://github.com/debashisbiswas/music-fundamentals" target="_blank" class="btn btn-primary btn-block">Source code</a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Pitch Transposer</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Python</h6>
-                            <p class="card-text">Transposes pitches between two specified keys</p>
-                            <a href="https://github.com/debashisbiswas/transposer" target="_blank" class="btn btn-primary">Source code</a>
+                        
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">Pitch Transposer</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Python</h6>
+                                <p class="card-text">Transposes pitches between two specified keys</p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="col">
+                                    <a href="https://github.com/debashisbiswas/transposer" target="_blank" class="btn btn-primary btn-block">Source code</a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Teleprompter Android Application</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Java + Kotlin</h6>
-                            <p class="card-text">Teleprompter Android App on the Google Play Store</p>
-                            <a href="https://play.google.com/store/apps/details?id=com.maestoso.teleprompter" target="_blank" class="btn btn-primary">See project</a>
-                            <a href="https://github.com/debashisbiswas/teleprompter" target="_blank" class="btn btn-primary">Source code</a>
+                        
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">Teleprompter Android Application</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Java + Kotlin</h6>
+                                <p class="card-text">Teleprompter Android App on the Google Play Store</p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="https://play.google.com/store/apps/details?id=com.maestoso.teleprompter" target="_blank" class="btn btn-primary btn-block">See project</a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="https://github.com/debashisbiswas/teleprompter" target="_blank" class="btn btn-primary btn-block">Source code</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <hr>
-            
-            <!-- Open Source Section -->
-            <div id="opensource-section">
-                <div class="text-center pb-3">
-                    <h2>Open Source Contributions</h2>
-                </div>
-                <div class="card-columns">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Habitica for Android</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Java + Kotlin</h6>
-                            <p class="card-text">A habit-building application that uses game mechanics from classic RPGs to motivate players</p>
-                            <a href="https://github.com/HabitRPG/habitica-android" target="_blank" class="btn btn-primary">Source code</a>
-                        </div>
-                    </div>
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Stardew Checkup</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">HTML/CSS/JS</h6>
-                            <p class="card-text">Checks achievement and milestone progress on a Stardew Valley save file</p>
-                            <a href="https://github.com/MouseyPounds/stardew-checkup" target="_blank" class="btn btn-primary">Source code</a>
-                        </div>
-                    </div>
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Horace</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">JavaScript + Node.js</h6>
-                            <p class="card-text">Discord bot that oversees the Knights of Academia Discord server</p>
-                            <a href="https://github.com/Knights-Of-Academia/horace" target="_blank" class="btn btn-primary">Source code</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <hr>
-            
-            <!-- Music Section -->
-            <div id="music-section">
-                <h2 class="text-center pb-3">Music Performances</h2>
                 
-                <!-- ROW 1 (first three cards) -->
-                <div class="row">
-                    <div class="col-md-4 pb-2 pb-md-0">
-                        <div class="card">
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/JgM6tUMkcaY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <hr>
+                
+                <!-- Open Source Section -->
+                <div id="opensource-section">
+                    <div class="text-center pb-3">
+                        <h2>Open Source Contributions</h2>
+                    </div>
+                    <div class="card-deck">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">Habitica for Android</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Java + Kotlin</h6>
+                                <p class="card-text">A habit-building application that uses game mechanics from classic RPGs to motivate players</p>
                             </div>
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Szalowski: Sonatina - 1, 2</h5>
-                                <p class="card-text text-muted">December 2, 2019</p>
+                            <div class="card-footer">
+                                <div class="col">
+                                    <a href="https://github.com/HabitRPG/habitica-android" target="_blank" class="btn btn-primary btn-block">Source code</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">Stardew Checkup</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">HTML/CSS/JS</h6>
+                                <p class="card-text">Checks achievement and milestone progress on a Stardew Valley save file</p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="col">
+                                    <a href="https://github.com/MouseyPounds/stardew-checkup" target="_blank" class="btn btn-primary btn-block">Source code</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">Horace</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">JavaScript + Node.js</h6>
+                                <p class="card-text">Discord bot that oversees the Knights of Academia Discord server</p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="col">
+                                    <a href="https://github.com/Knights-Of-Academia/horace" target="_blank" class="btn btn-primary btn-block">Source code</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 pb-2 pb-md-0">
-                        <div class="card">
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/0YFkiAuHW-M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Weber: Concertino</h5>
-                                <p class="card-text text-muted">July 15, 2019</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 pb-2 pb-md-0">
-                        <div class="card">
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/7m8qzWEhSZM?start=565" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Shared Recital with Selena Graf</h5>
-                                <p class="card-text text-muted">April 14, 2019</p>
-                            </div>
-                        </div>
-                    </div>
+                </div>
+                
+                <hr>
+                
+                <!-- Music Section -->
+                <div id="music-section">
+                    <h2 class="text-center pb-3">Music Performances</h2>
                     
-                    <!-- ROW 2 -->
-                    <div class="col-12 pb-md-3"></div>
-                    
-                    <div class="col-md-4 pb-2 pb-md-0">
-                        <div class="card">
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/LWCXOTGhLk0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Mandat: Tricolor Capers - 1, 2</h5>
-                                <p class="card-text text-muted">October 28, 2019</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 pb-2 pb-md-0">
-                        <div class="card">
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/Wl-MR09BpGc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Mandat: Tricolor Capers - 1</h5>
-                                <p class="card-text text-muted">September 23, 2019</p>
+                    <!-- ROW 1 (first three cards) -->
+                    <div class="row">
+                        <div class="col-md-4 pb-2 pb-md-0">
+                            <div class="card">
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/JgM6tUMkcaY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Szalowski: Sonatina - 1, 2</h5>
+                                    <p class="card-text text-muted">December 2, 2019</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4 pb-2 pb-md-0">
-                        <div class="card">
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/MZBN6R462Zw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <div class="col-md-4 pb-2 pb-md-0">
+                            <div class="card">
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/0YFkiAuHW-M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Weber: Concertino</h5>
+                                    <p class="card-text text-muted">July 15, 2019</p>
+                                </div>
                             </div>
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Devienne: Deuxieme Sonata</h5>
-                                <p class="card-text text-muted">March 18, 2019</p>
+                        </div>
+                        <div class="col-md-4 pb-2 pb-md-0">
+                            <div class="card">
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/7m8qzWEhSZM?start=565" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Shared Recital with Selena Graf</h5>
+                                    <p class="card-text text-muted">April 14, 2019</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- ROW 2 -->
+                        <div class="col-12 pb-md-3"></div>
+                        
+                        <div class="col-md-4 pb-2 pb-md-0">
+                            <div class="card">
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/LWCXOTGhLk0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Mandat: Tricolor Capers - 1, 2</h5>
+                                    <p class="card-text text-muted">October 28, 2019</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 pb-2 pb-md-0">
+                            <div class="card">
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/Wl-MR09BpGc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Mandat: Tricolor Capers - 1</h5>
+                                    <p class="card-text text-muted">September 23, 2019</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 pb-2 pb-md-0">
+                            <div class="card">
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/MZBN6R462Zw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Devienne: Deuxieme Sonata</h5>
+                                    <p class="card-text text-muted">March 18, 2019</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
-    
-    <!-- Footer -->
-    <footer class="page-footer text-center py-4">
-        <p class="text-muted my-auto">
-            Written by Debashis Biswas using <a href="https://getbootstrap.com/" target="_blank">Bootstrap</a>
-        </p>
-    </footer>
-    
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
-</html>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="page-footer text-center py-4">
+            <p class="text-muted my-auto">
+                Written by Debashis Biswas using <a href="https://getbootstrap.com/" target="_blank">Bootstrap</a>
+            </p>
+        </footer>
+        
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
+    </html>
