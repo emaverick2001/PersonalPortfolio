@@ -1,6 +1,16 @@
 .header-bg
 {
-    background-color: #800080;
+    background-color: #563d7c;
+}
+
+.contact-links a
+{
+	color: #cbbde2;
+}
+
+.contact-links a:hover
+{
+	color: white;
 }
 
 .page-footer
