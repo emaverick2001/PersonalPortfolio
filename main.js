@@ -113,9 +113,7 @@ var theCardContainerClasses = 'col mb-4';
 
 function generateProjectSection( aProjectObject )
 {
-    // opening div
-    var theOutput = `<div class="${ theGridCardClasses }">`;
-
+    var theCards = '';
     for( projectName in aProjectObject )
     {
         var currentProject = aProjectObject[ projectName ];
@@ -149,7 +147,7 @@ function generateProjectSection( aProjectObject )
         </div>`;
 
         // add item
-        theOutput += `\
+        theCards += `\
         <div class="${ theCardContainerClasses }">
             <div class="card text-center h-100">
                 ${ theCardBody }
@@ -158,17 +156,15 @@ function generateProjectSection( aProjectObject )
         </div>`;
     }
 
-    // closing div
-    theOutput += `</div>`;
-
-    return theOutput;
+    return `\
+    <div class="${ theGridCardClasses }">
+        ${ theCards }
+    </div>`;
 }
 
 function generateMusicSection( aMusicObject )
 {
-    // opening div
-    var theOutput = `<div class="${ theGridCardClasses }">`;
-
+    var theCards = '';
     for( performanceTitle in aMusicObject )
     {
         var currentPerformance = aMusicObject[ performanceTitle ];
@@ -185,7 +181,7 @@ function generateMusicSection( aMusicObject )
         </div>`;
 
         // add item
-        theOutput += `\
+        theCards += `\
         <div class="${ theCardContainerClasses }">
             <div class="card text-center h-100">
                 ${ theEmbedSection }
@@ -194,10 +190,10 @@ function generateMusicSection( aMusicObject )
         </div>`;
     }
 
-    // closing div
-    theOutput += `</div>`;
-
-    return theOutput;
+    return `\
+    <div class="${ theGridCardClasses }">
+        ${ theCards }
+    </div>`;
 }
 
 $( document ).ready(()=>
