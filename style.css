@@ -13,6 +13,13 @@
 	color: white;
 }
 
+.contact-svg
+{
+	display: inline-block;
+	width: 2rem;
+	height: 2rem;
+}
+
 .page-footer
 {
 	font-size: .875rem;
