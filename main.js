@@ -1,5 +1,11 @@
 const personalProjects = 
 {
+    'KKΨ Beta Omicron Website':
+    {
+        lang: 'Firebase + Node.js + Bootstrap',
+        desc: 'Website, built from the ground up, to digitize history for the Beta Omicron Chapter of ΚΚΨ.',
+        projectLink: 'https://kkp-bo-website.web.app'
+    },
     'Scale Scrambler':
     {
         lang: 'HTML/CSS/JS + Bootstrap',
