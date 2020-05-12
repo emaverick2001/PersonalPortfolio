@@ -1,5 +1,29 @@
-const personalProjects = 
+const softwareProjects =
 {
+    'KOA May Pom War Bot':
+    {
+        lang: 'Python + PostgreSQL',
+        desc: 'Discord bot that manages the Knights of Academia May Pom War, a competition to log pomodoro sessions',
+    },
+    'KOA May Pom War Dashboard':
+    {
+        lang: 'Angular + Node.js + PostgreSQL',
+        desc: 'Private website that displays competition statistics and team rankings for the Knights of Academia May Pom War',
+    },
+    'Jazz Clarinet Methods Website':
+    {
+        lang: 'Firebase + HTML/CSS + Bootstrap',
+        desc: 'Website displaying jazz clarinet methods developed by fellow music student',
+        sourceCode: 'https://github.com/debashisbiswas/vashawn-analysis-website',
+        projectLink: 'https://vashawn-clarinet.web.app/daily-jazz'
+    },
+    'Additive Synthesis Website':
+    {
+        lang: 'HTML/CSS/JS + Bootstrap',
+        desc: 'Webpage that demonstrates instrumental additive synthesis through the JavaScript Web Audio API',
+        sourceCode: 'https://github.com/debashisbiswas/timbre-gen',
+        projectLink: 'https://debashisbiswas.github.io/timbre-gen/'
+    },
     'KKΨ Beta Omicron Website':
     {
         lang: 'Firebase + Node.js + Bootstrap',
@@ -44,10 +68,10 @@ const personalProjects =
         sourceCode: 'https://github.com/debashisbiswas/teleprompter',
         projectLink: 'https://play.google.com/store/apps/details?id=com.maestoso.teleprompter'
     },
-    'Clarinet Spectral Analysis':
+    'Clarinet Spectral Analysis Website':
     {
         lang: 'Firebase + HTML/CSS + Bootstrap',
-        desc: 'Firebase website displaying research findings of fellow music student',
+        desc: 'Website displaying research findings of fellow music student',
         sourceCode: 'https://github.com/debashisbiswas/vashawn-analysis-website',
         projectLink: 'https://vashawn-clarinet.web.app/'
     },
@@ -77,6 +101,11 @@ const openSourceContributions =
 
 const musicPerformances = 
 {
+    'Views of the Blues with Lizeth Gil':
+    {
+        date: 'April 25, 2020',
+        embedLink: 'https://www.youtube.com/embed/txnp8mszRsU?start=2015'
+    },
     'Szalowski: Sonatina - 1, 2':
     {
         date: 'December 2, 2019',
@@ -132,23 +161,44 @@ function generateProjectSection( aProjectObject )
         </div>`;
 
         // footer is required if either are defined
-        var footerRequired = !isUndefined( currentProject.sourceCode ) || !isUndefined( currentProject.projectLink );
+        var hasLink = !isUndefined( currentProject.sourceCode ) || !isUndefined( currentProject.projectLink );
 
-        var theProjectLink = `${ !isUndefined( currentProject.projectLink ) ? `\
-        <div class="col">
-            <a href="${ currentProject.projectLink }" target="_blank" class="btn btn-primary btn-block">See project</a>
-        </div>` : '' }`
+        let theProjectLink = '';
+        let theSourceCodeLink = '';
+        let thePlaceholderEmptyLink = '';
 
-        var theSourceCodeLink = `${ !isUndefined( currentProject.sourceCode ) ? `\
-        <div class="col">
-            <a href="${ currentProject.sourceCode }" target="_blank" class="col btn btn-primary btn-block">Source code</a>
-        </div>` : '' }`
+        if( !isUndefined(currentProject.projectLink) )
+        {
+            theProjectLink = `\
+            <div class="col">
+                <a href="${ currentProject.projectLink }" target="_blank" class="btn btn-primary btn-block">See project</a>
+            </div>`;
+            hasLink = true;
+        }
+
+        if( !isUndefined( currentProject.sourceCode ) )
+        {
+            theSourceCodeLink = `\
+            <div class="col">
+                <a href="${ currentProject.sourceCode }" target="_blank" class="col btn btn-primary btn-block">Source code</a>
+            </div>`;
+            hasLink = true;
+        }
+
+        if( !hasLink )
+        {
+            thePlaceholderEmptyLink = `\
+            <div class="col">
+                <a href="${ currentProject.sourceCode }" target="_blank" class="col btn btn-secondary btn-block disabled">No links</a>
+            </div>`;
+        }
 
         var theCardFooter = `\
-        <div class="card-footer ${ footerRequired ? '' : 'd-none' }">
+        <div class="card-footer">
             <div class="row">
                 ${ theProjectLink }
                 ${ theSourceCodeLink }
+                ${ !hasLink ? thePlaceholderEmptyLink : '' }
             </div>
         </div>`;
 
@@ -202,9 +252,9 @@ function generateMusicSection( aMusicObject )
     </div>`;
 }
 
-$( document ).ready(()=>
+$( document ).ready(() =>
 {
-    $( '#projects-placeholder' ).html( generateProjectSection( personalProjects ) );
+    $( '#projects-placeholder' ).html( generateProjectSection( softwareProjects ) );
     $( '#opensourceprojects-placeholder' ).html( generateProjectSection( openSourceContributions ) );
     $( '#performances-placeholder' ).html( generateMusicSection( musicPerformances ) );
 });
