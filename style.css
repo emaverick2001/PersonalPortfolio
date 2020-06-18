@@ -3,6 +3,19 @@
     background-color: #563d7c;
 }
 
+.btn-primary
+{
+	color: #fff;
+	background-color: #593196;
+	border: 1px solid transparent;
+}
+
+.btn-primary:hover
+{
+	background-color: #482879;
+	border-color: #422470;
+}
+
 .contact-links a
 {
 	color: #cbbde2;
