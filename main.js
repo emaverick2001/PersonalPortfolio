@@ -101,6 +101,11 @@ const openSourceContributions =
 
 const musicPerformances = 
 {
+    'Astor Piazzolla - 3 Tangos':
+    {
+        date: 'November 15, 2020',
+        embedLink: 'https://www.youtube.com/embed/d8VvURsGo2E'
+    },
     'Views of the Blues with Lizeth Gil':
     {
         date: 'April 25, 2020',
