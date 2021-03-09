@@ -10,13 +10,6 @@ const softwareProjects =
         lang: 'Angular + Node.js + PostgreSQL',
         desc: 'Private website that displays competition statistics and team rankings for the Knights of Academia May Pom War',
     },
-    'Jazz Clarinet Methods Website':
-    {
-        lang: 'Firebase + HTML/CSS + Bootstrap',
-        desc: 'Website displaying jazz clarinet methods developed by fellow music student',
-        sourceCode: 'https://github.com/debashisbiswas/vashawn-analysis-website',
-        projectLink: 'https://vashawn-clarinet.web.app/daily-jazz'
-    },
     'Additive Synthesis Website':
     {
         lang: 'HTML/CSS/JS + Bootstrap',
@@ -74,6 +67,13 @@ const softwareProjects =
         desc: 'Website displaying research findings of fellow music student',
         sourceCode: 'https://github.com/debashisbiswas/vashawn-analysis-website',
         projectLink: 'https://vashawn-clarinet.web.app/'
+    },
+    'Jazz Clarinet Methods Website':
+    {
+        lang: 'Firebase + HTML/CSS + Bootstrap',
+        desc: 'Website displaying jazz clarinet methods developed by fellow music student',
+        sourceCode: 'https://github.com/debashisbiswas/vashawn-analysis-website',
+        projectLink: 'https://vashawn-clarinet.web.app/daily-jazz'
     },
 }
 
