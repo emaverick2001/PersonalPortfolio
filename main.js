@@ -1,15 +1,5 @@
 const softwareProjects =
 {
-    'KOA May Pom War Bot':
-    {
-        lang: 'Python + PostgreSQL',
-        desc: 'Discord bot that manages the Knights of Academia May Pom War, a competition to log pomodoro sessions',
-    },
-    'KOA May Pom War Dashboard':
-    {
-        lang: 'Angular + Node.js + PostgreSQL',
-        desc: 'Private website that displays competition statistics and team rankings for the Knights of Academia May Pom War',
-    },
     'Additive Synthesis Website':
     {
         lang: 'HTML/CSS/JS + Bootstrap',
@@ -17,18 +7,33 @@ const softwareProjects =
         sourceCode: 'https://github.com/debashisbiswas/timbre-gen',
         projectLink: 'https://debashisbiswas.github.io/timbre-gen/'
     },
-    'KKΨ Beta Omicron Website':
-    {
-        lang: 'Firebase + Node.js + Bootstrap',
-        desc: 'Website, built from the ground up, to digitize history for the Beta Omicron Chapter of ΚΚΨ.',
-        projectLink: 'https://kkp-bo-website.web.app'
-    },
     'Scale Scrambler':
     {
         lang: 'HTML/CSS/JS + Bootstrap',
         desc: 'Responsive web app that randomizes fundamental exercises to supplement music practice',
         sourceCode: 'https://github.com/debashisbiswas/scales',
         projectLink: 'https://debashisbiswas.github.io/scales'
+    },
+    'KKΨ Beta Omicron Website':
+    {
+        lang: 'Firebase + Node.js + Bootstrap',
+        desc: 'Website, built from the ground up, to digitize history for the Beta Omicron Chapter of ΚΚΨ.',
+        projectLink: 'https://kkp-bo-website.web.app'
+    },
+    'KOA Pom War 2021 Bot':
+    {
+        lang: 'Python + MySQL',
+        desc: 'Discord bot that managed the Knights of Academia 2021 Pom War, a competition to log pomodoro sessions',
+    },
+    'KOA Pom War 2020 Bot':
+    {
+        lang: 'Python + PostgreSQL',
+        desc: 'Discord bot that managed the Knights of Academia 2020 Pom War, a competition to log pomodoro sessions',
+    },
+    'KOA May Pom War Dashboard':
+    {
+        lang: 'Angular + Node.js + PostgreSQL',
+        desc: 'Private website that displays competition statistics and team rankings for the Knights of Academia 2020 Pom War',
     },
     'Todoica': 
     {
@@ -82,7 +87,7 @@ const openSourceContributions =
     'Habitica for Android':
     {
         lang: 'Java + Kotlin',
-        desc: 'A habit-building application that uses game mechanics from classic RPGs to motivate players',
+        desc: 'A habit-building application that uses game mechanics from classic RPGs to motivate users to achieve their goals',
         sourceCode: 'https://github.com/HabitRPG/habitica-android',
     },
     'Stardew Checkup':
@@ -194,7 +199,7 @@ function generateProjectSection( aProjectObject )
         {
             thePlaceholderEmptyLink = `\
             <div class="col">
-                <a href="${ currentProject.sourceCode }" target="_blank" class="col btn btn-secondary btn-block disabled">No links</a>
+                <a href="${ currentProject.sourceCode }" target="_blank" class="col btn btn-secondary btn-block disabled">Private</a>
             </div>`;
         }
 
