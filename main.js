@@ -35,6 +35,13 @@ const softwareProjects =
         lang: 'Angular + Node.js + PostgreSQL',
         desc: 'Private website that displays competition statistics and team rankings for the Knights of Academia 2020 Pom War',
     },
+    'Teleprompter':
+    {
+        lang: 'Android (Java + Kotlin)',
+        desc: 'Teleprompter Android App on the Google Play Store',
+        sourceCode: 'https://github.com/debashisbiswas/teleprompter',
+        projectLink: 'https://play.google.com/store/apps/details?id=com.maestoso.teleprompter'
+    },
     'Todoica': 
     {
         lang: 'Heroku + Node.js',
@@ -58,13 +65,6 @@ const softwareProjects =
         lang: 'Python',
         desc: 'Transposes pitches between two specified keys',
         sourceCode: 'https://github.com/debashisbiswas/transposer',
-    },
-    'Teleprompter':
-    {
-        lang: 'Java + Kotlin',
-        desc: 'Teleprompter Android App on the Google Play Store',
-        sourceCode: 'https://github.com/debashisbiswas/teleprompter',
-        projectLink: 'https://play.google.com/store/apps/details?id=com.maestoso.teleprompter'
     },
     'Clarinet Spectral Analysis Website':
     {
@@ -119,7 +119,7 @@ const musicPerformances =
     'Views of the Blues with Lizeth Gil':
     {
         date: 'April 25, 2020',
-        embedLink: 'https://www.youtube.com/embed/txnp8mszRsU?start=2015'
+        embedLink: 'https://www.youtube.com/embed/txnp8mszRsU?start=2080'
     },
     'Szalowski: Sonatina - 1, 2':
     {
