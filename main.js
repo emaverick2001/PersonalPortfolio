@@ -106,7 +106,12 @@ const openSourceContributions =
 
 const musicPerformances = 
 {
-    'Astor Piazzolla - 3 Tangos':
+    'Astor Piazzolla: 3 Tangos (Live)':
+    {
+        date: 'November 21, 2020',
+        embedLink: 'https://www.youtube.com/embed/bs_aJkjmj64?start=3407'
+    },
+    'Astor Piazzolla: 3 Tangos':
     {
         date: 'November 15, 2020',
         embedLink: 'https://www.youtube.com/embed/d8VvURsGo2E'
@@ -120,6 +125,11 @@ const musicPerformances =
     {
         date: 'December 2, 2019',
         embedLink: 'https://www.youtube.com/embed/JgM6tUMkcaY',
+    },
+    'Russell: Bass Clarinet Double Concerto (ensemble)':
+    {
+        date: 'November 22, 2019',
+        embedLink: 'https://www.youtube.com/embed//k3XtJrf4-eI?start=4205',
     },
     'Weber: Concertino':
     {
