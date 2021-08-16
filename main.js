@@ -1,5 +1,11 @@
 const softwareProjects =
 {
+    'Word of the Day Generator':
+    {
+        lang: 'Python',
+        desc: 'Automatically generate posts for Japanese vocabulary words, including definitions and example sentences',
+        sourceCode: 'https://github.com/debashisbiswas/word-of-the-day'
+    },
     'Additive Synthesis Website':
     {
         lang: 'HTML/CSS/JS + Bootstrap',
