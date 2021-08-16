@@ -112,6 +112,11 @@ const openSourceContributions =
 
 const musicPerformances = 
 {
+    'Shared Recital with Adam Schay':
+    {
+        date: 'April 15, 2021',
+        embedLink: 'https://www.youtube.com/embed/KOUfF_aeAZk?start=2475'
+    },
     'Astor Piazzolla: 3 Tangos (Live)':
     {
         date: 'November 21, 2020',
