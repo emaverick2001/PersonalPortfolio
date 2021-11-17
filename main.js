@@ -112,6 +112,11 @@ const openSourceContributions =
 
 const musicPerformances = 
 {
+    'Parker: Grooves':
+    {
+        date: 'November 15, 2021',
+        embedLink: 'https://www.youtube.com/embed/Lv3ftDBDmh0?start=34'
+    },
     'Shared Recital with Adam Schay':
     {
         date: 'April 15, 2021',
