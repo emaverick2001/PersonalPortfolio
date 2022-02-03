@@ -1,5 +1,11 @@
 const softwareProjects =
 {
+    'Duplicate Encode':
+    {
+        lang: 'Python + Rust',
+        desc: 'Exploration of optimization in Python and Rust for a simple coding puzzle',
+        sourceCode: 'https://github.com/debashisbiswas/duplicate-encode'
+    },
     'Word of the Day Generator':
     {
         lang: 'Python',
