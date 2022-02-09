@@ -118,6 +118,11 @@ const openSourceContributions =
 
 const musicPerformances = 
 {
+    'Artie Shaw: Concerto (Ensemble)':
+    {
+        date: 'November 23, 2021',
+        embedLink: 'https://www.youtube.com/embed/cIxiNypcWpo?start=1974'
+    },
     'Parker: Grooves':
     {
         date: 'November 15, 2021',
