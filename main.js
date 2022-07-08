@@ -1,5 +1,25 @@
 const softwareProjects =
 {
+    'SRP Peak Status':
+    {
+        lang: 'HTML/CSS/JS + Bootstrap',
+        desc: 'Displays current SRP peak status to help decide when to use energy throughout the day.',
+        sourceCode: 'https://github.com/debashisbiswas/srp-peak-status',
+        projectLink: 'https://debashisbiswas.github.io/srp-peak-status/'
+    },
+    'Binaural Beats Generator':
+    {
+        lang: 'Rust',
+        desc: 'CLI program to create binaural beats, writing to a WAV file.',
+        sourceCode: 'https://github.com/debashisbiswas/rust_binaural_beats'
+    },
+    'Senior Recital Program':
+    {
+        lang: 'HTML/CSS/JS + Bootstrap',
+        desc: 'Music program for my senior clarinet recital, accessible on mobile devices through a QR code and the web.',
+        sourceCode: 'https://github.com/debashisbiswas/senior-recital-program',
+        projectLink: 'https://debashisbiswas.github.io/senior-recital-program/'
+    },
     'Duplicate Encode':
     {
         lang: 'Python + Rust',
@@ -54,13 +74,13 @@ const softwareProjects =
         sourceCode: 'https://github.com/debashisbiswas/teleprompter',
         projectLink: 'https://play.google.com/store/apps/details?id=com.maestoso.teleprompter'
     },
-    'Todoica': 
+    'Todoica':
     {
         lang: 'Heroku + Node.js',
         desc: 'Synchronizes tasks between task manager applications Todoist and Habitica',
         sourceCode: 'https://github.com/debashisbiswas/todoica',
     },
-    'Bitmap Image Processor': 
+    'Bitmap Image Processor':
     {
         lang: 'C',
         desc: 'Multithreaded C program that reads bitmap images and alters color data using multiple threads',
@@ -94,8 +114,14 @@ const softwareProjects =
     },
 }
 
-const openSourceContributions = 
+const openSourceContributions =
 {
+    'Eminent Reader':
+    {
+        lang: 'Node.js',
+        desc: 'Japanese webnovel downloader and reader, to supplement Japanese study',
+        sourceCode: 'https://github.com/cademcniven/Eminent-Reader',
+    },
     'Habitica for Android':
     {
         lang: 'Java + Kotlin',
@@ -116,8 +142,13 @@ const openSourceContributions =
     },
 }
 
-const musicPerformances = 
+const musicPerformances =
 {
+    'Senior Clarinet Recital':
+    {
+        date: 'April 16, 2022',
+        embedLink: 'https://www.youtube.com/embed/1t8fU8YPe2c'
+    },
     'Artie Shaw: Concerto (Ensemble)':
     {
         date: 'November 23, 2021',
@@ -272,9 +303,16 @@ function generateMusicSection( aMusicObject )
     {
         var currentPerformance = aMusicObject[ performanceTitle ];
 
+        // iframe's loading="lazy" is currently not supported in Firefox.
         var theEmbedSection = `\
         <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="${ currentPerformance.embedLink }" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe
+                loading="lazy"
+                class="embed-responsive-item"
+                src="${ currentPerformance.embedLink }"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+            </iframe>
         </div>`;
 
         var theCardBody = `\
