@@ -149,6 +149,11 @@ const musicPerformances =
         date: 'April 16, 2022',
         embedLink: 'https://www.youtube.com/embed/1t8fU8YPe2c'
     },
+    'Lowenstern: My Favorite Things':
+    {
+        date: 'February 21, 2022',
+        embedLink: 'https://www.youtube.com/embed/kQSEs8U5Ee4'
+    },
     'Artie Shaw: Concerto (Ensemble)':
     {
         date: 'November 23, 2021',
@@ -164,12 +169,12 @@ const musicPerformances =
         date: 'April 15, 2021',
         embedLink: 'https://www.youtube.com/embed/KOUfF_aeAZk?start=2475'
     },
-    'Astor Piazzolla: 3 Tangos (Live)':
+    'Piazzolla: 3 Tangos (Live)':
     {
         date: 'November 21, 2020',
         embedLink: 'https://www.youtube.com/embed/bs_aJkjmj64?start=3407'
     },
-    'Astor Piazzolla: 3 Tangos':
+    'Piazzolla: 3 Tangos':
     {
         date: 'November 15, 2020',
         embedLink: 'https://www.youtube.com/embed/d8VvURsGo2E'
