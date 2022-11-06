@@ -12,9 +12,9 @@ const { project } = Astro.props
 <div>
   <h4 class="font-bold text-xl mb-1">
     {project.name}
-    <span class="text-lg text-slate-400 italic">{project.lang}</span>
+    <span class="text-lg text-slate-400 italic font-normal">{project.lang}</span>
   </h4>
-  <div class="mb-4">{project.desc}</div>
+  <div class="mb-3">{project.desc}</div>
 
   <div class="flex justify-start space-x-2">
     {project.link && <LinkButton href={project.link}>Link</LinkButton>}
