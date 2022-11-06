@@ -1,0 +1,47 @@
+---
+import BaseHead from "../components/BaseHead.astro"
+import Header from "../components/Header.astro"
+import ProjectDisplay from "../components/ProjectDisplay.astro"
+import EmbedDisplay from "../components/EmbedDisplay.astro"
+import {
+  SITE_TITLE,
+  SITE_DESCRIPTION,
+  SOFTWARE_PROJECTS,
+  OPEN_SOURCE_CONTRIBUTIONS,
+  MUSIC_PERFORMANCES,
+} from "../content"
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+
+  <body class="max-w-[900px] mx-auto bg-gradient-to-r from-violet-100 to-blue-100">
+    <main role="main" class="mx-4">
+      <Header />
+
+      <div class="my-4">
+        <h3 class="text-3xl font-bold text-center p-3">Software Projects</h3>
+        <div class="space-y-8">
+          {SOFTWARE_PROJECTS.map((project) => <ProjectDisplay project={project} />)}
+        </div>
+      </div>
+
+      <div class="my-4">
+        <h3 class="text-3xl font-bold text-center p-3">Open Source Contributions</h3>
+        <div class="space-y-8">
+          {OPEN_SOURCE_CONTRIBUTIONS.map((project) => <ProjectDisplay project={project} />)}
+        </div>
+      </div>
+
+      <div class="my-4">
+        <h3 class="text-3xl font-bold text-center p-3">Music Performances</h3>
+        <div class="space-y-8">
+          {MUSIC_PERFORMANCES.map((performance) => <EmbedDisplay performance={performance} />)}
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

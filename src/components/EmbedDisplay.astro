@@ -1,0 +1,24 @@
+---
+import type { PerformanceData } from "../types"
+
+interface Props {
+  performance: PerformanceData
+}
+
+const { performance } = Astro.props
+---
+
+<div class="flex justify-between">
+  <div class="self-center">
+    <h3 class="text-xl font-bold mb-1">{performance.name}</h3>
+    <p class="text-lg">{performance.date}</p>
+  </div>
+
+  <iframe
+    loading="lazy"
+    class="aspect-video h-60"
+    src={performance.embedLink}
+    frameborder="0"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen></iframe>
+</div>
