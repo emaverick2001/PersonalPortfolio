@@ -100,9 +100,9 @@ export const OPEN_SOURCE_CONTRIBUTIONS: SoftwareData[] = [
   },
 ]
 
-export const MUSIC_PERFORMANCES: PerformanceData[] = [
+export const PERFORMANCES: PerformanceData[] = [
   {
-    name: "Kevin Day: Concerto for Wind Ensemble",
+    name: "Day: Concerto for Wind Ensemble",
     date: "April 16, 2022",
     hrefLink: "https://www.youtube.com/playlist?list=PLJgbNlanoROsLIJggw2_pX9qoAVvr7w7y",
     thumbnailLink: "https://img.youtube.com/vi/lAunyfdN8Tk/mqdefault.jpg",

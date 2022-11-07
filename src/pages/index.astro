@@ -2,13 +2,13 @@
 import BaseHead from "../components/BaseHead.astro"
 import Header from "../components/Header.astro"
 import ProjectDisplay from "../components/ProjectDisplay.astro"
-import EmbedDisplay from "../components/EmbedDisplay.astro"
+import PerformanceDisplay from "../components/PerformanceDisplay.astro"
 import {
   SITE_TITLE,
   SITE_DESCRIPTION,
   SOFTWARE_PROJECTS,
   OPEN_SOURCE_CONTRIBUTIONS,
-  MUSIC_PERFORMANCES,
+  PERFORMANCES,
 } from "../content"
 ---
 
@@ -38,8 +38,8 @@ import {
 
       <div class="my-4">
         <h3 class="text-3xl font-bold py-6 tracking-tight">Music Performances</h3>
-        <div class="space-y-4">
-          {MUSIC_PERFORMANCES.map((performance) => <EmbedDisplay performance={performance} />)}
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+          {PERFORMANCES.map((performance) => <PerformanceDisplay performance={performance} />)}
         </div>
       </div>
     </main>
