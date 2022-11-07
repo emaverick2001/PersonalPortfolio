@@ -9,5 +9,6 @@ export interface SoftwareData {
 export interface PerformanceData {
   name: string
   date: string
-  embedLink: string
+  hrefLink: string
+  thumbnailLink?: string
 }
