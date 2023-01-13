@@ -18,7 +18,7 @@ import {
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
 
-  <body class="container mx-auto bg-gradient-to-r from-violet-100 to-blue-100">
+  <body class="max-w-screen-lg mx-auto bg-gradient-to-r from-violet-100 to-blue-100">
     <main role="main" class="mx-4">
       <Header />
 
@@ -38,7 +38,7 @@ import {
 
       <div class="my-4">
         <h3 class="text-3xl font-bold py-6 tracking-tight">Music Performances</h3>
-        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div class="grid md:grid-cols-2 gap-4">
           {PERFORMANCES.map((performance) => <PerformanceDisplay performance={performance} />)}
         </div>
       </div>
