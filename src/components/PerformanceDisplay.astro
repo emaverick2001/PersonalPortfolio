@@ -11,18 +11,18 @@ const { performance } = Astro.props
 <a
   href={performance.hrefLink}
   target="_blank"
-  class="flex justify-between items-center h-32 shadow-md rounded-xl overflow-hidden border transition ease-in-out hover:scale-[102%] hover:shadow-lg"
+  class="flex h-32 items-center justify-between overflow-hidden rounded-xl border shadow-md transition ease-in-out hover:scale-[102%] hover:shadow-lg"
 >
   <div class="p-4">
-    <h3 class="text-xl font-bold mb-1 tracking-tight">{performance.name}</h3>
-    <p class="text-lg text-gray-500 tracking-tighter">{performance.date}</p>
+    <h3 class="mb-1 text-xl font-bold tracking-tight">{performance.name}</h3>
+    <p class="text-lg tracking-tighter text-gray-500">{performance.date}</p>
   </div>
 
   {
     performance.thumbnailLink && (
       // Negative margin allows the text to overlap with the image on small screens.
       // There's probably a better way to accomplish this...
-      <img class="ml-[-40%] w-60 md:w-80 opacity-mask -z-10" src={performance.thumbnailLink} />
+      <img class="opacity-mask -z-10 ml-[-40%] w-60 md:w-80" src={performance.thumbnailLink} />
     )
   }
 </a>
