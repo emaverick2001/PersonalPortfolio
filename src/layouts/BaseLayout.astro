@@ -1,0 +1,18 @@
+---
+// For Tailwind.
+import "../styles/global.css"
+
+const { frontmatter } = Astro.props
+---
+
+<html>
+  <head>
+    <!-- Add other Head elements here, like styles and meta tags. -->
+    <title>{frontmatter.title}</title>
+  </head>
+  <body class="p-4">
+    <article class="prose mx-auto">
+      <slot />
+    </article>
+  </body>
+</html>
