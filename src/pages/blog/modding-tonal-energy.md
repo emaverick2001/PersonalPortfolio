@@ -5,6 +5,7 @@ author: Debashis Biswas
 date: today
 draft: true
 ---
+
 # Modding Tonal Energy's Android App
 
 In this project, I modify [Tonal Energy](https://www.tonalenergy.com/),
@@ -128,7 +129,7 @@ class - the first parameter is just a pointer to the current instance. The
 double that gets passed in is first checked to ensure it is not negative or
 infinity, and then gets assigned to a variable at some offset of the
 `Metronome*`, which I assumed is where the current tempo is stored. The second
-parameter, then, is new value for the tempo.  Basically, the function signature
+parameter, then, is new value for the tempo. Basically, the function signature
 looks like this:
 
 ```cpp
@@ -162,7 +163,7 @@ able to add my feature into the binary using LIEF as well.
 
 The easiest way to use Frida is to use it in "injected" mode, in which we can
 run `frida-server` on the device and use it to hook into any running process by
-connecting through a client on the desktop.  However, this requires the Android
+connecting through a client on the desktop. However, this requires the Android
 device to be rooted. This would also mean that the feature would not be embedded
 in the app itself. Because my device is not rooted, and I wanted my patch to be
 embedded directly into the APK rather than depending on the external
@@ -210,7 +211,7 @@ was not fully embedded in the APK. Continuing to read through Frida's
 documentation, I learned that a config file could be added, which I added in the
 same `tetuner-unpack/lib` folder as `libfrida-gadget.config.so`. Though this
 file is a JSON file, this naming convention was used so that Android would copy
-it when installing the app.  The similarly with the `libfrida-gadget.so` name
+it when installing the app. The similarly with the `libfrida-gadget.so` name
 was also necessary so that Gadget could identify this as the config file.
 
 This config file allows an option to load a script on startup from a given path
