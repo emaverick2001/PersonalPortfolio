@@ -9,12 +9,16 @@ interface Props {
 const { project } = Astro.props
 ---
 
-<div>
-  <h4 class="mb-1 text-xl font-bold">
-    {project.name}
-    <span class="text-lg font-normal italic tracking-tighter text-gray-500">{project.lang}</span>
-  </h4>
-  <div class="mb-3">{project.desc}</div>
+<div
+  class="rounded-xl border p-4 shadow-md transition ease-in-out hover:scale-[102%] hover:shadow-lg"
+>
+  <div>
+    <h4 class="mb-1 text-xl font-bold">
+      {project.name}
+    </h4>
+    <h5 class="text-md mb-2 font-normal tracking-tighter text-gray-500">{project.lang}</h5>
+  </div>
+  <div class="mb-4">{project.desc}</div>
 
   <div class="flex justify-start space-x-2">
     {project.link && <LinkButton href={project.link}>Link</LinkButton>}

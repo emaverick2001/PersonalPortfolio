@@ -4,6 +4,7 @@ export interface SoftwareData {
   desc: string
   sourceCode?: string
   link?: string
+  enabled?: boolean
 }
 
 export interface PerformanceData {

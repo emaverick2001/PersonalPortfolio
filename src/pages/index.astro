@@ -18,21 +18,19 @@ import {
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
 
-  <body class="mx-auto max-w-screen-lg bg-gradient-to-r from-violet-100 to-blue-100">
+  <body class="mx-auto mt-8 max-w-screen-lg bg-gradient-to-r from-violet-100 to-blue-100">
     <main role="main" class="mx-4">
       <Header />
 
       <div class="my-4">
-        <h3 class="py-6 text-3xl font-bold tracking-tight">Software Projects</h3>
-        <div class="space-y-8">
-          {SOFTWARE_PROJECTS.map((project) => <ProjectDisplay project={project} />)}
-        </div>
-      </div>
-
-      <div class="my-4">
-        <h3 class="py-6 text-3xl font-bold tracking-tight">Open Source Contributions</h3>
-        <div class="space-y-8">
-          {OPEN_SOURCE_CONTRIBUTIONS.map((project) => <ProjectDisplay project={project} />)}
+        <h3 class="py-6 text-3xl font-bold tracking-tight">Public Software Projects</h3>
+        <div class="grid gap-4 md:grid-cols-2">
+          {
+            SOFTWARE_PROJECTS
+              // Explicit check against false to avoid falsy undefined.
+              .filter((project) => project.enabled !== false)
+              .map((project) => <ProjectDisplay project={project} />)
+          }
         </div>
       </div>
 

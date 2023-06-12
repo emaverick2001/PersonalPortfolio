@@ -8,36 +8,45 @@ export const SITE_DESCRIPTION =
 
 export const SOFTWARE_PROJECTS: SoftwareData[] = [
   {
+    name: "Scale Scrambler",
+    lang: "HTML/CSS/JS + Bootstrap",
+    desc: "Responsive web app that randomizes fundamental exercises to supplement music practice",
+    sourceCode: "https://github.com/debashisbiswas/scales",
+    link: "https://debashisbiswas.github.io/scales",
+  },
+  {
     name: "SRP Peak Status",
     lang: "HTML/CSS/JS + Bootstrap",
-    desc: "Displays current SRP peak status to help decide when to use energy throughout the day.",
+    desc: "Displays energy company's current peak status to help decide when to use energy throughout the day",
     sourceCode: "https://github.com/debashisbiswas/srp-peak-status",
     link: "https://debashisbiswas.github.io/srp-peak-status/",
   },
   {
-    name: "Binaural Beats Generator",
-    lang: "Rust",
-    desc: "CLI program to create binaural beats, writing to a WAV file.",
-    sourceCode: "https://github.com/debashisbiswas/rust_binaural_beats",
+    name: "Japanese Word of the Day",
+    lang: "Python",
+    desc: "Automatically generate posts for Japanese vocabulary words, including definitions and example sentences",
+    sourceCode: "https://github.com/debashisbiswas/word-of-the-day",
   },
   {
-    name: "Senior Recital Program",
+    name: "Music Recital Program",
     lang: "HTML/CSS/JS + Bootstrap",
     desc: "Music program for my senior clarinet recital, accessible on mobile devices through a QR code and the web.",
     sourceCode: "https://github.com/debashisbiswas/senior-recital-program",
     link: "https://debashisbiswas.github.io/senior-recital-program/",
   },
   {
+    name: "Binaural Beats Generator",
+    lang: "Rust",
+    desc: "CLI program to create binaural beats, writing to a WAV file.",
+    sourceCode: "https://github.com/debashisbiswas/rust_binaural_beats",
+    enabled: false,
+  },
+  {
     name: "Duplicate Encode",
     lang: "Python + Rust",
     desc: "Exploration of optimization in Python and Rust for a simple coding puzzle",
     sourceCode: "https://github.com/debashisbiswas/duplicate-encode",
-  },
-  {
-    name: "Word of the Day Generator",
-    lang: "Python",
-    desc: "Automatically generate posts for Japanese vocabulary words, including definitions and example sentences",
-    sourceCode: "https://github.com/debashisbiswas/word-of-the-day",
+    enabled: false,
   },
   {
     name: "Additive Synthesis Website",
@@ -47,17 +56,11 @@ export const SOFTWARE_PROJECTS: SoftwareData[] = [
     link: "https://debashisbiswas.github.io/timbre-gen/",
   },
   {
-    name: "Scale Scrambler",
-    lang: "HTML/CSS/JS + Bootstrap",
-    desc: "Responsive web app that randomizes fundamental exercises to supplement music practice",
-    sourceCode: "https://github.com/debashisbiswas/scales",
-    link: "https://debashisbiswas.github.io/scales",
-  },
-  {
     name: "KKΨ Beta Omicron Website",
     lang: "Firebase + Node.js + Bootstrap",
     desc: "Website, built from the ground up, to digitize history for the Beta Omicron Chapter of ΚΚΨ.",
     link: "https://kkp-bo-website.web.app",
+    enabled: false,
   },
   {
     name: "Teleprompter",
@@ -70,6 +73,7 @@ export const SOFTWARE_PROJECTS: SoftwareData[] = [
     name: "KOA Pom War 2021 Bot",
     lang: "Python + MySQL",
     desc: "Discord bot that managed the Knights of Academia 2021 Pom War, a competition to log pomodoro sessions",
+    enabled: false,
   },
 ]
 
