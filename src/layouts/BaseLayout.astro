@@ -10,8 +10,8 @@ const { frontmatter } = Astro.props
     <!-- Add other Head elements here, like styles and meta tags. -->
     <title>{frontmatter.title}</title>
   </head>
-  <body class="p-4">
-    <article class="prose mx-auto">
+  <body class="py-12 bg-zinc-800">
+    <article class="prose prose-invert prose-lg mx-auto max-w-screen-md">
       <slot />
     </article>
   </body>
