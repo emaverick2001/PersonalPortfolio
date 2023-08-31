@@ -1,0 +1,35 @@
+---
+interface Route {
+  displayName: string
+  route: string
+}
+
+const routes: Route[] = [
+  {
+    displayName: "Home",
+    route: "/",
+  },
+  {
+    displayName: "Music",
+    route: "/music/",
+  },
+]
+
+function isCurrentRoute(route: string) {
+  let pathname = new URL(Astro.request.url).pathname
+  return pathname === route
+}
+---
+
+<nav class="space-x-6">
+  {
+    routes.map((route) => (
+      <!-- prettier-ignore -->
+      <!-- Avoid extra whitespace from formatter adding line breaks. -->
+      <a
+        href={route.route}
+        class={"hover:cursor hover:underline hover:bold" + (isCurrentRoute(route.route) ? " underline font-bold" : "")}
+      >{route.displayName}</a>
+    ))
+  }
+</nav>

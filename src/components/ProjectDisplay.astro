@@ -9,14 +9,12 @@ interface Props {
 const { project } = Astro.props
 ---
 
-<div
-  class="rounded-xl border p-4 shadow-md transition ease-in-out hover:scale-[102%] hover:shadow-lg"
->
-  <div>
+<div class="bg-slate-800 p-4">
+  <div class="tracking-tight">
     <h4 class="mb-1 text-xl font-bold">
       {project.name}
     </h4>
-    <h5 class="text-md mb-2 font-normal tracking-tighter text-gray-500">{project.lang}</h5>
+    <h5 class="text-md mb-2 text-slate-400">{project.lang}</h5>
   </div>
   <div class="mb-4">{project.desc}</div>
 

@@ -1,45 +1,19 @@
 ---
-import BaseHead from "../components/BaseHead.astro"
+import SiteLayout from "../layouts/SiteLayout.astro"
 import Header from "../components/Header.astro"
 import ProjectDisplay from "../components/ProjectDisplay.astro"
-import PerformanceDisplay from "../components/PerformanceDisplay.astro"
-import {
-  SITE_TITLE,
-  SITE_DESCRIPTION,
-  SOFTWARE_PROJECTS,
-  OPEN_SOURCE_CONTRIBUTIONS,
-  PERFORMANCES,
-} from "../content"
+import { SOFTWARE_PROJECTS } from "../content"
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
+<SiteLayout>
+  <Header />
 
-  <body class="mx-auto mt-8 max-w-screen-lg bg-gradient-to-r from-violet-100 to-blue-100">
-    <main role="main" class="mx-4">
-      <Header />
-
-      <div class="my-4">
-        <h3 class="py-6 text-3xl font-bold tracking-tight">Public Software Projects</h3>
-        <div class="grid gap-4 md:grid-cols-2">
-          {
-            SOFTWARE_PROJECTS
-              // Explicit check against false to avoid falsy undefined.
-              .filter((project) => project.enabled !== false)
-              .map((project) => <ProjectDisplay project={project} />)
-          }
-        </div>
-      </div>
-
-      <div class="my-4">
-        <h3 class="py-6 text-3xl font-bold tracking-tight">Music Performances</h3>
-        <div class="grid gap-4 md:grid-cols-2">
-          {PERFORMANCES.map((performance) => <PerformanceDisplay performance={performance} />)}
-        </div>
-      </div>
-    </main>
-  </body>
-</html>
+  <h3 class="py-6 text-3xl font-bold tracking-tight">Software Projects</h3>
+  <div class="grid gap-4 md:grid-cols-2">
+    {
+      SOFTWARE_PROJECTS.filter((project) => project.enabled !== false)
+      // Explicit check against false to avoid falsy undefined.
+        .map((project) => <ProjectDisplay project={project} />)
+    }
+  </div>
+</SiteLayout>
