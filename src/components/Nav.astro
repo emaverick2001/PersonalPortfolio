@@ -30,11 +30,14 @@ function isCurrentRoute(route: string): boolean {
 <nav class="space-x-6">
   {
     routes.map((route) => (
-      <!-- prettier-ignore -->
       <!-- Avoid extra whitespace from formatter adding line breaks. -->
+      <!-- prettier-ignore -->
       <a
         href={route.route}
-        class={"hover:cursor hover:underline hover:bold" + (isCurrentRoute(route.route) ? " underline font-bold" : "")}
+        class:list={[
+          "hover:cursor hover:underline hover:bold",
+          isCurrentRoute(route.route) && "underline font-bold"
+        ]}
       >{route.displayName}</a>
     ))
   }
