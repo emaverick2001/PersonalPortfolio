@@ -5,10 +5,8 @@ import { PERFORMANCES } from "../content"
 ---
 
 <SiteLayout>
-  <div class="my-4">
-    <h3 class="py-6 text-3xl font-bold tracking-tight">Music Performances</h3>
-    <div class="grid gap-4 md:grid-cols-2">
-      {PERFORMANCES.map((performance) => <PerformanceDisplay performance={performance} />)}
-    </div>
+  <h3 class="mb-6 text-3xl font-bold tracking-tight">Music Performances</h3>
+  <div class="grid gap-4 md:grid-cols-2">
+    {PERFORMANCES.map((performance) => <PerformanceDisplay performance={performance} />)}
   </div>
 </SiteLayout>
