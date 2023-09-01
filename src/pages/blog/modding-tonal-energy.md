@@ -1,9 +1,5 @@
 ---
-layout: ../../layouts/BaseLayout.astro
 title: Modding Tonal Energy's Android App
-author: Debashis Biswas
-date: today
-draft: true
 ---
 
 # Modding Tonal Energy's Android App

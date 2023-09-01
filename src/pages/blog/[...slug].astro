@@ -1,0 +1,23 @@
+---
+import SiteLayout from "@layouts/SiteLayout.astro"
+import type { GetStaticPaths } from "astro"
+import { getCollection } from "astro:content"
+
+export const getStaticPaths = (async () => {
+  const blogEntries = await getCollection("blog")
+  return blogEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }))
+}) satisfies GetStaticPaths
+
+const { entry } = Astro.props
+const { Content } = await entry.render()
+---
+
+<SiteLayout>
+  <div class="prose-invert">
+    <h3 class="mb-6 text-3xl font-bold tracking-tight">{entry.data.title}</h3>
+    <Content />
+  </div>
+</SiteLayout>

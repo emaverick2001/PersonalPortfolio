@@ -10,14 +10,20 @@ const routes: Route[] = [
     route: "/",
   },
   {
+    displayName: "Blog",
+    route: "/blog/",
+  },
+  {
     displayName: "Music",
     route: "/music/",
   },
 ]
 
-function isCurrentRoute(route: string) {
+function isCurrentRoute(route: string): boolean {
   let pathname = new URL(Astro.request.url).pathname
-  return pathname === route
+
+  const onBaseRoute = route.length < 2;
+  return onBaseRoute ? pathname === route : pathname.startsWith(route)
 }
 ---
 
