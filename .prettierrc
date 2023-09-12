@@ -2,6 +2,15 @@
   "semi": false,
   "singleQuote": false,
   "printWidth": 100,
+  "htmlWhitespaceSensitivity": "strict",
   "plugins": ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
-  "pluginSearchDirs": false
+  "pluginSearchDirs": false,
+  "overrides": [
+    {
+      "files": "*.astro",
+      "options": {
+        "parser": "astro"
+      }
+    }
+  ]
 }

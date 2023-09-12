@@ -1,3 +1,7 @@
+---
+import Link from "./Link.astro"
+---
+
 <header>
   <!-- Outer container -->
   <div class="md:flex md:items-center md:justify-between">
@@ -18,16 +22,8 @@
       </div>
 
       <div class="flex justify-start space-x-4">
-        <a
-          href="https://github.com/debashisbiswas/"
-          class="underline decoration-purple-500 decoration-2 underline-offset-2 transition ease-out hover:text-purple-300"
-          >GitHub</a
-        >
-        <a
-          href="https://www.linkedin.com/in/d-biswas/"
-          class="underline decoration-purple-500 decoration-2 underline-offset-2 transition ease-out hover:text-purple-300"
-          >LinkedIn</a
-        >
+        <Link href="https://github.com/debashisbiswas/">GitHub</Link>
+        <Link href="https://www.linkedin.com/in/d-biswas/">LinkedIn</Link>
       </div>
     </div>
   </div>
