@@ -1,0 +1,20 @@
+---
+import SiteLayout from "@layouts/SiteLayout.astro"
+import { getCollection } from "astro:content";
+
+const posts = await getCollection('blog')
+---
+
+<SiteLayout>
+  <h3 class="mb-6 text-3xl font-bold tracking-tight">Blog Posts</h3>
+  {
+    posts.map((post) => (
+      <div class="bg-slate-700">
+        <a
+          href={post.slug + '/'}
+          class="underline decoration-purple-600 text-lg"
+        >{post.data.title}</a>
+      </div>
+    ))
+  }
+</SiteLayout>

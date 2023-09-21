@@ -13,11 +13,17 @@ export const getStaticPaths = (async () => {
 
 const { entry } = Astro.props
 const { Content } = await entry.render()
+
+const dateAsString = entry.data.publishDate.toDateString()
 ---
 
 <SiteLayout>
-  <div class="prose-invert">
-    <h3 class="mb-6 text-3xl font-bold tracking-tight">{entry.data.title}</h3>
+  <h3 class="mb-2 text-3xl font-bold tracking-tight">{entry.data.title}</h3>
+  <p class="mb-6 text-slate-400 tracking-tight">{entry.data.author}, {dateAsString}</p>
+
+  <div
+    class="prose prose-invert max-w-none lg:prose-lg prose-code:before:hidden prose-code:after:hidden"
+  >
     <Content />
   </div>
 </SiteLayout>
