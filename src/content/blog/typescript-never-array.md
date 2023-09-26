@@ -1,8 +1,7 @@
 ---
 title: TypeScript's elusive `never[]` type
 author: Debashis Biswas
-tagline: A deep dive into TypeScript array type inference and the `never[]`
-type.
+tagline: A deep dive into TypeScript array type inference and the `never[]` type.
 publishDate: 2023-09-21
 ---
 
