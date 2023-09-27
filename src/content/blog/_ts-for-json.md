@@ -5,9 +5,10 @@ tagline: You can't escape JavaScript (this time, because of JSON).
 publishDate: 2023-09-26
 ---
 
-I recently had to write a data migration tool at work. This particular migration
-involved reading JSON data from a database, converting the data into another
-JSON format, and sending it off to an endpoint.
+A few months ago, I had to write a data migration tool at work. There were some
+database and endpoint calls mixed in, but the core of the task involved mapping
+one JSON format to another. This wasn't a simple "just map the key names"
+mapping - there were some structural transformations as well.
 
 Being a quick, short-lived script, I completed the task in Python. If I had to
 do something similar again, I'd use TypeScript.
@@ -16,10 +17,16 @@ But why? Nearly all modern languages have options for good JSON support, why not
 use a language more well-suited for scripting?
 
 The short answer is: JSON (**J**ava**S**cript **O**bject **N**otation), being
-dervied from JavaScript objects, inherits some of JavaScript's quirks. Dealing
+derived from JavaScript objects, inherits some of JavaScript's quirks. Dealing
 with these quirks in JavaScript is easier than in other languages.
 
 Here's the longer answer.
+
+TODO: here, introduce the part of the task you want to discuss. mainly, the
+mapping aspect. this way, you can set up your explanation to highlight the
+benefit of having `undefined` as a value you can pass around. representing
+potential states as values (undefined is a value, rather than a special case to
+handle. link to errors as values, which Golang does, for a similar concept)
 
 ## Two states of null
 
