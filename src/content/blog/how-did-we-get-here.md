@@ -7,7 +7,7 @@ publishDate: 2023-10-20
 
 Matt Pocock, a well-known TypeScript wizard, recently released a
 [video](https://youtu.be/uiOJ5_7cB4I?si=pdh31CjquqUwUUIy) covering what type
-props should be for a React component which be either a button or anchor tag.
+props should be for a React component which can be either a button or anchor tag.
 The video is titled "Rethink your life choices before you do this...", so by the
 end, his recommendation is to avoid this pattern - just make two separate
 components.
@@ -36,7 +36,7 @@ const ButtonOrLink = (props: ButtonOrLinkProps) => {
 
 is a reasonable option when trying to display a button on a page?
 
-Let's try follow the thought process.
+Let's try following the thought process.
 
 If you've done frontend using a component-based framework, you've likely come
 across the problem he's describing. Your page will have `<button>` and `<a>`
@@ -99,9 +99,9 @@ Not quite. There's another strong reason why you might want both elements in one
 component - you're using Tailwind.
 
 Following Tailwind's approach, we wouldn't use a CSS class here to reuse the
-style. To reuse the style, we need to wrap it in a component - so for this
-case, the button and anchor tag should be handled by the same component, which
-encapsulates the style.
+style. To reuse the style, we need to use utility classes wrap them in a
+component - so for this case, the button and anchor tag should be handled by the
+same component, which encapsulates the style.
 
 This is because Tailwind strongly recommends against using CSS classes. Instead,
 they recommend [reusing styles by encapsulating utility classes in a
@@ -130,18 +130,19 @@ As a Tailwind user, you have two options here. Dogmatically follow Tailwind's
 approach and use the code snippet above, or use a CSS class for this one
 exception.
 
-To get back to the original point of the article - this is how we ended up here.
-We placed a bunch of artificial constraints on ourselves, and then back ourselves
+To get back to the first point of the article - this is how we ended up here.
+We placed a bunch of artificial constraints on ourselves, and then backed ourselves
 into a corner, requiring us to build weird workarounds like the code snippet at
 the beginning of this article.
 
 This happens often with abstractions. They make some things easier, yet some
-things much more complicated - sometimes, we need the built-in capabilities of
-the thing we meant to abstract away. [ORMs are another place where you can see
-this](https://effectivetypescript.com/2023/08/29/sql/).
+things much more complicated - sometimes, we just need the built-in capabilities
+of the thing we meant to abstract away. [ORMs are another place where you can
+see this](https://effectivetypescript.com/2023/08/29/sql/).
 
 So, to answer the original question: how did we get to a place where that code
 snippet seems reasonable? By deciding that typesafety and utility classes are
-the way to build frontends for the way. Like all things, they come with
-tradeoffs, and in the future, it'll be easier to judge whether the tradeoffs
-were worth it.
+the way to build frontends for the web. Like all things, they come with
+tradeoffs, and the type of code we've ended up with is our tradeoff.
+Difficulty making buttons and anchor tags look the same is our tradeoff.
+In the future, it'll be easier to judge whether the tradeoffs were worth it.
