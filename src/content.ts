@@ -3,8 +3,7 @@
 import type { SoftwareData, PerformanceData } from "./types"
 
 export const SITE_TITLE = "Debashis Biswas"
-export const SITE_DESCRIPTION =
-  "Collection of software projects and music performances by Debashis Biswas"
+export const SITE_DESCRIPTION = "Debashis Biswas: software engineer, musician"
 
 export const SOFTWARE_PROJECTS: SoftwareData[] = [
   {
