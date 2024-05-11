@@ -13,7 +13,11 @@ When I first got into synthetic reeds, I spent most of the time trying to find a
 
 ## Bb clarinet
 
+### BD5 with cane
+
 My setup for a while was a Vandoren BD5 with V12 3.5+ to 4 reeds. After playing on this setup for a while, I was frustrated about how many bad and stuffy reeds I'd get. Knowing what I know now, I probably just needed to move down to V12 3.5 or 3.25 reeds - but I didn't know that, so I went down a deep synthetic reed rabbit hole that I never came out of.
+
+### BD5 with synthetics
 
 After that, I tried my BD5 with Legere European Cut reeds. I tried multiple reeds in every size from 3.25 to 4.5, but personally could never get this setup to sound good. Throat tones were always low (even though my BD5 is at 442), I found it difficult to project in a chamber setting, and my sound was always missing that core I'd get with a good cane reed on the BD5. Also, if you've played on this setup for a while, you might know that there's a very specific "synthetic articulation" sound that this mouthpiece/reed combo has. I've since met people who could make this setup work, but it didn't work for me, so I moved on.
 
@@ -21,7 +25,9 @@ Next, I tried my BD5 with Legere Signature Soprano Sax 3.5 reeds. This setup sou
 - Ridiculously resistant. Seriously, your embouchure needs to be in Olympic shape to play this setup without your embouchure blowing out after 10 minutes. I still can't believe I made it through a whole recital on this setup. You end up having to bite quite a bit as well, which doesn't help - but softer reeds of the same cut are too buzzy on this setup, so you can't move down a strength. Sadly, not all of us have embouchures like Andreas Ottensamer or Michael Robinson.
 - Quiet. You're fighting for volume against both the resistance of the setup and the darkness of the sound. I'd be maxing out in orchestral settings and was still told that I needed to play louder.
 
-The setup I've settled on is a Playnick Puccini Tosca with Legere European Cut 3.25 reeds. It's great - it's incredible what a synthetic reed can do on a mouthpiece that's built for it. I did have to try 3 different Puccini Tosca mouthpieces (I ordered them from Silverstein), and they all played quite differently, so that's something to keep in mind.
+### Playnick Puccini Tosca
+
+The setup I've settled on is a Playnick Puccini Tosca with Legere European Cut 3.25 reeds. It's incredible what a synthetic reed can do on a mouthpiece that's built for it. I did have to try 3 different Puccini Tosca mouthpieces (I ordered them from Silverstein), and they all played quite differently, so that's something to keep in mind.
 
 ### Notes on the Legere French Cut
 
