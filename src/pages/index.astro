@@ -1,19 +1,8 @@
 ---
 import SiteLayout from "@layouts/SiteLayout.astro"
 import Header from "@components/Header.astro"
-import ProjectDisplay from "@components/ProjectDisplay.astro"
-import { SOFTWARE_PROJECTS } from "../content"
 ---
 
 <SiteLayout>
   <Header />
-
-  <h3 class="mb-6 mt-12 text-3xl font-bold tracking-tight">Software Projects</h3>
-  <div class="grid gap-4 md:grid-cols-2">
-    {
-      SOFTWARE_PROJECTS.filter((project) => project.enabled !== false)
-      // Explicit check against false to avoid falsy undefined.
-        .map((project) => <ProjectDisplay project={project} />)
-    }
-  </div>
 </SiteLayout>
