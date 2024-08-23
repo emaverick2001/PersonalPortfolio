@@ -18,32 +18,31 @@ const routes: Route[] = [
     route: "/music/",
   },
   {
-    displayName: "Keyboard Layout",
-    route: "/keyboard-layout/",
+    displayName: "Keyboards",
+    route: "/keyboards/",
   },
 ]
 
 function isCurrentRoute(route: string): boolean {
   let pathname = new URL(Astro.request.url).pathname
 
-  const onBaseRoute = route.length < 2;
+  const onBaseRoute = route.length < 2
   return onBaseRoute ? pathname === route : pathname.startsWith(route)
 }
 ---
 
-<nav class="space-x-6">
+<nav class="space-x-3">
   {
     routes.map((route) => (
-      <!-- Avoid extra whitespace from formatter adding line breaks. -->
-      <!-- https://github.com/withastro/prettier-plugin-astro/issues/308 -->
-      <!-- prettier-ignore -->
-      <a
-        href={route.route}
-        class:list={[
+      <>
+        {/* Avoid extra whitespace from formatter adding line breaks. */}
+        {/* https://github.com/withastro/prettier-plugin-astro/issues/308 */}
+        {/* prettier-ignore */}
+        <a href={route.route} class:list={[
           "hover:cursor hover:underline hover:bold",
           isCurrentRoute(route.route) && "underline font-bold"
-        ]}
-      >{route.displayName}</a>
+        ]}>{route.displayName}</a>
+      </>
     ))
   }
 </nav>

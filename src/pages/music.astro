@@ -1,12 +1,12 @@
 ---
 import SiteLayout from "@layouts/SiteLayout.astro"
 import PerformanceDisplay from "@components/PerformanceDisplay.astro"
-import { PERFORMANCES } from "../content"
+import { performances } from "../content"
 ---
 
 <SiteLayout>
   <h3 class="mb-6 text-3xl font-bold tracking-tight">Music Performances</h3>
   <div class="grid gap-4 md:grid-cols-2">
-    {PERFORMANCES.map((performance) => <PerformanceDisplay performance={performance} />)}
+    {performances.map((performance) => <PerformanceDisplay performance={performance} />)}
   </div>
 </SiteLayout>

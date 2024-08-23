@@ -3,13 +3,13 @@ import "@fontsource/lora"
 
 import BaseHead from "@components/BaseHead.astro"
 import Nav from "@components/Nav.astro"
-import { SITE_TITLE, SITE_DESCRIPTION } from "../content"
+import { siteTitle, siteDescription } from "../content"
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <BaseHead title={siteTitle} description={siteDescription} />
   </head>
 
   <body class="mx-4 my-8 max-w-screen-md bg-zinc-50 font-serif text-zinc-900 lg:mx-auto">

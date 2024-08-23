@@ -20,9 +20,8 @@ import Link from "./Link.astro"
         <ul class="list-inside list-disc leading-relaxed">
           I've recently been exploring...
           <li>real-time distributed systems for music applications</li>
-          <li>programming language and type theory</li>
-          <li>infrastructure as code</li>
           <li>design and UX</li>
+          <li>infrastructure as code</li>
         </ul>
         <ul class="list-inside list-disc leading-relaxed">
           My recent inspirations in computing include...
@@ -34,12 +33,14 @@ import Link from "./Link.astro"
         <p>
           I'm also a classically-trained clarinetist, and I completed my BMus in Clarinet
           Performance at Arizona State University. I've studied with
-          <Link href="https://www.selmer.fr/en/blogs/artistes/robert-spring">
-            Dr. Robert Spring
-          </Link>,
-          <Link href="https://www.selmer.fr/en/blogs/artistes/joshua-gardner">
-            Dr. Joshua Gardner
-          </Link>, and
+          <!-- Avoid extra whitespace from formatter adding line breaks. -->
+          <!-- https://github.com/withastro/prettier-plugin-astro/issues/308 -->
+          <!-- prettier-ignore -->
+          <Link href="https://www.selmer.fr/en/blogs/artistes/robert-spring">Dr. Robert Spring</Link>,
+          <!-- prettier-ignore -->
+          <Link href="https://www.selmer.fr/en/blogs/artistes/joshua-gardner">Dr. Joshua Gardner</Link>,
+          and
+          <!-- prettier-ignore -->
           <Link href="www.selmer.fr/en/blogs/artistes/stefanie-gardner">Dr. Stefanie Gardner</Link>.
           In addition to the clarinet, I also play the bass clarinet, contra-alto clarinet, and
           contrabass clarinet.
@@ -48,6 +49,10 @@ import Link from "./Link.astro"
           Oh, I also repair musical instruments! I studied instrument repair with Dr. Steve
           Prescott, a well-known repairperson in the clarinet community. I primarily focus on
           clarinet repair, though I've done a bit of work on flutes and saxophones.
+        </p>
+        <p>
+          Some of my other interests include calisthenics, cooking, language learning, note-taking
+          systems, ergonomic keyboards, type theory, (neo)vim, Linux, and NixOS.
         </p>
         <p>
           You can find me on

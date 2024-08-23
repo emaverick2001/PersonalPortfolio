@@ -1,38 +1,11 @@
 // Place any global data in this file.
 // You can import this data from anywhere in your site by using the `import` keyword.
-import type { SoftwareData, PerformanceData } from "./types"
+import type { PerformanceData } from "./types"
 
-export const SITE_TITLE = "Debashis Biswas"
-export const SITE_DESCRIPTION = "Debashis Biswas: software engineer, musician"
+export const siteTitle = "Debashis Biswas"
+export const siteDescription = "software engineer, clarinetist"
 
-export const OPEN_SOURCE_CONTRIBUTIONS: SoftwareData[] = [
-  {
-    name: "Eminent Reader",
-    lang: "Node.js",
-    desc: "Japanese webnovel downloader and reader, to supplement Japanese study",
-    sourceCode: "https://github.com/cademcniven/Eminent-Reader",
-  },
-  {
-    name: "Habitica for Android",
-    lang: "Java + Kotlin",
-    desc: "A habit-building application that uses game mechanics from classic RPGs to motivate users to achieve their goals",
-    sourceCode: "https://github.com/HabitRPG/habitica-android",
-  },
-  {
-    name: "Stardew Checkup",
-    lang: "HTML/ CSS / JS",
-    desc: "Checks achievement and milestone progress on a Stardew Valley save file",
-    sourceCode: "https://github.com/MouseyPounds/stardew-checkup",
-  },
-  {
-    name: "Horace",
-    lang: "JavaScript + Node.js",
-    desc: "Discord bot that oversees the Knights of Academia Discord server",
-    sourceCode: "https://github.com/Knights-Of-Academia/horace",
-  },
-]
-
-export const PERFORMANCES: PerformanceData[] = [
+export const performances: PerformanceData[] = [
   {
     name: "Day: Concerto for Wind Ensemble",
     date: "April 16, 2022",
