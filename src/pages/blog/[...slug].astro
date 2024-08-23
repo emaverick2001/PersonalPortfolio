@@ -14,12 +14,12 @@ export const getStaticPaths = (async () => {
 const { entry } = Astro.props
 const { Content } = await entry.render()
 
-const dateAsString = entry.data.publishDate.toDateString()
+const formatter = new Intl.DateTimeFormat("en", { dateStyle: "long" })
 ---
 
 <SiteLayout>
   <h1 class="mb-2 text-3xl font-bold tracking-tight">{entry.data.title}</h1>
-  <p class="mb-6 tracking-tight text-zinc-600">{entry.data.author}, {dateAsString}</p>
+  <p class="mb-6 tracking-tight text-zinc-600">{formatter.format(entry.data.publishDate)}</p>
 
   <article
     class="prose prose-zinc max-w-none lg:prose-lg prose-code:before:hidden prose-code:after:hidden"
