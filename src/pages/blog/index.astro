@@ -2,23 +2,24 @@
 import SiteLayout from "@layouts/SiteLayout.astro"
 import { getCollection } from "astro:content"
 
-const posts = await getCollection("blog")
+const posts = (await getCollection("blog")).sort(
+  (postA, postB) => +postB.data.publishDate - +postA.data.publishDate
+)
+
+const formatter = new Intl.DateTimeFormat("en", { dateStyle: "medium" })
 ---
 
 <SiteLayout>
   <h3 class="mb-6 text-3xl font-bold tracking-tight">Blog Posts</h3>
 
-  <div class="space-y-6">
+  <div class="space-y-3">
     {
-      posts
-        .sort((postA, postB) => +postB.data.publishDate - +postA.data.publishDate)
-        .map((post) => (
-          <a href={post.slug + "/"} class="block bg-slate-800 p-8">
-            <p class="mb-2 text-2xl font-bold tracking-tight">{post.data.title}</p>
-            <p class="mb-4 text-sm text-slate-400">{post.data.publishDate.toDateString()}</p>
-            <p class="text-slate-200">{post.data.tagline}</p>
-          </a>
-        ))
+      posts.map((post) => (
+        <a href={post.slug + "/"} class="block">
+          {post.data.title}
+          <em class="ml-1 text-sm text-zinc-400">{formatter.format(post.data.publishDate)}</em>
+        </a>
+      ))
     }
   </div>
 </SiteLayout>

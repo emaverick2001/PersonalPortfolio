@@ -19,10 +19,10 @@ const dateAsString = entry.data.publishDate.toDateString()
 
 <SiteLayout>
   <h1 class="mb-2 text-3xl font-bold tracking-tight">{entry.data.title}</h1>
-  <p class="mb-6 tracking-tight text-slate-400">{entry.data.author}, {dateAsString}</p>
+  <p class="mb-6 tracking-tight text-zinc-600">{entry.data.author}, {dateAsString}</p>
 
   <article
-    class="prose prose-invert max-w-none lg:prose-lg prose-code:before:hidden prose-code:after:hidden"
+    class="prose prose-zinc max-w-none lg:prose-lg prose-code:before:hidden prose-code:after:hidden"
   >
     <Content />
   </article>
