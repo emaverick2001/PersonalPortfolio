@@ -14,6 +14,7 @@
   "dependencies": {
     "@astrojs/sitemap": "^1.0.0",
     "@astrojs/tailwind": "^5.1.0",
+    "@fontsource/lora": "^5.0.18",
     "astro": "^4.14.5"
   },
   "devDependencies": {
