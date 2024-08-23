@@ -13,8 +13,8 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^1.0.0",
-    "@astrojs/tailwind": "^4.0.0",
-    "astro": "^2.10.12"
+    "@astrojs/tailwind": "^5.1.0",
+    "astro": "^4.14.5"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
