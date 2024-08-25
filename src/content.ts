@@ -25,21 +25,10 @@ export const performances: PerformanceData[] = [
     thumbnailLink: "https://img.youtube.com/vi/kQSEs8U5Ee4/mqdefault.jpg",
   },
   {
-    name: "Artie Shaw: Concerto (Ensemble)",
-    date: "November 23, 2021",
-    hrefLink: "https://www.youtube.com/watch/cIxiNypcWpo?start=1974",
-  },
-  {
     name: "Parker: Grooves",
     date: "November 15, 2021",
     hrefLink: "https://www.youtube.com/watch/Lv3ftDBDmh0?start=34",
     thumbnailLink: "https://img.youtube.com/vi/Lv3ftDBDmh0/mqdefault.jpg",
-  },
-  {
-    name: "Shared Recital with Adam Schay",
-    date: "April 15, 2021",
-    hrefLink: "https://www.youtube.com/watch/KOUfF_aeAZk?start=2475",
-    thumbnailLink: "https://img.youtube.com/vi/KOUfF_aeAZk/mqdefault.jpg",
   },
   {
     name: "Piazzolla: 3 Tangos (Live)",
@@ -81,16 +70,5 @@ export const performances: PerformanceData[] = [
     date: "July 15, 2019",
     hrefLink: "https://www.youtube.com/watch/0YFkiAuHW-M",
     thumbnailLink: "https://img.youtube.com/vi/0YFkiAuHW-M/mqdefault.jpg",
-  },
-  {
-    name: "Shared Recital with Selena Graf",
-    date: "April 14, 2019",
-    hrefLink: "https://www.youtube.com/watch/7m8qzWEhSZM?start=565",
-  },
-  {
-    name: "Devienne: Deuxieme Sonata",
-    date: "March 18, 2019",
-    hrefLink: "https://www.youtube.com/watch/MZBN6R462Zw",
-    thumbnailLink: "https://img.youtube.com/vi/MZBN6R462Zw/mqdefault.jpg",
   },
 ]
