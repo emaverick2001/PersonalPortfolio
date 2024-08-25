@@ -14,7 +14,7 @@ export const getStaticPaths = (async () => {
 const { entry } = Astro.props
 const { Content } = await entry.render()
 
-const formatter = new Intl.DateTimeFormat("en", { dateStyle: "long" })
+const formatter = new Intl.DateTimeFormat("en", { dateStyle: "full", timeZone: "UTC" })
 ---
 
 <SiteLayout>
