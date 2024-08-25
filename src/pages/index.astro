@@ -1,9 +1,6 @@
 ---
 import SiteLayout from "@layouts/SiteLayout.astro"
-import { Image } from "astro:assets"
-
 import Link from "../components/Link.astro"
-import headshot from "../images/headshot.webp"
 ---
 
 <SiteLayout>
@@ -19,7 +16,14 @@ import headshot from "../images/headshot.webp"
         </div>
 
         <div class="flex justify-center">
-          <Image src={headshot} alt="My headshot!" width="256" height="256" class="rounded-lg" />
+          <!-- Avoiding the Image component as it makes my image too blurry. -->
+          <img
+            src="/headshot.webp"
+            alt="My headshot!"
+            width="256"
+            height="256"
+            class="rounded-lg"
+          />
         </div>
       </div>
     </header>
