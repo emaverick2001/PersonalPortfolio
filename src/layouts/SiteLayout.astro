@@ -1,17 +1,17 @@
 ---
 import "@fontsource/lora"
 
-import BaseHead from "@components/BaseHead.astro"
+import Head from "@components/Head.astro"
 import Nav from "@components/Nav.astro"
 
-const siteTitle = "Debashis Biswas"
-const siteDescription = "software engineer, clarinetist"
+const title = "Debashis Biswas"
+const description = "software engineer, clarinetist"
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <BaseHead title={siteTitle} description={siteDescription} />
+    <Head {title} {description} />
   </head>
 
   <body class="max-w-screen-md bg-zinc-50 px-6 pb-6 pt-2 font-serif text-zinc-900 md:mx-auto">
