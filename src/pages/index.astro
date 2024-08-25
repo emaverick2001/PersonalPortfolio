@@ -1,8 +1,82 @@
 ---
 import SiteLayout from "@layouts/SiteLayout.astro"
-import Header from "@components/Header.astro"
+import { Image } from "astro:assets"
+
+import Link from "../components/Link.astro"
+import headshot from "../images/headshot.webp"
 ---
 
 <SiteLayout>
-  <Header />
+  <div>
+    <header>
+      <div
+        class="my-6 flex flex-col items-center justify-around gap-8 text-center sm:flex-row sm:gap-0 sm:text-left"
+      >
+        <div class="order-last sm:order-first">
+          <h1 class="mb-2 text-4xl font-bold">Debashis Biswas</h1>
+          <p class="text-lg">MS Computer Science</p>
+          <p class="text-lg">Software Engineer, Honeywell</p>
+        </div>
+
+        <div class="flex justify-center">
+          <Image src={headshot} alt="My headshot!" width="256" height="256" class="rounded-lg" />
+        </div>
+      </div>
+    </header>
+
+    <section class="space-y-4">
+      <p>
+        Hi, I'm Debashis. I'm a software engineer at Honeywell. I've previously worked at Garmin and
+        Intel. I currently spend most of my time using Elixir, TypeScript, and Python, and I'm
+        comfortable in other languages as well.
+      </p>
+      <p>
+        I completed my MS in Computer Science at Arizona State University, where I primarily studied
+        cybersecurity: binary analysis and exploitation, reverse engineering, and network security.
+      </p>
+      <ul class="list-inside list-disc leading-relaxed">
+        I've recently been exploring...
+        <li>real-time distributed systems for music applications</li>
+        <li>design and UX</li>
+        <li>infrastructure as code</li>
+      </ul>
+      <ul class="list-inside list-disc leading-relaxed">
+        My recent inspirations in computing include...
+        <li><Link href="https://slim.computer/">Slim Lim</Link></li>
+        <li><Link href="https://thesephist.com/">Linus Lee</Link></li>
+        <li><Link href="https://x.com/thdxr">Dax Raad</Link></li>
+        <li><Link href="https://geohot.com/">George Hotz</Link></li>
+      </ul>
+      <p>
+        I'm a classically-trained clarinetist, and I completed my BMus in Clarinet Performance at
+        Arizona State University. I've studied with
+        <!-- Avoid extra whitespace from formatter adding line breaks. -->
+        <!-- https://github.com/withastro/prettier-plugin-astro/issues/308 -->
+        <!-- prettier-ignore -->
+        <Link href="https://www.selmer.fr/en/blogs/artistes/robert-spring">Dr. Robert Spring</Link>,
+        <!-- prettier-ignore -->
+        <Link href="https://www.selmer.fr/en/blogs/artistes/joshua-gardner">Dr. Joshua Gardner</Link>,
+        and
+        <!-- prettier-ignore -->
+        <Link href="https://www.selmer.fr/en/blogs/artistes/stefanie-gardner">Dr. Stefanie Gardner</Link>.
+        In addition to the clarinet, I play the bass clarinet, contra-alto clarinet, and contrabass
+        clarinet.
+      </p>
+      <p>
+        Oh, I also repair musical instruments! I studied instrument repair with Dr. Steve Prescott,
+        a well-known repairperson in the clarinet community. I primarily focus on clarinet repair,
+        though I've done a bit of work on flutes and saxophones.
+      </p>
+      <p>
+        Some of my other interests include calisthenics, cooking, language learning, note-taking
+        systems, ergonomic keyboards, type theory, (neo)vim, Linux, and NixOS.
+      </p>
+      <p>
+        You can find me on
+        <Link href="https://github.com/debashisbiswas/">GitHub</Link>,
+        <Link href="https://x.com/raenastra">Twitter</Link>, and
+        <Link href="https://www.linkedin.com/in/d-biswas/">LinkedIn</Link>.
+      </p>
+    </section>
+  </div>
 </SiteLayout>
