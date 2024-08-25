@@ -1,8 +1,18 @@
 ---
-title: Modding Tonal Energy's Android App
+title: Modding the Tonal Energy Android App
+publishDate: 2022-12-11
 ---
 
-# Modding Tonal Energy's Android App
+For readers: This is a lightly edited writeup of a reverse engineering project I
+completed during my master's degree. It may be difficult to read as it's missing
+some context. **I'm leaving this up for the one engineer browsing page 23 of
+their Google search results trying to find _any information at all_ on reverse
+engineering or modifying Android apps built with native code (C++, NDK, JNI,
+whatever).** If that's you, reach out and hopefully I can save you some time. I
+could not find a single resource on this while I was working on it, so I hope
+you find this helpful.
+
+---
 
 In this project, I modify [Tonal Energy](https://www.tonalenergy.com/),
 specifically the [Android
@@ -29,45 +39,13 @@ advantage of the idea that perception of tempo is not a linear scale; for
 example, a difference in 2 BPM is more perceptible between 42 and 44 BPM than
 between 120 and 122 BPM.
 
-## Included files
-
-For context, these are the files included with the project. Further context
-on relevant files is explained in the rest of the writeup.
-
-- `frida-agent/`
-  - Node project - Frida agent in TypeScript
-- `gadget/`
-  - Frida Gadget binaries
-- `modded-build/`
-  - Folder for storing modified APK after rebuilding + aligning + signing
-- `tetuner-unpack/`
-  - Unpacked version of app. Modifications are made here
-- `base.apk`
-  - Tonal Energy's original Android APK, retrieved with `adb`
-- `com.maestoso`
-  - Key for self-signing APK
-- `asdf.sh`
-  - Builds and installs app
-- `build.sh`
-  - Turns `tetuner-unpack/` into installable APK, places in `modded-build/`
-- `deploy.sh`
-  - Installs app on connected device through `adb`
-- `get-apk.sh`
-  - Gets Tonal Energy APK from connected device through `adb`
-- `inject-gadget.py`
-  - Injects Gadget as a dependency of `libjuce_jni.so`
-- `frida-gadget-config.json`
-  - Gadget config file, copied into `tetuner-unpack/` before building
-
 ## Analyzing the application
 
 ### Acquiring the APK
 
 To begin analyzing the application, I first needed to acquire application's APK,
 which is format in which apps are packaged on Android. The app is not free, but
-because I own it already, I was able to pull the APK from my phone using adb. In
-the included files, the command I used to do this is included in `get-apk.sh`.
-This APK is included in the files as `base.apk`.
+because I own it already, I was able to pull the APK from my phone using `adb`.
 
 Once I had the APK, I needed to analyze it. Fortunately, because Android apps
 are written in Java and Kotlin, they are compiled to bytecode, making it easy
@@ -79,14 +57,10 @@ to read the decompiled Java to get an idea of how the application worked.
 Also, while it is possible to unzip the APK and analyze the contents, rebuilding
 the APK correctly can be tedious. I found it to be much easier to use
 [apktool](https://ibotpeaches.github.io/Apktool/) for both unpacking and
-rebuilding the app. The included `tetuner-unpack` directory is the unpacked
-version of the app, and `dist/base.apk` in this directory is the repacked
-version of the application, with my modifications. However, this APK can
-not be installed directly; I had to ensure bytes were properly aligned and
-the APK was signed before being allowed to install it in the device. The script
-I wrote to do this is included as `build.sh`, and `deploy.sh` is a quick
-script which deploys the app. `asdf.sh` does both, and is easier to type.
-This script was used to in between changes to redeploy my changes to my phone.
+rebuilding the app. However, this APK can not be installed directly; I had to
+ensure bytes were properly aligned and the APK was signed before being allowed
+to install it in the device. I wrote a few scripts to automate this, allowing me
+to quickly redeploy the application as I made changes.
 
 ### Analyzing native code
 
@@ -149,10 +123,10 @@ more than changing bytes in place.
 
 ### Implementing the rest of the feature
 
-Around this time in the project, I talked to Fish about adding more substantial
-changes to binaries. He recommended [Frida](https://frida.re/) and
-[LIEF](https://lief-project.github.io/), both of which I ended up using on this
-project. I decided to use Frida for adding my feature, but I may have been
+Around this time in the project, I talked to my professor, Fish, about adding
+more substantial changes to binaries. He recommended [Frida](https://frida.re/)
+and [LIEF](https://lief-project.github.io/), both of which I ended up using on
+this project. I decided to use Frida for adding my feature, but I may have been
 able to add my feature into the binary using LIEF as well.
 
 #### Setting up Frida
@@ -170,8 +144,8 @@ my use case. Rather than running `frida-server` on the device, this option
 allowed me to add `frida-gadget` as a dependency of `libjuce_jni.so`, causing
 the application to expose Frida's server when the library is loaded. This does
 not require the device to be rooted, and is included in the app itself. For an
-Android application, this method works best if these is a native library loaded
-early in the function - and because the whole application depends on
+Android application, this method works best if there is a native library loaded
+early in the application - and because the whole application depends on
 `libjuce_jni.so` being loaded at startup, this method worked well.
 
 To use Gadget, I had to include the binary, which I downloaded from their
@@ -183,8 +157,8 @@ begin with `lib` and end with `.so`. For reference, the Gadget binaries I used
 are located in the included files in the `gadget` directory.
 
 To load Gadget on startup, I needed to add my new `libfrida-gadget.so` as a
-dependency of the main `libjuce_jni.so`. This was quite easy with LIEF, and the
-script I wrote to do this is in the included files, called `inject-gadget.py`.
+dependency of the main `libjuce_jni.so`. This was quite easy with LIEF, and I
+was able to quickly to this with a Python script.
 
 #### Hooking the setTempo function
 
