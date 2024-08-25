@@ -12,10 +12,10 @@ import { siteTitle, siteDescription } from "../content"
     <BaseHead title={siteTitle} description={siteDescription} />
   </head>
 
-  <body class="mx-4 my-8 max-w-screen-md bg-zinc-50 font-serif text-zinc-900 lg:mx-auto">
+  <body class="max-w-screen-md bg-zinc-50 px-6 pb-6 pt-2 font-serif text-zinc-900 md:mx-auto">
     <Nav />
 
-    <main role="main" class="mt-8">
+    <main role="main">
       <slot />
     </main>
   </body>
