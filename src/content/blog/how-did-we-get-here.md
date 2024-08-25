@@ -1,7 +1,5 @@
 ---
 title: How did we get here?
-author: Debashis Biswas
-tagline: Musings on how complicated we've made easy things in frontend
 publishDate: 2023-10-20
 ---
 

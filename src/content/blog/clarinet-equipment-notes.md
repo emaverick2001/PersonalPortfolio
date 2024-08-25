@@ -1,7 +1,5 @@
 ---
 title: Clarinet equipment and synthetic reeds
-author: Debashis Biswas
-tagline: Note of my experiments with clarinet mouthpieces and (mostly synthetic) reeds. I plan to update this as I try different equipment.
 publishDate: 2024-05-10
 ---
 
