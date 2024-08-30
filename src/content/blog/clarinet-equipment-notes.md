@@ -21,7 +21,7 @@ After that, I tried my BD5 with Legere European Cut reeds. I tried multiple reed
 
 Next, I tried my BD5 with Legere Signature Soprano Sax 3.5 reeds. This setup sounds amazing, beautiful, dark, etc, and I got quite a few compliments on my tone during this time. I even played my whole senior recital on this setup. However, this setup has two huge tradeoffs.
 - Ridiculously resistant. Seriously, your embouchure needs to be in Olympic shape to play this setup without your embouchure blowing out after 10 minutes. I still can't believe I made it through a whole recital on this setup. You end up having to bite quite a bit as well, which doesn't help - but softer reeds of the same cut are too buzzy on this setup, so you can't move down a strength. Sadly, not all of us have embouchures like Andreas Ottensamer or Michael Robinson.
-- Quiet. You're fighting for volume against both the resistance of the setup and the darkness of the sound. I'd be maxing out in orchestral settings and was still told that I needed to play louder.
+- Quiet. You're fighting for volume against both the resistance of the setup and the darkness of the sound. The darkness means you blend well - maybe a little too well, and that's not always what you want. I'd be maxing out in orchestral settings and was still told that I needed to play louder.
 
 ### Playnick Puccini Tosca
 
