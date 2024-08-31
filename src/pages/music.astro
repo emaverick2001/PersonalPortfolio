@@ -1,8 +1,9 @@
 ---
+import type { PerformanceData } from "../types"
+
 import SiteLayout from "@layouts/SiteLayout.astro"
 import PerformanceDisplay from "@components/PerformanceDisplay.astro"
-
-import type { PerformanceData } from "../types"
+import PageHeader from "@components/PageHeader.astro"
 
 export const performances: PerformanceData[] = [
   {
@@ -93,7 +94,8 @@ export const performances: PerformanceData[] = [
 ---
 
 <SiteLayout>
-  <h3 class="mb-6 text-3xl font-bold tracking-tight">Music Performances</h3>
+  <PageHeader>Performances</PageHeader>
+
   <div class="grid gap-4 md:grid-cols-2">
     {performances.map((performance) => <PerformanceDisplay {performance} />)}
   </div>
