@@ -18,6 +18,10 @@ const routes: Route[] = [
     route: "/music/",
   },
   {
+    displayName: "Inspirations",
+    route: "/inspirations/",
+  },
+  {
     displayName: "Keyboards",
     route: "/keyboards/",
   },
@@ -32,7 +36,7 @@ function isCurrentRoute(route: string): boolean {
 ---
 
 <nav class="mb-8 mt-6 flex justify-center sm:justify-between">
-  <div class="flex gap-3">
+  <div class="flex flex-wrap justify-center gap-3">
     {
       routes.map((route) => (
         <>

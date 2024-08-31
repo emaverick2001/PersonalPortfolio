@@ -1,0 +1,106 @@
+---
+import SiteLayout from "@layouts/SiteLayout.astro"
+import PageHeader from "@components/PageHeader.astro"
+import Link from "@components/Link.astro"
+
+const inspirations = {
+  people: [
+    { name: "José Valim", link: "https://github.com/josevalim" },
+    { name: "Slim Lim", link: "https://slim.computer/" },
+    { name: "Linus Lee", link: "https://thesephist.com/" },
+    { name: "Dax Raad", link: "https://x.com/thdxr" },
+    { name: "Alexis King", link: "https://lexi-lambda.github.io/" },
+    { name: "George Hotz", link: "https://geohot.com/" },
+    { name: "Richard Feynman", link: "https://en.wikipedia.org/wiki/Richard_Feynman" },
+    { name: "Alan Kay", link: "https://en.wikipedia.org/wiki/Alan_Kay" },
+  ],
+  posts: [
+    {
+      title: "Less is exponentially more",
+      author: "Rob Pike",
+      link: "https://commandcenter.blogspot.com/2012/06/less-is-exponentially-more.html",
+    },
+    {
+      title: "Parse, don't validate",
+      author: "Alexis King",
+      link: "https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/",
+    },
+    {
+      title: "Build tools around workflows, not workflows around tools",
+      author: "thesephist",
+      link: "https://thesephist.com/posts/tools/",
+    },
+    {
+      title: "Tiger Style",
+      author: "TigerBeetle",
+      link: "https://github.com/tigerbeetle/tigerbeetle/blob/main/docs/TIGER_STYLE.md",
+    },
+  ],
+  talks: [
+    {
+      title: "History of Computers & User Interface Images & Symbols",
+      author: "Alan Kay",
+      link: "https://youtu.be/6ZdxiQoOBgs",
+    },
+    {
+      title: "Gang of None: Design Patterns in Elixir",
+      author: "José Valim",
+      link: "https://youtu.be/agkXUp0hCW8",
+    },
+    {
+      title: "TigerBeetle",
+      author: "Joran Dirk Greef",
+      link: "https://youtu.be/sC1B3d9C_sI",
+    },
+    {
+      title: "Can machines think?",
+      author: "Richard Feynman",
+      link: "https://youtu.be/ipRvjS7q1DI",
+    },
+  ],
+}
+---
+
+<SiteLayout>
+  <PageHeader>Inspirations</PageHeader>
+
+  <section class="space-y-4">
+    <ul class="list-inside list-disc leading-relaxed">
+      Here are some of my inspirations in computing:
+      {
+        inspirations.people.map((person) => (
+          <li>
+            <Link href={person.link}>{person.name}</Link>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p>
+      While it's difficult to be exhaustive, here are some posts and talks that have changed my
+      perspective in a meaningful way.
+    </p>
+
+    <ul class="list-inside list-disc leading-relaxed">
+      <h4 class="mb-2 text-xl font-bold tracking-tight">Posts</h4>
+      {
+        inspirations.posts.map((post) => (
+          <li>
+            <Link href={post.link}>{post.title}</Link> by {post.author}
+          </li>
+        ))
+      }
+    </ul>
+
+    <ul class="list-inside list-disc leading-relaxed">
+      <h4 class="mb-2 text-xl font-bold tracking-tight">Talks</h4>
+      {
+        inspirations.talks.map((talk) => (
+          <li>
+            <Link href={talk.link}>{talk.title}</Link> by {talk.author}
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</SiteLayout>
