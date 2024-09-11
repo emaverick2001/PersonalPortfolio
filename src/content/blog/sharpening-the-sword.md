@@ -27,11 +27,11 @@ Exploration isn't inherently problematic. However, it's an issue when I find
 myself in seasons of my life in which I'm *only* exploring, and not capitalizing
 on any of the knowledge I've accumulated so far. It's a problem of balance.
 
-One "tell" for me is when I start studying theory in a field. While I do enjoy
-studying theory, this is often an indication that the balance is in question,
-especially when it's outside of my primary field. I can justify computer science
-books, but how much should I really be studying the theory of note-taking? Or
-rather, do I really want to be studying this?
+One heuristic I use to catch myself is noticing when I get into the theory of a
+field. While I do enjoy studying theory, this is often an indication that the
+balance is in question, especially when it's outside of my primary field. I can
+justify computer science books, but how much should I really be studying the
+theory of note-taking? Or rather, do I really want to be studying this?
 
 I don't have a clear solution for this yet, but it helps to focus on the outputs
 rather than the inputs. What am I trying to accomplish? What are my goals? It's
