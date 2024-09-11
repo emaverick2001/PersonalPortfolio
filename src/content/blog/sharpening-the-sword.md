@@ -45,3 +45,4 @@ back](https://youtu.be/b_Og4TF6B1Q) - where I encountered the phrase "sharpening
 the sword for a battle that never comes"
 - [Think more about what to focus
 on](https://www.henrikkarlsson.xyz/p/multi-armed-bandit)
+- [The Cult of Done](https://youtu.be/bJQj1uKtnus)
