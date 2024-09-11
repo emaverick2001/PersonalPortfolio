@@ -1,5 +1,5 @@
 ---
-title: Sharpening the sword for the battle that never comes
+title: Sharpening the sword for a battle that never comes
 publishDate: 2024-09-11
 ---
 
@@ -40,5 +40,8 @@ without a direction, it's not easy to know when a something is truly an
 improvement. 
 
 Here are some other resources that have helped me think about this:
-- [Think more about what to focus on](https://www.henrikkarlsson.xyz/p/multi-armed-bandit)
-- [The neurotic over-optimization trap that holds you back](https://youtu.be/b_Og4TF6B1Q)
+- [The neurotic over-optimization trap that holds you
+back](https://youtu.be/b_Og4TF6B1Q) - where I encountered the phrase "sharpening
+the sword for a battle that never comes"
+- [Think more about what to focus
+on](https://www.henrikkarlsson.xyz/p/multi-armed-bandit)
