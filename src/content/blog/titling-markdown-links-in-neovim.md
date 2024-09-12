@@ -61,7 +61,7 @@ https://youtu.be/_QU9w_TLWO8 - and got back:
 
 So close.
 
-URL decoding could have been a huge rabbit hole, but for most cases, a minimal
+HTML decoding could have been a huge rabbit hole, but for most cases, a minimal
 solution will work. To handle this, I borrowed some logic from [this
 webpage](https://stackoverflow.com/questions/5929492/bash-script-to-convert-from-html-entities-to-characters),
 turned it into a script I could pipe into, and called it `htmldecode.sh`:
