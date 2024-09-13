@@ -4,8 +4,13 @@ import "@fontsource/lora"
 import Head from "@components/Head.astro"
 import Nav from "@components/Nav.astro"
 
-const title = "Debashis Biswas"
-const description = "software engineer, musician"
+interface Props {
+  title?: string
+  description?: string
+}
+
+const title = Astro.props.title ? `${Astro.props.title} | Debashis Biswas` : "Debashis Biswas"
+const { description = "software engineer, musician" } = Astro.props
 ---
 
 <!DOCTYPE html>

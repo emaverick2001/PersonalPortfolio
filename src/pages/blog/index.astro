@@ -10,7 +10,7 @@ const posts = (await getCollection("blog")).sort(
 const formatter = new Intl.DateTimeFormat("en", { dateStyle: "medium", timeZone: "UTC" })
 ---
 
-<SiteLayout>
+<SiteLayout title="Blog">
   <PageHeader>Posts</PageHeader>
 
   <div class="space-y-5">

@@ -93,8 +93,8 @@ export const performances: PerformanceData[] = [
 ]
 ---
 
-<SiteLayout>
-  <PageHeader>Performances</PageHeader>
+<SiteLayout title="Music">
+  <PageHeader>Music</PageHeader>
 
   <div class="grid gap-4 md:grid-cols-2">
     {performances.map((performance) => <PerformanceDisplay {performance} />)}

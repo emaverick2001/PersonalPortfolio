@@ -17,7 +17,8 @@ const { Content } = await entry.render()
 const formatter = new Intl.DateTimeFormat("en", { dateStyle: "full", timeZone: "UTC" })
 ---
 
-<SiteLayout>
+<!-- TODO: it'd be cool to have some tagline or something to use as the meta description -->
+<SiteLayout title={entry.data.title}>
   <h1 class="mb-2 text-3xl font-bold tracking-tight">{entry.data.title}</h1>
   <p class="mb-6 tracking-tight text-zinc-600">{formatter.format(entry.data.publishDate)}</p>
 
