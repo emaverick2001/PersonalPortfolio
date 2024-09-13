@@ -32,6 +32,13 @@ I wrote a quick shell script to do just that. I added this to my path, called it
 curl -Ls "$1" | grep -oP '(?<=<title>).*?(?=</title>)' | head -n 1
 ```
 
+To call it...
+
+```sh
+web-title.sh "https://thesephist.com/posts/tools/"
+# returns "Build tools around workflows, not workflows around tools | thesephist.com"
+```
+
 In summary, fetch the URL passed in as an argument with `curl`. Follow redirects
 (`-L`) and run silently, only returning the result without any status-related
 output (`-s`).
@@ -82,7 +89,7 @@ done
 ```
 
 In short, this script uses `sed` to replace patterns - for example, every
-`&quot;` is replaced with `;`, etc.
+`&quot;` is replaced with `"`, etc.
 
 With this change, I can fix my original script with a single pipe:
 
