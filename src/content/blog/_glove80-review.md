@@ -4,12 +4,13 @@ publishDate: 2024-10-01
 draft: true
 ---
 
-I've been using the Kinesis Advantage360 Pro for about a year and a half.
+This is a review of the Glove80 after having used the Kinesis Advantage360 for
+about a year and a half.
 
-It's a great keyboard, and helped me quite a bit while I was trying to fix
-issues in my arm and wrist. I am grateful for this, as my issues were getting to
-the point where I was wondering if my software career would be cut short in year
-one. This keyboard may have saved my career.
+The Advantage360 is a great keyboard, and helped me quite a bit while I was
+trying to fix issues in my arm and wrist. I am grateful for this, as my issues
+were getting to the point where I was wondering if my software career was going
+to be cut short in year one. This keyboard may have saved my career.
 
 However, as sentimental as this keyboard is to me, it's not without its flaws.
 Most reviews will point out that, while the 360 might be one of the comfortable
@@ -27,9 +28,23 @@ I've been using the Glove80 for a just over a week. First impression? The
 Glove80 is an amazing keyboard, and *it solves every single issue I had with
 the Advantage360 Pro*.
 
+Seriously. It's like MoErgo was feeling the exact same issues with the existing
+keyboards on the market, and then precisely designed around solving each of
+those issues.
+
+Let's start with bluetooth, since this is what got me to buy this keyboard in
+the first place.
+
 ## Bluetooth
 
-- no bluetooth issues
+The bluetooth just works, exactly as you'd expect. I pull the two halves of the
+keyboard out of the travel case, turn them on, and start working within seconds.
+No more back and forth with "turn the left half on first, wait one second, pray
+to the bluetooth gods, turn on the right half, realize it didn't work, start
+over" (360 users know what I'm talking about) - just turn the keyboard on and
+start working.
+
+As it should be.
 
 ## Ergonomics
 
