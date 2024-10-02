@@ -4,7 +4,7 @@ publishDate: 2024-10-01
 draft: true
 ---
 
-For about a year and half, I've been using the Kinesis Advantage360 Pro.
+I've been using the Kinesis Advantage360 Pro for about a year and a half.
 
 It's a great keyboard, and helped me quite a bit while I was trying to fix
 issues in my arm and wrist. I am grateful for this, as my issues were getting to
