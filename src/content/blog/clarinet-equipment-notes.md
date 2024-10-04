@@ -52,11 +52,12 @@ However, this setup has two huge tradeoffs.
 
 ### Playnick Puccini Tosca
 
-The setup I've settled on is a Playnick Puccini Tosca with Legere European Cut
+The setup I've landed on is a Playnick Puccini Tosca with Legere European Cut
 3.25 reeds. It's incredible what a synthetic reed can do on a mouthpiece that's
 built for it. I did have to try 3 different Puccini Tosca mouthpieces (I ordered
 them from Silverstein), and they all played quite differently, so that's
-something to keep in mind.
+something to keep in mind. The only tradeoff I can find with this setup is that
+altissimo is still a bit difficult, but everything else is amazing.
 
 ### Notes on the Legere French Cut
 
