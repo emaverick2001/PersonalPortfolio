@@ -82,9 +82,10 @@ good default, but I'm not ready to pay that much for a bass mouthpiece yet.
 
 Started on a BD5 with Legere Signature bass clarinet 2.75 reed. It was difficult
 to play loudly on this setup, and playing in Team Lo-Blow (Dr. Stefanie
-Gardner's low clarinet ensemble), I wanted more volume.
+Gardner's low clarinet ensemble), I wanted more volume. I've tried this setup
+with the European Cut, but it's the same issue.
 
-### B50
+### B50 with European Cut
 
 Since then, I've been playing on a Vandoren B50 with a Legere European Cut bass
 clarinet 2.5 reed. The 2.75 is too resistant. This is a synthetic version of
@@ -104,6 +105,23 @@ that type of sound is even possible on synthetic reeds.
 I'll stick with this setup for now, as I'm making a lot of progress on this
 setup and I still have a lot to learn from it. The B50 provides a lot of
 flexibility, so lots of room to continue exploring.
+
+### B50 with Tenor Sax American Cut
+
+Update 10/4/2024 - I've recently been experimenting the the Tenor Sax American
+Cut 2.75. This works *much* better than the European Cut. After more time on
+bass, I started to notice limitations of the European Cut on the B50:
+
+- The 2.5 is too free-blowing, making is difficult to control, especially with
+  softer dynamics. Altissimo is difficult.
+- The 2.75 is too resistant. Articulation is stuffy.
+
+The Tenor Sax American Cut reed has solved these issues for me - it's a good
+amount of resistance, and feels and responds similarly to a 2.5 blue box
+Vandoren. Articulation is amazing, and it's much easier to control at softer
+dynamics. The tone is a bit brighter - which I guess is because it's made for
+jazz players, but this ends up pairing well with the B50 to allow for great
+projection when needed.
 
 ### Notes on Legere French Cut Tenor Sax reeds
 
