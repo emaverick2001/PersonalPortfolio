@@ -5,8 +5,8 @@ publishDate: 2024-10-05
 
 These are my impressions of the [MoErgo
 Glove80](https://www.moergo.com/collections/glove80-keyboards/products/glove80-ergonomic-keyboard-revision-2-with-cherry-blossom-30gf-silent-linear-switches?variant=50146620965137)
-after using the [Kinesis Advantage360](https://kinesis-ergo.com/shop/adv360pro/)
-for about a year and a half.
+after using the [Kinesis Advantage360
+Pro](https://kinesis-ergo.com/shop/adv360pro/) for about a year and a half.
 
 The Advantage360 Pro is a great keyboard, and I'm grateful to Kinesis for making
 a product that may have saved my career early on. However, the 360 Pro has some
