@@ -28,8 +28,8 @@ Seriously, I am loving this keyboard.
 I ended up ordering the Glove80 after getting frustrated with the bluetooth
 issues on the 360 Pro. A well-known issue with the 360 Pro is that the two
 halves will sometimes have trouble connecting. One morning, before work, it took
-me 10 minutes to connect the two halves. I remembered the the Glove80 reviews
-from [Ben Frain](https://youtu.be/Q-mNGb7-Ywo), [If Coding Were
+me 10 minutes to connect the two halves. I remembered watching the Glove80
+reviews from [Ben Frain](https://youtu.be/Q-mNGb7-Ywo), [If Coding Were
 Natural](https://youtu.be/iwjtiNxAkMA), and [Code to the
 Moon](https://youtu.be/PFFa3h7eLWM) - there was a way out! I went straight the
 MoErgo website and bought the Glove80.
