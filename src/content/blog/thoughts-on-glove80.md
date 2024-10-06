@@ -141,13 +141,15 @@ customization, but the mechanism can be tedious to screw and unscrew, especially
 when using the travel case often. A few points on this:
 
 - This design choice is intentional. As I mentioned before, the Glove80 is
-designed to be as ergonomic as possible, as offering this level of custom
-tenting is part of that.
+designed to be as ergonomic as possible, and offering this level of custom
+tenting serves that goal even if it is at the cost of being a bit more
+inconvenient.
 - I assumed I would need to screw the feet back in every time in put the
-keyboard back in the case. It turns out this is not necessary - the case is able
-to hold the keyboard comfortably even with my current tenting configuration!
+keyboard back in the travel case. It turns out this is not necessary - the case
+is able to hold the keyboard comfortably even with my current tenting
+configuration!
 
 Because of this, I'm not even sure that I have any strong downsides of the
 Glove80 to mention.
 
-Thanks to MoErgo for a great keyboard!
+Thanks to MoErgo for a making great keyboard!
