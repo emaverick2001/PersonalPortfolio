@@ -1,4 +1,5 @@
 ---
+import Link from "@components/Link.astro"
 import PageHeader from "@components/PageHeader.astro"
 import SiteLayout from "@layouts/SiteLayout.astro"
 import { getCollection } from "astro:content"
@@ -7,7 +8,12 @@ const posts = (await getCollection("blog")).sort(
   (postA, postB) => +postB.data.publishDate - +postA.data.publishDate
 )
 
-const formatter = new Intl.DateTimeFormat("en", { dateStyle: "medium", timeZone: "UTC" })
+const formatter = new Intl.DateTimeFormat("en", {
+  day: "2-digit",
+  month: "2-digit",
+  year: "numeric",
+  timeZone: "UTC",
+})
 ---
 
 <SiteLayout title="Blog">
@@ -16,10 +22,13 @@ const formatter = new Intl.DateTimeFormat("en", { dateStyle: "medium", timeZone:
   <div class="space-y-5">
     {
       posts.map((post) => (
-        <a href={post.slug + "/"} class="block">
-          {post.data.title}
-          <span class="ml-1 text-sm text-zinc-400">{formatter.format(post.data.publishDate)}</span>
-        </a>
+        <div>
+          <time class="inline-block min-w-24 text-zinc-400">
+            {formatter.format(post.data.publishDate)}
+          </time>
+
+          <Link href={post.slug + "/"}>{post.data.title}</Link>
+        </div>
       ))
     }
   </div>
