@@ -66,7 +66,7 @@ say the Glove80 brings an attention to detail to many of the papercuts in design
 that I've seen in competing keyboards.
 
 The Glove80's thumb cluster is also much more usable than that of the 360. Out
-of the 7 keys allocated to the each thumb on the 360, I only found 2, maybe 3,
+of the 6 keys allocated to the each thumb on the 360, I only found 2, maybe 3,
 usable by my thumbs while typing. The other keys are so far out of the way that
 I was never able to figure out their intended use. Are you meant to reach for
 them? Are they just extra keys tacked onto the thumb cluster? When I did use
