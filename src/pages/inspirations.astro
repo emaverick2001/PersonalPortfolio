@@ -71,6 +71,13 @@ const inspirations = {
       link: "https://sive.rs/obvious",
     },
   ],
+  videos: [
+    {
+      title: "Inaction Is A Slow Death",
+      author: "Better Ideas",
+      link: "https://youtu.be/RIVVQkZtnAU",
+    },
+  ],
   talks: [
     {
       title: "Gang of None: Design Patterns in Elixir",
@@ -271,6 +278,17 @@ const inspirations = {
         inspirations.talks.map((talk) => (
           <li>
             <Link href={talk.link}>{talk.title}</Link> by {talk.author}
+          </li>
+        ))
+      }
+    </ul>
+
+    <ul class="list-inside list-disc leading-relaxed">
+      <h4 class="mb-2 text-xl font-bold tracking-tight">Videos</h4>
+      {
+        inspirations.videos.map((video) => (
+          <li>
+            <Link href={video.link}>{video.title}</Link> by {video.author}
           </li>
         ))
       }
