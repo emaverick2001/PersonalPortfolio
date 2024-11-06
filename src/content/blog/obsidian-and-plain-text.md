@@ -69,3 +69,10 @@ Unix?
 
 Tools that work local plain text, offer a facility for extension, and provide a
 means of distributing those extensions is an unstoppable combination.
+
+## Related
+
+- [Emacs Org Mode and the power of plain
+text](https://sachachua.com/blog/2015/03/emacs-org-mode-power-plain-text/)
+- [Local-first software: You own your data, in spite of the
+cloud](https://www.inkandswitch.com/local-first/)
