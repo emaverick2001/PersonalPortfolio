@@ -7,9 +7,9 @@ I've been thinking about the software design of Obsidian recently.
 
 Consider tags: they're just text. A `#` followed immediately by some characters.
 This feature doesn't exist in markdown, but Obsidian is able to quickly
-autocomplete, list, and search he tags in your markdown files. Links behave
+autocomplete, list, and search the tags in your markdown files. Links behave
 similarly. They're indexed locally, so that every single operation doesn't
-require full-text search of all of your data.
+require a full-text search of all of your data.
 
 In this way, Obsidian's client doesn't own the data's format - it only provides
 tools for working with the data's _semantics_. Your data is in markdown, and
@@ -33,7 +33,7 @@ we can't have this power locally.
 Tools built for the web also make it easy to support mobile clients, as the
 application will run in most environments with a browser.
 
-The alternative to the implementing data semantics on a server is pre-processing
+The alternative to implementing data semantics on a server is pre-processing
 the data on the client: indexing the files in your project to improve search
 speed, or in the case of Obsidian, enumerating links and tags. I started
 thinking about this after seeing part of rwxrob's zettlekasten, and what looks
@@ -50,7 +50,7 @@ In order to keep your data accessible on many clients, Obsidian happens to offer
 a nice sync server, which pairs nicely with the fact that they have good clients
 for both desktop and mobile. The differentiation here is that the sync solution
 has nothing to do with your data - they're basically just offering a bespoke
-file sync engine which has official support within their client. This means that
+file sync engine that has official support within their client. This means that
 it's optional, and tools like Dropbox and Syncthing can be used to a similar
 end, though they won't integrate as nicely with the client.
 
@@ -67,5 +67,5 @@ our tooling look like? Standard utilities to index files on a certain pattern, a
 method of querying… would it look like Emacs? Neovim? Do we already have it in
 Unix?
 
-Tools which work with local plain text, offer a facility for extension, and
-provide a means of distributing those extensions is an unstoppable combination.
+Tools that work local plain text, offer a facility for extension, and provide a
+means of distributing those extensions is an unstoppable combination.
