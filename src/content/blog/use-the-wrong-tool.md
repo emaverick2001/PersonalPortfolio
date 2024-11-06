@@ -19,23 +19,23 @@ context it's brought up in.
 It's true that different tools fit certain jobs well. But _how do you determine
 what the right tool is?_
 
-Sometimes, you should use the tool you're already using. This is [John Carmack's
-advice](https://x.com/ID_AA_Carmack/status/989951283900514304):
-
-> The right tool for the job is often the tool you are already using -- adding
-> new tools has a higher cost than many people appreciate.
-
 "Use the right tool for job" implies that certain jobs have specific tools that
 are a perfect fit. That there's a "best" tool for the job, and that's the one
 you should be using.
 
+But sometimes, you should use the tool you're already using. This is [John
+Carmack's advice](https://x.com/ID_AA_Carmack/status/989951283900514304):
+
+> The right tool for the job is often the tool you are already using -- adding
+> new tools has a higher cost than many people appreciate.
+
 Earlier in my career, I helped a small startup build a desktop application for
-Windows to visualize streaming signal data. Thinking I should use the correct
-tool for the job, I wrote it in WPF - a framework I had no experience in. A
-framework for building applications which - I didn't know at the time - is known
-for a ridiculously high learning curve. I chose WPF because for writing a
-Windows desktop application, wouldn't the native platform be the "correct" tool
-to use?
+Windows to visualize streaming signal data. Thinking I should use the right tool
+for the job, I wrote it in WPF - a framework I had no experience in. A framework
+for building applications which - I didn't know at the time - is known for a
+ridiculously high learning curve. I chose WPF because for writing a Windows
+desktop application because, well, wouldn't the native platform be the "correct"
+tool to use?
 
 It took me far too long to get anything useful done, because I spent all my time
 trying to figure out WPF specifics. A more pragmatic option in this scenario
