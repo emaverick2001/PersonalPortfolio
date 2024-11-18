@@ -4,3 +4,10 @@ export interface PerformanceData {
   hrefLink: string
   thumbnailLink: string
 }
+
+export interface SoftwareProjectData {
+  name: string
+  desc: string
+  sourceCode?: string
+  projectLink?: string
+}
