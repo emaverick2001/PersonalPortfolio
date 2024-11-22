@@ -1,11 +1,9 @@
 ---
-import type { SoftwareProjectData } from "../types"
-
 import SiteLayout from "@layouts/SiteLayout.astro"
 import PageHeader from "@components/PageHeader.astro"
 import Link from "@components/Link.astro"
 
-export const software: SoftwareProjectData[] = [
+export const software = [
   {
     name: "Clarinet BBoard Proxy",
     desc: "A mobile-focused reader for the Clarinet BBoard focused on readability, design, and UX.",
@@ -25,13 +23,30 @@ export const software: SoftwareProjectData[] = [
   },
   {
     name: "Word of the Day",
-    desc: 'Quickly generate Japanese "Word of the Day" posts',
+    desc: 'Quickly generate Japanese "Word of the Day" posts.',
     sourceCode: "https://github.com/debashisbiswas/word-of-the-day",
   },
   {
     name: "Binaural Beats Generator",
-    desc: "Write binaural beats to a WAV file byte-by-byte in Rust",
+    desc: "Write binaural beats to a WAV file byte-by-byte in Rust.",
     sourceCode: "https://github.com/debashisbiswas/word-of-the-day",
+  },
+  {
+    name: "Duplicate Encode",
+    desc: "Code optimization challenge with a friend. His solutions were in Python, and mine were in Rust.",
+    sourceCode: "https://github.com/debashisbiswas/duplicate-encode",
+  },
+  {
+    name: "Portable Subtitles",
+    desc: "Watch videos using the mpv player and sync the subtitles to another device over a WebSocket.",
+    sourceCode: "https://github.com/debashisbiswas/portable-subs",
+    demo: "https://youtu.be/98LBklGn2f0",
+  },
+  {
+    name: "Scale Scrambler",
+    desc: "Web app using randomization to supplement music practice. Used as a teaching tool in the ASU music program.",
+    sourceCode: "https://github.com/debashisbiswas/scales",
+    projectLink: "https://dbiswas.com/scales/",
   },
 ]
 ---
@@ -50,6 +65,11 @@ export const software: SoftwareProjectData[] = [
           ) : (
             <span>{project.name}</span>
           )}
+          {project.demo ? (
+            <span>
+              (<Link href={project.demo}>demo</Link>)
+            </span>
+          ) : null}
           {project.sourceCode ? (
             <span>
               (<Link href={project.sourceCode}>code</Link>)
