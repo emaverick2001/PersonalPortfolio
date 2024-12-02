@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        serif: ["Lora", ...defaultTheme.fontFamily.serif],
+        serif: ["Noto Serif Variable", ...defaultTheme.fontFamily.serif],
       },
     },
   },
