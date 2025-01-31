@@ -62,11 +62,12 @@ level.
 
 Using all of my facilities to put together great writing. Juggling lots of
 sources and making connections. I remember feeling this during highly focused
-essay writing during university. I'd often go to Hayden Library to get this deep
-work done. I also had a phase where I'd turn off the lights in my room, sit in
-front of my CRT with nothing on screen but my text editor, put my headphones on,
-listen to lo-fi, set a pomodoro timer, and work for hours.
+essay writing during university. I'd often go to [Hayden
+Library](https://lib.asu.edu/hayden) to get this deep work done. I also had a
+phase where I'd turn off the lights in my room, sit in front of my CRT monitor
+with nothing on screen but my text editor, put lo-fi in my headphones, set a
+pomodoro timer, and work for hours.
 
 I often have to use the pomodoro technique for this sort of work. It's deep work
-and it's focused, and the pomodoro technique allows me to minimize distractions
+and it's focused. The pomodoro technique allows me to minimize distractions
 while allowing me to come back up for air at regular intervals. 
