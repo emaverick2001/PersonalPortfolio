@@ -2,6 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Charter";
+  src: url("/assets/fonts/charter/charter_regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Charter";
+  src: url("/assets/fonts/charter/charter_italic.woff2") format("woff2");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Charter";
+  src: url("/assets/fonts/charter/charter_bold.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Charter";
+  src: url("/assets/fonts/charter/charter_bold_italic.woff2") format("woff2");
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Biolinum";
+  src: url("/assets/fonts/biolinum/linbiolinum_r-webfont.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Biolinum";
+  src: url("/assets/fonts/biolinum/linbiolinum_rb-webfont.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Biolinum";
+  src: url("/assets/fonts/biolinum/linbiolinum_ri-webfont.woff2") format("woff2");
+  font-weight: normal;
+  font-style: italic;
+}
+
 @layer utilities {
   .opacity-mask {
     mask-image: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8));

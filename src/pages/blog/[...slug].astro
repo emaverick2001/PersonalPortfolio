@@ -19,11 +19,11 @@ const formatter = new Intl.DateTimeFormat("en", { dateStyle: "full", timeZone: "
 
 <!-- TODO: it'd be cool to have some tagline or something to use as the meta description -->
 <SiteLayout title={entry.data.title}>
-  <h1 class="mb-2 text-3xl font-bold tracking-tight">{entry.data.title}</h1>
+  <h1 class="mb-2 font-sans text-3xl font-bold tracking-tight">{entry.data.title}</h1>
   <p class="mb-6 tracking-tight text-zinc-600">{formatter.format(entry.data.publishDate)}</p>
 
   <article
-    class="prose prose-zinc max-w-none lg:prose-lg prose-code:before:hidden prose-code:after:hidden"
+    class="prose prose-zinc max-w-none lg:prose-lg prose-headings:font-sans prose-code:before:hidden prose-code:after:hidden"
   >
     <Content />
   </article>

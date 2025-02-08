@@ -6,7 +6,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        serif: ["Noto Serif Variable", ...defaultTheme.fontFamily.serif],
+        serif: ["Charter", ...defaultTheme.fontFamily.serif],
+        sans: ["Biolinum", ...defaultTheme.fontFamily.sans],
       },
     },
   },
