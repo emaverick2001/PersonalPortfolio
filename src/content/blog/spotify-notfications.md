@@ -7,8 +7,8 @@ I recently wanted to customize Spotify media notfications on Linux. Every time I
 change songs, I get a desktop notification with the new song's information. I
 wanted to this notification to stand out in comparision with other notfications
 on my system: a notification from Spotify should be outlined in green. This was
-a quick and fun project which interacted which utilized a lot of Linux knowledge
-that I've built up over the years, and I thought I'd share the process.
+a quick and fun project which utilized a lot of Linux knowledge that I've built
+up over the years, and I thought I'd share the process.
 
 Notifications on Linux work through D-Bus, a message bus that allows
 applications to communicate with each other. Applications can publish messages
@@ -109,8 +109,8 @@ method call time=1739299183.583906 sender=:1.1008 -> destination=:1.1242 serial=
 ```
 
 Based on this output, it seems like the first field is the app name ("Spotify"),
-the the fourth is the song title, and the fifth is the album title. Matching up
-the fields with the above documentation, we get
+the fourth is the song title, and the fifth is the album title. Matching up the
+fields with the above documentation, we get
 
 | Field | Description | Value |
 | ------------- | -------------- | -------------- | 
