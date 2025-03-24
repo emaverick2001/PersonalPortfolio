@@ -1,6 +1,6 @@
 ---
 title: Conjuring tools
-publishDate: 2025-03-21
+publishDate: 2025-03-24
 ---
 
 Using LLMs to create small, purpose-built tools makes me feel like I'm casting
@@ -10,10 +10,10 @@ There are so many ways to get value out of LLMs, and the one I keep finding
 myself landing on while working in software is using them to create small tools
 as I work on larger problems.
 
-For example, I recently optimized a legacy data import program at work. The
-program was parsing a specialized file format with about two million data points
-and uploading the data into our database. The data import was taking six hours,
-and after working at it for a week, I was able to get it down to two minutes.
+For example, I recently optimized a legacy data import program. The program was
+parsing a specialized file format with about two million data points and
+uploading the data into our database. The data import was taking six hours, and
+after working at it for a week, I was able to get it down to two minutes.
 Throughout the process, I often wished for small tools that would help me
 investigate smaller parts of the problem. These were tools I could write, but
 that would have normally required a long detour. AI was quite helpful for
@@ -26,23 +26,23 @@ performance characteristics of each approach
 which are different? Do columns match between the tables? Does each table have
 the same data?
 
-The first script helped me quickly find that the performance bottleneck
-was actually in parsing the file, rather than network latency while uploading to
-the database. It also helped me a find a good batch size. The second helped me
+The first script helped me quickly find that the performance bottleneck was
+actually in parsing the file, rather than network latency while uploading to the
+database. It also helped me a find a good batch size. The second helped me
 automatically test that the changes I was making only changed the performance of
-the tool, and not the behavior of the data import.
+the tool, and not the behavior of the data import. 
 
 AI didn't solve the whole problem, but it allowed me to conjure purpose-built
 tools to get faster feedback and test out my ideas while I was working towards a
-solution! I felt like a spellcaster with the power to summon exactly what I
-needed at my fingertips.
+solution! I felt like a spellcaster with the power at my fingertips to summon
+exactly what I needed.
 
-TODO: this section on bound weapons
-
-This idea reminds me of "bound weapons" in Skyrim. In Skyrim, there are a set
-of spells that allow a magic user to conjure a weapon at will. For example, the
-"Bound Sword" spell... [If you don't know what I'm talking about, here's a
-link](https://youtu.be/XGAJ8Jc1KM8).
+This idea reminds me of "bound weapons" in Skyrim. In Skyrim, there are a set of
+spells that allow a magic user to conjure a weapon at will. [Here's a video
+demonstration](https://youtu.be/XGAJ8Jc1KM8). I always thought this spell was
+facinating. The implication is that the magic user summons a tool that's exactly
+fit for their hand, and exactly tailored to their preferences. LLMs offer me a
+similar magic.
 
 While we're talking about spellcasting, I'll leave this off with an excerpt from
 [Structure and Interpretation of Computer
