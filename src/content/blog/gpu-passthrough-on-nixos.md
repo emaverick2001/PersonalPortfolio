@@ -100,7 +100,7 @@ second disk drive
 - During the install, Windows 11 tries to force you to sign in with a Microsoft
 account. This can be bypassed by disabling the network adapter, hitting `Shift +
 F10` to open a command prompt, and typing `oobe\bypassnro` to reboot with the
-option skipping online sign in. Coincidentally, [I read this morning that
+option to skip online sign in. Coincidentally, [I read this morning that
 Microsoft is disabling this
 feature](https://www.tomshardware.com/software/windows/microsoft-eliminates-workaround-that-circumvents-microsoft-account-requirement-during-windows-11-installation),
 so you may need to do some registry edits to get this to work.
@@ -136,11 +136,7 @@ ensures that passthrough devices operate within safe boundaries.
 This was quick in NixOS:
 
 ```nix
-{ pkgs, ... }:
-
-{ 
-  boot.kernelParams = [ "intel_iommu=on" ];
-}
+boot.kernelParams = [ "intel_iommu=on" ];
 ```
 
 If you have an AMD CPU, this will be `amd_iommu`.
@@ -281,8 +277,6 @@ loaded before regular graphics modules so that VFIO can bind to the card first.
       "vfio-pci.ids=1002:67df,1002:aaf0"
     ];
   };
-
-  # ...
 }
 ```
 
@@ -304,7 +298,7 @@ virt-manager to pass my GPU through to the VM.
 The VM had difficulty booting due to the hardware change, so I had to use the
 virtual display to walk it through some restarts. After that, I installed AMD
 drivers in the VM, and I could see Windows on my primary monitor! I suspect most
-guides don't cover this part, because they usually install the guest operating
+guides don't cover this part because they usually install the guest operating
 system after passthrough is already set up.
 
 To my surprise, sound was already working! Both the graphics and audio were
@@ -333,7 +327,7 @@ ultrawide, playing fullscreen on my 3440x1440 monitor with a Steam Controller.
 It felt native! I always think of VMs as slow because of my past experience with
 them, so using a VM at near-native performance was incredible.
 
-Here's the final config:
+Here's the final config for my virtualization module:
 
 ```nix
 { pkgs, ... }:
