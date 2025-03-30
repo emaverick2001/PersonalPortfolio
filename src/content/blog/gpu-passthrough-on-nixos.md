@@ -13,9 +13,9 @@ I recently wanted to try writing a Skyrim mod. My mod idea was beyond the scope
 of most Skyrim mods: it would make network calls, dynamically create items in
 the world based on those results, etc.
 
-While Linux gaming has come quite far, some of the more involved tools for
-Skyrim modding only support Windows. To my surprise, this was a barrier for me -
-I don't have a single Windows machine around anymore! I run NixOS on my desktop
+While Linux gaming has come far, some of the more involved tools for Skyrim
+modding only support Windows. To my surprise, this was a barrier for me - I
+don't have a single Windows machine around anymore! I run NixOS on my desktop
 and laptop and stopped dual-booting years ago. 
 
 This left me with a few options. I could either
@@ -26,17 +26,17 @@ This left me with a few options. I could either
 
 Dual-booting would be easiest, but I stopped doing it in the first place because
 I found it annoying to reboot into a different operating system whenever I
-wanted to use a different application. The Wine route didn't sound very
-appealing, and I got [nerd-sniped](https://xkcd.com/356/) by the potential of
-GPU passthrough.
+wanted to use a different application. The Wine route didn't sound appealing,
+and I got [nerd-sniped](https://xkcd.com/356/) by the potential of GPU
+passthrough.
 
 ## Setting up the virtual machine
 
 While most posts on this topic start by setting up GPU passthrough first and the
 VM second, I started by setting up the VM first. I was hoping that I could get
-by with a basic VM with no passthrough at first. Skyrim's an old game, and I
-remember running it 10 years ago on a weak laptop with integrated graphics.
-Perhaps a VM on modern hardware would be enough!
+by with a basic VM with no passthrough. Skyrim's an old game, and I remember
+running it 10 years ago on a weak laptop with integrated graphics. Perhaps a VM
+on modern hardware would be enough!
 
 Setting up a VM isn't too difficult on NixOS, but it helps to understand how it
 works. Linux virtualization has many moving parts, so here's a high-level
@@ -83,12 +83,9 @@ Here's the corresponding NixOS config, which I broke out into a separate module:
 }
 ```
 
-The only piece that I didn't mention is `swtpm`, which allows the VM to
-emulate a TPM. This is needed because the Windows 11 installer wants to see a
-TPM when checking hardware compatibility.
-
-It took me a bit to figure out get past the TPM issue, but the rest of the VM
-setup was straightforward:
+The only piece that I didn't mention is `swtpm`, which allows the VM to emulate
+a TPM. The Windows 11 installer wants to see a TPM when checking hardware
+compatibility. Other than this, the rest of the VM setup was straightforward:
 
 - Install the [Windows 11
 ISO](https://www.microsoft.com/en-us/software-download/windows11) and add it to
@@ -96,9 +93,9 @@ a virtual disk drive
 - Install the [virtio drivers
 ISO](https://pve.proxmox.com/wiki/Windows_VirtIO_Drivers) and add them to a
 second disk drive
-- Ensure the main disk and network card were configured to use virtio
+- Configure the main disk and network card to use virtio
 - During the install, Windows 11 tries to force you to sign in with a Microsoft
-account. This can be bypassed by disabling the network adapter, hitting `Shift +
+account. You can bypass this by disabling the network adapter, hitting `Shift +
 F10` to open a command prompt, and typing `oobe\bypassnro` to reboot with the
 option to skip online sign in. Coincidentally, [I read this morning that
 Microsoft is disabling this
@@ -123,16 +120,14 @@ few guides that helped me through this process:
 
 My dedicated graphics card is an RX 580, and I have integrated graphics on my
 i7-7700T. GPU passthrough is much easier if you have more than one graphics
-card, because it's easiest give the VM full ownership of your passthrough GPU
-rather than trying to share it between the guest and the host.
+card, because it's easiest to give the VM full ownership of your passthrough GPU
+rather than trying to share it between the host and the guest.
 
 ### Enabling IOMMU
 
-GPU passthrough is done using VFIO, a Linux kernel driver that allows userspace
-programs (like QEMU) access to PCI devices like a GPU. Giving the VM full access
-would be insecure, however. To use VFIO, I first needed to enable IOMMU, which
-ensures that passthrough devices operate within safe boundaries.
-
+GPU passthrough uses VFIO, a Linux kernel driver that allows userspace programs
+(like QEMU) to access PCI devices like a GPU. To use VFIO, I needed to enable
+IOMMU, which ensures that passthrough devices operate within safe boundaries.
 This was quick in NixOS:
 
 ```nix
@@ -141,8 +136,8 @@ boot.kernelParams = [ "intel_iommu=on" ];
 
 If you have an AMD CPU, this will be `amd_iommu`.
 
-After a rebuild and reboot, I could see that IOMMU was enabled using the
-following command to check messages from the kernel:
+After a rebuild and reboot, I used the following command to check messages from
+the kernel and confirm that IOMMU was enabled.
 
 ```bash
 sudo dmesg | grep -i iommu
@@ -179,8 +174,8 @@ But it wasn't returning anything!
 IOMMU Group .:
 ```
 
-It was because I needed to enable VT-d (Intel's IOMMU) in the BIOS. After doing
-so, the output of each command looked better!
+I needed to enable VT-d (Intel's IOMMU) in the BIOS. After doing so, the output
+of each command looked better!
 
 Kernel messages:
 
@@ -237,7 +232,7 @@ IOMMU Group 8:
 	02:00.0 Ethernet controller [0200]: Realtek Semiconductor Co., Ltd. RTL8111/8168/8211/8411 PCI Express Gigabit Ethernet Controller [10ec:8168] (rev 15)
 ```
 
-From this, I can see that IOMMU group that contains my RX 580:
+From this, I can see the IOMMU group that contains my RX 580:
 
 ```
 IOMMU Group 1:
@@ -247,18 +242,16 @@ IOMMU Group 1:
 ```
 
 But what's this? I expected two devices in this group - the graphics and the
-audio - but there were three!
-
-This is fine. Depending on motherboard and CPU, there are some cases where the
-PCIe slot itself is shown in the group. This is okay, and I can still pass the
-devices I need to VFIO. In this case, the script also shows the devices IDs that
-I need to pass: `1002:67df` for graphics and `1002:aaf0` for audio.
+audio - but there are three! Depending on motherboard and CPU, the PCIe slot
+itself may be in the group. This is okay, and I can still pass the GPU devices
+to VFIO. The script shows the devices IDs that I need to pass: `1002:67df` for
+graphics and `1002:aaf0` for audio.
 
 ### Passing the GPU through using VFIO
 
-Now that I had verified that IOMMU was set up correctly and could see my IOMMU
-groups, I could pass the GPU through using VFIO. Note that the VFIO modules are
-loaded before regular graphics modules so that VFIO can bind to the card first.
+Now that I set up IOMMU correctly and could see my IOMMU groups, I could pass
+the GPU through using VFIO. Note that I load VFIO modules before regular
+graphics modules so that VFIO can bind to the card first.
 
 ```nix
 {
@@ -432,5 +425,5 @@ Here's my module for now.
 - [Looking Glass](https://looking-glass.io/) seems even more interesting
 - NixOS is great! Having multiple generations of the system made it easy to
 experiment safely, and being able to disable everything temporarily without
-losing my progress for later is quite nice
+losing my progress for later is nice
 - I need to take more pictures and screenshots during projects like this!
