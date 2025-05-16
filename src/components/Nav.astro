@@ -18,6 +18,10 @@ const routes: Route[] = [
     route: "/blog/",
   },
   {
+    displayName: "Streams",
+    route: "/streams/",
+  },
+  {
     displayName: "Music",
     route: "/music/",
   },
@@ -48,8 +52,8 @@ function isCurrentRoute(route: string): boolean {
           {/* https://github.com/withastro/prettier-plugin-astro/issues/308 */}
           {/* prettier-ignore */}
           <a href={route.route} class:list={[
-          "hover:cursor hover:underline hover:bold",
-          isCurrentRoute(route.route) && "underline font-bold"
+          "hover:cursor hover:bold hover:underline",
+          isCurrentRoute(route.route) && "font-bold underline"
         ]}>{route.displayName}</a>
         </>
       ))
