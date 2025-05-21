@@ -28,10 +28,10 @@ season](https://youtube.com/playlist?list=PL1tiwbzkOjQxD0jjAE7PsWoaCrs0EkBH2&si=
 recently, but wanted a better way to sync my progress between devices, as I'll
 often listen to the show while driving or in the background on desktop. YouTube
 works, but doesn't always sync progress properly, and I didn't enjoy scrubbing
-through 4-hour long videos when progress didn't sync. There is a Spotify
-podcast, but it doesn't have the video, it's missing some content, and I found
-it frustrating to scroll through the app to find the show again whenever I
-wanted to continue listening.
+through 4-hour long videos when progress didn't sync. There is a podcast, but it
+doesn't have the video, it's missing some content, and I found it frustrating to
+scroll through my podcast app to find the show again whenever I wanted to
+continue listening.
 
 The goal: Critical Role Season 2, properly synced between devices. Continue
 watching/listening with as close to one click as possible. 
