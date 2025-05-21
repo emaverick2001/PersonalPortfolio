@@ -1,6 +1,9 @@
 ---
 title: Self-hosting the optimal Critical Role experience
 publishDate: 2025-05-19
+description: >-
+  Setting up a media server and writing scripts to optimize my
+  Critical Role viewing experience
 ---
 
 For this project, I self-host a media server with
@@ -103,12 +106,12 @@ directory on the host to the `/media` directory in the container. When I
 download episodes, I can put them on `/media` on the host for the Jellyfin
 server in the container to serve them.
 
-After starting the container, I could access my media server from a browser from
-any of machines in connected to my Tailscale network:
+After starting the container, I could access my media server from a browser on
+any of machines connected to my Tailscale network:
 
 ![Jellyfin Web](@images/critical-role-server/jellyfin-web.png)
 
-## Accessing the media server on mobile
+## Accessing the media server on iOS
 
 To access the server on my phone, I installed Tailscale and a Jellyfin client.
 After trying a few Jellyfin clients, I landed on
@@ -133,6 +136,17 @@ To be honest, I probably should have used something other than bash for this,
 but it's good for the purpose it serves. I use this script by `ssh`ing into the
 machine whenever I'm close to finishing the episodes I've downloaded.
 
+The script uses [gum](https://github.com/charmbracelet/gum) for the TUI frontend
+and [yt-dlp](https://github.com/yt-dlp/yt-dlp) to download episodes from
+YouTube. `yt-dlp` has options for including
+[SponsorBlock](https://sponsor.ajay.app/) data, **allowing me to add chapter
+data that Jellyfin can use to skip the intro sequence and intermission for each
+episode**!
+
+I also use `shell.nix` for dependencies. It's a nice balance for this
+lightweight script: not a full Docker container, but enough to allow me to
+manage dependencies in a sane way.
+
 Here's a demo. I can select multiple episodes, but just download episode 12 here.
 
 <script src="https://asciinema.org/a/720200.js" id="asciicast-720200" async="true"></script>
@@ -145,17 +159,6 @@ metadata (episode title, thumbnail, description) automatically added:
 It also shows on the mobile client:
 
 ![Episode 12 in the mobile app](@images/critical-role-server/episode12mobile.png)
-
-Some details:
-
-- [yt-dlp](https://github.com/yt-dlp/yt-dlp) to download episodes from YouTube.
-  It has options for including [SponsorBlock](https://sponsor.ajay.app/) data,
-  **allowing me to add chapter data that Jellyfin can use to skip the intro sequence
-  and intermission for each episode**
-- [gum](https://github.com/charmbracelet/gum) for the TUI frontend
-- `shell.nix` for dependencies! It's a nice balance for this lightweight script:
-  not a full Docker container, but enough to allow me to manage dependencies in
-  a sane way.
 
 The YouTube playlist has videos in the middle of the playlist, like short
 episodes where the players roll for new stats after leveling up. I wanted to see

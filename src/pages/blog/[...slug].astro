@@ -18,7 +18,7 @@ const formatter = new Intl.DateTimeFormat("en", { dateStyle: "full", timeZone: "
 ---
 
 <!-- TODO: it'd be cool to have some tagline or something to use as the meta description -->
-<SiteLayout title={entry.data.title}>
+<SiteLayout title={entry.data.title} description={entry.data.description}>
   <h1 class="mb-2 font-sans text-3xl font-bold tracking-tight">{entry.data.title}</h1>
   <p class="mb-6 tracking-tight text-zinc-600">{formatter.format(entry.data.publishDate)}</p>
 
