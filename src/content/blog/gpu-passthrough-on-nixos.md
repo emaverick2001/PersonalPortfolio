@@ -1,6 +1,9 @@
 ---
 title: GPU passthrough on NixOS to a Windows 11 VM
 publishDate: 2025-03-29
+description: >-
+  Running a Windows 11 virtual machine on NixOS with near-native performance
+  using GPU passthrough
 ---
 
 Last week, I set up GPU passthrough on NixOS, enabling me to run a Windows 11
