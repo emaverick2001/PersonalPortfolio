@@ -1,6 +1,7 @@
 ---
 title: Obsidian and the beauty of plain text
 publishDate: 2024-11-05
+description: Decoupling data format from the data's semantics
 ---
 
 I've been thinking about the software design of Obsidian recently.

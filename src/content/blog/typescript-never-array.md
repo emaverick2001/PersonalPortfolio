@@ -1,6 +1,7 @@
 ---
 title: TypeScript's elusive never[] type
 publishDate: 2023-09-21
+description: Exploring type theory through TypeScript type inference
 ---
 
 This TypeScript code results in an error.

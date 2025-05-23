@@ -1,13 +1,10 @@
 ---
-import Link from "@components/Link.astro"
 import PageHeader from "@components/PageHeader.astro"
 import SiteLayout from "@layouts/SiteLayout.astro"
 import { getCollection } from "astro:content"
-
 const posts = (await getCollection("blog")).sort(
   (postA, postB) => +postB.data.publishDate - +postA.data.publishDate
 )
-
 const formatter = new Intl.DateTimeFormat("en", {
   day: "2-digit",
   month: "2-digit",
@@ -18,17 +15,23 @@ const formatter = new Intl.DateTimeFormat("en", {
 
 <SiteLayout title="Blog">
   <PageHeader>Posts</PageHeader>
-
-  <div class="space-y-5">
+  <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
     {
       posts.map((post) => (
-        <div>
-          <time class="inline-block min-w-24 text-zinc-400">
+        <a
+          href={post.slug + "/"}
+          class="group flex w-full flex-col gap-3 rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition duration-75 hover:scale-[102%] hover:shadow-md"
+        >
+          <h2 class="text-xl text-gray-900 transition-colors duration-200 group-hover:text-purple-500">
+            {post.data.title}
+          </h2>
+          {post.data.description && (
+            <p class="text-sm leading-relaxed text-gray-600">{post.data.description}</p>
+          )}
+          <time class="text-sm font-medium text-gray-400">
             {formatter.format(post.data.publishDate)}
           </time>
-
-          <Link href={post.slug + "/"}>{post.data.title}</Link>
-        </div>
+        </a>
       ))
     }
   </div>

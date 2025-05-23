@@ -1,6 +1,7 @@
 ---
 title: Conjuring tools
 publishDate: 2025-03-24
+description: Using LLMs to create tools on demand feels like spellcasting
 ---
 
 Using LLMs to create small, purpose-built tools makes me feel like I'm casting

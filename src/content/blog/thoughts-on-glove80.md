@@ -1,6 +1,9 @@
 ---
 title: Thoughts on the Glove80
 publishDate: 2024-10-05
+description: >-
+  Reviewing the most well-designed split ergonomic countoured columnar-staggered
+  (am I too far into ergo keyboards?) keyboard
 ---
 
 These are my impressions of the [MoErgo

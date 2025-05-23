@@ -1,6 +1,7 @@
 ---
 title: How did we get here?
 publishDate: 2023-10-20
+description: The tradeoffs we make in frontend
 ---
 
 Matt Pocock, a well-known TypeScript wizard, recently released a
