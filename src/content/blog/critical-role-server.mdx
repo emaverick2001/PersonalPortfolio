@@ -6,6 +6,10 @@ description: >-
   Critical Role viewing experience
 ---
 
+import { Image } from 'astro:assets';
+import episode12web from '@images/critical-role-server/episode12web.png';
+import episode12mobile from '@images/critical-role-server/episode12mobile.png';
+
 For this project, I self-host a media server with
 [Jellyfin](https://jellyfin.org), set up [Tailscale](http://tailscale.com) to
 securely access my server from anywhere, and write a script to quickly download
@@ -34,7 +38,7 @@ scroll through my podcast app to find the show again whenever I wanted to
 continue listening.
 
 The goal: Critical Role Season 2, properly synced between devices. Continue
-watching/listening with as close to one click as possible. 
+watching/listening with as close to one click as possible.
 
 ## The plan
 
@@ -81,7 +85,7 @@ inside the Tailscale network.
 
 I also installed Docker and Nix. Docker for the Jellyfin server, and Nix for my
 download script (more on this later).
-  
+
 ## Setting up Jellyfin
 
 Jellyfin was trivial to set up with Docker Compose. I created a
@@ -154,11 +158,11 @@ Here's a demo. I can select multiple episodes, but just download episode 12 here
 After running the script, I can see episode 12 in my Jellyfin library, with the
 metadata (episode title, thumbnail, description) automatically added:
 
-![Episode 12 in the web interface](@images/critical-role-server/episode12web.png)
+<Image src={episode12web} alt="Episode 12 in the web interface" />
 
 It also shows on the mobile client:
 
-![Episode 12 in the mobile app](@images/critical-role-server/episode12mobile.png)
+<Image src={episode12mobile} alt="Episode 12 in the mobile app" class="w-full max-w-xs mx-auto block sm:max-w-sm" />
 
 The YouTube playlist has videos in the middle of the playlist, like short
 episodes where the players roll for new stats after leveling up. I wanted to see
