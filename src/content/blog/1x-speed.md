@@ -1,7 +1,7 @@
 ---
 title: Listen to content at 1x speed
 publishDate: 2025-09-11
-description: asdf
+description: Why I prefer 1x over 2x speed for content
 ---
 
 Modern productivity advice often tells us to listen to content at greater
