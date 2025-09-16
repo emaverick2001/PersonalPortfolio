@@ -19,8 +19,8 @@ resource like this - so here it is!
 My setup for a while was a Vandoren BD5 with V12 3.5+ to 4 reeds. After playing
 on this setup for a while, I was frustrated about how many bad and stuffy reeds
 I'd get. Knowing what I know now, I probably just needed to move down to V12 3.5
-or 3.25 reeds - but I didn't know that, so I went down a deep synthetic reed
-rabbit hole that I never came out of.
+reeds - but I didn't know that, so I went down a deep synthetic reed rabbit hole
+that I never came out of.
 
 ### BD5 with synthetics
 
