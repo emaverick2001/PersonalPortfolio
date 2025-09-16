@@ -129,7 +129,7 @@ projection when needed.
 I tried Legere French Cut Tenor Sax 2.75 and 3 reeds on my B50. When synthetic
 reeds don't work on your mouthpiece, they have a specific "synthetic buzz", and
 that's what I was getting with these. I wonder if they'd work better on a
-different mouthpiece, but it's hard to beat the B50/Euro Cut combo.
+different mouthpiece, but it's hard to beat the B50 + American Cut.
 
 ---
 
