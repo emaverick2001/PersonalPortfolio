@@ -1,3 +1,3 @@
-# debashisbiswas.github.io
+# maverickespinosa.github.io
 
 Personal website
