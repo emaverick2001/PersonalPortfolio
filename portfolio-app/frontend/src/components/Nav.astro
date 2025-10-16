@@ -43,22 +43,27 @@ function isCurrentRoute(route: string): boolean {
 }
 ---
 
-<nav class="mb-8 mt-6 flex justify-center sm:justify-between">
-  <div class="flex flex-wrap justify-center gap-3">
-    {
-      routes.map((route) => (
-        <>
-          {/* Avoid extra whitespace from formatter adding line breaks. */}
-          {/* https://github.com/withastro/prettier-plugin-astro/issues/308 */}
-          {/* prettier-ignore */}
-          <a href={route.route} class:list={[
-          "hover:cursor hover:bold hover:underline",
-          isCurrentRoute(route.route) && "font-bold underline"
-        ]}>{route.displayName}</a>
-        </>
-      ))
-    }
+<nav class="sticky top-0 z-50 w-full bg-zinc-100 border-b-4 border-gray-200 shadow-none">
+  <div class="max-w-7xl mx-auto flex items-center justify-around px-4 py-4">
+    <!-- Logo and Title -->
+    <div class="flex items-center gap-8">
+      <img src="/assets/logo.svg" alt="Logo" class="h-10 w-10" />
+      <span class="font-bold text-2xl tracking-tight">Maverick Espinosa</span>
+    </div>
+    <div class="flex gap-8 text-lg">
+      {
+        routes.map((route) => (
+          <>
+            {/* Avoid extra whitespace from formatter adding line breaks. */}
+            {/* https://github.com/withastro/prettier-plugin-astro/issues/308 */}
+            {/* prettier-ignore */}
+            <a href={route.route} class:list={[
+            "hover:cursor hover:bold hover:underline transition-all duration-200",
+            isCurrentRoute(route.route) && "font-bold underline"
+          ]}>{route.displayName}</a>
+          </>
+        ))
+      }
+    </div>
   </div>
-
-  <span class="hidden sm:inline">Debashis Biswas</span>
 </nav>

@@ -1,13 +1,14 @@
 ---
 import Head from "@components/Head.astro"
 import Nav from "@components/Nav.astro"
+import Footer from "@components/Footer.astro"
 
 interface Props {
   title?: string
   description?: string
 }
 
-const title = Astro.props.title ? `${Astro.props.title} | Debashis Biswas` : "Debashis Biswas"
+const title = Astro.props.title ? `${Astro.props.title} | Maverick Espinosa` : "Maverick Espinosa"
 const description = Astro.props.description ?? "Software engineer, musician"
 ---
 
@@ -17,13 +18,11 @@ const description = Astro.props.description ?? "Software engineer, musician"
     <Head {title} {description} />
   </head>
 
-  <body
-    class="max-w-screen-md bg-zinc-50 px-6 pb-32 pt-2 font-serif text-lg text-zinc-900 md:mx-auto"
-  >
-    <Nav />
-
-    <main role="main">
-      <slot />
-    </main>
-  </body>
+<body class="w-full bg-zinc-50">
+  <Nav />
+  <main role="main" class="max-w-screen-md md:mx-auto px-6 pb-32 pt-2 font-serif text-lg text-zinc-900">
+    <slot />
+  </main>
+  <Footer />
+</body>
 </html>

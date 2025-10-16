@@ -16,8 +16,8 @@ fi
 cd portfolio-app/frontend/ || exit
 
 # Kill any existing processes on port 3000
-echo "🔍 Checking for existing processes on port 3000..."
-kill -9 "$(lsof -ti:3000)" 2>/dev/null || echo "No processes found on port 3000"
+echo "🔍 Checking for existing processes on port 4321..."
+kill -9 "$(lsof -ti:4321)" 2>/dev/null || echo "No processes found on port 4321"
 
 # Install dependencies if node_modules doesn't exist or is outdated
 if [ ! -d "node_modules" ] || [ "package.json" -nt "node_modules" ]; then
@@ -28,5 +28,5 @@ else
 fi
 
 # Start development server
-echo "🎉 Starting development server on port 3000..."
+echo "🎉 Starting development server on port 4321..."
 pnpm dev
