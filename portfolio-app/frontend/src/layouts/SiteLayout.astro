@@ -1,7 +1,5 @@
 ---
 import Head from "@components/Head.astro"
-import Nav from "@components/Nav.astro"
-import Footer from "@components/Footer.astro"
 
 interface Props {
   title?: string
@@ -9,20 +7,15 @@ interface Props {
 }
 
 const title = Astro.props.title ? `${Astro.props.title} | Maverick Espinosa` : "Maverick Espinosa"
-const description = Astro.props.description ?? "Software engineer, musician"
+const description = Astro.props.description ?? "Software Engineer, Music Producer"
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <Head {title} {description} />
   </head>
-
-<body class="w-full bg-zinc-50">
-  <Nav />
-  <main role="main" class="max-w-screen-md md:mx-auto px-6 pb-32 pt-2 font-serif text-lg text-zinc-900">
+  <body>
     <slot />
-  </main>
-  <Footer />
-</body>
+  </body>
 </html>

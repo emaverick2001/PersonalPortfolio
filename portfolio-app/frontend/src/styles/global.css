@@ -51,6 +51,12 @@
   font-style: italic;
 }
 
+@layer base {
+  body {
+    @apply bg-zinc-50 font-body antialiased;
+  }
+}
+
 @layer utilities {
   .opacity-mask {
     mask-image: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8));

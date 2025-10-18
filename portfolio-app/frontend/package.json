@@ -1,27 +1,36 @@
 {
-  "name": "@example/blog",
+  "name": "maverickespinosa-personal-portfolio-site",
   "type": "module",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.7",
-    "@astrojs/sitemap": "^3.6.0",
-    "@astrojs/tailwind": "^6.0.2",
-    "astro": "^5.14.5"
+    "framer-motion": "^11.3.31",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwind-merge": "^2.5.2"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.9",
+    "astro": "^5.14.5",
+    "@astrojs/tailwind": "^6.0.2",
+    "@astrojs/react": "^3.6.2",
+    "@astrojs/mdx": "^4.3.7",
+    "@astrojs/sitemap": "^3.6.0",
+    "@astrojs/check": "^0.9.3",
+    "tailwindcss": "^3.4.10",
+    "@tailwindcss/typography": "^0.5.15",
+    "typescript": "^5.5.4",
+    "@types/react": "^18.3.4",
+    "@types/react-dom": "^18.3.0",
     "prettier": "^3.5.3",
     "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-tailwindcss": "^0.6.11",
-    "tailwindcss": "^4"
+    "prettier-plugin-tailwindcss": "^0.6.11"
   }
 }
