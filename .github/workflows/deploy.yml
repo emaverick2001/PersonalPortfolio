@@ -3,10 +3,8 @@ name: Github Pages Astro CI
 on:
   push:
     branches: [master]
-  # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
 
-# Allow this job to clone the repo and create a page deployment
 permissions:
   contents: read
   pages: write
@@ -18,10 +16,15 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
+
       - name: Install dependencies
         run: pnpm install
-        working-directory: frontend
-      - name: Install, build, and upload your site
+        working-directory: portfolio-app/frontend
+
+      - name: Change to frontend directory
+        run: cd portfolio-app/frontend
+
+      - name: Build and upload your site
         uses: withastro/action@v2
         with:
           package-manager: pnpm
