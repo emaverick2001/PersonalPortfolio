@@ -1,5 +1,7 @@
 ---
 import Head from "@components/Head.astro"
+import { HeaderSection } from "@components/Header"
+import { FooterSection } from "@components/Footer"
 
 interface Props {
   title?: string
@@ -16,6 +18,10 @@ const description = Astro.props.description ?? "Software Engineer, Music Produce
     <Head {title} {description} />
   </head>
   <body>
-    <slot />
+    <HeaderSection client:load />
+    <main class="max-w-screen-lg bg-zinc-50 px-6 pb-4 pt-2 font-serif text-lg text-zinc-900 md:mx-auto">
+      <slot />
+    </main>
+    <FooterSection client:load/>
   </body>
 </html>

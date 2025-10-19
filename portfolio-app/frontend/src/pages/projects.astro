@@ -1,0 +1,15 @@
+---
+import SiteLayout from "@layouts/SiteLayout.astro"
+import ProjectGrid from "@components/ProjectGrid"
+---
+
+<SiteLayout title="Projects">
+  <section class="my-6 flex flex-col items-center justify-around gap-6 text-center sm:flex-row sm:gap-4 sm:text-left">
+    <div class="container">
+      <h1 class="text-4xl font-bold tracking-tight">Projects</h1>
+    </div>
+  </section>
+  <section class="mb-4">
+    <ProjectGrid client:load/>
+  </section>
+</SiteLayout>

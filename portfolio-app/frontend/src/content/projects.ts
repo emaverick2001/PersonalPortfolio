@@ -1,33 +1,33 @@
----
-import SiteLayout from "@layouts/SiteLayout.astro"
-import PageHeader from "@components/PageHeader.astro"
-import Link from "@components/Link"
-
-export const software = [
+export const projects = [
   {
     name: "Clarinet BBoard Proxy",
+    image: "/assets/images/project-1.jpg",
     desc: "A mobile-focused reader for the Clarinet BBoard focused on readability, design, and UX.",
     sourceCode: "https://github.com/debashisbiswas/bboard-proxy",
     projectLink: "https://clarinet-bboard.vercel.app/",
   },
   {
     name: "Minimet",
+    image: "/assets/images/project-2.jpg",
     desc: "Mini metronome, intended to be embedded on smaller screens.",
     sourceCode: "https://github.com/debashisbiswas/minimet",
     projectLink: "https://dbiswas.com/minimet/",
   },
   {
     name: "Spire HTMX",
+    image: "/assets/images/project-3.jpg",
     desc: "Append-only notes augmented with AI - implemented with HTMX.",
     sourceCode: "https://github.com/debashisbiswas/spire-htmx",
   },
   {
     name: "Word of the Day",
+    image: "/assets/images/project-4.jpg",
     desc: 'Quickly generate Japanese "Word of the Day" posts.',
     sourceCode: "https://github.com/debashisbiswas/word-of-the-day",
   },
   {
     name: "Binaural Beats Generator",
+    image: "/assets/images/project-5.jpg",
     desc: "Write binaural beats to a WAV file byte-by-byte in Rust.",
     sourceCode: "https://github.com/debashisbiswas/word-of-the-day",
   },
@@ -49,35 +49,9 @@ export const software = [
     projectLink: "https://dbiswas.com/scales/",
   },
 ]
----
 
-<SiteLayout title="Software">
-  <PageHeader>Software</PageHeader>
-
-  <p class="mb-4">Some of my favorite projects that I've built over the years.</p>
-
-  <ul class="list-inside list-disc leading-relaxed">
-    {
-      software.map((project) => (
-        <li>
-          {project.projectLink ? (
-            <Link href={project.projectLink}>{project.name}</Link>
-          ) : (
-            <span>{project.name}</span>
-          )}
-          {project.demo ? (
-            <span>
-              (<Link href={project.demo}>demo</Link>)
-            </span>
-          ) : null}
-          {project.sourceCode ? (
-            <span>
-              (<Link href={project.sourceCode}>code</Link>)
-            </span>
-          ) : null}
-          - {project.desc}
-        </li>
-      ))
-    }
-  </ul>
-</SiteLayout>
+export const slugify = (name: string) =>
+  name
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9\-]/g, "")

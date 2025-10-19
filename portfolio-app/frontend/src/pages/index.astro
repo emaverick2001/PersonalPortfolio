@@ -1,12 +1,53 @@
 ---
+import { Link } from "@components/Link"
 import SiteLayout from "@layouts/SiteLayout.astro"
-import { HeaderSection } from "@components/Header"
-import { HeroSection } from "@components/Hero"
-import { FooterSection } from "@components/Footer"
 ---
 
 <SiteLayout>
-  <HeaderSection client:load />
-  <HeroSection/>
-  <FooterSection />
+  <section class="my-6 flex flex-col items-center justify-around gap-6 text-center sm:flex-row sm:gap-4 sm:text-left">
+    <div class="order-last font-sans sm:order-first">
+      <h1 class="mb-2 text-4xl font-bold tracking-tight">Maverick Espinosa</h1>
+      <p class="text-lg">Software Engineer, Researcher, Music Producer</p>
+    </div>
+
+    <div class="flex justify-center">
+      {/*Avoiding the Image component as it makes my image too blurry.*/}
+      <img
+        src="/assets/headshot_500x500.webp"
+        alt="My headshot!"
+        width="256"
+        height="256"
+        class="rounded-lg"
+      />
+    </div>
+  </section>
+
+  <section class="ml-6 mb-4 space-y-4">
+    <p>
+      Hi, I'm Maverick. I'm currently working on autonomous vessel data ingestion and parsing at
+      <Link href="https://www.jhuapl.edu/">Johns Hopkins Applied Physics Lab</Link>, and have previously worked at <Link href="https://hopkinspsychedelic.org/">The Center for
+      Psychadelic & Consciousness Research</Link> at Johns Hopkins University. In the past, I led developers at <Link href="https://www.q2l.app/">Quest2Learn</Link> and worked at
+      multiple startups: <Link href="https://www.wisecities.us/">WiseCities</Link>, <Link href="https://www.pactspace.co/">PactSpace</Link>, <Link href="https://visual-score.com/">VisualScore</Link>.
+    </p>
+    <p>
+      I am completing my MS in Computer Science at University of Illinois Urbana-Champaign,
+      where I primarily study Agentic Systems and Data Engineering: Graph Neural Networks,
+      Cloud Computing, and Data Mining.
+    </p>
+    <p>
+      I recieved my BS in Computer Science at Johns Hopkins University, where I primarily studied Data Science and Software Engineering.
+    </p>
+    <p>
+      I'm also a self-learned music producer, and I like to make beats and remixes with friends on FL-Studio
+      in my spare time. I am currently in the process of mastering my midi keyboard using <Link href="https://melodics.com/">Melodics</Link> and am in
+      the process of learning guitar.
+    </p>
+    <p>
+      Oh, I also love to tinker! I have dabbled with vocal mixing & mastering, sound design, and creating synth patches with plug data. Feel free to reach out if you have any creative music ideas you would want to work on. I am very interested in finding ways to apply my computer science skills to creative disciplines!
+    </p>
+    <p>
+      Some of my other interests include calisthenics + weight lifting, cooking, note-taking
+      systems, biking, and creative coding.
+    </p>
+  </section>
 </SiteLayout>

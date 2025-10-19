@@ -1,86 +1,183 @@
+import { useEffect } from "react"
+interface Route {
+  title: string
+  route: string
+}
+
+const navLink: Route[] = [
+  { title: "Home", route: "/" },
+  { title: "Projects", route: "/projects/" },
+  //   { title: "Blog", route: "/blog/" },
+  //   { title: "Streams", route: "/streams/" },
+  //   { title: "Music", route: "/music/" },
+  //   { title: "Inspirations", route: "/inspirations/" },
+  //   { title: "Keyboards", route: "/keyboards/" },
+]
+
+const socialIcons = [
+  {
+    href: "https://x.com/MaverickEspDev",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 640 640"
+        className="size-5 fill-gray-600"
+      >
+        {/*!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.*/}
+        <path d="M453.2 112L523.8 112L369.6 288.2L551 528L409 528L297.7 382.6L170.5 528L99.8 528L264.7 339.5L90.8 112L236.4 112L336.9 244.9L453.2 112zM428.4 485.8L467.5 485.8L215.1 152L173.1 152L428.4 485.8z" />
+      </svg>
+    ),
+  },
+  {
+    href: "https://www.linkedin.com/in/maverick-espinosa/",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 640 640"
+        className="size-5 fill-gray-600"
+      >
+        {/*!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.*/}
+        <path d="M196.3 512L103.4 512L103.4 212.9L196.3 212.9L196.3 512zM149.8 172.1C120.1 172.1 96 147.5 96 117.8C96 103.5 101.7 89.9 111.8 79.8C121.9 69.7 135.6 64 149.8 64C164 64 177.7 69.7 187.8 79.8C197.9 89.9 203.6 103.6 203.6 117.8C203.6 147.5 179.5 172.1 149.8 172.1zM543.9 512L451.2 512L451.2 366.4C451.2 331.7 450.5 287.2 402.9 287.2C354.6 287.2 347.2 324.9 347.2 363.9L347.2 512L254.4 512L254.4 212.9L343.5 212.9L343.5 253.7L344.8 253.7C357.2 230.2 387.5 205.4 432.7 205.4C526.7 205.4 544 267.3 544 347.7L544 512L543.9 512z" />
+      </svg>
+    ),
+  },
+  {
+    href: "https://github.com/emaverick2001",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 640 640"
+        className="size-5 fill-gray-600"
+      >
+        {/*!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.*/}
+        <path d="M237.9 461.4C237.9 463.4 235.6 465 232.7 465C229.4 465.3 227.1 463.7 227.1 461.4C227.1 459.4 229.4 457.8 232.3 457.8C235.3 457.5 237.9 459.1 237.9 461.4zM206.8 456.9C206.1 458.9 208.1 461.2 211.1 461.8C213.7 462.8 216.7 461.8 217.3 459.8C217.9 457.8 216 455.5 213 454.6C210.4 453.9 207.5 454.9 206.8 456.9zM251 455.2C248.1 455.9 246.1 457.8 246.4 460.1C246.7 462.1 249.3 463.4 252.3 462.7C255.2 462 257.2 460.1 256.9 458.1C256.6 456.2 253.9 454.9 251 455.2zM316.8 72C178.1 72 72 177.3 72 316C72 426.9 141.8 521.8 241.5 555.2C254.3 557.5 258.8 549.6 258.8 543.1C258.8 536.9 258.5 502.7 258.5 481.7C258.5 481.7 188.5 496.7 173.8 451.9C173.8 451.9 162.4 422.8 146 415.3C146 415.3 123.1 399.6 147.6 399.9C147.6 399.9 172.5 401.9 186.2 425.7C208.1 464.3 244.8 453.2 259.1 446.6C261.4 430.6 267.9 419.5 275.1 412.9C219.2 406.7 162.8 398.6 162.8 302.4C162.8 274.9 170.4 261.1 186.4 243.5C183.8 237 175.3 210.2 189 175.6C209.9 169.1 258 202.6 258 202.6C278 197 299.5 194.1 320.8 194.1C342.1 194.1 363.6 197 383.6 202.6C383.6 202.6 431.7 169 452.6 175.6C466.3 210.3 457.8 237 455.2 243.5C471.2 261.2 481 275 481 302.4C481 398.9 422.1 406.6 366.2 412.9C375.4 420.8 383.2 435.8 383.2 459.3C383.2 493 382.9 534.7 382.9 542.9C382.9 549.4 387.5 557.3 400.2 555C500.2 521.8 568 426.9 568 316C568 177.3 455.5 72 316.8 72zM169.2 416.9C167.9 417.9 168.2 420.2 169.9 422.1C171.5 423.7 173.8 424.4 175.1 423.1C176.4 422.1 176.1 419.8 174.4 417.9C172.8 416.3 170.5 415.6 169.2 416.9zM158.4 408.8C157.7 410.1 158.7 411.7 160.7 412.7C162.3 413.7 164.3 413.4 165 412C165.7 410.7 164.7 409.1 162.7 408.1C160.7 407.5 159.1 407.8 158.4 408.8zM190.8 444.4C189.2 445.7 189.8 448.7 192.1 450.6C194.4 452.9 197.3 453.2 198.6 451.6C199.9 450.3 199.3 447.3 197.3 445.4C195.1 443.1 192.1 442.8 190.8 444.4zM179.4 429.7C177.8 430.7 177.8 433.3 179.4 435.6C181 437.9 183.7 438.9 185 437.9C186.6 436.6 186.6 434 185 431.7C183.6 429.4 181 428.4 179.4 429.7z" />
+      </svg>
+    ),
+  },
+  {
+    href: "https://soundcloud.com/1fixate",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 640 640"
+        className="size-5 fill-gray-600"
+      >
+        {/*!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.*/}
+        <path d="M640.2 362.6C638.9 385.7 628.7 407.4 611.8 423.1C594.9 438.8 572.6 447.5 549.5 447.2L331.5 447.2C326.7 447.2 322.1 445.2 318.7 441.8C315.3 438.4 313.4 433.8 313.4 429L313.4 194.2C313.2 190.2 314.3 186.2 316.5 182.8C318.7 179.4 321.8 176.7 325.5 175.1C325.5 175.1 345.6 161.2 387.8 161.2C413.6 161.2 438.9 168.1 461.1 181.3C478.4 191.5 493.4 205.1 505.2 221.4C517 237.7 525.2 256.2 529.4 275.8C536.9 273.7 544.7 272.6 552.5 272.6C564.2 272.5 575.8 274.8 586.7 279.3C597.6 283.8 607.2 290.6 615.4 299C623.6 307.4 630 317.3 634.3 328.3C638.6 339.3 640.6 350.9 640.2 362.6zM286.2 209.1C286.3 208.1 286.2 207.1 285.9 206.2C285.6 205.3 285.1 204.4 284.4 203.6C283.7 202.8 282.9 202.3 282 201.9C280.2 201.1 278 201.1 276.2 201.9C275.3 202.3 274.5 202.9 273.8 203.6C273.1 204.3 272.6 205.2 272.3 206.2C272 207.2 271.9 208.1 272 209.1C266 288 261.4 362 272 440.7C272.2 442.4 273 444 274.3 445.2C276.9 447.6 281.1 447.6 283.7 445.2C285 444 285.8 442.4 286 440.7C297.3 361.3 292.6 288.7 286 209.1L286.2 209.1zM242.2 236.4C242 234.6 241.1 232.9 239.8 231.7C238.5 230.5 236.7 229.8 234.8 229.8C232.9 229.8 231.2 230.5 229.8 231.7C228.4 232.9 227.6 234.6 227.4 236.4C219.5 304.3 219.5 372.9 227.4 440.8C227.7 442.6 228.6 444.2 229.9 445.3C231.2 446.4 233 447.1 234.7 447.1C236.4 447.1 238.2 446.5 239.5 445.3C240.8 444.1 241.7 442.5 242 440.8C250.8 373 250.8 304.3 242.1 236.4L242.2 236.4zM197.9 229.5C197.7 227.7 196.9 226.1 195.6 224.9C194.3 223.7 192.6 223.1 190.8 223.1C189 223.1 187.3 223.8 186 224.9C184.7 226 183.9 227.7 183.7 229.5C177 301.5 173.5 368.8 183.7 440.6C183.7 442.5 184.4 444.3 185.8 445.6C187.2 446.9 188.9 447.7 190.8 447.7C192.7 447.7 194.5 447 195.8 445.6C197.1 444.2 197.9 442.5 197.9 440.6C208.4 367.8 205.2 302.4 198 229.5L197.9 229.5zM153.9 250.1C153.9 248.2 153.1 246.3 151.8 244.9C150.5 243.5 148.6 242.8 146.6 242.8C144.6 242.8 142.8 243.6 141.4 244.9C140 246.2 139.3 248.1 139.3 250.1C131.2 313.4 131.2 377.6 139.3 440.9C139.5 442.7 140.3 444.3 141.7 445.5C143.1 446.7 144.8 447.4 146.5 447.4C148.2 447.4 150 446.7 151.3 445.5C152.6 444.3 153.5 442.7 153.7 440.9C162.5 377.6 162.6 313.4 154 250.1L153.9 250.1zM109.4 297.7C109.4 295.8 108.6 293.9 107.3 292.6C106 291.3 104.1 290.5 102.2 290.5C100.3 290.5 98.4 291.3 97.1 292.6C95.8 293.9 95 295.8 95 297.7C84.5 346.9 89.5 391.6 95.4 441.3C95.7 442.9 96.5 444.4 97.7 445.5C98.9 446.6 100.5 447.2 102.2 447.2C103.9 447.2 105.4 446.6 106.7 445.5C108 444.4 108.8 443 109 441.3C115.6 390.9 120.6 347.2 109.4 297.7zM65.3 290.2C65.1 288.4 64.2 286.7 62.9 285.4C61.6 284.1 59.7 283.5 57.9 283.5C56.1 283.5 54.3 284.2 52.9 285.4C51.5 286.6 50.7 288.3 50.5 290.2C41.2 340.4 44.3 384.6 50.8 434.7C51.5 442.3 64.4 442.2 65.2 434.7C72.4 383.8 75.7 340.9 65.5 290.2L65.3 290.2zM20.7 314.8C20.5 313 19.6 311.3 18.3 310C17 308.7 15.1 308.1 13.3 308.1C11.5 308.1 9.7 308.8 8.3 310C6.9 311.2 6 312.9 5.9 314.8C-2.6 348.5 0 376.4 6.5 410.2C6.7 411.9 7.5 413.5 8.8 414.6C10.1 415.7 11.7 416.4 13.5 416.4C15.3 416.4 16.9 415.8 18.2 414.6C19.5 413.4 20.3 411.9 20.5 410.2C28 375.7 31.7 348.4 20.9 314.8L20.7 314.8z" />
+      </svg>
+    ),
+  },
+  {
+    href: "mailto:emaverick2001@gmail.com",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 640 640"
+        className="size-5 fill-gray-600"
+      >
+        {/*!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.*/}
+        <path d="M125.4 128C91.5 128 64 155.5 64 189.4C64 190.3 64 191.1 64.1 192L64 192L64 448C64 483.3 92.7 512 128 512L512 512C547.3 512 576 483.3 576 448L576 192L575.9 192C575.9 191.1 576 190.3 576 189.4C576 155.5 548.5 128 514.6 128L125.4 128zM528 256.3L528 448C528 456.8 520.8 464 512 464L128 464C119.2 464 112 456.8 112 448L112 256.3L266.8 373.7C298.2 397.6 341.7 397.6 373.2 373.7L528 256.3zM112 189.4C112 182 118 176 125.4 176L514.6 176C522 176 528 182 528 189.4C528 193.6 526 197.6 522.7 200.1L344.2 335.5C329.9 346.3 310.1 346.3 295.8 335.5L117.3 200.1C114 197.6 112 193.6 112 189.4z" />
+      </svg>
+    ),
+  },
+]
+
 export const FooterSection: React.FC = () => {
-  return (
-    <footer className="mt-12 w-full border-t-4 border-gray-200 bg-zinc-100 text-sm text-gray-700">
-      <div className="mx-auto flex max-w-4xl flex-col items-center justify-between gap-2 px-4 py-6 md:flex-row">
-        <div>
-          © {new Date().getFullYear()} Maverick Espinosa.
-          <br />
-          Site made with{" "}
-          <a href="https://astro.build/" className="underline hover:text-blue-600">
-            Astro
-          </a>
-          .
-        </div>
-        <div className="flex items-center gap-4">
-          <a href="mailto:your@email.com" aria-label="Email" className="hover:text-blue-600">
-            <svg
-              className="inline h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-            >
-              <path d="M4 4h16v16H4V4zm0 0l8 8 8-8"></path>
-            </svg>
-          </a>
-          <a
-            href="https://github.com/yourusername"
-            aria-label="GitHub"
-            className="hover:text-blue-600"
-          >
-            <svg className="inline h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.92.58.11.79-.25.79-.56v-2.01c-3.2.7-3.87-1.54-3.87-1.54-.53-1.35-1.29-1.71-1.29-1.71-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.78 2.73 1.27 3.4.97.11-.75.41-1.27.74-1.56-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.45.11-3.02 0 0 .97-.31 3.18 1.18a11.1 11.1 0 012.9-.39c.98.01 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.57.23 2.73.12 3.02.74.8 1.19 1.83 1.19 3.09 0 4.43-2.7 5.41-5.27 5.7.42.36.79 1.08.79 2.18v3.23c0 .31.21.67.8.56C20.71 21.39 24 17.08 24 12c0-6.27-5.23-11.5-12-11.5z"></path>
-            </svg>
-          </a>
-          <a
-            href="https://x.com/MaverickEspDev"
-            aria-label="Twitter"
-            className="hover:text-blue-600"
-          >
-            <svg className="inline h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0022.4.36a9.09 9.09 0 01-2.88 1.1A4.48 4.48 0 0016.11 0c-2.48 0-4.49 2.01-4.49 4.49 0 .35.04.69.11 1.02C7.69 5.4 4.07 3.67 1.64 1.15c-.38.65-.6 1.4-.6 2.21 0 1.53.78 2.88 1.97 3.67A4.48 4.48 0 01.96 6.1v.06c0 2.14 1.52 3.93 3.54 4.33-.37.1-.76.16-1.16.16-.28 0-.55-.03-.81-.08.55 1.72 2.16 2.97 4.07 3A9.05 9.05 0 010 19.54a12.8 12.8 0 006.94 2.03c8.33 0 12.89-6.9 12.89-12.89 0-.2 0-.39-.01-.58A9.22 9.22 0 0023 3z"></path>
-            </svg>
-          </a>
-        </div>
-        <div>
-          <a href="/accessibility" className="underline hover:text-blue-600">
-            Accessibility
-          </a>
-        </div>
-      </div>
+  useEffect(() => {
+    const btn = document.getElementById("scrollTopBtn")
+    if (!btn) return
 
-      {/*-- Scroll to top button (centered, overlaps footer)*/}
-      {/*} <button
-    id="scrollTopBtn"
-    aria-label="Scroll to top"
-    className="fixed left-1/2 -translate-x-1/2 bottom-8 z-50 bg-white border border-gray-200 rounded-full p-3 shadow-lg transition-all duration-300 opacity-0 -translate-y-4 pointer-events-none"
-    title="Back to top"
-  >
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
-    </svg>
-  </button>
+    const toggleVisibility = () => {
+      const btn = document.getElementById("scrollTopBtn")
+      if (!btn) return
 
-  <script type="module">
-    const btn = document.getElementById('scrollTopBtn');
-    if (btn) {
-      const toggleVisibility = () => {
-        if (window.scrollY > 200) {
-          btn.classList.remove('opacity-0', '-translate-y-4', 'pointer-events-none');
-          btn.classList.add('opacity-100', 'translate-y-0');
-        } else {
-          btn.classList.add('opacity-0', '-translate-y-4', 'pointer-events-none');
-          btn.classList.remove('opacity-100', 'translate-y-0');
-        }
-      };
+      const scrollY = window.scrollY
+      const windowHeight = window.innerHeight
+      const documentHeight = document.documentElement.scrollHeight
 
-      // initial state
-      toggleVisibility();
-
-      window.addEventListener('scroll', toggleVisibility, { passive: true });
-      btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+      // Show button when user is within 100px of the bottom
+      if (scrollY + windowHeight >= documentHeight - 100) {
+        btn.classList.remove("opacity-0", "-translate-y-4", "pointer-events-none")
+        btn.classList.add("opacity-100", "translate-y-0")
+      } else {
+        btn.classList.add("opacity-0", "-translate-y-4", "pointer-events-none")
+        btn.classList.remove("opacity-100", "translate-y-0")
+      }
     }
-  </script> */}
+
+    toggleVisibility()
+    window.addEventListener("scroll", toggleVisibility, { passive: true })
+    btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }))
+
+    return () => {
+      window.removeEventListener("scroll", toggleVisibility)
+      btn.removeEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }))
+    }
+  }, [])
+  return (
+    <footer className="w-full border-t-4 border-gray-200 bg-zinc-100 py-8 text-sm text-gray-700">
+      <div className="container">
+        <div className="flex items-center justify-between">
+          <div>
+            <img src="/websitelogonobackground.png" alt="Logo" className="h-10 w-10" />
+          </div>
+          {/* NavLinks: hidden on mobile, visible on tablet and up */}
+          <nav className="hidden items-center gap-8 md:flex">
+            {navLink.map((routes) => (
+              <a
+                key={routes.title}
+                href={routes.route}
+                className="font-serif text-lg font-black tracking-tight text-black transition duration-300 hover:text-zinc-500"
+              >
+                {routes.title}
+              </a>
+            ))}
+          </nav>
+        </div>
+        <div className="mt-4 items-center justify-between md:flex">
+          <p>
+            &copy; {new Date().getFullYear()} Maverick Espinosa. Site made with{" "}
+            <a href="https://astro.build/" className="underline hover:text-blue-600">
+              Astro
+            </a>
+            .
+          </p>
+          <div className="mt-4 flex justify-center gap-4 md:mt-0">
+            {socialIcons.map((icons) => (
+              <a
+                key={icons.href}
+                href={icons.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex size-10 items-center justify-center rounded-full bg-zinc-300 transition hover:bg-zinc-400"
+                aria-label="Social link"
+              >
+                {icons.icon}
+              </a>
+            ))}
+          </div>
+        </div>
+        {/* -- Scroll to top button (centered, overlaps footer)*/}
+        <button
+          id="scrollTopBtn"
+          aria-label="Scroll to top"
+          className="pointer-events-none fixed bottom-8 left-1/2 z-50 -translate-x-1/2 -translate-y-4 rounded-full border border-gray-200 bg-white p-3 opacity-0 shadow-lg transition-all duration-300"
+          title="Back to top"
+          type="button"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 text-gray-700"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+            aria-hidden="true"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+          </svg>
+        </button>
+      </div>
     </footer>
   )
 }

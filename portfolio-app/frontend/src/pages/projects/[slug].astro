@@ -1,0 +1,43 @@
+---
+// filepath: /Users/maver/Desktop/Coding Projects/Full Stack/PersonalPortfolio/portfolio-app/frontend/src/pages/projects/[slug].astro
+import { projects, slugify } from "../../content/projects";
+import SiteLayout from "@layouts/SiteLayout.astro";
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: slugify(project.name) },
+  }));
+}
+
+const { slug } = Astro.params;
+const project = projects.find((p) => slugify(p.name) === slug);
+
+if (!project) {
+  throw new Error("Project not found");
+}
+---
+<SiteLayout title={project.name}>
+  <section class="max-w-screen-lg bg-zinc-50 px-6 pb-4 pt-2 font-serif text-lg text-zinc-900 md:mx-auto">
+    <div class="flex flex-col items-center text-center">
+        <h1 class="text-3xl md:text-5xl font-bold mb-6">{project.name}</h1>
+        {project.image && <img src={project.image} alt={project.name} class="mb-6 rounded-xl w-full max-w-md mx-auto" />}
+        <p class="mb-6 text-lg text-gray-700">{project.desc}</p>
+    </div>
+    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Pretium tellus duis convallis tempus leo eu aenean. Iaculis massa nisl malesuada lacinia integer nunc posuere. Conubia nostra inceptos himenaeos orci varius natoque penatibus. Nulla molestie mattis scelerisque maximus eget fermentum odio. Blandit quis suspendisse aliquet nisi sodales consequat magna. Ligula congue sollicitudin erat viverra ac tincidunt nam. Velit aliquam imperdiet mollis nullam volutpat porttitor ullamcorper. Dui felis venenatis ultrices proin libero feugiat tristique. Cubilia curae hac habitasse platea dictumst lorem ipsum. Sem placerat in id cursus mi pretium tellus. Fringilla lacus nec metus bibendum egestas iaculis massa. Taciti sociosqu ad litora torquent per conubia nostra. Ridiculus mus donec rhoncus eros lobortis nulla molestie. Mauris pharetra vestibulum fusce dictum risus blandit quis. Finibus facilisis dapibus etiam interdum tortor ligula congue. Justo lectus commodo augue arcu dignissim velit aliquam. Primis vulputate ornare sagittis vehicula praesent dui felis. Senectus netus suscipit auctor curabitur facilisi cubilia curae. Quisque faucibus ex sapien vitae pellentesque sem placerat. </p>
+    {project.projectLink && (
+      <a href={project.projectLink} target="_blank" rel="noopener noreferrer" class="block mb-2 text-blue-600 underline">
+        Live Demo
+      </a>
+    )}
+    {project.sourceCode && (
+      <a href={project.sourceCode} target="_blank" rel="noopener noreferrer" class="block mb-2 text-gray-700 underline">
+        Source Code
+      </a>
+    )}
+    {project.demo && (
+      <a href={project.demo} target="_blank" rel="noopener noreferrer" class="block mb-2 text-purple-700 underline">
+        Demo Video
+      </a>
+    )}
+  </section>
+</SiteLayout>
