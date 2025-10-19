@@ -8,7 +8,7 @@ export default function ProjectAccordion() {
   const [selectedIndex, setSelectedIndex] = useState<null | number>(null)
 
   return (
-    <div className="mx-auto mt-12 grid max-w-5xl grid-cols-1 items-start gap-8 md:grid-cols-2">
+    <div className="mx-auto mb-10 mt-10 grid max-w-5xl grid-cols-1 items-start gap-8 md:grid-cols-2">
       {projects.map((project, projectIndex) => (
         <div
           key={projectIndex}
@@ -27,7 +27,7 @@ export default function ProjectAccordion() {
             />
           </div>
           <div className="mt-6 flex items-center justify-between">
-            <h3 className="font-bold">{project.name}</h3>
+            <h3 className="text-xl font-bold">{project.name}</h3>
             <Triangle
               className={twMerge(
                 "h-5 w-5 flex-shrink-0 rotate-90 fill-black transition duration-300",
@@ -52,13 +52,13 @@ export default function ProjectAccordion() {
                 }}
                 className={twMerge("mt-6 overflow-hidden")}
               >
-                <p className="mb-4 text-base text-gray-700">{project.desc}</p>
+                <p className="mb-4 text-base font-medium text-black">{project.desc}</p>
                 <div className="mb-1 mt-6 flex flex-col flex-wrap items-center gap-3 lg:flex-row lg:items-start lg:justify-start">
                   <a
                     href={`/projects/${slugify(project.name)}/`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex w-auto items-center gap-2 rounded-full bg-zinc-100 px-3 py-3 text-base font-medium text-gray-700 shadow transition hover:bg-zinc-200"
+                    className="inline-flex w-auto items-center gap-2 rounded-full bg-zinc-100 px-3 py-3 text-base font-medium text-black shadow transition hover:bg-zinc-200"
                   >
                     <BookMarkedIcon className="h-5 w-5" />
                     Learn More
@@ -68,7 +68,7 @@ export default function ProjectAccordion() {
                       href={project.projectLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex w-auto items-center gap-2 rounded-full bg-zinc-100 px-3 py-3 text-base font-medium text-gray-700 shadow transition hover:bg-zinc-200"
+                      className="inline-flex w-auto items-center gap-2 rounded-full bg-zinc-100 px-3 py-3 text-base font-medium text-black shadow transition hover:bg-zinc-200"
                     >
                       <RadioIcon className="h-5 w-5" />
                       Live Demo
@@ -79,7 +79,7 @@ export default function ProjectAccordion() {
                       href={project.sourceCode}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex w-auto items-center gap-2 rounded-full bg-zinc-100 px-3 py-3 text-base font-medium text-gray-700 shadow transition hover:bg-zinc-200"
+                      className="inline-flex w-auto items-center gap-2 rounded-full bg-zinc-100 px-3 py-3 text-base font-medium text-black shadow transition hover:bg-zinc-200"
                     >
                       <CodeIcon className="h-5 w-5" />
                       Source Code
