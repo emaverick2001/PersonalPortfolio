@@ -24,13 +24,9 @@ jobs:
         run: pnpm install
         working-directory: portfolio-app/frontend
 
-      - name: Change to frontend directory
-        run: cd portfolio-app/frontend
-
       - name: Build and upload your site
-        uses: withastro/action@v2
-        with:
-          package-manager: pnpm
+        run: pnpx astro build && pnpx astro deploy
+        working-directory: portfolio-app/frontend
 
   deploy:
     needs: build
