@@ -1,27 +1,43 @@
 ---
 import { Link } from "@components/Link"
+import { PaperclipIcon  } from "lucide-react"
 import SiteLayout from "@layouts/SiteLayout.astro"
 ---
 
-<SiteLayout title="Homepage">
-  <section class="my-6 flex flex-col items-center justify-around gap-6 text-center sm:flex-row sm:gap-4 sm:text-left">
-    <div class="order-last font-sans sm:order-first">
+<SiteLayout title="About">
+  <section class="gap-4 my-4 flex flex-col items-center justify-around text-center md:flex-row md:gap-2 md:text-left lg:gap-0">
+    <div class="font-sans order-first flex flex-col items-center">
       <h1 class="mb-2 text-4xl font-bold tracking-tight">Maverick Espinosa</h1>
-      <p class="text-lg">Software Engineer, Researcher, Music Producer</p>
+      <p class="text-lg mb-1 md:mb-2">Software Engineer, Researcher, Music Producer</p>
+      <a
+        href="assets/files/Resume_09_20_2025.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden md:inline-flex w-auto items-center gap-2 rounded-full bg-zinc-100 px-3 py-1 text-base font-medium text-black shadow transition hover:bg-zinc-200"
+        >
+        <PaperclipIcon className="h-4 w-4" />
+        Resume
+      </a>
     </div>
-
-    <div class="flex justify-center">
-      {/*Avoiding the Image component as it makes my image too blurry.*/}
+    <div class="order-last font-sans sm:order-first flex flex-col items-center">
       <img
         src="/assets/headshot_500x500.webp"
-        alt="My headshot!"
-        width="256"
-        height="256"
-        class="rounded-lg"
+        alt="Headshot"
+        class="rounded-lg w-70 mb-4 md:h-64 md:mb-0 border border-solid border-[#222222]/10 shadow-[0_7px_14px_#EAEAEA]"
       />
+      <a
+        href="assets/files/Resume_09_20_2025.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex w-auto items-center gap-2 rounded-full bg-zinc-100 px-3 py-1 text-base font-medium text-black shadow transition hover:bg-zinc-200  md:hidden"
+        >
+        <PaperclipIcon className="h-4 w-4" />
+        Resume
+      </a>
     </div>
   </section>
 
+  <div class="border-t-4 border-gray-200 mt-6 mb-6" />
   <section class="ml-6 mb-4 space-y-4">
     <p>
       Hi, I'm Maverick. I'm currently working on autonomous vessel data ingestion and parsing at

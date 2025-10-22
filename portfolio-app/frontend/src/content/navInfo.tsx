@@ -4,11 +4,13 @@ export interface Route {
 }
 
 export const navLink: Route[] = [
-  { title: "Home", route: "/" },
+  { title: "About", route: "/" },
   { title: "Projects", route: "/projects/" },
-  //   { title: "Blog", route: "/blog/" },
-    { title: "Streams", route: "/streams/" },
-  { title: "Music", route: "/music/" },
+  { title: "Research", route: "/research/" },
+  // { title: "Music", route: "/music/" },
+  // { title: "Blog", route: "/blog/" },
+  // { title: "Streams", route: "/streams/" },
   { title: "Inspirations", route: "/inspirations/" },
-  //   { title: "Keyboards", route: "/keyboards/" },
+  { title: "Personal", route: "/personal/" },
+  // { title: "Keyboards", route: "/keyboards/" },
 ]

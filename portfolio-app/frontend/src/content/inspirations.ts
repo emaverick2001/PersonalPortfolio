@@ -114,6 +114,10 @@ export const inspirations = {
   ],
   music: [
     {
+      title: "SaveState",
+      link: "https://soundcloud.com/1savestate",
+    },
+    {
       title: "Joe Hisaishi in Budokan - Studio Ghibli 25 Years Concert",
       link: "https://youtu.be/IbRkwS_xRt8",
     },

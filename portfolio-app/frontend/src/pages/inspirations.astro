@@ -1,14 +1,15 @@
 ---
 import SiteLayout from "@layouts/SiteLayout.astro"
 import { PageHeader } from "@components/PageHeader.tsx"
+import { Page } from "@components/Page"
 import { Link } from "@components/Link"
 import { inspirations } from "src/content/inspirations";
 ---
 
 <SiteLayout title="Inspirations">
   <PageHeader>Inspirations</PageHeader>
-
-  <section class="space-y-4">
+  <div class="border-t-4 border-gray-200 mb-6" />
+  <Page >
     <p>
       I've taken inspiration from quite a few different places. It's difficult to know in advance
       when something will inspire you, but it's a special feeling when you find something that does.
@@ -100,5 +101,5 @@ import { inspirations } from "src/content/inspirations";
       <h4 class="mb-2 font-sans text-xl font-bold tracking-tight">Media</h4>
       {inspirations.media.map((item) => <li>{item.title}</li>)}
     </ul>
-  </section>
+  </Page>
 </SiteLayout>

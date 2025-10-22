@@ -1,0 +1,33 @@
+---
+import SiteLayout from "@layouts/SiteLayout.astro"
+import { Page } from "@components/Page";
+import { PageHeader } from "@components/PageHeader.tsx"
+---
+
+<SiteLayout title="Personal">
+  <PageHeader>Personal</PageHeader>
+  <div class="border-t-4 border-gray-200 mb-6" />
+  <Page>
+    <h2 class="mb-2 font-sans text-xl font-bold tracking-tight">Background</h2>
+    <p>
+        I was born in Dallas, Texas and raised mostly in Phoenix Arizona where I went to highschool at Pinnacle Highschool.
+        I moved to Baltimore, Maryland and finished my BS in computer science at Johns Hopkins University. I am currently pursuing my
+        Masters of computer science at the University of Illinois at Urbana-Champaign.
+    </p>
+
+    <h2 class="mb-2 font-sans text-xl font-bold tracking-tight">Family</h2>
+    <p>
+        I have 2 dogs, Buddy and Pikachoo, and three lovely cats (Pecan and her kittens Walnut and Pistachio) with my girlfriend Isabel Lopez Santiago.
+    </p>
+
+    <h2 class="mb-2 font-sans text-xl font-bold tracking-tight">Hiking</h2>
+    <p>
+        I love hiking with friends back in my true home in Phoenix Arizona.
+    </p>
+
+    <h2 class="mb-2 font-sans text-xl font-bold tracking-tight">Biking</h2>
+    <p>
+        I love biking with friends wherever I go.
+    </p>
+  </Page>
+</SiteLayout>

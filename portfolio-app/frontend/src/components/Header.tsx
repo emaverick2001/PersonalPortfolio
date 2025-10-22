@@ -21,7 +21,7 @@ export const HeaderSection: React.FC = () => {
         <div className="container">
           <div className="flex h-24 items-center justify-between md:h-28">
             <div>
-              <img src="/websitelogonobackground.png" alt="Logo" className="h-10 w-10" />
+              <img src="/assets/websitelogonobackground.png" alt="Logo" className="h-10 w-10" />
             </div>
             <div className="flex items-center gap-4 md:hidden">
               <div className="relative size-10" onClick={() => setIsOpen((curr) => !curr)}>

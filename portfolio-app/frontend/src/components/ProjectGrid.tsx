@@ -8,7 +8,7 @@ export default function ProjectAccordion() {
   const [selectedIndex, setSelectedIndex] = useState<null | number>(null)
 
   return (
-    <div className="mx-auto mb-10 mt-10 grid max-w-5xl grid-cols-1 items-start gap-8 md:grid-cols-2">
+    <div className="mx-auto mb-6 grid max-w-5xl grid-cols-1 items-start gap-8 md:grid-cols-2">
       {projects.map((project, projectIndex) => (
         <div
           key={projectIndex}
