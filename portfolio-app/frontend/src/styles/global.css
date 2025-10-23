@@ -57,6 +57,16 @@
   }
 }
 
+@layer components {
+  /* Replaces <style is:global> … */
+  .logo-card {
+    @apply relative h-28 w-28 rounded-xl bg-white shadow ring-1 ring-black/5 md:h-32 md:w-32 lg:h-36 lg:w-36;
+  }
+  .logo-img {
+    @apply h-full w-full object-contain;
+  }
+}
+
 @layer utilities {
   .opacity-mask {
     mask-image: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8));

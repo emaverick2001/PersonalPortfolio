@@ -120,6 +120,26 @@ export const inspirations = {
       link: "https://soundcloud.com/1savestate",
     },
     {
+      title: "Redpriest",
+      link: "https://soundcloud.com/rprezo1",
+    },
+    {
+      title: "Cuco",
+      link: "https://soundcloud.com/doubeltonky",
+    },
+    {
+      title: "Unit Kai",
+      link: "https://soundcloud.com/unitkai"
+    },
+    {
+      title: "Sam Gellaitry",
+      link: "https://soundcloud.com/samgellaitry",
+    },
+    {
+      title: "Tatsuro Yamashita",
+      link: "https://soundcloud.com/tatsuroyamashita",
+    },
+    {
       title: "Porter Robinson",
       link: "https://porterrobinson.com/",
     },
@@ -132,7 +152,6 @@ export const inspirations = {
       link: "https://youtu.be/IbRkwS_xRt8",
     },
   ],
-  language: [{ name: "Stephen Krashen", link: "https://github.com/josevalim" }],
   games: [{ title: "The Legend of Zelda" }],
   media: [
     { title: "Alice in Borderland" },
