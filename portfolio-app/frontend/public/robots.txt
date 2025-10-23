@@ -1,0 +1,17 @@
+# Allow all search engines to crawl everything
+User-agent: *
+Allow: /
+
+# Block Next.js internal files
+Disallow: /_next/
+Disallow: /api/
+
+# Block error pages from being indexed
+Disallow: /404
+Disallow: /500
+
+# Tell search engines where to find your sitemap
+Sitemap: https://www.maverickespinosa.com/sitemap.xml
+
+# Optional: Add crawl delay if you're worried about server load
+# Crawl-delay: 1
