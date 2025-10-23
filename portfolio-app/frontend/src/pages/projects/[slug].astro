@@ -1,6 +1,7 @@
 ---
 // filepath: /Users/maver/Desktop/Coding Projects/Full Stack/PersonalPortfolio/portfolio-app/frontend/src/pages/projects/[slug].astro
 import { projects, slugify } from "../../content/projects";
+import { RadioIcon, CodeIcon } from "lucide-react"
 import SiteLayout from "@layouts/SiteLayout.astro";
 
 export function getStaticPaths() {
@@ -19,25 +20,116 @@ if (!project) {
 <SiteLayout title={project.name}>
   <section class="max-w-screen-lg bg-zinc-50 px-6 pb-4 pt-2 font-serif text-lg text-zinc-900 md:mx-auto">
     <div class="flex flex-col items-center text-center">
-        <h1 class="text-3xl md:text-5xl font-bold mb-6">{project.name}</h1>
-        {project.image && <img src={project.image} alt={project.name} class="mb-6 rounded-xl w-full max-w-md mx-auto" />}
-        <p class="mb-6 text-lg text-gray-700">{project.desc}</p>
+      <h1 class="text-3xl md:text-5xl font-bold mb-4">{project.name}</h1>
+      <p class="mb-4 text-lg text-gray-700">{project.desc}</p>
+      {project.image && <img src={project.image} alt={project.name} class="mb-4 rounded-xl w-full max-w-md mx-auto" />}
+      <div class="flex flex-row gap-4 mb-4">
+        <a
+          href={project.projectLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex w-auto items-center gap-1 rounded-full bg-zinc-100 px-3 py-2 text-base font-medium text-black shadow transition hover:bg-zinc-200"
+          >
+          <RadioIcon className="h-5 w-5" />
+          Live Demo
+        </a>
+        <a
+          href={project.sourceCode}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex w-auto items-center gap-1 rounded-full bg-zinc-100 px-3 py-2 text-base font-medium text-black shadow transition hover:bg-zinc-200"
+          >
+          <CodeIcon className="h-5 w-5" />
+          Source Code
+        </a>
+      </div>
     </div>
-    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Pretium tellus duis convallis tempus leo eu aenean. Iaculis massa nisl malesuada lacinia integer nunc posuere. Conubia nostra inceptos himenaeos orci varius natoque penatibus. Nulla molestie mattis scelerisque maximus eget fermentum odio. Blandit quis suspendisse aliquet nisi sodales consequat magna. Ligula congue sollicitudin erat viverra ac tincidunt nam. Velit aliquam imperdiet mollis nullam volutpat porttitor ullamcorper. Dui felis venenatis ultrices proin libero feugiat tristique. Cubilia curae hac habitasse platea dictumst lorem ipsum. Sem placerat in id cursus mi pretium tellus. Fringilla lacus nec metus bibendum egestas iaculis massa. Taciti sociosqu ad litora torquent per conubia nostra. Ridiculus mus donec rhoncus eros lobortis nulla molestie. Mauris pharetra vestibulum fusce dictum risus blandit quis. Finibus facilisis dapibus etiam interdum tortor ligula congue. Justo lectus commodo augue arcu dignissim velit aliquam. Primis vulputate ornare sagittis vehicula praesent dui felis. Senectus netus suscipit auctor curabitur facilisi cubilia curae. Quisque faucibus ex sapien vitae pellentesque sem placerat. </p>
-    {project.projectLink && (
-      <a href={project.projectLink} target="_blank" rel="noopener noreferrer" class="block mb-2 text-blue-600 underline">
-        Live Demo
-      </a>
+    <div class="border-t-4 border-gray-200 mt-6 mb-6" />
+    {project.overview && (
+      <div>
+        <h2 class="mb-2 font-sans text-3xl font-bold tracking-tight">Overview:</h2>
+        <p>{project.overview}</p>
+      </div>
     )}
-    {project.sourceCode && (
-      <a href={project.sourceCode} target="_blank" rel="noopener noreferrer" class="block mb-2 text-gray-700 underline">
-        Source Code
-      </a>
+    {project.features && (
+      <div>
+      <h2 class="mt-2 mb-2 font-sans text-3xl font-bold tracking-tight">Features:</h2>
+      {Array.isArray(project.features) ? (
+      <ul class="list-disc pl-5">
+        {project.features.map((feature) => (
+          <li>{feature}</li>
+        ))}
+      </ul>
+    ) : (
+      <p>{project.features}</p>
     )}
-    {project.demo && (
-      <a href={project.demo} target="_blank" rel="noopener noreferrer" class="block mb-2 text-purple-700 underline">
-        Demo Video
-      </a>
+    </div>
+    )}
+    {project.gallery && (
+      <div>
+        <h2 class="mt-2 mb-2 font-sans text-3xl font-bold tracking-tight">Gallery:</h2>
+        <p>{project.gallery}</p>
+      </div>
+    )}
+    {project.howItWorks && (
+      <div>
+        <h2 class="mt-2 mb-2 font-sans text-3xl font-bold tracking-tight">How It Works:</h2>
+        <p>{project.howItWorks}</p>
+      </div>
+    )}
+    {project.directoryStructure && (
+      <div>
+        <h2 class="mt-2 mb-2 font-sans text-3xl font-bold tracking-tight">Directory Structure:</h2>
+        <p>{project.directoryStructure}</p>
+      </div>
+    )}
+    {project.usage && (
+      <div>
+        <h2 class="mt-2 mb-2 font-sans text-3xl font-bold tracking-tight">Usage:</h2>
+        <p>{project.usage}</p>
+      </div>
+    )}
+    {project.importantNotes && (
+      <div>
+        <h2 class="mt-2 mb-2 font-sans text-3xl font-bold tracking-tight">Important Notes:</h2>
+        <p>{project.importantNotes}</p>
+      </div>
+    )}
+    {project.dependencies && (
+      <div>
+        <h2 class="mt-2 mb-2 font-sans text-3xl font-bold tracking-tight">Technologies & Dependencies:</h2>
+        <p>{project.dependencies}</p>
+      </div>
+    )}
+    {project.gettingStarted && (
+      <div>
+        <h2 class="mt-2 mb-2 font-sans text-3xl font-bold tracking-tight">Getting Started:</h2>
+        <p>{project.gettingStarted}</p>
+      </div>
+    )}
+    {project.contributions && (
+      <div>
+        <h2 class="mt-2 mb-2 font-sans text-3xl font-bold tracking-tight">Contributions & Support:</h2>
+        <p>{project.contributions}</p>
+      </div>
+    )}
+    {project.license && (
+      <div>
+        <h2 class="mt-2 mb-2 font-sans text-3xl font-bold tracking-tight">License:</h2>
+        <p>{project.license}</p>
+      </div>
+    )}
+    {project.credits && (
+      <div>
+        <h2 class="mt-2 mb-2 font-sans text-3xl font-bold tracking-tight">Credits:</h2>
+        <p>{project.credits}</p>
+      </div>
+    )}
+    {project.acknowledgements && (
+      <div>
+        <h2 class="mt-2 mb-2 font-sans text-3xl font-bold tracking-tight">Acknowledgements:</h2>
+        <p>{project.acknowledgements}</p>
+      </div>
     )}
   </section>
 </SiteLayout>

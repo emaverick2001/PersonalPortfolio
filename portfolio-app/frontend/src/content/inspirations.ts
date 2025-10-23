@@ -1,15 +1,14 @@
 export const inspirations = {
   people: [
-    { name: "José Valim", link: "https://github.com/josevalim" },
-    { name: "Slim Lim", link: "https://slim.computer/" },
-    { name: "Linus Lee", link: "https://thesephist.com/" },
-    { name: "Dax Raad", link: "https://x.com/thdxr" },
+    { name: "Jiaxuan You", link: "https://cs.stanford.edu/~jiaxuan/" },
+    { name: "Haofei Yu", link: "https://haofeiyu.me/" },
+    { name: "ChengXiang Zhai", link: "https://czhai.cs.illinois.edu/" },
+    { name: "Heng Ji", link: "https://blender.cs.illinois.edu/hengji.html" },
+    { name: "Jiawei Han", link: "https://hanj.cs.illinois.edu/" },
+    { name: "Chinat Yu", link: "https://www.linkedin.com/in/chinat-yu/" },
     { name: "Astrid Yu", link: "https://astrid.tech/" },
-    { name: "Aaron Francis", link: "https://aaronfrancis.com" },
-    { name: "Thorsten Ball", link: "https://thorstenball.com/" },
-    { name: "Carson Gross", link: "https://bigsky.software/cv/" },
-    { name: "Ink and Switch", link: "https://www.inkandswitch.com/" },
-    { name: "George Hotz", link: "https://geohot.com/" },
+    { name: "Adham Dannaway", link: "https://www.adhamdannaway.com/learn-ui-design" },
+    { name: "Sean Halpin", link: "https://www.seanhalpin.xyz/about" },
   ],
   posts: [
     {
@@ -118,103 +117,26 @@ export const inspirations = {
       link: "https://soundcloud.com/1savestate",
     },
     {
+      title: "Porter Robinson",
+      link: "https://porterrobinson.com/",
+    },
+    {
+      title: "Zedd",
+      link: "https://www.zedd.net/",
+    },
+    {
       title: "Joe Hisaishi in Budokan - Studio Ghibli 25 Years Concert",
       link: "https://youtu.be/IbRkwS_xRt8",
-    },
-    {
-      title: "Sumeru Live Symphony Performance",
-      link: "https://youtu.be/VrP3lO3aGDg",
-    },
-    {
-      title: "Keiichi Okabe, creating the music of NieR: Automata",
-      link: "https://youtu.be/MhTSy9OTWv0",
-    },
-    {
-      title: "Kronodigger: Electronic Dance Tracks with Clarinet",
-      link: "https://www.youtube.com/playlist?list=PLiDVgcuF8JTycyp7lfBS2TDz6uGqySj-0",
-    },
-    {
-      title: "Twilight Symphony - Behind the Scenes",
-      link: "https://youtu.be/_tT9Ey_1iMk",
-    },
-    {
-      title: "The Legend of Zelda 25th Anniversary Symphony Special CD",
-      link: "https://archive.org/details/03.thewindwakersymphonicmovement",
-    },
-    {
-      title: "Floaroma Town, insaneintherain ft. Jose Ignacio Santos Aquino",
-      link: "https://youtu.be/xW4nufr8quE",
-    },
-    {
-      title: "Team Galactic HQ, insaneintherain ft. Pat Bartley",
-      link: "https://youtu.be/P-pGG02A0oY",
-    },
-    {
-      title: "Prelude to the Champion, insaneintherain ft. Kara Comparetto",
-      link: "https://youtu.be/HNWU4X9lqDQ",
-    },
-    {
-      title: "FELT - Rising Nebula",
-      link: "https://youtube.com/playlist?list=PLCpeysDj_eWdkLvsdGC_Ti_pZiHaTG43A",
-    },
-    {
-      title: "GATE OF STEINER",
-      link: "https://youtu.be/7d0WMVU_tlo",
-    },
-    {
-      title: "NieR Piano Collections",
-      link: "https://youtube.com/playlist?list=OLAK5uy_lKV2DO7jn6IBLa5AnSDX2DfnQ84h5U2h8",
-    },
-    {
-      title: "NieR: Automata Piano Collections",
-      link: "https://youtube.com/playlist?list=PLBO2h-GzDvIY8aPOhCa2X9fniAB8Qfz3A",
-    },
-    {
-      title: "命の在り方",
-      link: "https://youtu.be/4H4ZHvZFb1w",
-    },
-    {
-      title: "Stories of Remote Antiquity",
-      link: "https://youtu.be/mgOCMnnAkdg",
-    },
-    {
-      title: "Forgotten Vale - Skyrim",
-      link: "https://youtu.be/tBGgZ1PUFWU",
-    },
-    {
-      title: "Scheherazade",
-      link: "https://youtu.be/zY4w4_W30aQ",
-    },
-    {
-      title: "The Seventh Night of July",
-      link: "https://open.spotify.com/track/7c8SbAtxmhG1HVPkvweses?si=845854386705427f",
-    },
-    {
-      title: "たなばた / 酒井格 -クラリネット五重奏",
-      link: "https://youtu.be/sk708vRc0oo",
     },
   ],
   language: [{ name: "Stephen Krashen", link: "https://github.com/josevalim" }],
   games: [
     { title: "The Legend of Zelda" },
-    { title: "NieR" },
-    { title: "The Elder Scrolls (Skyrim, Oblivion)" },
-    { title: "Bioshock" },
-    { title: "Horizon: Zero Dawn" },
-    { title: "Tales of Vesperia" },
-    { title: "Tales of the Abyss" },
-    { title: "Tales of Berseria" },
-    { title: "Stardew Valley" },
-    { title: "Genshin Impact" },
   ],
   media: [
-    { title: "Arcane" },
     { title: "Alice in Borderland" },
-    { title: "Violet Evergarden" },
     { title: "STEINS;GATE" },
-    { title: "Hibike! Euphonium" },
     { title: "PSYCHO-PASS" },
     { title: "Your Name" },
-    { title: "Liz and the Blue Bird" },
   ],
 }
