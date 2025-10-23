@@ -6,8 +6,8 @@ import react from "@astrojs/react"
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://emaverick2001.github.io/PersonalPortfolio/",
-  base: "/PersonalPortfolio/",
+  site: "https://maverickespinosa.com",
+  base: "/",
   trailingSlash: "always",
   integrations: [tailwind({ applyBaseStyles: false }), sitemap(), mdx(), react()],
 })
