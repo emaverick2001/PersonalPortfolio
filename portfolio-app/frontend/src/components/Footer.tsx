@@ -39,7 +39,9 @@ export const FooterSection: React.FC = () => {
       <div className="container">
         <div className="flex items-center justify-between">
           <div>
-            <img src="/assets/websitelogonobackground.png" alt="Logo" className="h-10 w-10" />
+            <a href="/">
+              <img src="/assets/websitelogonobackground.png" alt="Logo" className="h-10 w-10" />
+            </a>
           </div>
           {/* NavLinks: hidden on mobile, visible on tablet and up */}
           <nav className="hidden items-center gap-8 md:flex">
