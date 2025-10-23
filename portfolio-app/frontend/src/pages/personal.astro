@@ -9,19 +9,65 @@ import { Link } from "@components/Link"
   <PageHeader>Personal</PageHeader>
   <div class="border-t-4 border-gray-200 mb-6" />
   <Page>
-    <h2 class="mb-2 font-sans text-xl font-bold tracking-tight">Background</h2>
-    <p>
-        I was born in Dallas, Texas and raised mostly in Phoenix, Arizona where I went to highschool at Pinnacle Highschool.
-        I moved to Baltimore, Maryland and finished my BS in computer science at Johns Hopkins University. I am currently pursuing my
-        Masters of computer science at the University of Illinois at Urbana-Champaign.
-    </p>
+    <div class="flex items-center gap-14 mb-12">
+      <div>
+        <h2 class="mb-2 font-sans text-xl font-bold tracking-tight">Background</h2>
+        <p class="mb-3">
+          I’m <strong>Maverick Espinosa</strong>, a builder from Phoenix by way of Dallas—curious, process-driven, and happiest when I’m turning messy data into clear, useful systems. I earned my B.S. in Computer Science at Johns Hopkins and I’m now pursuing my M.S. (MCS) at the University of Illinois Urbana-Champaign as a <Link href="https://www.gemfellowship.org/2025-gem-fellows/"><strong>GEM Employer Fellow</strong></Link>.
+        </p>
+        <p class="mb-4">
+          My work sits at the intersection of <strong>data engineering</strong>, <strong>information retrieval</strong>, and <strong>learning tools</strong>. At Johns Hopkins CPCR I’ve automated REDCap-based reporting and built pipelines that harmonize research data. At APL, I’ve supported ingestion and analysis for autonomous vessels/telemetry workflows. Lately I’ve been building a lightweight <strong>search engine + data catalog</strong> to make research data discoverable and trustworthy.
+        </p>
+      </div>
+      <!-- <div class="flex flex-row gap-2 items-center">
+        <img
+          src="/assets/images/hopkinslogo.jpg"
+          alt="hop"
+          class="h-36 w-36 object-contain rounded-md shadow-md bg-white p-1"
+        />
+        <img
+          src="/assets/images/uiuclogo.jpg"
+          alt="uiuc"
+          class="h-36 w-36 object-contain rounded-md shadow-md bg-white p-1"
+        />
+        <img
+          src="/assets/images/gemlogo.jpg"
+          alt="gem"
+          class="h-36 w-36 object-contain rounded-md shadow-md bg-white p-1"
+        />
+      </div> -->
+    </div>
+    <div class="flex items-center gap-14 mb-12">
+      <div>
+        <h2 class="mb-2 font-sans text-xl font-bold tracking-tight">Fitness</h2>
+        <p class="mb-4">
+            When I am not coding or doing music, I like to decompress with weightlifting at the gym. I currently follow a push pull legs split, but I like to add on extra workouts to target muscles I want to focus on. Check out my <Link href="https://yielding-bucket-c99.notion.site/Fitness-TODO-a84d3236759a4ab085f4f6966a79c2fc?source=copy_link">workout planner template</Link> on Notion!
+        </p>
+      </div>
+    </div>
 
-    <h2 class="mb-2 font-sans text-xl font-bold tracking-tight">Family</h2>
-    <p>
-        I have 2 dogs, Buddy and Pikachu, and three lovely cats (Pecan and her kittens Walnut and Pistachio) with my girlfriend <Link href="https://www.linkedin.com/in/isabel-lopez-santiago/">Isabel Lopez Santiago</Link>.
-    </p>
+    <div class="flex items-center gap-">
+      <div class="flex-1">
+        <h2 class="mb-2 font-sans text-xl font-bold tracking-tight">Family</h2>
+        <p>
+            I have 2 dogs, Buddy and Pikachu, and three lovely cats (Pecan and her kittens Walnut and Pistachio) with my girlfriend <Link href="https://www.linkedin.com/in/isabel-lopez-santiago/">Isabel Lopez Santiago</Link>.
+        </p>
+      </div>
+      <!-- <div class="flex flex-row gap-2 items-center flex-1">
+        <img
+          src="/assets/images/cats1.jpg"
+          alt="Cat 1"
+          class="rounded-lg md:w-64 lg:w-72 md:h-48 object-cover shadow-md"
+        />
+        <img
+          src="/assets/images/dogs.jpg"
+          alt="Dogs"
+          class="rounded-lg md:w-36 lg:w-48 h-48 object-cover shadow-md"
+        />
+      </div> -->
+    </div>
 
-    <h2 class="mb-2 font-sans text-xl font-bold tracking-tight">Hiking</h2>
+    <!-- <h2 class="mb-2 font-sans text-xl font-bold tracking-tight">Hiking</h2>
     <p>
         I love hiking with friends back in my true home in Phoenix Arizona.
     </p>
@@ -29,6 +75,6 @@ import { Link } from "@components/Link"
     <h2 class="mb-2 font-sans text-xl font-bold tracking-tight">Biking</h2>
     <p>
         I love biking with friends wherever I go.
-    </p>
+    </p> -->
   </Page>
 </SiteLayout>
