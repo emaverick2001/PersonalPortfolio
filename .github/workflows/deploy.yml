@@ -13,6 +13,8 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      POSTHOG_API_KEY: ${{ secrets.POSTHOG_API_KEY }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -41,6 +43,8 @@ jobs:
       id-token: write
     environment:
       name: github-pages
+    env:
+      POSTHOG_API_KEY: ${{ secrets.POSTHOG_API_KEY }}
     steps:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
