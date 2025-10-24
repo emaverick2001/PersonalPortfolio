@@ -15,7 +15,10 @@ export default function ProjectAccordion() {
           className={twMerge(
             "w-full cursor-pointer rounded-3xl bg-white border border-solid border-[#222222]/10 p-8 shadow-[0_7px_14px_#EAEAEA] transition duration-200 hover:bg-zinc-200",
           )}
-          onClick={() => setSelectedIndex(projectIndex)}
+          onClick={() => {
+            setSelectedIndex(projectIndex); 
+            project.onclick(); 
+          }}
         >
           <div className="aspect-video">
             <img

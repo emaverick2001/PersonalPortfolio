@@ -1,6 +1,9 @@
+import { trackCTA } from "../utils/analytics"
+
 export const socialIcons = [
   {
     href: "https://x.com/MaverickEspDev",
+    onclick: () => trackCTA("twitter", "header"),
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -14,6 +17,7 @@ export const socialIcons = [
   },
   {
     href: "https://www.linkedin.com/in/maverick-espinosa/",
+    onclick: () => trackCTA("linkedin", "header"),
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -27,6 +31,7 @@ export const socialIcons = [
   },
   {
     href: "https://github.com/emaverick2001",
+    onclick: () => trackCTA("github", "header"),
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -40,6 +45,7 @@ export const socialIcons = [
   },
   {
     href: "https://soundcloud.com/1fixate",
+    onclick: () => trackCTA("soundcloud", "header"),
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -53,6 +59,7 @@ export const socialIcons = [
   },
   {
     href: "mailto:emaverick2001@gmail.com",
+    onclick: () => trackCTA("email", "header"),
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"

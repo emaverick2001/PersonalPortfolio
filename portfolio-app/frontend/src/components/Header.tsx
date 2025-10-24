@@ -98,6 +98,7 @@ export const HeaderSection: React.FC = () => {
                       href={icons.href}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={icons.onclick}
                       className="inline-flex size-10 items-center justify-center rounded-full bg-zinc-300 transition hover:bg-zinc-400"
                       aria-label="Social link"
                     >

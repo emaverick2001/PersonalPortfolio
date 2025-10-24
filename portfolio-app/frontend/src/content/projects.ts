@@ -1,3 +1,5 @@
+import { trackProjectOpened } from "../utils/analytics"
+
 export const projects = [
   {
     name: "Visual Score",
@@ -5,6 +7,7 @@ export const projects = [
     tags: ["JavaScript", "AI"],
     sourceCode: "https://github.com/emaverick2001/VisualScore",
     projectLink: "https://visual-score.com/",
+    onclick: () => trackProjectOpened("VisualScore", "projectCard"),
     desc: "Sheet music scoring software designed to serve avant-garde composition",
     overview:
       "VisualScore is a free, open-source program that is re-imagining the future of music notation software. By utilizing the neoscore Python library and constructing an intuitive graphical user interface around it, VisualScore is democratizing the creation of aleatoric and graphic notation for composers of all levels. It stands as one of the only software programs designed to serve avant-garde artistic practices, delivering unmatched flexibility and innovative capabilities. VisualScore is currently in development.",
@@ -28,6 +31,7 @@ export const projects = [
     tags: ["JavaScript", "AI"],
     sourceCode: "https://github.com/emaverick2001/PactSpace",
     projectLink: "https://www.pactspace.co/",
+    onclick: () => trackProjectOpened("PactSpace", "projectCard"),
     desc: "A New Perspective on B2B Networking",
     overview:
       "At PactSpace, we help businesses discover partners, exchange services, and manage contracts, all through an integrated platform with built-in negotiation tools and milestone- based workflows. We bring structure, clarity, and trust to the deal-making process, saving you time, reducing friction, and eliminating manual errors.",
@@ -50,6 +54,7 @@ export const projects = [
     image: "/assets/images/project-3.jpg",
     tags: ["DataScience", "AI", "DataMining"],
     sourceCode: "https://github.com/emaverick2001/CTRAnalysis",
+    onclick: () => trackProjectOpened("CTR Analysis", "projectCard"),
     desc: "Exploring CTR classification algorithms and model pipelines",
     overview:
       "In online advertising, click-through rate (CTR) is a very important metric for evaluating ad performance. As a result, click prediction systems are essential and widely used for sponsored search and real-time bidding. This project utilizes data from Avazu on Kaggles CTR prediction contest",
@@ -72,6 +77,7 @@ export const projects = [
     image: "/assets/images/project-7.jpg",
     tags: ["AI", "Policy"],
     sourceCode: "https://github.com/emaverick2001/AIPolicyWebCrawler",
+    onclick: () => trackProjectOpened("AI Policy Web Crawler", "projectCard"),
     desc: "Visualize a heat distribution map to see popularity of various AI Policy articles / mentions",
     overview:
       "The project is for Option #11 of the final project for Information Retrieval and Web Agents. The purpose of this program is to catalogue important AI and Machine Learning Policy from the past and present into relevant categories. The output of this project will be then sent to TPS to be hosted within their Ancestry Tree that represents a timeline of AI Policy over time.",
@@ -94,6 +100,7 @@ export const projects = [
     image: "/assets/images/project-9.jpg",
     tags: ["Datascience", "DataEngineering"],
     sourceCode: "https://github.com/emaverick2001/DataCatalog",
+    onclick: () => trackProjectOpened("CPCR DataCatalog", "projectCard"),
     desc: "tool designed to support ingestion, harmonization, documentation, and distribution of center-wide data for organization and security purposes",
     overview:
       "A centralized data‐asset metadata and discovery tool designed to support ingestion, harmonization, documentation, and exploration of datasets across analytic workflows and teams",
@@ -116,6 +123,7 @@ export const projects = [
     image: "/assets/images/project-6.jpg",
     tags: ["DataScience", "AI", "HealthCare"],
     sourceCode: "https://github.com/emaverick2001/PHI-redactor",
+    onclick: () => trackProjectOpened("PHI-redactor", "projectCard"),
     desc: "Auto-detect and redact PHI information in datasets",
     overview:
       "A privacy-focused text/document processing tool designed to identify and redact Protected Health Information (PHI) from documents and images, enabling secure data handling for research, compliance, and workflows.",
@@ -127,7 +135,8 @@ export const projects = [
       "Visualization & audit support (optional): Outputs patterns of PHI detection (types/frequencies) that help analysts understand redaction coverage and risk exposure.",
     ],
     gallery: ["TODO1", "TODO2"],
-    howItWorks: "The PHI-redactor tool is designed to detect and redact Protected Health Information (PHI) from documents and text so that downstream workflows (analyses, sharing, research) can proceed without exposing personal health identifiers.",
+    howItWorks:
+      "The PHI-redactor tool is designed to detect and redact Protected Health Information (PHI) from documents and text so that downstream workflows (analyses, sharing, research) can proceed without exposing personal health identifiers.",
     directoryStructure: "TODO",
     usage: "TODO",
     importantNotes: "TODO",
@@ -144,6 +153,7 @@ export const projects = [
     image: "/assets/images/project-8.jpg",
     tags: ["Music"],
     sourceCode: "https://github.com/emaverick2001/Pure-Data-Synthesizer",
+    onclick: () => trackProjectOpened("Pure Data Synthesizer", "projectCard"),
     desc: "Virtual Modular Synth with various parameters to map onto midi keyboard + control visualizer",
     overview:
       "A creative tool for generating and manipulating synthesizer sounds—built using data processing, audio engineering and visualization workflows to support music production, experimentation and learning.",
@@ -167,6 +177,7 @@ export const projects = [
     tags: ["Databases", "SQL", "JavaScript"],
     sourceCode: "https://github.com/emaverick2001/Music-Recommendation-system",
     projectLink: "https://music-information-system.vercel.app/",
+    onclick: () => trackProjectOpened("Music Recommendation-system", "projectCard"),
     desc: "Music recommendation system using SQL queries",
     overview:
       "A user-centric music recommendation engine designed to suggest songs that align with listener preferences and metadata features. The system leverages data-engineering and machine learning techniques to curate personalized playlists and facilitate discovery of new music.",
@@ -196,6 +207,7 @@ export const projects = [
     image: "/assets/images/project-4.jpg",
     tags: ["Datastructures", "Algorithms", "Python"],
     sourceCode: "https://github.com/emaverick2001/Datastructures-Algos-in-Python-",
+    onclick: () => trackProjectOpened("Datastructures & Algos in Python", "projectCard"),
     desc: "Datastructures and Algorithms in Python",
     overview:
       "Implementing Datastructures and Algorithms in Python for practice and coding interviews",
