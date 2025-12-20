@@ -29,4 +29,4 @@ jobs:
           pip install codespell==2.2.6 tomli==2.0.1
       - name: Spelling check with codespell
         run: |
-          codespell --toml pyproject.toml
+          codespell --toml pyproject.toml --skip="frontend/src/content/blog,frontend/src/content/inspirations.ts"

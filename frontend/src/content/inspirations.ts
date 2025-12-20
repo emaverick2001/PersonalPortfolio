@@ -171,6 +171,6 @@ export const inspirations = {
     { title: "Black Clover" },
     { title: "Fullmetal Alchemist" },
     { title: "Dr Stone" },
-    { title: "Assasination Classroom" },
+    { title: "Assassination Classroom" },
   ],
 }

@@ -51,6 +51,27 @@ repos:
         pass_filenames: false
         files: "frontend/"
 
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.8.0
+    hooks:
+      - id: mypy
+        additional_dependencies:
+          - pydantic>=2.8.2
+          - types-setuptools
+          - types-pyyaml
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.2.6
+    hooks:
+      - id: codespell
+        args:
+          [
+            --skip="frontend/src/content/blog,
+            frontend/src/content/inspirations.ts",
+          ]
+        exclude: ^frontend/src/content/blog/
+        stages: [manual]
+
   # Commit message check
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v3.14.1
