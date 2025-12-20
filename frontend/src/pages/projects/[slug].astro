@@ -1,20 +1,20 @@
 ---
 // filepath: /Users/maver/Desktop/Coding Projects/Full Stack/PersonalPortfolio/portfolio-app/frontend/src/pages/projects/[slug].astro
-import { projects, slugify } from "../../content/projects";
+import { projects, slugify } from "../../content/projects"
 import { RadioIcon, CodeIcon } from "lucide-react"
-import SiteLayout from "@layouts/SiteLayout.astro";
+import SiteLayout from "@layouts/SiteLayout.astro"
 
 export function getStaticPaths() {
   return projects.map((project) => ({
     params: { slug: slugify(project.name) },
-  }));
+  }))
 }
 
-const { slug } = Astro.params;
-const project = projects.find((p) => slugify(p.name) === slug);
+const { slug } = Astro.params
+const project = projects.find((p) => slugify(p.name) === slug)
 
 if (!project) {
-  throw new Error("Project not found");
+  throw new Error("Project not found")
 }
 ---
 <SiteLayout title={project.name}>
@@ -29,7 +29,7 @@ if (!project) {
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex w-auto items-center gap-1 rounded-full bg-zinc-100 px-3 py-2 text-base font-medium text-black shadow transition hover:bg-zinc-200"
-          >
+        >
           <RadioIcon className="h-5 w-5" />
           Live Demo
         </a>
@@ -38,7 +38,7 @@ if (!project) {
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex w-auto items-center gap-1 rounded-full bg-zinc-100 px-3 py-2 text-base font-medium text-black shadow transition hover:bg-zinc-200"
-          >
+        >
           <CodeIcon className="h-5 w-5" />
           Source Code
         </a>
@@ -53,17 +53,17 @@ if (!project) {
     )}
     {project.features && (
       <div>
-      <h2 class="mt-2 mb-2 font-sans text-3xl font-bold tracking-tight">Features:</h2>
-      {Array.isArray(project.features) ? (
-      <ul class="list-disc pl-5">
-        {project.features.map((feature) => (
-          <li>{feature}</li>
-        ))}
-      </ul>
-    ) : (
-      <p>{project.features}</p>
-    )}
-    </div>
+        <h2 class="mt-2 mb-2 font-sans text-3xl font-bold tracking-tight">Features:</h2>
+        {Array.isArray(project.features) ? (
+          <ul class="list-disc pl-5">
+            {project.features.map((feature) => (
+              <li>{feature}</li>
+            ))}
+          </ul>
+        ) : (
+          <p>{project.features}</p>
+        )}
+      </div>
     )}
     {project.gallery && (
       <div>

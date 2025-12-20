@@ -2,7 +2,7 @@ import React from "react"
 
 type Props = {
   href: string
-  children: React.ReactNode // <-- Add this line
+  children: React.ReactNode
 }
 
 export const Link: React.FC<Props> = ({ href, children }) => (
