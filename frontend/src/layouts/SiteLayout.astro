@@ -1,0 +1,61 @@
+---
+import Head from "@components/Head.astro"
+import PostHog from "@components/PostHog.astro"
+import { HeaderSection } from "@components/Header"
+import { FooterSection } from "@components/Footer"
+
+interface Props {
+  title?: string
+  description?: string
+}
+
+const title = Astro.props.title ? `${Astro.props.title} | Maverick Espinosa` : "Maverick Espinosa"
+const description = Astro.props.description ?? "Software Engineer, Music Producer"
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head {title} {description} />
+    <PostHog />
+  </head>
+
+  <body>
+    <HeaderSection client:load />
+    <main class="max-w-screen-lg relative isolate overflow-hidden bg-zinc-50 px-6 pb-4 pt-2 font-serif text-lg text-zinc-900 md:mx-auto">
+      <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
+        <div class="absolute top-[8%] right-[-8rem] h-56 w-56 md:h-72 md:w-72 lg:h-80 lg:w-80 rounded-full
+                    bg-[radial-gradient(closest-side,theme(colors.fuchsia.400),transparent)]
+                    opacity-30 blur-3xl">
+        </div>
+
+        <div class="absolute top-[-8rem] left-[20%] h-64 w-64 md:h-80 md:w-80 rounded-full
+                    bg-[radial-gradient(closest-side,theme(colors.purple.400),transparent)]
+                    opacity-20 blur-3xl">
+        </div>
+
+        <div class="absolute top-[5%] left-[-6rem] h-64 w-64 md:h-80 md:w-80 lg:h-96 lg:w-96 rounded-full
+                    bg-[radial-gradient(closest-side,theme(colors.sky.400),transparent)]
+                    opacity-40 blur-3xl">
+        </div>
+
+        <div class="absolute bottom-[-7rem] left-[-12rem] h-80 w-80 md:h-96 md:w-96 rounded-full
+                    bg-[radial-gradient(closest-side,theme(colors.emerald.400),transparent)]
+                    opacity-30 blur-3xl">
+        </div>
+
+        <div class="absolute bottom-[-8rem] right-[-8rem] h-[22rem] w-[22rem] md:h-[26rem] md:w-[26rem] rounded-full
+                    bg-[radial-gradient(closest-side,theme(colors.orange.400),transparent)]
+                    opacity-40 blur-3xl">
+        </div>
+
+        <div class="absolute bottom-[8%] left-[38%] h-40 w-40 md:h-48 md:w-48 rounded-full
+                    bg-[radial-gradient(closest-side,theme(colors.rose.400),transparent)]
+                    opacity-18 blur-3xl">
+        </div>
+      </div>
+      <slot />
+    </main>
+    <FooterSection client:load/>
+  </body>
+</html>

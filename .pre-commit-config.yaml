@@ -1,0 +1,59 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-toml
+      - id: check-added-large-files
+      - id: check-json
+      - id: detect-private-key
+      - id: mixed-line-ending
+
+  # - repo: https://github.com/pre-commit/mirrors-prettier
+  #   rev: v3.0.1
+  #   hooks:
+  #     - id: prettier
+  #       files: "^frontend/"
+  #       exclude: "^frontend/node_modules/"
+
+  # backend linting
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.3.0
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.8.0
+    hooks:
+      - id: mypy
+        additional_dependencies:
+          - pydantic>=2.8.2
+          - types-setuptools
+          - types-pyyaml
+
+  # frontend linting
+  - repo: local
+    hooks:
+      - id: pnpm-lint
+        name: "pnpm: lint"
+        entry: bash -c 'cd frontend && pnpm run lint'
+        language: system
+        pass_filenames: false
+        files: "frontend/"
+      - id: typecheck
+        name: TypeScript Type Check
+        entry: bash -c 'cd frontend && pnpm run typecheck'
+        language: system
+        pass_filenames: false
+        files: "frontend/"
+
+  # Commit message check
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v3.14.1
+    hooks:
+      - id: commitizen
+        stages: [commit-msg]

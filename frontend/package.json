@@ -1,0 +1,48 @@
+{
+  "name": "maverickespinosa-personal-portfolio-site",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx,astro}\" --fix",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,astro,md,mdx,json,css,html}\""
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "framer-motion": "^11.3.31",
+    "lucide-react": "^0.546.0",
+    "posthog-js": "^1.280.1",
+    "pre-commit": "^1.2.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwind-merge": "^2.5.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.3",
+    "@astrojs/mdx": "^4.3.7",
+    "@astrojs/react": "^3.6.2",
+    "@astrojs/sitemap": "^3.6.0",
+    "@astrojs/tailwind": "^6.0.2",
+    "@tailwindcss/typography": "^0.5.15",
+    "@types/react": "^18.3.4",
+    "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.50.0",
+    "@typescript-eslint/parser": "^8.50.0",
+    "astro": "^5.14.5",
+    "astro-eslint-parser": "^0.16.0",
+    "eslint": "^9.38.0",
+    "eslint-plugin-astro": "^0.31.0",
+    "prettier": "^3.6.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "tailwindcss": "^3.4.10",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.50.0"
+  }
+}

@@ -2,15 +2,13 @@ version: 2
 updates:
   # Update npm dependencies in the frontend directory
   - package-ecosystem: "npm"
-    directory: "/portfolio-app/frontend"
+    directory: "/frontend"
     schedule:
       interval: "weekly"
       day: "monday"
       time: "09:00"
     open-pull-requests-limit: 3
     assignees:
-      - "emaverick2001"
-    reviewers:
       - "emaverick2001"
     commit-message:
       prefix: "deps(workspace)"
@@ -23,15 +21,13 @@ updates:
       interval: "monthly"
     assignees:
       - "emaverick2001"
-    reviewers:
-      - "emaverick2001"
     commit-message:
       prefix: "ci"
       include: "scope"
-      
+
   # Update Tailwind CSS dependencies
   - package-ecosystem: "npm"
-    directory: "/portfolio-app/frontend"
+    directory: "/frontend"
     schedule:
       interval: "weekly"
     allow:
@@ -39,9 +35,15 @@ updates:
 
   # Update pnpm lockfile
   - package-ecosystem: "npm"
-    directory: "/portfolio-app/frontend"
+    directory: "/frontend"
     schedule:
       interval: "weekly"
     ignore:
       - dependency-name: "pnpm"
         update-types: ["version-update:semver-major"]
+
+  # Update uv dependencies
+  - package-ecosystem: "uv" # See documentation for possible values
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: "weekly"

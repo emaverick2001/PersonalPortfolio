@@ -22,16 +22,16 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
-        working-directory: portfolio-app/frontend
+        working-directory: frontend
 
       - name: Build site
         run: pnpx astro build
-        working-directory: portfolio-app/frontend
+        working-directory: frontend
 
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: portfolio-app/frontend/dist
+          path: frontend/dist
 
   deploy:
     needs: build

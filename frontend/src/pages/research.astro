@@ -1,0 +1,91 @@
+---
+import SiteLayout from "@layouts/SiteLayout.astro"
+import { Page } from "@components/Page";
+import { PageHeader } from "@components/PageHeader.tsx"
+---
+
+<SiteLayout title="Research">
+  <PageHeader id="research">Research</PageHeader>
+  <div class="border-t-4 border-gray-200 mb-6" />
+  <Page>
+    <h2 class="mb-2 font-sans text-3xl font-bold tracking-tight">Research Interests</h2>
+    <div class="mb-6 p-4 bg-white border-l-4 border-blue-400 rounded-lg shadow-[0_7px_14px_#EAEAEA]">
+        <p class="text-black">
+            My research interests lie at the intersection of <strong>Graph Neural Networks</strong>, <strong>Agentic AI Systems</strong>, and <strong>Data Engineering</strong>.
+            I’m drawn to problems that require bridging structured data processing with intelligent reasoning systems — enabling more robust, personalized, and explainable learning experiences.
+            My current work spans from graph-based retrieval systems to data automation pipelines for clinical research.
+        </p>
+    </div>
+
+    <h2 class="mb-2 font-sans text-3xl font-bold tracking-tight">Research Trajectory</h2>
+    <div class="mb-6 p-4 bg-white border-l-4 border-blue-400 rounded-lg shadow-[0_7px_14px_#EAEAEA]">
+        <p class="text-black">
+      My long-term research vision focuses on building <strong>graph-based intelligent systems</strong> capable of structured reasoning, multi-hop retrieval, and personalized interaction.
+      I’m especially excited by opportunities that bridge machine learning, data engineering, and human-centered design — whether in education, research, or healthcare contexts.
+    </p>
+    </div>
+
+    <div class="border-t-4 border-gray-200" />
+
+    <!-- ULAB -->
+    <h2 class="mb-2 mt-12 font-sans text-3xl font-bold tracking-tight">U Lab — Graph Neural Networks & Intelligent Systems</h2>
+    <p class="mb-4">
+      Directed by <strong>Professor Jiaxuan You</strong>, U Lab focuses on leveraging Graph Neural Networks for reasoning, representation learning, and multi-hop knowledge access.
+      Our work explores how graph structure can enable models to move beyond static prompts and towards structured, explainable intelligence.
+    </p>
+
+    <h3 class="mb-2 font-sans text-xl font-bold tracking-tight">TinyTutor (Ideation)</h3>
+    <p class="mb-4">
+      TinyTutor is an early-stage research project that explores how graph-based reasoning can support <strong>adaptive tutoring systems</strong>.
+      The core idea is to create a graph-enhanced backbone that links concepts, dependencies, and skill progressions — enabling a small language model to act as an interactive, concept-aware tutor.
+      I’m currently designing the system architecture, retrieval pipeline, and evaluation framework for multi-hop question answering and content personalization.
+    </p>
+
+    <!-- CPCR -->
+    <h2 class="mb-2 font-sans text-3xl font-bold tracking-tight">Center for Psychedelic & Consciousness Research (CPCR)</h2>
+    <p class="mb-4">
+      At <strong>Johns Hopkins CPCR</strong>, my work centers on automating and scaling clinical research data workflows — from ingestion to reporting.
+      CPCR conducts world-leading psychedelic clinical trials, aiming to uncover therapeutic mechanisms and expand responsible psychedelic science.
+      My contributions focus on building reliable, reproducible systems to support researchers and clinicians.
+    </p>
+
+    <h3 class="mb-2 font-sans text-xl font-bold tracking-tight">QA Library</h3>
+    <p class="mb-4">
+      A centralized Python library that automates scoring for over <strong>100+ questionnaires and psychometric measures</strong> used in CPCR studies.
+      It ensures reproducibility, version control, and harmonization of data across multiple clinical protocols.
+    </p>
+
+    <h3 class="mb-2 font-sans text-xl font-bold tracking-tight">PHI Redactor</h3>
+    <p class="mb-4">
+      A pipeline that <strong>automatically detects and redacts Protected Health Information (PHI)</strong> from unstructured text and tabular datasets.
+      This enables compliant downstream processing and model training on de-identified data.
+    </p>
+
+    <h3 class="mb-2 font-sans text-xl font-bold tracking-tight">Data Catalog System</h3>
+    <p class="mb-4">
+      An internal data management platform for organizing, distributing, and versioning scored study datasets.
+      This tool integrates tightly with the QA Library, AE/PD report generator, and other automation scripts to reduce manual overhead in research workflows.
+    </p>
+
+    <h3 class="mb-2 font-sans text-xl font-bold tracking-tight">Protocol Deviations + Adverse Events (AE/PD) Automation</h3>
+    <p class="mb-6">
+      A RedCap-based automation pipeline that ingests adverse event and protocol deviation data,
+      parses and harmonizes it, and generates <strong>human-readable HTML reports</strong> for IRB and clinical teams.
+      This reduced manual reporting time and improved standardization across studies.
+    </p>
+
+    <!-- Toscano Lab -->
+    <h2 class="mb-2 font-sans text-3xl font-bold tracking-tight">Toscano Lab — Reactive Sulfur Species Chemistry</h2>
+    <p class="mb-4">
+      In <strong>Toscano Lab</strong>, I contributed to experimental research investigating the chemistry and biological roles of <strong>hydropersulfides</strong>.
+      Our work focused on developing reagents and methods to understand protein persulfidation and its biochemical effects.
+    </p>
+
+    <h3 class="mb-2 font-sans text-xl font-bold tracking-tight">Lab Work</h3>
+    <p class="mb-4">
+      • Developed and executed wet-lab protocols for hydropersulfide generation.<br/>
+      • Contributed to characterization and analysis of reactive sulfur species.<br/>
+      • Collaborated with interdisciplinary researchers to align experimental workflows with downstream data processing and visualization.
+    </p>
+  </Page>
+</SiteLayout>

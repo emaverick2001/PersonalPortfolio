@@ -81,6 +81,6 @@ coverage/
 # Jupyter Notebook
 .ipynb_checkpoints
 
-portfolio-app/frontend/node_modules/
-portfolio-app/frontend/dist/
-portfolio-app/frontend/.astro/
+frontend/node_modules/
+frontend/dist/
+frontend/.astro/
