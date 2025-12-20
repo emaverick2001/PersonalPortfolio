@@ -22,7 +22,11 @@ export const HeaderSection: React.FC = () => {
           <div className="flex h-24 items-center justify-between md:h-28">
             <div>
               <a href="/">
-                <img src="/assets/websitelogonobackground.png" alt="Logo" className="h-10 w-10" />
+                <img
+                  src="/assets/images/websitelogonobackground.png"
+                  alt="Logo"
+                  className="h-10 w-10"
+                />
               </a>
             </div>
             <div className="flex items-center gap-4 md:hidden">
