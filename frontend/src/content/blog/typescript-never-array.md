@@ -1,7 +1,9 @@
 ---
 title: TypeScript's elusive never[] type
 publishDate: 2023-09-21
+image: "/assets/images/ts.jpg"
 description: Exploring type theory through TypeScript type inference
+categories: ["Tutorial"]
 ---
 
 This TypeScript code results in an error.
@@ -253,7 +255,7 @@ type](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.
 [Some type theory, specifically regarding the bottom
 type](https://wiki.c2.com/?BottomType)
 
-[More on the `never` type from Basarat's TypeScript Deep
+[More on the `never` type from Basarat&#39;s TypeScript Deep
 Dive](https://basarat.gitbook.io/typescript/type-system/never)
 
 [StackOverflow post discussing motivations behind the `never`

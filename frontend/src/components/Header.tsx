@@ -76,7 +76,7 @@ export const HeaderSection: React.FC = () => {
             <div className="absolute inset-1 z-0 border border-solid border-[#222222]/10 p-8 shadow-[0_7px_14px_#EAEAEA] md:mt-28">
               {/* add background designs like shapes hexagon etc */}
               <div className="flex h-full flex-col items-center justify-center">
-                <nav className="flex flex-col items-center gap-8 text-4xl font-bold tracking-tight md:gap-16">
+                <nav className="flex max-h-[60vh] flex-col items-center gap-8 overflow-y-auto pr-8 text-4xl font-bold tracking-tight md:gap-16">
                   {navLink.map((routes, index) => (
                     <motion.a
                       initial={{ opacity: 0, y: 20 }}

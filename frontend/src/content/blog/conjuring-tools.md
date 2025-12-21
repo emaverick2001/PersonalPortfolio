@@ -2,6 +2,8 @@
 title: Conjuring tools
 publishDate: 2025-03-24
 description: Using LLMs to create tools on demand feels like spellcasting
+image: "/assets/images/conjuringTools.jpg"
+categories: ["Reflection"]
 ---
 
 Using LLMs to create small, purpose-built tools makes me feel like I'm casting
@@ -21,11 +23,11 @@ that would have normally required a long detour. AI was quite helpful for
 creating these tools quickly:
 
 - A script to benchmark database inserts: without batching, with batching,
-connection pooling, different batch sizes, and a nice report comparing
-performance characteristics of each approach
+  connection pooling, different batch sizes, and a nice report comparing
+  performance characteristics of each approach
 - A script to compare database schemas: do they have the same tables? If not,
-which are different? Do columns match between the tables? Does each table have
-the same data?
+  which are different? Do columns match between the tables? Does each table have
+  the same data?
 
 The first script helped me quickly find that the performance bottleneck was
 actually in parsing the file, rather than network latency while uploading to the

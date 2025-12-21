@@ -1,6 +1,9 @@
 ---
 title: Sharpening the sword for a battle that never comes
 publishDate: 2024-09-11
+image: "/assets/images/overdoing.jpg"
+description: Catching yourself when overthinking
+categories: ["Reflection"]
 ---
 
 I often notice this pattern in myself, but didn't have words for it until
@@ -18,13 +21,15 @@ getting pulled in. Thinking about doing something is often easier, and can feel
 nicer, than actually doing the thing itself.
 
 There are a few areas in which this issue is most prominent for me:
+
 - Note-taking apps
 - Productivity systems
 - Programming languages
 - Text editors
+- Music Composing
 
 Exploration isn't inherently problematic. However, it's an issue when I find
-myself in seasons of my life in which I'm *only* exploring, and not capitalizing
+myself in seasons of my life in which I'm _only_ exploring, and not capitalizing
 on any of the knowledge I've accumulated so far. It's a problem of balance.
 
 One heuristic I use to catch myself is noticing when I get into the theory of a
@@ -40,9 +45,10 @@ without a direction, it's not easy to know when a something is truly an
 improvement.
 
 Here are some other resources that have helped me think about this:
+
 - [The neurotic over-optimization trap that holds you
-back](https://youtu.be/b_Og4TF6B1Q) - where I encountered the phrase "sharpening
-the sword for a battle that never comes"
+  back](https://youtu.be/b_Og4TF6B1Q) - where I encountered the phrase "sharpening
+  the sword for a battle that never comes"
 - [Think more about what to focus
-on](https://www.henrikkarlsson.xyz/p/multi-armed-bandit)
+  on](https://www.henrikkarlsson.xyz/p/multi-armed-bandit)
 - [The Cult of Done](https://youtu.be/bJQj1uKtnus)

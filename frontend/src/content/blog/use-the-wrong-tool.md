@@ -1,6 +1,9 @@
 ---
 title: Use the wrong tool for the job
 publishDate: 2024-11-05
+image: "/assets/images/wrongTool.jpg"
+description: Limiting perfectionism
+categories: ["Reflection"]
 ---
 
 Use the wrong tool for the job?
@@ -24,7 +27,7 @@ are a perfect fit. That there's a "best" tool for the job, and that's the one
 you should be using.
 
 But sometimes, you should use the tool you're already using. This is [John
-Carmack's advice](https://x.com/ID_AA_Carmack/status/989951283900514304):
+Carmack&#39;s advice](https://x.com/ID_AA_Carmack/status/989951283900514304):
 
 > The right tool for the job is often the tool you are already using -- adding
 > new tools has a higher cost than many people appreciate.
@@ -49,6 +52,7 @@ that advice is too vague to be applied generally.
 
 The idea that you should use the tool that's theoretically the best is, again,
 missing the context of the rest of the decision-making process. Sometimes...
+
 - You already have existing infrastructure around your existing tools.
 - It's not a good fit for your team's experience and interest.
 - It's difficult to hire people for down the road.
@@ -73,7 +77,8 @@ the context it was created in.
 
 Contrast these two pieces of advice. "Protect your time", and, "Be wary of
 commitments that add overhead in the form of meetings on your calendar".
+
 - The first tells you _what_ to do, and can be treated and applied dogmatically
-with whatever interpretation suits you.
+  with whatever interpretation suits you.
 - The second tells you _how_ to protect your time, providing clear criteria to
-consider.
+  consider.

@@ -1,6 +1,9 @@
 ---
 title: Modes of writing
 publishDate: 2025-01-31
+description: writing modes and their different outputs + effects
+image: "/assets/images/modesOfWriting.jpg"
+categories: ["Reflection", "Analysis"]
 ---
 
 Writing improves thinking, but only if you write well. You need to slow
@@ -39,7 +42,7 @@ can be searched easily.
 
 Another benefit can be journaling: sometimes, journaling about emotions in a
 stream-of-consciousness can help with processing emotions or uncovering things
-about yourself that you didn't noticed.
+about yourself that you didn't notice.
 
 However, I don't find this mode of writing to improve my thinking in a
 meaningful way. Also, most of these notes tend to be difficult for me to read
@@ -48,7 +51,7 @@ depth, etc.
 
 ## Moderate intensity
 
-I'd call the mode I'm writing in now *moderate intensity*. I'm not
+I'd call the mode I'm writing in now _moderate intensity_. I'm not
 brain-dumping, but not trying to produce a masterpiece. I'm just thinking a good
 amount about what I'm writing. Is there a better way to explain my point? Does
 the structure make sense? It's slower and more intentional. I'll re-read what
@@ -62,8 +65,7 @@ level.
 
 Using all of my facilities to put together great writing. Juggling lots of
 sources and making connections. I remember feeling this during highly focused
-essay writing during university. I'd often go to [Hayden
-Library](https://lib.asu.edu/hayden) to get this deep work done. I also had a
+essay writing during university. I also had a
 phase where I'd turn off the lights in my room, sit in front of my CRT monitor
 with nothing on screen but my text editor, put lo-fi in my headphones, set a
 pomodoro timer, and work for hours.
