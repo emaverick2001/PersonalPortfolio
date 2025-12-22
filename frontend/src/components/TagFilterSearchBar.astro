@@ -1,0 +1,386 @@
+---
+interface Props {
+  tags: string[]
+  tagCounts?: Record<string, number>
+  selectedTag?: string
+  query?: string
+  disabled?: boolean
+  placeholder?: string
+  debounceMs?: number
+  matchMode?: "title" | "title_summary" | "fulltext"
+  targetSelector: string
+}
+
+const {
+  tags,
+  tagCounts = {},
+  selectedTag = "All",
+  query = "",
+  disabled = false,
+  placeholder = "Search posts...",
+  debounceMs = 250,
+  targetSelector,
+} = Astro.props
+
+const tagList = tags.includes("All") ? tags : ["All", ...tags]
+const totalCount = Object.values(tagCounts).reduce((sum, count) => sum + count, 0)
+const counts: Record<string, number> = {
+  ...tagCounts,
+  All: tagCounts.All ?? totalCount,
+}
+---
+
+<div
+  class="mb-6 space-y-3"
+  data-tag-filter-root
+  data-tags={JSON.stringify(tagList)}
+  data-tag-counts={JSON.stringify(counts)}
+  data-selected-tag={selectedTag}
+  data-query={query}
+  data-debounce-ms={debounceMs}
+  data-target-selector={targetSelector}
+>
+  <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+    <div class="relative">
+      <button
+        type="button"
+        class="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-semibold text-gray-700 shadow-sm transition hover:border-gray-300 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 disabled:cursor-not-allowed disabled:opacity-60"
+        data-tag-trigger
+        aria-haspopup="listbox"
+        aria-expanded="false"
+        disabled={disabled}
+      >
+        <span data-tag-label>{selectedTag}</span>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 20 20"
+          class="h-4 w-4 text-gray-500"
+          fill="currentColor"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08Z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </button>
+      <div
+        class="absolute left-0 top-full z-20 mt-2 hidden w-64 rounded-xl border border-gray-200 bg-white p-2 shadow-lg"
+        data-tag-menu
+      >
+        <ul
+          class="max-h-64 space-y-1 overflow-auto p-1 text-sm"
+          role="listbox"
+          tabindex="-1"
+          data-tag-list
+        >
+          {
+            tagList.map((tag) => (
+              <li>
+                <button
+                  type="button"
+                  role="option"
+                  class="flex w-full items-center justify-between rounded-full px-3 py-2 text-left text-gray-700 transition hover:bg-gray-100 focus-visible:outline-none"
+                  data-tag-option
+                  data-tag={tag}
+                  aria-selected={tag === selectedTag}
+                  tabindex="-1"
+                  disabled={disabled}
+                >
+                  <span class="truncate">{tag}</span>
+                  <span class="ml-3 rounded-full bg-gray-100 px-2 py-0.5 text-xs font-semibold text-gray-500">
+                    {counts[tag] ?? 0}
+                  </span>
+                </button>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="relative flex-1">
+      <input
+        type="search"
+        class="w-full rounded-full border border-gray-200 bg-white px-4 py-2 pr-10 text-sm text-gray-700 shadow-sm transition placeholder:text-gray-400 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 disabled:cursor-not-allowed disabled:bg-gray-50"
+        data-tag-search
+        aria-label="Search posts"
+        placeholder={placeholder}
+        value={query}
+        disabled={disabled}
+      />
+      <button
+        type="button"
+        class="absolute right-3 top-1/2 hidden -translate-y-1/2 text-gray-400 transition hover:text-gray-600"
+        data-clear-query
+        aria-label="Clear search"
+        disabled={disabled}
+      >
+        <svg aria-hidden="true" viewBox="0 0 20 20" class="h-4 w-4" fill="currentColor">
+          <path
+            fill-rule="evenodd"
+            d="M4.72 4.72a.75.75 0 0 1 1.06 0L10 8.94l4.22-4.22a.75.75 0 1 1 1.06 1.06L11.06 10l4.22 4.22a.75.75 0 0 1-1.06 1.06L10 11.06l-4.22 4.22a.75.75 0 0 1-1.06-1.06L8.94 10 4.72 5.78a.75.75 0 0 1 0-1.06Z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </button>
+    </div>
+
+    <button
+      type="button"
+      class="hidden text-sm font-semibold text-gray-500 transition hover:text-gray-800"
+      data-clear-all
+      disabled={disabled}
+    >
+      Clear
+    </button>
+  </div>
+
+  <div
+    class="hidden rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-900"
+    data-empty-banner
+    role="status"
+  >
+    <span data-empty-text></span>
+    <button type="button" class="ml-2 font-semibold underline" data-empty-undo> Undo </button>
+  </div>
+</div>
+
+<style>
+  :global([data-tag-search]::-webkit-search-cancel-button),
+  :global([data-tag-search]::-webkit-search-decoration),
+  :global([data-tag-search]::-webkit-search-results-button),
+  :global([data-tag-search]::-webkit-search-results-decoration) {
+    -webkit-appearance: none;
+    appearance: none;
+    display: none;
+  }
+</style>
+
+<script type="module">
+  const roots = document.querySelectorAll("[data-tag-filter-root]")
+
+  const toTagList = (value) =>
+    value
+      ? value
+          .split("|")
+          .map((tag) => tag.trim())
+          .filter(Boolean)
+      : []
+
+  const normalizeQuery = (value) => value.trim().toLowerCase().split(/\s+/).filter(Boolean)
+
+  roots.forEach((root) => {
+    const tags = JSON.parse(root.dataset.tags ?? "[]")
+    const debounceMs = Number(root.dataset.debounceMs ?? "250")
+    const targetSelector = root.dataset.targetSelector ?? ""
+    const postCards = Array.from(document.querySelectorAll(targetSelector))
+
+    let selectedTag = root.dataset.selectedTag ?? "All"
+    let query = root.dataset.query ?? ""
+    let isOpen = false
+    let highlightIndex = Math.max(0, tags.indexOf(selectedTag))
+    let debounceId = null
+    let lastFallbackTag = ""
+    let suppressFallbackOnce = false
+
+    const trigger = root.querySelector("[data-tag-trigger]")
+    const label = root.querySelector("[data-tag-label]")
+    const menu = root.querySelector("[data-tag-menu]")
+    const list = root.querySelector("[data-tag-list]")
+    const options = Array.from(root.querySelectorAll("[data-tag-option]"))
+    const searchInput = root.querySelector("[data-tag-search]")
+    const clearQueryButton = root.querySelector("[data-clear-query]")
+    const clearAllButton = root.querySelector("[data-clear-all]")
+    const banner = root.querySelector("[data-empty-banner]")
+    const bannerText = root.querySelector("[data-empty-text]")
+    const bannerUndo = root.querySelector("[data-empty-undo]")
+
+    const selectedClasses = ["bg-green-100", "text-green-800"]
+    const highlightedClasses = ["bg-gray-100"]
+
+    const updateClearButtons = () => {
+      if (clearQueryButton) {
+        clearQueryButton.classList.toggle("hidden", query.length === 0)
+      }
+      if (clearAllButton) {
+        clearAllButton.classList.toggle("hidden", selectedTag === "All" && query.length === 0)
+      }
+    }
+
+    const updateOptions = () => {
+      options.forEach((option, index) => {
+        const tag = option.dataset.tag
+        const isSelected = tag === selectedTag
+        option.setAttribute("aria-selected", String(isSelected))
+        selectedClasses.forEach((className) => option.classList.toggle(className, isSelected))
+        highlightedClasses.forEach((className) =>
+          option.classList.toggle(className, isOpen && index === highlightIndex),
+        )
+      })
+    }
+
+    const updateSelectedTag = () => {
+      if (label) label.textContent = selectedTag
+      highlightIndex = Math.max(0, tags.indexOf(selectedTag))
+      updateOptions()
+      updateClearButtons()
+    }
+
+    const updateBanner = (visible, text = "") => {
+      if (!banner || !bannerText) return
+      bannerText.textContent = text
+      banner.classList.toggle("hidden", !visible)
+    }
+
+    const applyFilter = () => {
+      const terms = normalizeQuery(query)
+      let visibleCount = 0
+
+      postCards.forEach((card) => {
+        const cardTags = toTagList(card.dataset.tags)
+        const searchText = (card.dataset.search ?? "").toLowerCase()
+        const tagMatch = selectedTag === "All" || cardTags.includes(selectedTag)
+        const searchMatch = terms.length === 0 || terms.every((term) => searchText.includes(term))
+        const isVisible = tagMatch && searchMatch
+        card.classList.toggle("hidden", !isVisible)
+        if (isVisible) visibleCount += 1
+      })
+
+      if (visibleCount === 0 && selectedTag !== "All" && !suppressFallbackOnce) {
+        lastFallbackTag = selectedTag
+        selectedTag = "All"
+        updateSelectedTag()
+        updateBanner(true, `No matches for "${lastFallbackTag}". Showing all posts.`)
+        applyFilter()
+        return
+      }
+
+      suppressFallbackOnce = false
+      if (visibleCount > 0 || selectedTag === "All") {
+        updateBanner(false)
+      }
+    }
+
+    const scheduleFilter = () => {
+      if (debounceId) window.clearTimeout(debounceId)
+      debounceId = window.setTimeout(applyFilter, debounceMs)
+    }
+
+    const openMenu = () => {
+      if (!menu || !list) return
+      isOpen = true
+      menu.classList.remove("hidden")
+      trigger?.setAttribute("aria-expanded", "true")
+      updateOptions()
+      list.focus()
+    }
+
+    const closeMenu = () => {
+      if (!menu) return
+      isOpen = false
+      menu.classList.add("hidden")
+      trigger?.setAttribute("aria-expanded", "false")
+    }
+
+    const selectTag = (tag) => {
+      selectedTag = tag
+      updateSelectedTag()
+      closeMenu()
+      suppressFallbackOnce = false
+      applyFilter()
+      searchInput?.focus()
+    }
+
+    const moveHighlight = (direction) => {
+      const total = options.length
+      if (total === 0) return
+      highlightIndex = (highlightIndex + direction + total) % total
+      updateOptions()
+    }
+
+    trigger?.addEventListener("click", () => {
+      if (isOpen) {
+        closeMenu()
+      } else {
+        openMenu()
+      }
+    })
+
+    options.forEach((option, index) => {
+      option.addEventListener("click", () => {
+        highlightIndex = index
+        selectTag(option.dataset.tag ?? "All")
+      })
+    })
+
+    list?.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowDown") {
+        event.preventDefault()
+        moveHighlight(1)
+      }
+      if (event.key === "ArrowUp") {
+        event.preventDefault()
+        moveHighlight(-1)
+      }
+      if (event.key === "Enter") {
+        event.preventDefault()
+        const option = options[highlightIndex]
+        if (option) selectTag(option.dataset.tag ?? "All")
+      }
+      if (event.key === "Escape") {
+        event.preventDefault()
+        closeMenu()
+        trigger?.focus()
+      }
+    })
+
+    document.addEventListener("click", (event) => {
+      if (!root.contains(event.target)) closeMenu()
+    })
+
+    searchInput?.addEventListener("input", (event) => {
+      query = event.target.value
+      updateClearButtons()
+      scheduleFilter()
+    })
+
+    searchInput?.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault()
+        if (debounceId) window.clearTimeout(debounceId)
+        applyFilter()
+      }
+    })
+
+    clearQueryButton?.addEventListener("click", () => {
+      query = ""
+      if (searchInput) searchInput.value = ""
+      updateClearButtons()
+      applyFilter()
+      searchInput?.focus()
+    })
+
+    clearAllButton?.addEventListener("click", () => {
+      selectedTag = "All"
+      query = ""
+      if (searchInput) searchInput.value = ""
+      updateSelectedTag()
+      updateClearButtons()
+      updateBanner(false)
+      applyFilter()
+      searchInput?.focus()
+    })
+
+    bannerUndo?.addEventListener("click", () => {
+      if (!lastFallbackTag) return
+      selectedTag = lastFallbackTag
+      suppressFallbackOnce = true
+      updateSelectedTag()
+      applyFilter()
+      updateBanner(false)
+    })
+
+    updateSelectedTag()
+    updateClearButtons()
+    applyFilter()
+  })
+</script>
