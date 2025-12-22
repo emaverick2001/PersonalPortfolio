@@ -167,6 +167,23 @@ const counts: Record<string, number> = {
       : []
 
   const normalizeQuery = (value) => value.trim().toLowerCase().split(/\s+/).filter(Boolean)
+  const applyVisibility = (card) => {
+    const isHidden =
+      card.dataset.filterHidden === "true" || card.dataset.pageHidden === "true"
+    card.classList.toggle("hidden", isHidden)
+  }
+
+  const updateUrlParams = (params) => {
+    const url = new URL(window.location.href)
+    Object.entries(params).forEach(([key, value]) => {
+      if (!value) {
+        url.searchParams.delete(key)
+        return
+      }
+      url.searchParams.set(key, value)
+    })
+    window.history.replaceState({}, "", url)
+  }
 
   roots.forEach((root) => {
     const tags = JSON.parse(root.dataset.tags ?? "[]")
@@ -176,11 +193,22 @@ const counts: Record<string, number> = {
 
     let selectedTag = root.dataset.selectedTag ?? "All"
     let query = root.dataset.query ?? ""
+    const urlParams = new URLSearchParams(window.location.search)
+    const urlTag = urlParams.get("tag")
+    const urlQuery = urlParams.get("q")
+    if (urlTag && tags.includes(urlTag)) {
+      selectedTag = urlTag
+    }
+    if (urlQuery) {
+      query = urlQuery
+    }
     let isOpen = false
     let highlightIndex = Math.max(0, tags.indexOf(selectedTag))
     let debounceId = null
     let lastFallbackTag = ""
     let suppressFallbackOnce = false
+    let lastUrlTag = selectedTag === "All" ? "" : selectedTag
+    let lastUrlQuery = query
 
     const trigger = root.querySelector("[data-tag-trigger]")
     const label = root.querySelector("[data-tag-label]")
@@ -231,6 +259,15 @@ const counts: Record<string, number> = {
       banner.classList.toggle("hidden", !visible)
     }
 
+    const syncUrl = () => {
+      const nextTag = selectedTag === "All" ? "" : selectedTag
+      const nextQuery = query || ""
+      if (nextTag === lastUrlTag && nextQuery === lastUrlQuery) return
+      updateUrlParams({ tag: nextTag, q: nextQuery })
+      lastUrlTag = nextTag
+      lastUrlQuery = nextQuery
+    }
+
     const applyFilter = () => {
       const terms = normalizeQuery(query)
       let visibleCount = 0
@@ -241,7 +278,8 @@ const counts: Record<string, number> = {
         const tagMatch = selectedTag === "All" || cardTags.includes(selectedTag)
         const searchMatch = terms.length === 0 || terms.every((term) => searchText.includes(term))
         const isVisible = tagMatch && searchMatch
-        card.classList.toggle("hidden", !isVisible)
+        card.dataset.filterHidden = String(!isVisible)
+        applyVisibility(card)
         if (isVisible) visibleCount += 1
       })
 
@@ -258,6 +296,11 @@ const counts: Record<string, number> = {
       if (visibleCount > 0 || selectedTag === "All") {
         updateBanner(false)
       }
+
+      syncUrl()
+      document.dispatchEvent(
+        new CustomEvent("tagfilter:updated", { detail: { selectedTag, query } }),
+      )
     }
 
     const scheduleFilter = () => {
@@ -381,6 +424,7 @@ const counts: Record<string, number> = {
 
     updateSelectedTag()
     updateClearButtons()
+    if (searchInput) searchInput.value = query
     applyFilter()
   })
 </script>
