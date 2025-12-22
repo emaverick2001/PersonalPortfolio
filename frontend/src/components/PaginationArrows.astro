@@ -46,7 +46,11 @@ const {
     <span data-pagination-prev-label>Prev</span>
   </button>
 
-  <span class="text-xs uppercase tracking-wide text-gray-400" data-pagination-status aria-live="polite">
+  <span
+    class="text-xs uppercase tracking-wide text-gray-400"
+    data-pagination-status
+    aria-live="polite"
+  >
     Page 1 of 1
   </span>
 
@@ -70,8 +74,7 @@ const {
   const roots = document.querySelectorAll("[data-pagination-root]")
 
   const applyVisibility = (card) => {
-    const isHidden =
-      card.dataset.filterHidden === "true" || card.dataset.pageHidden === "true"
+    const isHidden = card.dataset.filterHidden === "true" || card.dataset.pageHidden === "true"
     card.classList.toggle("hidden", isHidden)
   }
 
@@ -115,10 +118,7 @@ const {
     const updateStatus = (totalItems, totalPages, startIndex, endIndex) => {
       if (!status) return
       status.textContent = `Page ${page} of ${totalPages}`
-      status.setAttribute(
-        "data-range",
-        totalItems === 0 ? "0-0" : `${startIndex + 1}-${endIndex}`,
-      )
+      status.setAttribute("data-range", totalItems === 0 ? "0-0" : `${startIndex + 1}-${endIndex}`)
     }
 
     const focusList = () => {

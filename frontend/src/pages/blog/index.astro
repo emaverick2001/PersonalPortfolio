@@ -48,11 +48,7 @@ const formatter = new Intl.DateTimeFormat("en", {
       matchMode="title_summary"
       targetSelector="#post-grid [data-post-card]"
     />
-    <div
-      id="post-grid"
-      class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
-      tabindex="-1"
-    >
+    <div id="post-grid" class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3" tabindex="-1">
       {
         posts.map((post) => {
           const categories = post.data.categories ?? ["Reflection"]
