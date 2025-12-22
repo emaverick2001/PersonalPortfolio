@@ -161,9 +161,9 @@ const counts: Record<string, number> = {
   const toTagList = (value) =>
     value
       ? value
-          .split("|")
-          .map((tag) => tag.trim())
-          .filter(Boolean)
+        .split("|")
+        .map((tag) => tag.trim())
+        .filter(Boolean)
       : []
 
   const normalizeQuery = (value) => value.trim().toLowerCase().split(/\s+/).filter(Boolean)
