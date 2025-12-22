@@ -7,7 +7,7 @@ export const inspirations = {
     { name: "Heng Ji", link: "https://blender.cs.illinois.edu/hengji.html" },
     { name: "Jiawei Han", link: "https://hanj.cs.illinois.edu/" },
     { name: "Chinat Yu", link: "https://www.linkedin.com/in/chinat-yu/" },
-    { name: "Muskan Shivnani", link: "https://www.youtube.com/@muskanshivnani/videos"},
+    { name: "Muskan Shivnani", link: "https://www.youtube.com/@muskanshivnani/videos" },
     { name: "SpoonKid", link: "https://www.youtube.com/@spoonkid2169" },
     { name: "Astrid Yu", link: "https://astrid.tech/" },
     { name: "Adham Dannaway", link: "https://www.adhamdannaway.com/learn-ui-design" },
@@ -129,7 +129,7 @@ export const inspirations = {
     },
     {
       title: "Unit Kai",
-      link: "https://soundcloud.com/unitkai"
+      link: "https://soundcloud.com/unitkai",
     },
     {
       title: "Sam Gellaitry",

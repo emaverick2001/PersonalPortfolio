@@ -3,7 +3,7 @@ import tailwind from "@astrojs/tailwind"
 import sitemap from "@astrojs/sitemap"
 import mdx from "@astrojs/mdx"
 import react from "@astrojs/react"
-import dotenv from "dotenv";
+import dotenv from "dotenv"
 
 dotenv.config()
 
