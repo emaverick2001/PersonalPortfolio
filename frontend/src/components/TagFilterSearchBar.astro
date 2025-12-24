@@ -161,15 +161,14 @@ const counts: Record<string, number> = {
   const toTagList = (value) =>
     value
       ? value
-        .split("|")
-        .map((tag) => tag.trim())
-        .filter(Boolean)
+          .split("|")
+          .map((tag) => tag.trim())
+          .filter(Boolean)
       : []
 
   const normalizeQuery = (value) => value.trim().toLowerCase().split(/\s+/).filter(Boolean)
   const applyVisibility = (card) => {
-    const isHidden =
-      card.dataset.filterHidden === "true" || card.dataset.pageHidden === "true"
+    const isHidden = card.dataset.filterHidden === "true" || card.dataset.pageHidden === "true"
     card.classList.toggle("hidden", isHidden)
   }
 

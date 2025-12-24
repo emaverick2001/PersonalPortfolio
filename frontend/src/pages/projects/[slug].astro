@@ -19,7 +19,9 @@ if (!project) {
 ---
 
 <SiteLayout title={project.name}>
-  <section class="max-w-screen-lg px-6 pb-4 pt-2 font-serif text-lg text-zinc-900 dark:text-zinc-100 md:mx-auto">
+  <section
+    class="max-w-screen-lg px-6 pb-4 pt-2 font-serif text-lg text-zinc-900 dark:text-zinc-100 md:mx-auto"
+  >
     <div class="flex flex-col items-center text-center">
       <h1 class="mb-4 text-3xl font-bold md:text-5xl">{project.name}</h1>
       <p class="mb-4 text-lg text-gray-700 dark:text-zinc-300">{project.desc}</p>
@@ -53,7 +55,7 @@ if (!project) {
         </a>
       </div>
     </div>
-    <div class="mb-6 mt-6 border-t-4 border-gray-200 dark:border-zinc-200 rounded-lg"></div>
+    <div class="mb-6 mt-6 rounded-lg border-t-4 border-gray-200 dark:border-zinc-200"></div>
     {
       project.overview && (
         <div>

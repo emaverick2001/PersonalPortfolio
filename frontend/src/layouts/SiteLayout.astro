@@ -18,7 +18,7 @@ const description = Astro.props.description ?? "Software Engineer, Music Produce
   <head>
     <Head {title} {description} />
     <script>
-      (() => {
+      ;(() => {
         const savedTheme = localStorage.getItem("theme")
         const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
         const shouldBeDark = savedTheme ? savedTheme === "dark" : prefersDark
