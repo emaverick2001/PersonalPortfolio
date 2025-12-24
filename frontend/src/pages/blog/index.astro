@@ -37,7 +37,7 @@ const formatter = new Intl.DateTimeFormat("en", {
 
 <SiteLayout title="Blog">
   <PageHeader>Posts</PageHeader>
-  <div class="mb-6 border-t-4 border-gray-200"></div>
+  <div class="mb-6 border-t-4 border-black dark:border-zinc-200 rounded-lg"></div>
   <Page>
     <TagFilterSearchBar
       tags={tagList}
@@ -57,7 +57,7 @@ const formatter = new Intl.DateTimeFormat("en", {
           return (
             <a
               href={`/blog/${post.slug}/`}
-              class="group flex flex-col overflow-hidden rounded-lg bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg"
+              class="group flex flex-col overflow-hidden rounded-lg bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg dark:bg-zinc-800 dark:text-zinc-100 dark:shadow-[0_7px_14px_#0F0F0F]"
               data-post-card
               data-tags={categories.join("|")}
               data-search={searchText.toLowerCase()}
@@ -66,7 +66,7 @@ const formatter = new Intl.DateTimeFormat("en", {
               {post.data.image ? (
                 <img src={post.data.image} alt={post.data.title} class="h-48 w-full object-cover" />
               ) : (
-                <div class="h-48 w-full bg-gradient-to-br from-blue-200 to-blue-600" />
+                <div class="h-48 w-full bg-gradient-to-br from-blue-200 to-blue-600 dark:from-slate-700 dark:to-slate-900" />
               )}
 
               {/* Content */}
@@ -74,26 +74,26 @@ const formatter = new Intl.DateTimeFormat("en", {
                 {/* Category Badges */}
                 <div class="mb-3 flex flex-wrap gap-2">
                   {categories.map((cat: string) => (
-                    <span class="inline-block rounded-full bg-green-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-green-700">
+                    <span class="inline-block rounded-full bg-green-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-green-700 dark:bg-emerald-900/40 dark:text-emerald-200">
                       {cat}
                     </span>
                   ))}
                 </div>
 
                 {/* Title */}
-                <h2 class="mb-3 text-xl font-bold leading-tight text-gray-900 transition-colors duration-200 group-hover:text-green-600">
+                <h2 class="mb-3 text-xl font-bold leading-tight text-gray-900 transition-colors duration-200 group-hover:text-green-600 dark:text-zinc-100 dark:group-hover:text-green-400">
                   {post.data.title}
                 </h2>
 
                 {/* Description */}
                 {post.data.description && (
-                  <p class="mb-4 flex-1 text-sm leading-relaxed text-gray-600">
+                  <p class="mb-4 flex-1 text-sm leading-relaxed text-gray-600 dark:text-zinc-100">
                     {post.data.description}
                   </p>
                 )}
 
                 {/* Date */}
-                <time class="text-xs font-medium uppercase tracking-wide text-gray-400">
+                <time class="text-xs font-medium uppercase tracking-wide text-gray-400 dark:text-zinc-100">
                   {formatter.format(post.data.publishDate)}
                 </time>
               </div>

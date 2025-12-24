@@ -35,7 +35,7 @@ export const FooterSection: React.FC = () => {
     }
   }, [])
   return (
-    <footer className="w-full border-t-4 border-gray-200 bg-zinc-100 py-8 text-sm text-gray-700">
+    <footer className="w-full border-t-4 border-gray-200 bg-zinc-100 py-8 text-sm text-gray-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
       <div className="container">
         <div className="flex items-center justify-between">
           <div>
@@ -43,7 +43,7 @@ export const FooterSection: React.FC = () => {
               <img
                 src="/assets/images/websitelogonobackground.png"
                 alt="Logo"
-                className="h-10 w-10"
+                className="h-10 w-10 dark:invert"
               />
             </a>
           </div>
@@ -53,7 +53,7 @@ export const FooterSection: React.FC = () => {
               <a
                 key={routes.title}
                 href={routes.route}
-                className="font-serif text-lg font-black tracking-tight text-black transition duration-300 hover:text-zinc-500"
+                className="font-serif text-lg font-black tracking-tight text-black transition duration-300 hover:text-zinc-500 dark:text-zinc-100 dark:hover:text-zinc-400"
               >
                 {routes.title}
               </a>
@@ -63,7 +63,10 @@ export const FooterSection: React.FC = () => {
         <div className="mt-4 items-center justify-between md:flex">
           <p>
             &copy; {new Date().getFullYear()} Maverick Espinosa. Site made with{" "}
-            <a href="https://astro.build/" className="underline hover:text-blue-600">
+            <a
+              href="https://astro.build/"
+              className="underline hover:text-blue-600 dark:hover:text-blue-400"
+            >
               Astro
             </a>
             .
@@ -75,7 +78,7 @@ export const FooterSection: React.FC = () => {
                 href={icons.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex size-10 items-center justify-center rounded-full bg-zinc-300 transition hover:bg-zinc-400"
+                className="inline-flex size-10 items-center justify-center rounded-full bg-zinc-300 transition hover:bg-zinc-400 dark:bg-zinc-700 dark:hover:bg-zinc-600"
                 aria-label="Social link"
               >
                 {icons.icon}
@@ -87,13 +90,13 @@ export const FooterSection: React.FC = () => {
         <button
           id="scrollTopBtn"
           aria-label="Scroll to top"
-          className="pointer-events-none fixed bottom-24 left-1/2 z-50 -translate-x-1/2 -translate-y-4 rounded-full border border-gray-200 bg-white p-3 opacity-0 shadow-lg transition-all duration-300"
+          className="pointer-events-none fixed bottom-24 left-1/2 z-50 -translate-x-1/2 -translate-y-4 rounded-full border border-gray-200 bg-white p-3 opacity-0 shadow-lg transition-all duration-300 dark:border-zinc-800 dark:bg-zinc-900"
           title="Back to top"
           type="button"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 text-gray-700"
+            className="h-6 w-6 text-gray-700 dark:text-zinc-200"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

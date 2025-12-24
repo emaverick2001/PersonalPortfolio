@@ -13,7 +13,7 @@ export default function ProjectAccordion() {
         <div
           key={projectIndex}
           className={twMerge(
-            "w-full cursor-pointer rounded-3xl border border-solid border-[#222222]/10 bg-white p-8 shadow-[0_7px_14px_#EAEAEA] transition duration-200 hover:bg-zinc-200",
+            "w-full cursor-pointer rounded-3xl border border-solid border-[#222222]/10 bg-white p-8 text-zinc-900 shadow-[0_7px_14px_#EAEAEA] transition duration-200 hover:bg-zinc-200 dark:border-zinc-800/60 dark:bg-zinc-800 dark:text-zinc-100 dark:shadow-[0_7px_14px_#0F0F0F] dark:hover:bg-zinc-700",
           )}
           onClick={() => {
             setSelectedIndex(projectIndex)
@@ -33,7 +33,7 @@ export default function ProjectAccordion() {
             <h3 className="text-xl font-bold">{project.name}</h3>
             <Triangle
               className={twMerge(
-                "h-5 w-5 flex-shrink-0 rotate-90 fill-black transition duration-300",
+                "h-5 w-5 flex-shrink-0 rotate-90 fill-black transition duration-300 dark:fill-zinc-100",
                 selectedIndex === projectIndex && "rotate-180",
               )}
             />
@@ -55,13 +55,15 @@ export default function ProjectAccordion() {
                 }}
                 className={twMerge("mt-6 overflow-hidden")}
               >
-                <p className="mb-4 text-base font-medium text-black">{project.desc}</p>
+                <p className="mb-4 text-base font-medium text-zinc-700 dark:text-zinc-200">
+                  {project.desc}
+                </p>
                 <div className="mb-1 mt-6 flex flex-col flex-wrap items-center gap-3 lg:flex-row lg:items-start lg:justify-start">
                   <a
                     href={`/projects/${slugify(project.name)}/`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex w-auto items-center gap-2 rounded-full bg-zinc-100 px-3 py-3 text-base font-medium text-black shadow transition hover:bg-zinc-200"
+                    className="inline-flex w-auto items-center gap-2 rounded-full bg-zinc-100 px-3 py-3 text-base font-medium text-black shadow transition hover:bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
                   >
                     <BookMarkedIcon className="h-5 w-5" />
                     Learn More
@@ -71,7 +73,7 @@ export default function ProjectAccordion() {
                       href={project.projectLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex w-auto items-center gap-2 rounded-full bg-zinc-100 px-3 py-3 text-base font-medium text-black shadow transition hover:bg-zinc-200"
+                      className="inline-flex w-auto items-center gap-2 rounded-full bg-zinc-100 px-3 py-3 text-base font-medium text-black shadow transition hover:bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
                     >
                       <RadioIcon className="h-5 w-5" />
                       Live Demo
@@ -82,7 +84,7 @@ export default function ProjectAccordion() {
                       href={project.sourceCode}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex w-auto items-center gap-2 rounded-full bg-zinc-100 px-3 py-3 text-base font-medium text-black shadow transition hover:bg-zinc-200"
+                      className="inline-flex w-auto items-center gap-2 rounded-full bg-zinc-100 px-3 py-3 text-base font-medium text-black shadow transition hover:bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
                     >
                       <CodeIcon className="h-5 w-5" />
                       Source Code

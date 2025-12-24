@@ -17,13 +17,23 @@ const description = Astro.props.description ?? "Software Engineer, Music Produce
 <html lang="en">
   <head>
     <Head {title} {description} />
+    <script>
+      (() => {
+        const savedTheme = localStorage.getItem("theme")
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+        const shouldBeDark = savedTheme ? savedTheme === "dark" : prefersDark
+        if (shouldBeDark) {
+          document.documentElement.classList.add("dark")
+        }
+      })()
+    </script>
     <PostHog />
   </head>
 
   <body>
     <HeaderSection client:load />
     <main
-      class="relative isolate max-w-screen-lg overflow-hidden bg-zinc-50 px-6 pb-4 pt-2 font-serif text-lg text-zinc-900 md:mx-auto"
+      class="relative isolate max-w-screen-lg overflow-hidden bg-zinc-50 px-6 pb-4 pt-2 font-serif text-lg text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100 md:mx-auto"
     >
       <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
         <div

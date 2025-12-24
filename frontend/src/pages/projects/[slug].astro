@@ -19,10 +19,10 @@ if (!project) {
 ---
 
 <SiteLayout title={project.name}>
-  <section class="max-w-screen-lg px-6 pb-4 pt-2 font-serif text-lg text-zinc-900 md:mx-auto">
+  <section class="max-w-screen-lg px-6 pb-4 pt-2 font-serif text-lg text-zinc-900 dark:text-zinc-100 md:mx-auto">
     <div class="flex flex-col items-center text-center">
       <h1 class="mb-4 text-3xl font-bold md:text-5xl">{project.name}</h1>
-      <p class="mb-4 text-lg text-gray-700">{project.desc}</p>
+      <p class="mb-4 text-lg text-gray-700 dark:text-zinc-300">{project.desc}</p>
       {
         project.image && (
           <img
@@ -37,7 +37,7 @@ if (!project) {
           href={project.projectLink}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex w-auto items-center gap-1 rounded-full bg-zinc-100 px-3 py-2 text-base font-medium text-black shadow transition hover:bg-zinc-200"
+          class="inline-flex w-auto items-center gap-1 rounded-full bg-zinc-100 px-3 py-2 text-base font-medium text-black shadow transition hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
         >
           <RadioIcon className="h-5 w-5" />
           Live Demo
@@ -46,14 +46,14 @@ if (!project) {
           href={project.sourceCode}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex w-auto items-center gap-1 rounded-full bg-zinc-100 px-3 py-2 text-base font-medium text-black shadow transition hover:bg-zinc-200"
+          class="inline-flex w-auto items-center gap-1 rounded-full bg-zinc-100 px-3 py-2 text-base font-medium text-black shadow transition hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
         >
           <CodeIcon className="h-5 w-5" />
           Source Code
         </a>
       </div>
     </div>
-    <div class="mb-6 mt-6 border-t-4 border-gray-200"></div>
+    <div class="mb-6 mt-6 border-t-4 border-gray-200 dark:border-zinc-200 rounded-lg"></div>
     {
       project.overview && (
         <div>

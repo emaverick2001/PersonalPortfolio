@@ -19,12 +19,16 @@ const formatter = new Intl.DateTimeFormat("en", { dateStyle: "full", timeZone: "
 
 <!-- TODO: it'd be cool to have some tagline or something to use as the meta description -->
 <SiteLayout title={entry.data.title} description={entry.data.description ?? ""}>
-  <h1 class="mb-2 font-sans text-3xl font-bold tracking-tight">{entry.data.title}</h1>
-  <p class="mb-2 tracking-tight text-zinc-600">{formatter.format(entry.data.publishDate)}</p>
+  <h1 class="mb-2 font-sans text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+    {entry.data.title}
+  </h1>
+  <p class="mb-2 tracking-tight text-zinc-600 dark:text-zinc-400">
+    {formatter.format(entry.data.publishDate)}
+  </p>
   <div class="mb-6">
     {
       (entry.data.categories || ["Reflection"]).map((cat: string) => (
-        <span class="inline-block rounded-full bg-green-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-green-700">
+        <span class="inline-block rounded-full bg-green-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-green-700 dark:bg-emerald-900/40 dark:text-emerald-200">
           {cat}
         </span>
       ))
@@ -37,7 +41,7 @@ const formatter = new Intl.DateTimeFormat("en", { dateStyle: "full", timeZone: "
   />
 
   <article
-    class="prose prose-zinc max-w-none lg:prose-lg prose-headings:font-sans prose-code:before:hidden prose-code:after:hidden"
+    class="prose prose-zinc max-w-none lg:prose-lg prose-headings:font-sans prose-code:before:hidden prose-code:after:hidden dark:prose-invert"
   >
     <Content />
   </article>

@@ -15,7 +15,7 @@ import SiteLayout from "@layouts/SiteLayout.astro"
         href="assets/files/Resume_09_20_2025.pdf"
         target="_blank"
         rel="noopener noreferrer"
-        class="hidden w-auto items-center gap-2 rounded-full bg-zinc-100 px-3 py-1 text-base font-medium text-black shadow transition hover:bg-zinc-200 md:inline-flex"
+        class="hidden w-auto items-center gap-2 rounded-full bg-zinc-100 px-3 py-1 text-base font-medium text-black shadow transition hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700 md:inline-flex"
         onclick="if (window.posthog) {
           event.preventDefault();
           posthog.capture('doc_downloaded', { doc_name:'resume', location:'hero-desktop' });
@@ -31,13 +31,13 @@ import SiteLayout from "@layouts/SiteLayout.astro"
       <img
         src="/assets/images/headshot_500x500.webp"
         alt="Headshot"
-        class="w-70 mb-4 rounded-lg border border-solid border-[#222222]/10 shadow-[0_7px_14px_#EAEAEA] md:mb-0 md:h-64"
+        class="w-70 mb-4 rounded-lg border border-solid border-[#222222]/10 shadow-[0_7px_14px_#EAEAEA] dark:border-zinc-800/60 dark:shadow-[0_7px_14px_#0F0F0F] md:mb-0 md:h-64"
       />
       <a
         href="assets/files/Resume_09_20_2025.pdf"
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex w-auto items-center gap-2 rounded-full bg-zinc-100 px-3 py-1 text-base font-medium text-black shadow transition hover:bg-zinc-200 md:hidden"
+        class="inline-flex w-auto items-center gap-2 rounded-full bg-zinc-100 px-3 py-1 text-base font-medium text-black shadow transition hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700 md:hidden"
         onclick="if (window.posthog) {
           event.preventDefault();
           posthog.capture('doc_downloaded', { doc_name:'resume', location:'hero-mobile' });
@@ -51,14 +51,13 @@ import SiteLayout from "@layouts/SiteLayout.astro"
     </div>
   </section>
 
-  <div class="mb-6 mt-6 border-t-4 border-gray-200"></div>
   <section class="mb-4 ml-1 space-y-5">
     <h2 class="mb-2 font-sans text-3xl font-bold tracking-tight">About</h2>
     <p>
       Hi, I'm Maverick. I'm currently working on autonomous vessel data ingestion and parsing at
       <Link href="https://www.jhuapl.edu/">Johns Hopkins Applied Physics Lab</Link>, and have
       previously worked at <Link href="https://hopkinspsychedelic.org/"
-        >The Center for Psychedelic & Consciousness Research</Link
+      >The Center for Psychedelic & Consciousness Research</Link
       > at Johns Hopkins University. In the past, I led developers at <Link
         href="https://www.q2l.app/">Quest2Learn</Link
       > and worked at multiple startups: <Link href="https://www.wisecities.us/">WiseCities</Link>, <Link
@@ -97,8 +96,8 @@ import SiteLayout from "@layouts/SiteLayout.astro"
 
     <h2 class="mb-2 font-sans text-3xl font-bold tracking-tight">Now, Next, Interests</h2>
     <section class="mx-auto mt-8 grid max-w-3xl grid-cols-1 items-stretch gap-4 md:grid-cols-3">
-      <div class="h-full rounded-xl border border-zinc-200/70 bg-white p-4 shadow-sm">
-        <h3 class="text-sm font-semibold tracking-wide text-zinc-700">Now</h3>
+      <div class="h-full rounded-xl border border-zinc-200/70 bg-white p-4 text-zinc-900 shadow-sm dark:border-zinc-800/60 dark:bg-zinc-800 dark:text-zinc-100">
+        <h3 class="text-sm font-semibold tracking-wide text-zinc-700 dark:text-zinc-300">Now</h3>
         <ul
           class="mt-2 list-none space-y-1 break-words pl-0 text-sm leading-relaxed md:list-disc md:pl-5"
         >
@@ -107,8 +106,8 @@ import SiteLayout from "@layouts/SiteLayout.astro"
           <li>Data Management + Automation pipelines for Psychological research @CPCR</li>
         </ul>
       </div>
-      <div class="h-full rounded-xl border border-zinc-200/70 bg-white p-4 shadow-sm">
-        <h3 class="text-sm font-semibold tracking-wide text-zinc-700">Next</h3>
+      <div class="h-full rounded-xl border border-zinc-200/70 bg-white p-4 text-zinc-900 shadow-sm dark:border-zinc-800/60 dark:bg-zinc-800 dark:text-zinc-100">
+        <h3 class="text-sm font-semibold tracking-wide text-zinc-700 dark:text-zinc-300">Next</h3>
         <ul
           class="mt-2 list-none space-y-1 break-words pl-0 text-sm leading-relaxed md:list-disc md:pl-5"
         >
@@ -117,8 +116,8 @@ import SiteLayout from "@layouts/SiteLayout.astro"
           <li>Visual explainers/diagrams for learning</li>
         </ul>
       </div>
-      <div class="h-full rounded-xl border border-zinc-200/70 bg-white p-4 shadow-sm">
-        <h3 class="text-sm font-semibold tracking-wide text-zinc-700">Interests</h3>
+      <div class="h-full rounded-xl border border-zinc-200/70 bg-white p-4 text-zinc-900 shadow-sm dark:border-zinc-800/60 dark:bg-zinc-800 dark:text-zinc-100">
+        <h3 class="text-sm font-semibold tracking-wide text-zinc-700 dark:text-zinc-300">Interests</h3>
         <ul
           class="mt-2 list-none space-y-1 break-words pl-0 text-sm leading-relaxed md:list-disc md:pl-5"
         >
@@ -131,20 +130,20 @@ import SiteLayout from "@layouts/SiteLayout.astro"
 
     <h2 class="mb-2 font-sans text-3xl font-bold tracking-tight">Quick Facts</h2>
     <section class="mx-auto mt-8 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-2">
-      <div class="rounded-lg border border-zinc-200/70 bg-white p-4 shadow-sm">
-        <p class="text-sm font-semibold text-zinc-700">Location</p>
+      <div class="rounded-lg border border-zinc-200/70 bg-white p-4 text-zinc-900 shadow-sm dark:border-zinc-800/60 dark:bg-zinc-800 dark:text-zinc-100">
+        <p class="text-sm font-semibold text-zinc-700 dark:text-zinc-300">Location</p>
         <p class="font-medium">Phoenix ⇄ Baltimore ⇄ Urbana-Champaign</p>
       </div>
-      <div class="rounded-lg border border-zinc-200/70 bg-white p-4 shadow-sm">
-        <p class="text-sm font-semibold text-zinc-700">Focus Areas</p>
+      <div class="rounded-lg border border-zinc-200/70 bg-white p-4 text-zinc-900 shadow-sm dark:border-zinc-800/60 dark:bg-zinc-800 dark:text-zinc-100">
+        <p class="text-sm font-semibold text-zinc-700 dark:text-zinc-300">Focus Areas</p>
         <p class="font-medium">• Soft + Data Eng • Sys Design • IR/Data Mining • GraphNN/Agents</p>
       </div>
-      <div class="rounded-lg border border-zinc-200/70 bg-white p-4 shadow-sm">
-        <p class="text-sm font-semibold text-zinc-700">Roles</p>
+      <div class="rounded-lg border border-zinc-200/70 bg-white p-4 text-zinc-900 shadow-sm dark:border-zinc-800/60 dark:bg-zinc-800 dark:text-zinc-100">
+        <p class="text-sm font-semibold text-zinc-700 dark:text-zinc-300">Roles</p>
         <p class="font-medium">Software + Data Engineer, Data Analyst, Research Assistant</p>
       </div>
-      <div class="rounded-lg border border-zinc-200/70 bg-white p-4 shadow-sm">
-        <p class="text-sm font-semibold text-zinc-700">Values</p>
+      <div class="rounded-lg border border-zinc-200/70 bg-white p-4 text-zinc-900 shadow-sm dark:border-zinc-800/60 dark:bg-zinc-800 dark:text-zinc-100">
+        <p class="text-sm font-semibold text-zinc-700 dark:text-zinc-300">Values</p>
         <p class="font-medium">Personalization, Curiosity, Communication, Organization</p>
       </div>
     </section>
@@ -153,13 +152,13 @@ import SiteLayout from "@layouts/SiteLayout.astro"
     <!-- Timeline container: creates the vertical line in the gutter -->
     <div class="relative pl-1.5">
       <!-- vertical line runs from first to last item -->
-      <div class="pointer-events-none absolute bottom-0 left-3 top-0 z-0 w-px bg-zinc-200"></div>
+      <div class="pointer-events-none absolute bottom-0 left-3 top-0 z-0 w-px bg-zinc-200 dark:bg-zinc-700"></div>
 
       <ul class="space-y-6">
         <!-- Item 1 -->
         <li class="grid grid-cols-[1rem_auto] gap-4">
           <!-- dot lives in the fixed gutter column; no absolute positioning -->
-          <span class="z-10 mt-1 h-3 w-3 rounded-full bg-zinc-400"></span>
+          <span class="z-10 mt-1 h-3 w-3 rounded-full bg-zinc-400 dark:bg-zinc-500"></span>
 
           <div>
             <p class="font-medium">JHU Applied Physics Lab — Part-time SWE/DE</p>
@@ -168,7 +167,7 @@ import SiteLayout from "@layouts/SiteLayout.astro"
 
         <!-- Item 2 -->
         <li class="grid grid-cols-[1rem_auto] gap-4">
-          <span class="z-10 mt-1 h-3 w-3 rounded-full bg-zinc-400"></span>
+          <span class="z-10 mt-1 h-3 w-3 rounded-full bg-zinc-400 dark:bg-zinc-500"></span>
           <div>
             <p class="font-medium">JHU CPCR — Data Engineering</p>
           </div>
@@ -176,7 +175,7 @@ import SiteLayout from "@layouts/SiteLayout.astro"
 
         <!-- Item 3 -->
         <li class="grid grid-cols-[1rem_auto] gap-4">
-          <span class="z-10 mt-1 h-3 w-3 rounded-full bg-zinc-400"></span>
+          <span class="z-10 mt-1 h-3 w-3 rounded-full bg-zinc-400 dark:bg-zinc-500"></span>
           <div>
             <p class="font-medium">Quest2Learn • WiseCities • PactSpace • VisualScore</p>
           </div>
@@ -210,7 +209,7 @@ import SiteLayout from "@layouts/SiteLayout.astro"
           "MIDI/VST",
           "WebAudio API",
         ].map((t) => (
-          <span class="rounded-full bg-zinc-100 px-3 py-1 text-sm text-zinc-800 shadow-sm">
+          <span class="rounded-full bg-zinc-100 px-3 py-1 text-sm text-zinc-800 shadow-sm dark:bg-zinc-800 dark:text-zinc-100">
             {t}
           </span>
         ))

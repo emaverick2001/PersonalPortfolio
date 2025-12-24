@@ -6,16 +6,15 @@ import { PageHeader } from "@components/PageHeader.tsx"
 
 <SiteLayout title="Research">
   <PageHeader id="research">Research</PageHeader>
-  <div class="mb-6 border-t-4 border-gray-200"></div>
+  <div class="mb-6 border-t-4 border-black dark:border-zinc-200 rounded-lg"></div>
   <Page>
     <h2 class="mb-2 font-sans text-3xl font-bold tracking-tight">Research Interests</h2>
     <div
-      class="mb-6 rounded-lg border-l-4 border-blue-400 bg-white p-4 shadow-[0_7px_14px_#EAEAEA]"
+      class="mb-6 rounded-lg bg-white dark:bg-zinc-800 p-4 dark:shadow-[0_7px_14px_#EAEAEA] shadow-[0_7px_14px_#0F0F0F]"
     >
-      <p class="text-black">
+      <p class="dark:text-zinc-100">
         My research interests lie at the intersection of <strong>Graph Neural Networks</strong>, <strong
-          >Agentic AI Systems</strong
-        >, and <strong>Data Engineering</strong>. I’m drawn to problems that require bridging
+        >Agentic AI Systems</strong>, and <strong>Data Engineering</strong>. I’m drawn to problems that require bridging
         structured data processing with intelligent reasoning systems — enabling more robust,
         personalized, and explainable learning experiences. My current work spans from graph-based
         retrieval systems to data automation pipelines for clinical research.
@@ -24,11 +23,11 @@ import { PageHeader } from "@components/PageHeader.tsx"
 
     <h2 class="mb-2 font-sans text-3xl font-bold tracking-tight">Research Trajectory</h2>
     <div
-      class="mb-6 rounded-lg border-l-4 border-blue-400 bg-white p-4 shadow-[0_7px_14px_#EAEAEA]"
+      class="mb-6 rounded-lg bg-white dark:bg-zinc-800 p-4 dark:shadow-[0_7px_14px_#EAEAEA] shadow-[0_7px_14px_#0F0F0F]"
     >
-      <p class="text-black">
+      <p class="dark:text-zinc-100">
         My long-term research vision focuses on building <strong
-          >graph-based intelligent systems</strong
+        >graph-based intelligent systems</strong
         > capable of structured reasoning, multi-hop retrieval, and personalized interaction. I’m especially
         excited by opportunities that bridge machine learning, data engineering, and human-centered design
         — whether in education, research, or healthcare contexts.
@@ -73,15 +72,14 @@ import { PageHeader } from "@components/PageHeader.tsx"
     <h3 class="mb-2 font-sans text-xl font-bold tracking-tight">QA Library</h3>
     <p class="mb-4">
       A centralized Python library that automates scoring for over <strong
-        >100+ questionnaires and psychometric measures</strong
+      >100+ questionnaires and psychometric measures</strong
       > used in CPCR studies. It ensures reproducibility, version control, and harmonization of data
       across multiple clinical protocols.
     </p>
 
     <h3 class="mb-2 font-sans text-xl font-bold tracking-tight">PHI Redactor</h3>
     <p class="mb-4">
-      A pipeline that <strong
-        >automatically detects and redacts Protected Health Information (PHI)</strong
+      A pipeline that <strong>automatically detects and redacts Protected Health Information (PHI)</strong
       > from unstructured text and tabular datasets. This enables compliant downstream processing and
       model training on de-identified data.
     </p>
