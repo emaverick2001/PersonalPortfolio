@@ -6,6 +6,7 @@ import TagFilterSearchBar from "@components/TagFilterSearchBar.astro"
 import PaginationArrows from "@components/PaginationArrows.astro"
 import { getCollection } from "astro:content"
 import { BLOG_CATEGORIES } from "../../content/blogCategories"
+
 const posts = (await getCollection("blog")).sort(
   (postA, postB) => +postB.data.publishDate - +postA.data.publishDate,
 )
@@ -37,7 +38,6 @@ const formatter = new Intl.DateTimeFormat("en", {
 
 <SiteLayout title="Blog">
   <PageHeader>Posts</PageHeader>
-  <div class="mb-6 rounded-lg border-t-4 border-black dark:border-zinc-200"></div>
   <Page>
     <TagFilterSearchBar
       tags={tagList}
@@ -57,7 +57,7 @@ const formatter = new Intl.DateTimeFormat("en", {
           return (
             <a
               href={`/blog/${post.slug}/`}
-              class="group flex flex-col overflow-hidden rounded-lg bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg dark:bg-zinc-800 dark:text-zinc-100 dark:shadow-[0_7px_14px_#0F0F0F]"
+              class="group flex flex-col overflow-hidden rounded-lg bg-white transition duration-300 hover:-translate-y-1 hover:shadow-lg dark:bg-zinc-800 dark:text-zinc-100 dark:shadow-[0_7px_14px_#EAEAEA] shadow-[0_7px_14px_#0F0F0F]"
               data-post-card
               data-tags={categories.join("|")}
               data-search={searchText.toLowerCase()}
