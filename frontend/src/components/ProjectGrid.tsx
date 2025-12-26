@@ -13,7 +13,7 @@ export default function ProjectAccordion() {
         <div
           key={projectIndex}
           className={twMerge(
-            "w-full cursor-pointer rounded-3xl border border-solid border-[#222222]/10 bg-white p-8 text-zinc-900 shadow-[0_7px_14px_#0F0F0F] transition duration-200 hover:bg-zinc-200 dark:border-zinc-800/60 dark:bg-zinc-800 dark:text-zinc-100 dark:shadow-[0_7px_14px_#0F0F0F] dark:shadow-[0_7px_14px_#EAEAEA] dark:hover:bg-zinc-700",
+            "w-full cursor-pointer rounded-3xl border border-solid border-[#222222]/10 bg-white p-8 text-zinc-900 shadow-[0_7px_14px_#0F0F0F] transition duration-200 hover:bg-zinc-200 dark:border-zinc-800/60 dark:bg-zinc-800 dark:text-zinc-100 dark:shadow-[0_7px_14px_#EAEAEA] dark:hover:bg-zinc-700",
           )}
           onClick={() => {
             setSelectedIndex(projectIndex)

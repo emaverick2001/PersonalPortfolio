@@ -14,6 +14,9 @@
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,astro,md,mdx,json,css,html}\""
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.2.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "dotenv": "^17.2.3",
     "framer-motion": "^11.3.31",
     "lucide-react": "^0.546.0",
@@ -21,7 +24,8 @@
     "pre-commit": "^1.2.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "tailwind-merge": "^2.5.2"
+    "tailwind-merge": "^2.6.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.3",
