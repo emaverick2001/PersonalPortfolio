@@ -1,0 +1,33 @@
+---
+import Head from "@components/Head.astro"
+import { SignIn as ClerkSignIn } from "@clerk/astro/react"
+
+const title = "Sign In"
+const description = "Sign in to access admin."
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head {title} {description} />
+  </head>
+  <body class="min-h-screen bg-zinc-950 text-zinc-100">
+    <div class="flex min-h-screen items-center justify-center px-6 py-12">
+      <div class="relative w-full max-w-md">
+        <div
+          aria-hidden="true"
+          class="absolute -inset-10 -z-10 rounded-full bg-[radial-gradient(circle,rgba(59,130,246,0.25),transparent_60%)] blur-3xl"
+        >
+        </div>
+        <div class="rounded-3xl border border-zinc-800 bg-zinc-900/70 p-6 shadow-2xl">
+          <p class="text-xs uppercase tracking-[0.3em] text-zinc-500">Admin Access</p>
+          <h1 class="mt-2 text-2xl font-semibold tracking-tight text-white">Sign in</h1>
+          <p class="mt-2 text-sm text-zinc-400">Use your Clerk account to continue.</p>
+          <div class="mt-6">
+            <ClerkSignIn afterSignInUrl="/admin/" afterSignUpUrl="/admin/" client:load />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

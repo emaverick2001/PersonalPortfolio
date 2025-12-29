@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import { socialIcons } from "src/content/socials"
 import { navLink } from "src/content/navInfo"
 
+
 export const HeaderSection: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [isDark, setIsDark] = useState(false)

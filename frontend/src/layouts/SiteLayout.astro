@@ -4,11 +4,6 @@ import PostHog from "@components/PostHog.astro"
 import { HeaderSection } from "@components/Header"
 import { FooterSection } from "@components/Footer"
 
-interface Props {
-  title?: string
-  description?: string
-}
-
 const title = Astro.props.title ? `${Astro.props.title} | Maverick Espinosa` : "Maverick Espinosa"
 const description = Astro.props.description ?? "Software Engineer, Music Producer"
 ---
