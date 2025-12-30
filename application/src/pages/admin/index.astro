@@ -1,0 +1,53 @@
+---
+import AdminLayout from "@layouts/AdminLayout.astro"
+
+const cards = [
+  {
+    title: "Blog Posts",
+    description: "Draft, publish, and organize posts.",
+    href: "/admin/blogposts/",
+  },
+  {
+    title: "Projects",
+    description: "Manage portfolio projects and featured work.",
+    href: "/admin/projects/",
+  },
+  {
+    title: "Music",
+    description: "Track releases, playlists, and upcoming drops.",
+    href: "/admin/music/",
+  },
+  {
+    title: "Geography",
+    description: "Curate travel notes, places, and highlights.",
+    href: "/admin/geography/",
+  },
+]
+---
+
+<AdminLayout title="Dashboard">
+  <div class="space-y-6">
+    <div>
+      <p class="text-xs uppercase tracking-[0.35em] text-zinc-500">Admin Dashboard</p>
+      <h1 class="text-3xl font-semibold tracking-tight text-white">Overview</h1>
+      <p class="mt-2 text-sm text-zinc-400">Quick access to the content areas you manage most.</p>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-2">
+      {
+        cards.map((card) => (
+          <a
+            href={card.href}
+            class="group rounded-2xl border border-zinc-800 bg-zinc-950/40 p-5 transition hover:border-zinc-600"
+          >
+            <p class="text-lg font-semibold text-zinc-100">{card.title}</p>
+            <p class="mt-2 text-sm text-zinc-400">{card.description}</p>
+            <p class="mt-4 text-xs uppercase tracking-[0.3em] text-zinc-500 group-hover:text-zinc-300">
+              Open
+            </p>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</AdminLayout>

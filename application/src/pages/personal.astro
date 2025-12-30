@@ -1,0 +1,140 @@
+---
+import SiteLayout from "@layouts/SiteLayout.astro"
+import { Page } from "@components/Page"
+import { PageHeader } from "@components/PageHeader.tsx"
+import { Link } from "@components/Link"
+---
+
+<SiteLayout title="Personal">
+  <PageHeader id="personal">Personal</PageHeader>
+  <Page>
+    <!-- Background -->
+    <section class="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
+      <!-- text -->
+      <div class="space-y-3">
+        <h2 class="mb-2 font-sans text-2xl font-bold tracking-tight">Background</h2>
+        <p>
+          I’m <strong>Maverick Espinosa</strong>, a builder from Phoenix born in Dallas—curious,
+          process-driven, and happiest when I’m turning messy data into clear, useful systems. I
+          earned my B.S. in Computer Science at Johns Hopkins and I’m now pursuing my M.S. (MCS) at
+          the University of Illinois Urbana-Champaign as a
+          <Link href="https://www.gemfellowship.org/2025-gem-fellows/">
+            <strong>GEM Employer Fellow</strong>
+          </Link>.
+        </p>
+        <p>
+          My work sits at the intersection of <strong>data engineering</strong>, <strong
+            >information retrieval</strong
+          >, and <strong>learning tools</strong>. At Johns Hopkins CPCR I’ve automated REDCap-based
+          reporting and built pipelines that harmonize research data. At APL, I’ve supported
+          ingestion and analysis for autonomous vessels/telemetry workflows. Lately I’ve been
+          building a lightweight <strong>search engine + data catalog</strong> to make research data
+          discoverable and trustworthy.
+        </p>
+      </div>
+
+      <!-- logos (right) -->
+      <div
+        class="grid grid-cols-[repeat(3,theme(width.28))] justify-center gap-2 md:grid-cols-[repeat(3,theme(width.32))] md:gap-5 lg:grid-cols-[repeat(3,theme(width.36))]"
+      >
+        <figure class="logo-card">
+          <img
+            src="/assets/images/hopkinslogo.jpg"
+            alt="Johns Hopkins University"
+            class="logo-img"
+            loading="lazy"
+          />
+        </figure>
+        <figure class="logo-card">
+          <img
+            src="/assets/images/uiuclogo.jpg"
+            alt="University of Illinois Urbana-Champaign"
+            class="logo-img"
+            loading="lazy"
+          />
+        </figure>
+        <figure class="logo-card">
+          <img
+            src="/assets/images/gemlogo.jpg"
+            alt="GEM Fellowship"
+            class="logo-img"
+            loading="lazy"
+          />
+        </figure>
+      </div>
+    </section>
+
+    <!-- Fitness -->
+    <section class="grid grid-cols-1 place-items-center gap-10 lg:grid-cols-2">
+      <!-- text -->
+      <div>
+        <h2 class="mb-2 font-sans text-2xl font-bold tracking-tight">Fitness</h2>
+        <p class="mb-2">
+          When I am not coding or doing music, I like to decompress with weightlifting at the gym. I
+          currently follow a push–pull–legs split, and add accessory work to target specific
+          muscles. Check out my <Link
+            href="https://yielding-bucket-c99.notion.site/Fitness-TODO-a84d3236759a4ab085f4f6966a79c2fc?source=copy_link"
+            >workout planner template</Link
+          > on Notion!
+        </p>
+      </div>
+
+      <!-- one image (right) -->
+      <figure class="logo-card mx-auto md:mx-0">
+        <img src="/assets/images/notionlogo.jpg" alt="Notion" class="logo-img" loading="lazy" />
+      </figure>
+    </section>
+
+    <!-- Family -->
+    <section class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
+      <!-- text -->
+      <div>
+        <h2 class="mb-2 font-sans text-2xl font-bold tracking-tight">Family</h2>
+        <p>
+          I have 2 dogs, Buddy and Pikachu, and three lovely cats (Pecan and her kittens Walnut and
+          Pistachio) with my girlfriend
+          <Link href="https://www.linkedin.com/in/isabel-lopez-santiago/">
+            Isabel Lopez Santiago</Link
+          >.
+        </p>
+      </div>
+
+      <!-- 2-photo grid (right) -->
+      <div
+        class="grid justify-center gap-x-4 gap-y-5 sm:[grid-template-columns:repeat(2,theme(width.40))] md:grid-cols-[repeat(2,theme(width.64))] md:gap-x-5 lg:gap-x-5 lg:gap-y-5"
+      >
+        <figure
+          class="relative h-40 w-40 overflow-hidden rounded-xl bg-white shadow ring-1 ring-black/5 md:h-64 md:w-64"
+        >
+          <img
+            src="/assets/images/cats1.jpg"
+            alt="Cats"
+            class="absolute inset-0 h-full w-full object-cover"
+            loading="lazy"
+          />
+        </figure>
+        <figure
+          class="relative h-40 w-40 overflow-hidden rounded-xl bg-white shadow ring-1 ring-black/5 md:h-64 md:w-64"
+        >
+          <img
+            src="/assets/images/cats2.jpg"
+            alt="More cats"
+            class="absolute inset-0 h-full w-full object-cover"
+            loading="lazy"
+          />
+        </figure>
+        <!-- full-width on second row -->
+        <figure
+          class="relative col-span-2 h-52 w-52 justify-self-center overflow-hidden rounded-xl bg-white shadow ring-1 ring-black/5 md:h-72 md:w-72"
+        >
+          <img
+            src="/assets/images/dogs.jpg"
+            alt="Dogs"
+            class="absolute inset-0 h-full w-full object-cover"
+            loading="lazy"
+          />
+        </figure>
+      </div>
+    </section>
+  </Page>
+</SiteLayout>

@@ -1,0 +1,63 @@
+CREATE TABLE "blogs_table" (
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"title" text NOT NULL,
+	"description" text,
+	"content" text NOT NULL,
+	"image" text,
+	"slug" varchar(255) NOT NULL,
+	"categories" text[] NOT NULL,
+	"author" varchar(255) DEFAULT 'Maverick Espinosa' NOT NULL,
+	"publish_date" timestamp NOT NULL,
+	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"updated_at" timestamp NOT NULL,
+	CONSTRAINT "blogs_table_id_unique" UNIQUE("id"),
+	CONSTRAINT "blogs_table_title_unique" UNIQUE("title"),
+	CONSTRAINT "blogs_table_slug_unique" UNIQUE("slug")
+);
+--> statement-breakpoint
+CREATE TABLE "projects_table" (
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"name" varchar(255) NOT NULL,
+	"slug" varchar(255) NOT NULL,
+	"description" text NOT NULL,
+	"image" text,
+	"categories" text[] NOT NULL,
+	"source_code" text,
+	"project_link" text,
+	"publish_date" timestamp NOT NULL,
+	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"updated_at" timestamp NOT NULL,
+	"overview" text,
+	"features" text[],
+	"how_it_works" text,
+	"directory_structure" text,
+	"usage" text[],
+	"important_notes" text[],
+	"text_icon" text,
+	"tech_and_dependencies" text,
+	"getting_started" text,
+	"contributions" text,
+	"license" varchar(255),
+	"credits" text,
+	"acknowledgements" text[],
+	CONSTRAINT "projects_table_id_unique" UNIQUE("id"),
+	CONSTRAINT "projects_table_name_unique" UNIQUE("name"),
+	CONSTRAINT "projects_table_slug_unique" UNIQUE("slug")
+);
+--> statement-breakpoint
+CREATE TABLE "songs_table" (
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"title" text NOT NULL,
+	"image" text,
+	"categories" text[] NOT NULL,
+	"slug" varchar(255) NOT NULL,
+	"features" varchar(255),
+	"href_link" text NOT NULL,
+	"thumbnail_link" text,
+	"publish_date" timestamp NOT NULL,
+	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
+	"updated_at" timestamp NOT NULL,
+	CONSTRAINT "songs_table_id_unique" UNIQUE("id"),
+	CONSTRAINT "songs_table_title_unique" UNIQUE("title"),
+	CONSTRAINT "songs_table_slug_unique" UNIQUE("slug")
+);

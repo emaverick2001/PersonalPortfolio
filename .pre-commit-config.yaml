@@ -15,8 +15,8 @@ repos:
   #   rev: v3.0.1
   #   hooks:
   #     - id: prettier
-  #       files: "^frontend/"
-  #       exclude: "^frontend/node_modules/"
+  #       files: "^application/"
+  #       exclude: "^application/node_modules/"
 
   # backend linting
   - repo: https://github.com/astral-sh/ruff-pre-commit
@@ -35,21 +35,21 @@ repos:
           - types-setuptools
           - types-pyyaml
 
-  # frontend linting
+  # application linting
   - repo: local
     hooks:
       - id: pnpm-lint
         name: "pnpm: lint"
-        entry: bash -c 'cd frontend && pnpm run lint'
+        entry: bash -c 'cd application && pnpm run lint'
         language: system
         pass_filenames: false
-        files: "frontend/"
+        files: "application/"
       - id: typecheck
         name: TypeScript Type Check
-        entry: bash -c 'cd frontend && pnpm run typecheck'
+        entry: bash -c 'cd application && pnpm run typecheck'
         language: system
         pass_filenames: false
-        files: "frontend/"
+        files: "application/"
 
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.8.0
@@ -66,10 +66,10 @@ repos:
       - id: codespell
         args:
           [
-            --skip="frontend/src/content/blog,
-            frontend/src/content/inspirations.ts",
+            --skip="application/src/content/blog,
+            application/src/content/inspirations.ts",
           ]
-        exclude: ^frontend/src/content/blog/
+        exclude: ^application/src/content/blog/
         stages: [manual]
 
   # Commit message check

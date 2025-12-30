@@ -7,8 +7,8 @@ echo ""
 # Get the root directory (parent of scripts directory)
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)" || exit 1
 
-# Navigate to the frontend directory
-cd "$ROOT_DIR/frontend" || exit 1
+# Navigate to the application directory
+cd "$ROOT_DIR/application" || exit 1
 
 # 1. Type checking with TypeScript
 echo "📋 Type checking with TypeScript..."

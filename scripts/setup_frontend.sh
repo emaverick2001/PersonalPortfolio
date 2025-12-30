@@ -11,7 +11,7 @@ if ! command -v pnpm >/dev/null 2>&1; then
 fi
 
 # Move to frontend folder (relative to repo root)
-cd "$(dirname "$0")/../frontend" || exit
+cd "$(dirname "$0")/../application" || exit
 
 # Install frontend deps if needed
 if [ ! -d "node_modules" ] || [ "package.json" -nt "node_modules" ]; then

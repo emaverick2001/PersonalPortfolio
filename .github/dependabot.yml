@@ -2,7 +2,7 @@ version: 2
 updates:
   # Update npm dependencies in the frontend directory
   - package-ecosystem: "npm"
-    directory: "/frontend"
+    directory: "/application"
     schedule:
       interval: "weekly"
       day: "monday"
@@ -27,7 +27,7 @@ updates:
 
   # Update Tailwind CSS dependencies
   - package-ecosystem: "npm"
-    directory: "/frontend"
+    directory: "/application"
     schedule:
       interval: "weekly"
     allow:
@@ -35,7 +35,7 @@ updates:
 
   # Update pnpm lockfile
   - package-ecosystem: "npm"
-    directory: "/frontend"
+    directory: "/application"
     schedule:
       interval: "weekly"
     ignore:
