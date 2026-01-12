@@ -10,6 +10,7 @@
     "preview": "astro preview",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit push",
+    "db:seed:blogs": "node ./scripts/seed-blog-posts.mjs",
     "db:studio": "drizzle-kit studio",
     "db:drop": "drizzle-kit drop",
     "db:introspect": "drizzle-kit introspect",

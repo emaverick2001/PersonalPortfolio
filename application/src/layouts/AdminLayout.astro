@@ -5,11 +5,31 @@ import { UserButton } from "@clerk/astro/react"
 const title = Astro.props.title ? `${Astro.props.title} | Admin` : "Admin"
 const description = Astro.props.description ?? "Admin dashboard"
 const navItems = [
-  { label: "Dashboard", href: "/admin/" },
-  { label: "Blog Posts", href: "/admin/blogposts/" },
-  { label: "Projects", href: "/admin/projects/" },
-  { label: "Music", href: "/admin/music/" },
-  { label: "Geography", href: "/admin/geography/" },
+  {
+    label: "Dashboard",
+    href: "/admin/",
+    icon: "M4 4h7v7H4z M4 13h7v7H4z M13 4h7v7h-7z M13 13h7v7h-7z",
+  },
+  {
+    label: "Blog Posts",
+    href: "/admin/blogposts/",
+    icon: "M6 4h8l4 4v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z M14 4v4h4",
+  },
+  {
+    label: "Projects",
+    href: "/admin/projects/",
+    icon: "M4 7a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7z",
+  },
+  {
+    label: "Music",
+    href: "/admin/music/",
+    icon: "M9 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4z M19 16V6l-8 2v10",
+  },
+  {
+    label: "Geography",
+    href: "/admin/geography/",
+    icon: "M12 21s6-4.4 6-10a6 6 0 1 0-12 0c0 5.6 6 10 6 10z M12 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4z",
+  },
 ]
 ---
 
@@ -17,38 +37,205 @@ const navItems = [
 <html lang="en">
   <head>
     <Head {title} {description} />
+    <script>
+      ;(() => {
+        const savedTheme = localStorage.getItem("theme")
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+        const shouldBeDark = savedTheme ? savedTheme === "dark" : prefersDark
+        if (shouldBeDark) {
+          document.documentElement.classList.add("dark")
+        }
+      })()
+    </script>
   </head>
-  <body class="min-h-screen bg-zinc-950 text-zinc-100">
-    <div class="border-b border-zinc-800 bg-zinc-950/70 backdrop-blur">
-      <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <div>
-          <p class="text-xs uppercase tracking-[0.35em] text-zinc-400">Admin</p>
-          <p class="text-lg font-semibold tracking-tight">Maverick Espinosa</p>
+  <body class="min-h-screen bg-zinc-100 text-zinc-900 dark:bg-[#0b0f14] dark:text-zinc-100">
+    <div id="admin-shell" data-sidebar="open" class="relative min-h-screen overflow-hidden">
+      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.18),_transparent_55%),radial-gradient(circle_at_25%_35%,_rgba(15,118,110,0.2),_transparent_50%)] opacity-60 dark:opacity-100"></div>
+
+      <header class="sticky top-0 z-30 border-b border-zinc-200 bg-white/80 backdrop-blur dark:border-white/10 dark:bg-[#0b0f14]/85">
+        <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-4">
+          <div class="flex items-center gap-3">
+            <button
+              class="flex h-10 w-10 items-center justify-center rounded-2xl border border-zinc-200 bg-white text-zinc-700 transition hover:text-zinc-900 dark:border-white/10 dark:bg-white/5 dark:text-zinc-200 dark:hover:text-white"
+              aria-label="Toggle navigation"
+              aria-expanded="true"
+              aria-controls="admin-sidebar"
+              data-sidebar-toggle
+            >
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor">
+                <path d="M4 7h16 M4 12h16 M4 17h16" stroke-width="1.6" stroke-linecap="round" />
+              </svg>
+            </button>
+          </div>
+          <div class="flex items-center gap-3">
+            <button
+              class="flex h-10 w-10 items-center justify-center rounded-2xl border border-zinc-200 bg-white text-zinc-600 transition hover:text-zinc-900 dark:border-white/10 dark:bg-white/5 dark:text-zinc-300 dark:hover:text-white"
+              aria-label="Search"
+            >
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor">
+                <path
+                  d="M21 21l-4.35-4.35 M19 11a8 8 0 1 1-16 0 8 8 0 0 1 16 0z"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
+            <button
+              class="flex h-10 w-10 items-center justify-center rounded-2xl border border-zinc-200 bg-white text-zinc-600 transition hover:text-zinc-900 dark:border-white/10 dark:bg-white/5 dark:text-zinc-300 dark:hover:text-white"
+              aria-label="Open notifications"
+            >
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor">
+                <path
+                  d="M15 17H9a4 4 0 0 0 6 0z M18 9a6 6 0 1 0-12 0c0 5-2 6-2 6h16s-2-1-2-6z"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <button
+              class="flex h-10 w-10 items-center justify-center rounded-2xl border border-zinc-200 bg-white text-zinc-600 transition hover:text-zinc-900 dark:border-white/10 dark:bg-white/5 dark:text-zinc-300 dark:hover:text-white"
+              aria-label="Toggle light and dark mode"
+              data-theme-toggle
+            >
+              <svg viewBox="0 0 24 24" class="h-5 w-5 dark:hidden" fill="none" stroke="currentColor">
+                <path
+                  d="M12 3v2 M12 19v2 M5 12H3 M21 12h-2 M6.5 6.5 5 5 M19 19l-1.5-1.5 M17.5 6.5 19 5 M5 19l1.5-1.5 M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+              </svg>
+              <svg viewBox="0 0 24 24" class="hidden h-5 w-5 dark:block" fill="none" stroke="currentColor">
+                <path
+                  d="M21 14.5A8.5 8.5 0 0 1 9.5 3a7 7 0 1 0 11.5 11.5z"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <div class="rounded-2xl border border-zinc-200 bg-white px-2 py-1 dark:border-white/10 dark:bg-white/5">
+              <UserButton client:load />
+            </div>
+          </div>
         </div>
-        <UserButton client:load />
+      </header>
+
+      <button
+        class="admin-overlay"
+        type="button"
+        aria-label="Close navigation"
+        data-sidebar-close
+      ></button>
+
+      <div class="relative mx-auto flex max-w-7xl flex-col gap-6 px-6 py-6 md:flex-row">
+        <aside
+          id="admin-sidebar"
+          class="admin-sidebar relative z-30 flex w-full shrink-0 flex-col gap-6 rounded-3xl border border-zinc-200 bg-white p-5 shadow-[0_20px_60px_-45px_rgba(15,23,42,0.35)] backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-[0_20px_60px_-45px_rgba(15,23,42,0.8)] md:w-60"
+        >
+          <div>
+            <p class="text-xs uppercase tracking-[0.3em] text-zinc-500 dark:text-zinc-400">Navigation</p>
+            <p class="mt-2 text-sm font-semibold text-zinc-900 dark:text-white">Content Controls</p>
+          </div>
+          <nav class="flex flex-1 flex-wrap gap-2 text-sm md:flex-col md:flex-nowrap">
+            {
+              navItems.map((item) => (
+                <a
+                  href={item.href}
+                  class="group flex items-center gap-3 rounded-2xl px-3 py-2 text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-white/10 dark:hover:text-white"
+                >
+                  <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-100 text-zinc-500 transition group-hover:bg-zinc-200 dark:bg-white/5 dark:text-white/60 dark:group-hover:bg-white/10">
+                    <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor">
+                      <path d={item.icon} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </span>
+                  <span>{item.label}</span>
+                </a>
+              ))
+            }
+          </nav>
+          <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-4 text-xs text-zinc-600 dark:border-white/10 dark:bg-white/5 dark:text-zinc-300">
+            <p class="text-[11px] uppercase tracking-[0.3em] text-zinc-500 dark:text-zinc-400">Status</p>
+            <p class="mt-2 text-sm font-semibold text-zinc-900 dark:text-white">All systems normal</p>
+            <p class="mt-1 text-zinc-500 dark:text-zinc-400">Last update: 10 min ago</p>
+          </div>
+        </aside>
+
+        <div class="flex min-w-0 flex-1 flex-col gap-6">
+          <main class="min-h-[calc(100vh-12rem)] rounded-3xl border border-zinc-200 bg-white p-6 shadow-[0_30px_80px_-60px_rgba(15,23,42,0.15)] dark:border-white/10 dark:bg-slate-950/40 dark:shadow-[0_30px_80px_-60px_rgba(15,23,42,0.9)]">
+            <slot />
+          </main>
+        </div>
       </div>
     </div>
-
-    <div class="mx-auto grid max-w-6xl gap-6 px-6 py-8 md:grid-cols-[220px_1fr]">
-      <aside class="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-4">
-        <p class="mb-3 text-xs uppercase tracking-[0.3em] text-zinc-500">Navigation</p>
-        <nav class="flex flex-col gap-2 text-sm">
-          {
-            navItems.map((item) => (
-              <a
-                href={item.href}
-                class="rounded-lg px-3 py-2 text-zinc-200 transition hover:bg-zinc-800 hover:text-white"
-              >
-                {item.label}
-              </a>
-            ))
-          }
-        </nav>
-      </aside>
-
-      <main class="rounded-2xl border border-zinc-800 bg-zinc-900/40 p-6">
-        <slot />
-      </main>
-    </div>
+    <script>
+      const shell = document.getElementById("admin-shell")
+      const toggleButtons = document.querySelectorAll("[data-sidebar-toggle]")
+      const closeButtons = document.querySelectorAll("[data-sidebar-close]")
+      const themeButtons = document.querySelectorAll("[data-theme-toggle]")
+      const setSidebar = (isOpen) => {
+        if (!shell) return
+        shell.setAttribute("data-sidebar", isOpen ? "open" : "closed")
+        toggleButtons.forEach((button) => button.setAttribute("aria-expanded", String(isOpen)))
+      }
+      const applyTheme = (isDark) => {
+        document.documentElement.classList.toggle("dark", isDark)
+        localStorage.setItem("theme", isDark ? "dark" : "light")
+      }
+      toggleButtons.forEach((button) =>
+        button.addEventListener("click", () => {
+          const isOpen = shell?.getAttribute("data-sidebar") !== "closed"
+          setSidebar(!isOpen)
+        })
+      )
+      closeButtons.forEach((button) => button.addEventListener("click", () => setSidebar(false)))
+      themeButtons.forEach((button) =>
+        button.addEventListener("click", () => {
+          const isDark = document.documentElement.classList.contains("dark")
+          applyTheme(!isDark)
+        })
+      )
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") setSidebar(false)
+      })
+    </script>
+    <style>
+      #admin-shell {
+        --sidebar-width: 240px;
+      }
+      .admin-sidebar {
+        width: var(--sidebar-width);
+        transition: transform 0.3s ease, width 0.3s ease, opacity 0.3s ease;
+        overflow: hidden;
+      }
+      #admin-shell[data-sidebar="closed"] .admin-sidebar {
+        transform: translateX(-120%);
+        width: 0;
+        padding: 0;
+        border-width: 0;
+        opacity: 0;
+      }
+      .admin-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 20;
+        background: rgba(15, 23, 42, 0.2);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+      }
+      .dark .admin-overlay {
+        background: rgba(10, 12, 16, 0.6);
+      }
+      #admin-shell[data-sidebar="open"] .admin-overlay {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      @media (min-width: 768px) {
+        .admin-overlay {
+          display: none;
+        }
+      }
+    </style>
   </body>
 </html>
