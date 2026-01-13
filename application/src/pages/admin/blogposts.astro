@@ -1,62 +1,30 @@
 ---
 import AdminLayout from "@layouts/AdminLayout.astro"
+import { desc, eq } from "drizzle-orm"
+import { db } from "../../database/drizzle"
+import { blogsTable } from "../../database/schema"
 
-const posts = [
-  {
-    id: 1,
-    title: "The Great Reclamation: A Novel",
-    status: "Draft",
-    author: "Rachel Heng",
-    genre: "Strategic, Fantasy",
-    date: "Dec 19 2023",
-    img: "/assets/images/overdoing.jpg",
-  },
-  {
-    id: 2,
-    title: "Inside Evil: Book I",
-    status: "Draft",
-    author: "Rachel Heng",
-    genre: "Strategic, Fantasy",
-    date: "Dec 19 2023",
-    img: "/assets/images/conjuringTools.jpg",
-  },
-  {
-    id: 3,
-    title: "Jayne Castle: People in Glass Houses",
-    status: "Published",
-    author: "Rachel Heng",
-    genre: "Strategic, Fantasy",
-    date: "Dec 19 2023",
-    img: "/assets/images/modesOfWriting.jpg",
-  },
-  {
-    id: 4,
-    title: "The Great Reclamation: A Novel",
-    status: "Published",
-    author: "Rachel Heng",
-    genre: "Strategic, Fantasy",
-    date: "Dec 19 2023",
-    img: "/assets/images/1x-speed.jpg",
-  },
-  {
-    id: 5,
-    title: "Inside Evil: Book I",
-    status: "Published",
-    author: "Rachel Heng",
-    genre: "Strategic, Fantasy",
-    date: "Dec 19 2023",
-    img: "/assets/images/wrongTool.jpg",
-  },
-  {
-    id: 6,
-    title: "Jayne Castle: People in Glass Houses",
-    status: "Published",
-    author: "Rachel Heng",
-    genre: "Strategic, Fantasy",
-    date: "Dec 19 2023",
-    img: "/assets/images/cats1.jpg",
-  },
-]
+export const prerender = false
+
+if (Astro.request.method === "POST") {
+  const formData = await Astro.request.formData()
+  const intent = String(formData.get("intent") ?? "")
+  const id = String(formData.get("id") ?? "")
+
+  if (intent === "delete" && id) {
+    await db.delete(blogsTable).where(eq(blogsTable.id, id))
+  }
+
+  return Astro.redirect("/admin/blogposts/")
+}
+
+const posts = await db.select().from(blogsTable).orderBy(desc(blogsTable.publishDate))
+const formatter = new Intl.DateTimeFormat("en", {
+  month: "short",
+  day: "2-digit",
+  year: "numeric",
+  timeZone: "UTC",
+})
 
 const statusStyles = {
   Draft: "bg-amber-50 text-amber-700 ring-amber-500/20",
@@ -101,7 +69,7 @@ const statusStyles = {
             </svg>
           </button>
           <a
-            href="/admin/blogposts/new"
+            href="/admin/blogposts/new/"
             class="flex items-center gap-2 rounded-2xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-500"
           >
             <span class="text-lg leading-none">+</span>
@@ -111,67 +79,165 @@ const statusStyles = {
       </div>
 
       <div class="mt-6 overflow-hidden rounded-3xl border border-zinc-200">
-        <div class="grid grid-cols-[72px_minmax(220px,1.2fr)_120px_140px_160px_130px_90px] gap-4 bg-zinc-50 px-4 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
-          <span>Img</span>
-          <span>Title</span>
-          <span>Status</span>
-          <span>Author</span>
-          <span>Genre</span>
-          <span>Date Created</span>
-          <span class="text-right">Action</span>
-        </div>
+        <div class="overflow-x-auto">
+          <div class="min-w-[980px]">
+            <div class="grid grid-cols-[72px_minmax(220px,1.2fr)_120px_140px_160px_130px_90px] gap-4 bg-zinc-50 px-4 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
+              <span>Img</span>
+              <span>Title</span>
+              <span>Status</span>
+              <span>Author</span>
+              <span>Tags</span>
+              <span>Date Created</span>
+              <span class="text-right">Action</span>
+            </div>
 
-        <div class="divide-y divide-zinc-200 bg-white">
-          {
-            posts.map((post) => (
-              <div class="grid grid-cols-[72px_minmax(220px,1.2fr)_120px_140px_160px_130px_90px] items-center gap-4 px-4 py-4 text-sm text-zinc-600">
-                <div class="h-12 w-12 overflow-hidden rounded-xl border border-zinc-200 bg-zinc-100">
-                  <img src={post.img} alt="" class="h-full w-full object-cover" />
-                </div>
-                <div class="font-semibold text-zinc-800">{post.title}</div>
-                <span
-                  class={`inline-flex w-fit items-center rounded-full px-2.5 py-1 text-xs font-semibold ring-1 ${statusStyles[post.status]}`}
-                >
-                  {post.status}
-                </span>
-                <span>{post.author}</span>
-                <span>{post.genre}</span>
-                <span class="font-medium text-zinc-700">{post.date}</span>
-                <div class="flex items-center justify-end gap-2">
-                  <button
-                    class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 text-indigo-500 transition hover:border-indigo-200 hover:bg-indigo-50"
-                    type="button"
-                    aria-label="Edit post"
-                  >
-                    <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor">
-                      <path
-                        d="M4 20h4l10.5-10.5a2.1 2.1 0 0 0-3-3L5 17v3z"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                  </button>
-                  <button
-                    class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 text-rose-500 transition hover:border-rose-200 hover:bg-rose-50"
-                    type="button"
-                    aria-label="Delete post"
-                  >
-                    <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor">
-                      <path
-                        d="M3 6h18 M8 6V4h8v2 M6 6l1 14h10l1-14"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            ))
-          }
+            <div class="divide-y divide-zinc-200 bg-white">
+              {
+                posts.map((post) => (
+                  <div class="grid grid-cols-[72px_minmax(220px,1.2fr)_120px_140px_160px_130px_90px] items-center gap-4 px-4 py-4 text-sm text-zinc-600">
+                    <div class="h-12 w-12 overflow-hidden rounded-xl border border-zinc-200 bg-zinc-100">
+                      {post.image ? (
+                        <img src={post.image} alt="" class="h-full w-full object-cover" />
+                      ) : (
+                        <div class="flex h-full w-full items-center justify-center text-xs text-zinc-400">
+                          —
+                        </div>
+                      )}
+                    </div>
+                    <div class="font-semibold text-zinc-800">{post.title}</div>
+                    {(() => {
+                      const publishDate =
+                        post.publishDate instanceof Date
+                          ? post.publishDate
+                          : new Date(post.publishDate)
+                      const status = publishDate > new Date() ? "Draft" : "Published"
+                      return (
+                    <span
+                      class={`inline-flex w-fit items-center rounded-full px-2.5 py-1 text-xs font-semibold ring-1 ${statusStyles[status]}`}
+                    >
+                      {status}
+                    </span>
+                      )
+                    })()}
+                    <span>{post.author}</span>
+                    <span>{post.categories?.join(", ") ?? "Reflection"}</span>
+                    <span class="font-medium text-zinc-700">
+                      {formatter.format(
+                        post.publishDate instanceof Date
+                          ? post.publishDate
+                          : new Date(post.publishDate),
+                      )}
+                    </span>
+                    <div class="flex items-center justify-end gap-2">
+                      <a
+                        class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 text-indigo-500 transition hover:border-indigo-200 hover:bg-indigo-50"
+                        href={`/admin/blogposts/${post.slug}/edit/`}
+                        aria-label="Edit post"
+                      >
+                        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor">
+                          <path
+                            d="M4 20h4l10.5-10.5a2.1 2.1 0 0 0-3-3L5 17v3z"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </a>
+                      <button
+                        class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 text-rose-500 transition hover:border-rose-200 hover:bg-rose-50"
+                        type="button"
+                        aria-label="Delete post"
+                        data-delete-button
+                        data-delete-id={post.id}
+                        data-delete-title={post.title}
+                      >
+                        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor">
+                          <path
+                            d="M3 6h18 M8 6V4h8v2 M6 6l1 14h10l1-14"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
         </div>
       </div>
     </section>
+
+    <div
+      data-delete-modal
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-black/40 p-4"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="w-full max-w-md rounded-3xl bg-white p-6 shadow-xl">
+        <h2 class="text-lg font-semibold text-zinc-900">Delete blog post?</h2>
+        <p class="mt-2 text-sm text-zinc-500">
+          Are you sure you want to delete
+          <span class="font-semibold text-zinc-800" data-delete-title>this post</span>? This
+          cannot be undone.
+        </p>
+        <form method="post" class="mt-6 flex items-center justify-end gap-3">
+          <input type="hidden" name="intent" value="delete" />
+          <input type="hidden" name="id" data-delete-id />
+          <button
+            type="button"
+            data-delete-cancel
+            class="inline-flex items-center justify-center rounded-2xl border border-zinc-200 px-5 py-2 text-sm font-semibold text-zinc-600 transition hover:border-zinc-300 hover:text-zinc-900"
+          >
+            No
+          </button>
+          <button
+            type="submit"
+            class="inline-flex items-center justify-center rounded-2xl bg-rose-500 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-rose-400"
+          >
+            Yes
+          </button>
+        </form>
+      </div>
+    </div>
   </div>
 </AdminLayout>
+
+<script>
+  const modal = document.querySelector("[data-delete-modal]")
+  const title = modal?.querySelector("[data-delete-title]")
+  const idInput = modal?.querySelector("[data-delete-id]")
+  const cancelButton = modal?.querySelector("[data-delete-cancel]")
+  const openButtons = document.querySelectorAll("[data-delete-button]")
+
+  const closeModal = () => {
+    modal?.classList.add("hidden")
+    modal?.classList.remove("flex")
+  }
+
+  const openModal = (button) => {
+    const deleteId = button?.dataset?.deleteId
+    if (!deleteId || !idInput) return
+    idInput.value = deleteId
+    if (title) {
+      title.textContent = button.dataset.deleteTitle || "this post"
+    }
+    modal?.classList.remove("hidden")
+    modal?.classList.add("flex")
+  }
+
+  openButtons.forEach((button) => {
+    button.addEventListener("click", () => openModal(button))
+  })
+
+  cancelButton?.addEventListener("click", closeModal)
+  modal?.addEventListener("click", (event) => {
+    if (event.target === modal) closeModal()
+  })
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeModal()
+  })
+</script>

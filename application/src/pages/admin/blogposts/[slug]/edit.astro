@@ -1,27 +1,30 @@
 ---
 import AdminLayout from "@layouts/AdminLayout.astro"
-import { BLOG_CATEGORIES } from "../../../content/blogCategories"
-import { db } from "../../../database/drizzle"
-import { blogsTable } from "../../../database/schema"
+import { eq } from "drizzle-orm"
+import { BLOG_CATEGORIES } from "../../../../content/blogCategories"
+import { db } from "../../../../database/drizzle"
+import { blogsTable } from "../../../../database/schema"
 
 export const prerender = false
 
+const { slug } = Astro.params
+
 if (Astro.request.method === "POST") {
   const formData = await Astro.request.formData()
+  const id = String(formData.get("id") ?? "")
   const title = String(formData.get("title") ?? "").trim()
   const author = String(formData.get("author") ?? "").trim()
   const categoriesInput = formData.getAll("categories")
   const description = String(formData.get("description") ?? "").trim()
   const image = String(formData.get("image") ?? "").trim()
   const publishDateInput = String(formData.get("publishDate") ?? "")
-  const statusInput = String(formData.get("status") ?? "Draft").trim()
-  const slug = String(formData.get("slug") ?? "").trim()
+  const statusInput = String(formData.get("status") ?? "Published").trim()
+  const updatedSlug = String(formData.get("slug") ?? "").trim()
   const content = String(formData.get("content") ?? "").trim()
 
   const categories = categoriesInput
     .map((value) => String(value).trim())
     .filter(Boolean)
-
   const publishDateValue = new Date(publishDateInput)
   const isPublishDateValid = !Number.isNaN(publishDateValue.getTime())
   const isDraft = statusInput === "Draft"
@@ -36,26 +39,40 @@ if (Astro.request.method === "POST") {
     publishDate = now
   }
 
-  if (title && slug && content) {
-    await db.insert(blogsTable).values({
-      title,
-      author: author || "Maverick Espinosa",
-      categories: categories.length ? categories : ["Reflection"],
-      description: description || null,
-      image: image || null,
-      publishDate,
-      slug,
-      content,
-    })
-
-    return Astro.redirect(`/admin/blogposts/${slug}/edit/?created=1`)
+  if (id && title && updatedSlug && !Number.isNaN(publishDate.getTime()) && content) {
+    await db
+      .update(blogsTable)
+      .set({
+        title,
+        author: author || "Maverick Espinosa",
+        categories: categories.length ? categories : ["Reflection"],
+        description: description || null,
+        image: image || null,
+        publishDate,
+        slug: updatedSlug,
+        content,
+      })
+      .where(eq(blogsTable.id, id))
   }
+
+  return Astro.redirect("/admin/blogposts/")
 }
 
-const selectedCategories = new Set(["Reflection"])
+const [post] = await db.select().from(blogsTable).where(eq(blogsTable.slug, slug ?? ""))
+if (!post) {
+  return Astro.redirect("/admin/blogposts/")
+}
+
+const publishDateValue =
+  post.publishDate instanceof Date ? post.publishDate : new Date(post.publishDate)
+const publishDateInput = Number.isNaN(publishDateValue.getTime())
+  ? ""
+  : publishDateValue.toISOString().slice(0, 10)
+const selectedCategories = new Set(post.categories ?? ["Reflection"])
+const statusValue = publishDateValue > new Date() ? "Draft" : "Published"
 ---
 
-<AdminLayout title="Create Blog Post">
+<AdminLayout title={`Edit ${post.title}`}>
   <div class="space-y-6">
     <div class="flex flex-wrap items-center gap-4">
       <a
@@ -68,18 +85,21 @@ const selectedCategories = new Set(["Reflection"])
         Go back
       </a>
       <div>
-        <p class="text-xs uppercase tracking-[0.35em] text-zinc-500">Dashboard (New Blog)</p>
-        <h1 class="mt-1 text-3xl font-semibold tracking-tight text-zinc-900">Create a New Blog</h1>
+        <p class="text-xs uppercase tracking-[0.35em] text-zinc-500">Dashboard (Edit Blog)</p>
+        <h1 class="mt-1 text-3xl font-semibold tracking-tight text-zinc-900">Edit {post.title}</h1>
       </div>
     </div>
 
     <form method="post" class="rounded-3xl border border-zinc-200 bg-white p-6 shadow-[0_30px_80px_-60px_rgba(15,23,42,0.2)]">
+      <input type="hidden" name="id" value={post.id} />
+
       <div class="grid gap-5">
         <label class="grid gap-2 text-sm font-semibold text-zinc-700">
           Blog Title
           <input
             name="title"
             required
+            value={post.title}
             class="rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-800 shadow-sm focus:border-indigo-400 focus:outline-none"
           />
         </label>
@@ -88,7 +108,7 @@ const selectedCategories = new Set(["Reflection"])
           Author
           <input
             name="author"
-            value="Maverick Espinosa"
+            value={post.author ?? "Maverick Espinosa"}
             class="rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-800 shadow-sm focus:border-indigo-400 focus:outline-none"
           />
         </label>
@@ -116,13 +136,16 @@ const selectedCategories = new Set(["Reflection"])
             name="description"
             rows={3}
             class="rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-800 shadow-sm focus:border-indigo-400 focus:outline-none"
-          ></textarea>
+          >
+            {post.description ?? ""}
+          </textarea>
         </label>
 
         <label class="grid gap-2 text-sm font-semibold text-zinc-700">
           Blog Image
           <input
             name="image"
+            value={post.image ?? ""}
             placeholder="/assets/images/..."
             class="rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-800 shadow-sm focus:border-indigo-400 focus:outline-none"
           />
@@ -133,6 +156,7 @@ const selectedCategories = new Set(["Reflection"])
           <input
             type="date"
             name="publishDate"
+            value={publishDateInput}
             class="rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-800 shadow-sm focus:border-indigo-400 focus:outline-none"
           />
         </label>
@@ -143,8 +167,8 @@ const selectedCategories = new Set(["Reflection"])
             name="status"
             class="rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-800 shadow-sm focus:border-indigo-400 focus:outline-none"
           >
-            <option value="Draft" selected>Draft</option>
-            <option value="Published">Publish</option>
+            <option value="Draft" selected={statusValue === "Draft"}>Draft</option>
+            <option value="Published" selected={statusValue === "Published"}>Publish</option>
           </select>
         </label>
 
@@ -153,6 +177,7 @@ const selectedCategories = new Set(["Reflection"])
           <input
             name="slug"
             required
+            value={post.slug}
             class="rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-800 shadow-sm focus:border-indigo-400 focus:outline-none"
           />
         </label>
@@ -168,7 +193,9 @@ const selectedCategories = new Set(["Reflection"])
               rows={14}
               data-markdown-input
               class="rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-800 shadow-sm focus:border-indigo-400 focus:outline-none"
-            ></textarea>
+            >
+              {post.content ?? ""}
+            </textarea>
             <div class="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm">
               <div class="border-b border-zinc-200 bg-zinc-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
                 Preview

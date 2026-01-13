@@ -68,7 +68,7 @@ const navItems = [
             </button>
           </div>
           <div class="flex items-center gap-3">
-            <button
+            <!-- <button
               class="flex h-10 w-10 items-center justify-center rounded-2xl border border-zinc-200 bg-white text-zinc-600 transition hover:text-zinc-900 dark:border-white/10 dark:bg-white/5 dark:text-zinc-300 dark:hover:text-white"
               aria-label="Search"
             >
@@ -79,14 +79,14 @@ const navItems = [
                   stroke-linecap="round"
                 />
               </svg>
-            </button>
+            </button> -->
             <button
               class="flex h-10 w-10 items-center justify-center rounded-2xl border border-zinc-200 bg-white text-zinc-600 transition hover:text-zinc-900 dark:border-white/10 dark:bg-white/5 dark:text-zinc-300 dark:hover:text-white"
-              aria-label="Open notifications"
+              aria-label="Open chatbot"
             >
               <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor">
                 <path
-                  d="M15 17H9a4 4 0 0 0 6 0z M18 9a6 6 0 1 0-12 0c0 5-2 6-2 6h16s-2-1-2-6z"
+                  d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
                   stroke-width="1.5"
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -135,7 +135,6 @@ const navItems = [
         >
           <div>
             <p class="text-xs uppercase tracking-[0.3em] text-zinc-500 dark:text-zinc-400">Navigation</p>
-            <p class="mt-2 text-sm font-semibold text-zinc-900 dark:text-white">Content Controls</p>
           </div>
           <nav class="flex flex-1 flex-wrap gap-2 text-sm md:flex-col md:flex-nowrap">
             {
@@ -154,11 +153,16 @@ const navItems = [
               ))
             }
           </nav>
-          <div class="rounded-2xl border border-zinc-200 bg-zinc-50 p-4 text-xs text-zinc-600 dark:border-white/10 dark:bg-white/5 dark:text-zinc-300">
-            <p class="text-[11px] uppercase tracking-[0.3em] text-zinc-500 dark:text-zinc-400">Status</p>
-            <p class="mt-2 text-sm font-semibold text-zinc-900 dark:text-white">All systems normal</p>
-            <p class="mt-1 text-zinc-500 dark:text-zinc-400">Last update: 10 min ago</p>
-          </div>
+          <a
+            href="/"
+            class="inline-flex items-center justify-center rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm font-semibold text-zinc-700 shadow-sm transition hover:border-zinc-300 hover:text-zinc-900 dark:border-white/10 dark:bg-white/5 dark:text-zinc-300 dark:hover:text-white"
+            aria-label="Return to personal portfolio"
+          >
+            <svg viewBox="0 0 24 24" class="mr-2 h-4 w-4" fill="none" stroke="currentColor">
+              <path d="M15 18l-6-6 6-6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            Return to Personal Portfolio
+          </a>
         </aside>
 
         <div class="flex min-w-0 flex-1 flex-col gap-6">
