@@ -1,0 +1,262 @@
+---
+import '../styles/growth-preview.css'
+import '../styles/inspirations.css'
+import { inspirations } from '../content/inspirations'
+import GrowthHeader from './GrowthHeader.astro'
+import GrowthFooterLinks from './GrowthFooterLinks.astro'
+import ThemeBootstrap from './ThemeBootstrap.astro'
+
+interface InspirationItem {
+  title: string
+  author?: string
+  link?: string
+}
+
+interface InspirationCategory {
+  key: string
+  label: string
+  items: InspirationItem[]
+}
+
+const categories: InspirationCategory[] = [
+  {
+    key: 'people',
+    label: 'People',
+    items: inspirations.people.map(person => ({ title: person.name, link: person.link })),
+  },
+  {
+    key: 'posts',
+    label: 'Posts',
+    items: inspirations.posts.map(post => ({ title: post.title, author: post.author, link: post.link })),
+  },
+  {
+    key: 'talks',
+    label: 'Talks',
+    items: inspirations.talks.map(talk => ({ title: talk.title, author: talk.author, link: talk.link })),
+  },
+  {
+    key: 'videos',
+    label: 'Videos',
+    items: inspirations.videos.map(video => ({ title: video.title, author: video.author, link: video.link })),
+  },
+  {
+    key: 'music',
+    label: 'Music',
+    items: inspirations.music.map(item => ({ title: item.title, link: item.link })),
+  },
+  {
+    key: 'games',
+    label: 'Games',
+    items: inspirations.games.map(item => ({ title: item.title })),
+  },
+  {
+    key: 'media',
+    label: 'Media',
+    items: inspirations.media.map(item => ({ title: item.title })),
+  },
+]
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <ThemeBootstrap />
+    <link rel="canonical" href="https://maverickespinosa.com/inspirations/" />
+    <title>Inspirations | Maverick Espinosa</title>
+    <meta name="description" content="People, writing, talks, music, games, and media that inspire Maverick Espinosa." />
+  </head>
+  <body class="inspirations-page">
+    <a class="skip" href="#inspirations-content">Skip to content</a>
+    <GrowthHeader homeHref="/" aboutHref="/about/" activeExplore="/inspirations/" />
+
+    <main id="inspirations-content">
+      <header class="inspirations-hero">
+        <div class="inspirations-introduction">
+          <p class="eyebrow">Inspirations</p>
+          <h1>What stays<br /><em>with me.</em></h1>
+          <p>A living collection of people, ideas, and media that have shaped how I understand, create, and choose.</p>
+        </div>
+
+        <aside class="inspirations-note" aria-label="A note on perspective">
+          <p class="eyebrow">A note on perspective</p>
+          <p>Media lets us borrow another perspective. I keep what helps me see more clearly, act with intention, and move one thing forward.</p>
+        </aside>
+      </header>
+
+      <section class="inspirations-library" aria-labelledby="inspirations-library-title">
+        <header class="inspirations-library-heading">
+          <p class="eyebrow">Index</p>
+          <h2 id="inspirations-library-title">People, ideas, and works.</h2>
+        </header>
+
+        <nav class="inspirations-category-index" aria-label="Browse inspiration categories">
+          {categories.map(category => (
+            <a href={`#inspiration-${category.key}`} data-inspiration-index={category.key}>
+              <span>{category.label}</span>
+              <span data-inspiration-count>{category.items.length}</span>
+            </a>
+          ))}
+        </nav>
+
+        <form class="inspirations-controls" data-inspiration-controls>
+          <label class="inspirations-control">
+            <span>Show</span>
+            <select name="category" data-inspiration-category-filter>
+              <option value="all">All categories</option>
+              {categories.map(category => (
+                <option value={category.key}>{category.label}</option>
+              ))}
+            </select>
+          </label>
+
+          <label class="inspirations-control">
+            <span>Order</span>
+            <select name="sort" data-inspiration-sort>
+              <option value="curated">Curated</option>
+              <option value="az">A–Z</option>
+              <option value="za">Z–A</option>
+            </select>
+          </label>
+
+          <p class="inspirations-status" role="status" aria-live="polite" data-inspiration-status>
+            58 entries · Curated order
+          </p>
+        </form>
+
+        <div class="inspirations-grid">
+          {categories.map((category, categoryIndex) => (
+            <section
+              class="inspiration-category"
+              aria-labelledby={`inspiration-${category.key}`}
+              data-inspiration-category={category.key}
+            >
+              <header>
+                <p aria-hidden="true">{String(categoryIndex + 1).padStart(2, '0')}</p>
+                <h2 id={`inspiration-${category.key}`}>{category.label}</h2>
+              </header>
+              <ul>
+                {category.items.map((item, itemIndex) => (
+                  <li
+                    data-inspiration-item
+                    data-inspiration-title={item.title}
+                    data-curated-index={itemIndex}
+                  >
+                    {item.link ? (
+                      <a
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        referrerpolicy="no-referrer"
+                      >
+                        <span>
+                          <strong>{item.title}</strong>
+                          {item.author && <small>by {item.author}</small>}
+                        </span>
+                        <span aria-hidden="true">↗</span>
+                      </a>
+                    ) : (
+                      <span>{item.title}</span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
+      </section>
+    </main>
+
+    <footer class="inspirations-footer">
+      <GrowthFooterLinks />
+      <div class="footer-meta"><span>Maverick Espinosa</span><a href="#inspirations-content">Back to the beginning ↑</a></div>
+    </footer>
+
+    <script>
+      import { trackInspirationsFilterChanged, trackInspirationsSortChanged } from '../utils/analytics'
+
+      const controls = document.querySelector('[data-inspiration-controls]')
+
+      if (controls instanceof HTMLFormElement) {
+        const categorySelect = controls.querySelector('[data-inspiration-category-filter]')
+        const sortSelect = controls.querySelector('[data-inspiration-sort]')
+        const status = controls.querySelector('[data-inspiration-status]')
+        const sections = Array.from(document.querySelectorAll('[data-inspiration-category]'))
+        const indexLinks = Array.from(document.querySelectorAll('[data-inspiration-index]'))
+        const collator = new Intl.Collator('en', { sensitivity: 'base' })
+
+        const applyControls = () => {
+          if (!(categorySelect instanceof HTMLSelectElement) || !(sortSelect instanceof HTMLSelectElement)) return
+
+          const selectedCategory = categorySelect.value
+          const selectedSort = sortSelect.value
+          let visibleEntries = 0
+          let selectedLabel = 'All categories'
+
+          sections.forEach(section => {
+            if (!(section instanceof HTMLElement)) return
+
+            const category = section.dataset.inspirationCategory ?? ''
+            const isVisible = selectedCategory === 'all' || selectedCategory === category
+            section.hidden = !isVisible
+
+            const list = section.querySelector('ul')
+            if (!(list instanceof HTMLUListElement)) return
+
+            const items = Array.from(list.querySelectorAll('[data-inspiration-item]'))
+            const orderedItems = items.sort((first, second) => {
+              if (!(first instanceof HTMLElement) || !(second instanceof HTMLElement)) return 0
+
+              if (selectedSort === 'curated') {
+                return Number(first.dataset.curatedIndex) - Number(second.dataset.curatedIndex)
+              }
+
+              const comparison = collator.compare(
+                first.dataset.inspirationTitle ?? '',
+                second.dataset.inspirationTitle ?? '',
+              )
+              return selectedSort === 'za' ? -comparison : comparison
+            })
+
+            orderedItems.forEach(item => list.append(item))
+            if (isVisible) visibleEntries += items.length
+
+            if (category === selectedCategory) {
+              selectedLabel = section.querySelector('h2')?.textContent?.trim() ?? selectedLabel
+            }
+          })
+
+          if (status) {
+            const entryLabel = visibleEntries === 1 ? 'entry' : 'entries'
+            const orderLabel = selectedSort === 'az' ? 'A–Z' : selectedSort === 'za' ? 'Z–A' : 'Curated'
+            const categoryLabel = selectedCategory === 'all' ? '' : ` in ${selectedLabel}`
+            status.textContent = `${visibleEntries} ${entryLabel}${categoryLabel} · ${orderLabel} order`
+          }
+        }
+
+        controls.addEventListener('submit', event => event.preventDefault())
+        categorySelect?.addEventListener('change', () => {
+          applyControls()
+          if (categorySelect instanceof HTMLSelectElement) {
+            trackInspirationsFilterChanged(categorySelect.value)
+          }
+        })
+        sortSelect?.addEventListener('change', () => {
+          applyControls()
+          if (sortSelect instanceof HTMLSelectElement) {
+            trackInspirationsSortChanged(sortSelect.value)
+          }
+        })
+        indexLinks.forEach(link => link.addEventListener('click', () => {
+          if (!(categorySelect instanceof HTMLSelectElement) || !(link instanceof HTMLElement)) return
+          if (categorySelect.value === 'all') return
+
+          categorySelect.value = link.dataset.inspirationIndex ?? 'all'
+          applyControls()
+          trackInspirationsFilterChanged(categorySelect.value)
+        }))
+      }
+    </script>
+    <script src="../scripts/growth-theme.ts"></script>
+  </body>
+</html>

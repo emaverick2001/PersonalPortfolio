@@ -1,5 +1,9 @@
 ---
-import type { PerformanceData } from "../types"
+interface PerformanceData {
+  name: string
+  hrefLink: string
+  thumbnailLink?: string
+}
 
 interface Props {
   performance: PerformanceData

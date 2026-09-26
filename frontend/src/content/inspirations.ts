@@ -1,6 +1,5 @@
 export const inspirations = {
   people: [
-    { name: "Isabel Lopez Santiago", link: "https://www.linkedin.com/in/isabel-lopez-santiago/" },
     { name: "Jiaxuan You", link: "https://cs.stanford.edu/~jiaxuan/" },
     { name: "Haofei Yu", link: "https://haofeiyu.me/" },
     { name: "ChengXiang Zhai", link: "https://czhai.cs.illinois.edu/" },

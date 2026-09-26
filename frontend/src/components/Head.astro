@@ -8,9 +8,10 @@ export interface Props {
   title: string
   description: string
   image?: string
+  noindex?: boolean
 }
 
-const { title, description } = Astro.props
+const { title, description, noindex = false } = Astro.props
 ---
 
 <meta charset="UTF-8" />
@@ -19,7 +20,7 @@ const { title, description } = Astro.props
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta name="author" content="Maverick Espinosa" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="robots" content="index, follow" />
+<meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
 
 <title>{title}</title>
 <meta name="title" content={title} />

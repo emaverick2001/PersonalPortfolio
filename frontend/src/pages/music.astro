@@ -1,13 +1,4 @@
 ---
-import SiteLayout from "@layouts/SiteLayout.astro"
-import PerformanceDisplay from "@components/PerformanceDisplay.astro"
-import { PageHeader } from "@components/PageHeader.tsx"
-import { music } from "src/content/music"
+import GrowthMusic from '../components/GrowthMusic.astro'
 ---
-
-<SiteLayout title="Music">
-  <PageHeader>Music</PageHeader>
-  <div class="grid gap-4 md:grid-cols-2">
-    {music.map((performance) => <PerformanceDisplay {performance} />)}
-  </div>
-</SiteLayout>
+<GrowthMusic />

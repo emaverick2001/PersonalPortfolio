@@ -17,7 +17,6 @@ export default function ProjectAccordion() {
           )}
           onClick={() => {
             setSelectedIndex(projectIndex)
-            project.onclick()
           }}
         >
           <div className="aspect-video">

@@ -6,7 +6,7 @@ import { navLink } from "src/content/navInfo"
 
 export const HeaderSection: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [isDark, setIsDark] = useState(false)
+  const [isDark, setIsDark] = useState(true)
 
   useEffect(() => {
     if (isOpen) {
@@ -18,9 +18,13 @@ export const HeaderSection: React.FC = () => {
 
   // Initialize theme from localStorage
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme")
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-    const shouldBeDark = savedTheme ? savedTheme === "dark" : prefersDark
+    let savedTheme: string | null = null
+    try {
+      savedTheme = localStorage.getItem("theme")
+    } catch {
+      // Keep Night as the usable default when storage is unavailable.
+    }
+    const shouldBeDark = savedTheme !== "light"
 
     setIsDark(shouldBeDark)
     applyTheme(shouldBeDark)
@@ -32,7 +36,11 @@ export const HeaderSection: React.FC = () => {
     } else {
       document.documentElement.classList.remove("dark")
     }
-    localStorage.setItem("theme", dark ? "dark" : "light")
+    try {
+      localStorage.setItem("theme", dark ? "dark" : "light")
+    } catch {
+      // Keep the current visit usable when storage is unavailable.
+    }
   }
 
   const toggleTheme = () => {
@@ -233,21 +241,23 @@ export const HeaderSection: React.FC = () => {
                     </motion.a>
                   ))}
                 </nav>
-                <div className="absolute bottom-4 flex justify-center gap-4 border-t-4 border-gray-200 bg-zinc-100 py-4 dark:border-zinc-800 dark:bg-zinc-900">
+                <nav
+                  className="absolute bottom-4 flex justify-center gap-4 border-t-4 border-gray-200 bg-zinc-100 py-4 dark:border-zinc-800 dark:bg-zinc-900"
+                  aria-label="Social and contact links"
+                >
                   {socialIcons.map((icons) => (
                     <a
                       key={icons.href}
                       href={icons.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={icons.onclick}
                       className="inline-flex size-10 items-center justify-center rounded-full bg-zinc-300 transition hover:bg-zinc-400 dark:bg-zinc-700 dark:hover:bg-zinc-600"
                       aria-label="Social link"
                     >
                       {icons.icon}
                     </a>
                   ))}
-                </div>
+                </nav>
               </div>
             </div>
           </motion.div>

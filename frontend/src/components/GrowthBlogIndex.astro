@@ -1,0 +1,119 @@
+---
+import '../styles/global.css'
+import '../styles/growth-preview.css'
+import '../styles/blog.css'
+import { getCollection } from 'astro:content'
+import { BLOG_CATEGORIES } from '../content/blogCategories'
+import GrowthHeader from './GrowthHeader.astro'
+import GrowthFooterLinks from './GrowthFooterLinks.astro'
+import TagFilterSearchBar from './TagFilterSearchBar.astro'
+import PaginationArrows from './PaginationArrows.astro'
+import ThemeBootstrap from './ThemeBootstrap.astro'
+
+const posts = (await getCollection('blog')).sort(
+  (postA, postB) => +postB.data.publishDate - +postA.data.publishDate,
+)
+const tagCounts = BLOG_CATEGORIES.reduce((counts, tag) => {
+  counts[tag] = 0
+  return counts
+}, {} as Record<string, number>)
+posts.forEach(post => (post.data.categories ?? ['Reflection']).forEach(category => {
+  tagCounts[category] = (tagCounts[category] ?? 0) + 1
+}))
+tagCounts.All = posts.length
+const tagList = ['All', ...BLOG_CATEGORIES]
+const formatter = new Intl.DateTimeFormat('en', {
+  dateStyle: 'medium',
+  timeZone: 'UTC',
+})
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <ThemeBootstrap />
+    <link rel="canonical" href="https://maverickespinosa.com/blog/" />
+    <title>Writing | Maverick Espinosa</title>
+    <meta name="description" content="Writing by Maverick Espinosa about tools, technology, attention, learning, and creative practice." />
+  </head>
+  <body class="writing-index writing-page">
+    <a class="skip" href="#writing-content">Skip to content</a>
+    <GrowthHeader homeHref="/" aboutHref="/about/" activeExplore="/blog/" />
+
+    <main id="writing-content">
+      <header class="writing-hero">
+        <p class="eyebrow">Writing</p>
+        <div class="writing-hero-grid">
+          <h1>Thinking<br />out loud.</h1>
+          <div>
+            <p class="writing-lead">A place to share ideas and learn through explaining.</p>
+            <p class="writing-support">One question at a time, through examples, reflections, and the occasional technical deep dive.</p>
+          </div>
+        </div>
+      </header>
+
+      <section class="writing-library" aria-labelledby="library-title">
+        <div class="library-heading">
+          <div><p class="eyebrow">The archive</p><h2 id="library-title">Notes and essays</h2></div>
+          <p>{posts.length} pieces, arranged newest first.</p>
+        </div>
+        <div class="writing-tools">
+          <TagFilterSearchBar
+            tags={tagList}
+            tagCounts={tagCounts}
+            selectedTag="All"
+            query=""
+            debounceMs={250}
+            matchMode="title_summary"
+            targetSelector="#post-grid [data-post-card]"
+          />
+        </div>
+        <div id="post-grid" class="writing-grid" tabindex="-1">
+          {posts.map((post, index) => {
+            const categories = post.data.categories ?? ['Reflection']
+            const searchText = `${post.data.title} ${post.data.description ?? ''}`.trim()
+            return (
+              <a
+                href={`/blog/${post.slug}/`}
+                class:list={['writing-card', index === 0 && 'writing-card-featured']}
+                data-post-card
+                data-featured={index === 0 ? '' : undefined}
+                data-tags={categories.join('|')}
+                data-search={searchText.toLowerCase()}
+              >
+                <div class="writing-card-media">
+                  {post.data.image && <img src={post.data.image} alt="" loading={index === 0 ? 'eager' : 'lazy'} />}
+                </div>
+                <div class="writing-card-copy">
+                  <div class="writing-card-meta">
+                    <time datetime={post.data.publishDate.toISOString()}>{formatter.format(post.data.publishDate)}</time>
+                    <span aria-hidden="true">·</span>
+                    <span>{categories.join(' · ')}</span>
+                  </div>
+                  <h3>{post.data.title}</h3>
+                  {post.data.description && <p>{post.data.description}</p>}
+                  <span class="writing-card-link">Read the piece <span aria-hidden="true">↗</span></span>
+                </div>
+              </a>
+            )
+          })}
+        </div>
+        <div class="writing-pagination">
+          <PaginationArrows
+            targetSelector="#post-grid [data-post-card]"
+            focusTargetSelector="#post-grid"
+            pageSize={9}
+            compact={false}
+          />
+        </div>
+      </section>
+    </main>
+
+    <footer class="writing-footer">
+      <GrowthFooterLinks />
+      <div class="footer-meta"><span>Maverick Espinosa</span><a href="#writing-content">Back to the beginning ↑</a></div>
+    </footer>
+    <script src="../scripts/growth-theme.ts"></script>
+  </body>
+</html>

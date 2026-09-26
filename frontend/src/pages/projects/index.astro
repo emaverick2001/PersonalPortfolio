@@ -1,13 +1,7 @@
 ---
-import SiteLayout from "@layouts/SiteLayout.astro"
-import ProjectGrid from "@components/ProjectGrid"
-import { Page } from "@components/Page"
-import { PageHeader } from "@components/PageHeader"
+import GrowthPage from '../../components/GrowthPage.astro'
+import GrowthWork from '../../components/GrowthWork.astro'
 ---
-
-<SiteLayout title="Projects">
-  <PageHeader id="projects"> Projects </PageHeader>
-  <Page>
-    <ProjectGrid client:load />
-  </Page>
-</SiteLayout>
+<GrowthPage title="Work" description="Evidence-backed AI research, creative instruments, and assistive data work.">
+  <GrowthWork />
+</GrowthPage>

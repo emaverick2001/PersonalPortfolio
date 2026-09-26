@@ -1,0 +1,8 @@
+<script is:inline data-theme-bootstrap>
+  try {
+    const savedTheme = localStorage.getItem('theme')
+    document.documentElement.classList.toggle('dark', savedTheme !== 'light')
+  } catch {
+    document.documentElement.classList.add('dark')
+  }
+</script>

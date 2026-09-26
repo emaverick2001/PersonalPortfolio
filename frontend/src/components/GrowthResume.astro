@@ -1,0 +1,62 @@
+---
+import '../styles/growth-preview.css'
+import '../styles/resume.css'
+import { resumeEntries } from '../content/resumes'
+import GrowthHeader from './GrowthHeader.astro'
+import GrowthFooterLinks from './GrowthFooterLinks.astro'
+import ThemeBootstrap from './ThemeBootstrap.astro'
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <ThemeBootstrap />
+    <link rel="canonical" href="https://maverickespinosa.com/resume/" />
+    <title>Résumé | Maverick Espinosa</title>
+    <meta name="description" content="View or download Maverick Espinosa's dated résumé." />
+  </head>
+  <body class="resume-page">
+    <a class="skip" href="#resume-content">Skip to content</a>
+    <GrowthHeader homeHref="/" aboutHref="/about/" activeExplore="/resume/" />
+
+    <main id="resume-content">
+      <header class="resume-hero">
+        <p class="eyebrow">Résumé</p>
+        <h1>One source.<br /><em>Clearly dated.</em></h1>
+        <p>The available résumé is presented as a dated document while future role-specific versions remain under review.</p>
+      </header>
+
+      <section class="resume-list" aria-labelledby="resume-list-title">
+        <div class="resume-list-heading">
+          <p class="eyebrow">Available document</p>
+          <h2 id="resume-list-title">Résumé archive.</h2>
+        </div>
+
+        {resumeEntries.map(entry => (
+          <article class="resume-entry" data-resume-entry>
+            <div>
+              <h3>{entry.title}</h3>
+              <p>Updated {entry.updatedLabel}</p>
+            </div>
+            <div class="resume-actions">
+              <a href={entry.pdfPath} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">
+                View PDF
+              </a>
+              <a href={entry.pdfPath} download>
+                Download PDF
+              </a>
+            </div>
+          </article>
+        ))}
+      </section>
+    </main>
+
+    <footer class="resume-footer">
+      <GrowthFooterLinks />
+      <div class="footer-meta"><span>Maverick Espinosa</span><a href="#resume-content">Back to the beginning ↑</a></div>
+    </footer>
+
+    <script src="../scripts/growth-theme.ts"></script>
+  </body>
+</html>

@@ -1,33 +1,25 @@
 ---
 import Head from "@components/Head.astro"
-import PostHog from "@components/PostHog.astro"
 import { HeaderSection } from "@components/Header"
 import { FooterSection } from "@components/Footer"
+import ThemeBootstrap from "@components/ThemeBootstrap.astro"
 
 interface Props {
   title?: string
   description?: string
+  noindex?: boolean
 }
 
 const title = Astro.props.title ? `${Astro.props.title} | Maverick Espinosa` : "Maverick Espinosa"
 const description = Astro.props.description ?? "Software Engineer, Music Producer"
+const noindex = Astro.props.noindex ?? false
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <Head {title} {description} />
-    <script>
-      ;(() => {
-        const savedTheme = localStorage.getItem("theme")
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-        const shouldBeDark = savedTheme ? savedTheme === "dark" : prefersDark
-        if (shouldBeDark) {
-          document.documentElement.classList.add("dark")
-        }
-      })()
-    </script>
-    <PostHog />
+    <Head {title} {description} {noindex} />
+    <ThemeBootstrap />
   </head>
 
   <body>

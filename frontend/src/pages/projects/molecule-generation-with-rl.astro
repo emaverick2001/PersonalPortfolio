@@ -1,0 +1,133 @@
+---
+import GrowthPage from '../../components/GrowthPage.astro'
+
+const repo = 'https://github.com/emaverick2001/Molecule-Generation-With-RL'
+const pipeline = [
+  ['01', 'Generate', 'DiffDock samples four poses for a protein–ligand complex.'],
+  ['02', 'Reward', 'RMSD scores each pose against the known ligand position.'],
+  ['03', 'Compare', 'Rewards become normalized advantages within the group.'],
+  ['04', 'Update', 'A native DiffDock loss supplies a differentiable surrogate signal.'],
+  ['05', 'Export', 'The updated score model returns to DiffDock checkpoint format.'],
+  ['06', 'Evaluate', 'The same pose-generation and RMSD pipeline tests the checkpoint.'],
+]
+const seed44 = [
+  ['Coverage', '0.40', '0.60', 40, 60],
+  ['Strict Success@1', '0.40', '0.60', 40, 60],
+  ['Mean RMSD', '7.49 Å', '3.03 Å', 75, 30],
+]
+const seed45 = [
+  ['Coverage', '1.00', '0.60', 100, 60],
+  ['Strict Success@1', '0.80', '0.40', 80, 40],
+  ['Mean RMSD', '9.17 Å', '8.94 Å', 92, 89],
+]
+---
+<GrowthPage title="Molecule Generation with Reinforcement Learning" description="A preliminary DiffDock post-training experiment: implementation, mixed findings, limitations, and next tests.">
+  <header class="case-intro molecule-intro">
+    <a class="quiet-link" href="/projects/">← Back to Work</a>
+    <p class="eyebrow">AI systems research / Course collaboration / 2026</p>
+    <h1>Can reinforcement learning<br /><em>improve molecular docking?</em></h1>
+    <p class="work-lead">I built an end-to-end GRPO-style post-training loop for DiffDock. One small split improved. A second did not. The value of the project is the working system—and the evidence showing where it breaks.</p>
+    <div class="case-facts">
+      <div><span>My focus</span>DiffDock experiment implementation</div>
+      <div><span>Built with</span>Python · PyTorch · DiffDock · GRPO</div>
+      <div><span>Evidence status</span>Preliminary local experiments</div>
+    </div>
+    <a class="button" href={repo} target="_blank" rel="noopener noreferrer">Inspect the repository <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <section class="case-section">
+    <p class="eyebrow">01 / The research question</p>
+    <h2>A narrower testbed.<br />A difficult transfer.</h2>
+    <p>The broader course collaboration explored reinforcement learning for molecular generation. My case study focuses on a narrower question: could the same group-relative idea post-train a pretrained diffusion model for fixed-ligand docking?</p>
+    <p>DiffDock predicts a ligand pose through translation, rotation, and torsion diffusion. That made it a practical intermediate system for testing reward-based updates without claiming to solve full molecular generation.</p>
+    <p class="source-note">Scope note: the broader course project was collaborative. This page describes the DiffDock extension represented in my repository and does not claim sole authorship of teammates’ work.</p>
+  </section>
+
+  <section class="case-section">
+    <p class="eyebrow">02 / System</p>
+    <h2>How the system works</h2>
+    <p>Each update connects stochastic docking, a structural reward, a group-relative comparison, and DiffDock’s own training losses. The checkpoint then returns to the original inference path so baseline and updated models are judged the same way.</p>
+    <div class="research-pipeline" role="img" aria-label="DiffDock generates four poses, RMSD rewards them, rewards are normalized within the group, native DiffDock losses provide an update signal, the model is exported, and the checkpoint is evaluated through the same docking pipeline.">
+      {pipeline.map(([step, title, detail], index) => (
+        <div class="pipeline-step">
+          <span>{step}</span>
+          <h3>{title}</h3>
+          <p>{detail}</p>
+          {index < pipeline.length - 1 && <i aria-hidden="true">→</i>}
+        </div>
+      ))}
+    </div>
+    <div class="case-callout method-note">
+      <h3>The update signal</h3>
+      <p><code>sθ = −(Ltranslation + Lrotation + Ltorsion)</code></p>
+      <p>Group size 4 · score batch size 2 · learning rate 1×10<sup>−7</sup></p>
+    </div>
+  </section>
+
+  <section class="case-section">
+    <p class="eyebrow">03 / Role</p>
+    <h2>My contribution</h2>
+    <p>I implemented the DiffDock model loading and scoring path, native-loss batch construction, the GRPO-style update, batched gradient accumulation, checkpoint export, and the evaluation workflow. I also added tests and memory-oriented batching fixes as the experiment moved from a dry run to real complexes.</p>
+    <div class="implementation-grid role-grid">
+      <div><h3>Training loop</h3><p>Grouped on-policy rollouts, RMSD rewards, normalized advantages, and a clipped surrogate objective.</p></div>
+      <div><h3>Systems work</h3><p>Score batching and callable batch generation kept the native DiffDock loss path within available memory.</p></div>
+      <div><h3>Evaluation</h3><p>Exported checkpoints were loaded back into DiffDock and compared through the same pose and RMSD pipeline.</p></div>
+    </div>
+    <p class="source-note">Contribution boundaries are based on the repository’s implementation history. The numerical findings below come from a local experiment report draft and should be read as preliminary, not as a published benchmark.</p>
+  </section>
+
+  <section class="case-section findings-section">
+    <p class="eyebrow">04 / Findings</p>
+    <h2>Two seeds. Two different stories.</h2>
+    <p>The first split suggested a meaningful improvement. The cleaner second split did not reproduce it. Showing both is more useful than presenting the best run alone.</p>
+    <div class="seed-comparison">
+      <article class="seed-card improved">
+        <div class="seed-card-heading"><div><span>Seed 44</span><h3>Promising signal</h3></div><strong>Improved</strong></div>
+        <div class="metric-legend"><span>Baseline</span><span>After one update</span></div>
+        {seed44.map(([label, before, after, beforeWidth, afterWidth]) => (
+          <div class="metric-row">
+            <div class="metric-copy"><span>{label}</span><span>{before} → <strong>{after}</strong></span></div>
+            <div class="metric-bars" aria-hidden="true"><i style={`--metric:${beforeWidth}%`}></i><i class="after" style={`--metric:${afterWidth}%`}></i></div>
+          </div>
+        ))}
+        <p>Severe RMSD outliers also fell from 0.250 to 0.083.</p>
+      </article>
+      <article class="seed-card unstable">
+        <div class="seed-card-heading"><div><span>Seed 45</span><h3>Failed to generalize</h3></div><strong>Unstable</strong></div>
+        <div class="metric-legend"><span>Baseline</span><span>After one update</span></div>
+        {seed45.map(([label, before, after, beforeWidth, afterWidth]) => (
+          <div class="metric-row">
+            <div class="metric-copy"><span>{label}</span><span>{before} → <strong>{after}</strong></span></div>
+            <div class="metric-bars" aria-hidden="true"><i style={`--metric:${beforeWidth}%`}></i><i class="after" style={`--metric:${afterWidth}%`}></i></div>
+          </div>
+        ))}
+        <p>Coverage fell, strict Success@1 halved, and the RMSD change was marginal.</p>
+      </article>
+    </div>
+    <p class="source-note">Coverage and Success@1 are proportions; higher is better. RMSD is measured in ångströms; lower is better. These small-split results do not establish robust model improvement.</p>
+  </section>
+
+  <section class="case-section">
+    <p class="eyebrow">05 / Friction</p>
+    <h2>What held the work back</h2>
+    <div class="limitation-list">
+      <div><span>01</span><p><strong>Update stability.</strong> Repeated or poorly regularized updates could reduce generation coverage or move poses outside the binding pocket.</p></div>
+      <div><span>02</span><p><strong>Small evaluation slices.</strong> The result is too sensitive to seed and complex selection for broad performance claims.</p></div>
+      <div><span>03</span><p><strong>Surrogate mismatch.</strong> Optimizing DiffDock’s native loss is tractable, but it is not the same as differentiating through the full sampling trajectory.</p></div>
+      <div><span>04</span><p><strong>Compute constraints.</strong> Score batches of two and gradient accumulation were engineering necessities, not an idealized experimental setup.</p></div>
+    </div>
+  </section>
+
+  <section class="case-section case-next">
+    <p class="eyebrow">06 / Next action</p>
+    <h2>What I would test next</h2>
+    <ol class="next-actions">
+      <li><span>Stabilize</span>Compare one-step updates, stronger regularization, and gradient clipping before scaling.</li>
+      <li><span>Filter</span>Identify unstable complexes and distinguish data failures from optimization failures.</li>
+      <li><span>Repeat</span>Run more seeds with a frozen evaluation protocol and report uncertainty, not only point estimates.</li>
+      <li><span>Scale last</span>Only expand the benchmark after the improvement survives those checks.</li>
+    </ol>
+    <p>The current conclusion is intentionally narrow: the end-to-end post-training system works, but the improvement is not yet reliable.</p>
+    <a class="button" href="/projects/">Return to selected work <span aria-hidden="true">↗</span></a>
+  </section>
+</GrowthPage>

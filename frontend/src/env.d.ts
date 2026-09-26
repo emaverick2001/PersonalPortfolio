@@ -1,10 +1,10 @@
 import type { AstroGlobal } from "astro"
-import type { PostHog } from "posthog-js"
+import type { PostHogInterface } from "posthog-js"
 
 declare global {
   var Astro: AstroGlobal
   interface Window {
-    posthog?: PostHog
+    posthog?: PostHogInterface
   }
 }
 
