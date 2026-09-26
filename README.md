@@ -1,106 +1,60 @@
 # Maverick Espinosa Personal Portfolio
 
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://pre-commit.com/)
-[![Checked with mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](https://mypy-lang.org/)
-[![bear-ified](https://raw.githubusercontent.com/beartype/beartype-assets/main/badge/bear-ified.svg)](https://beartype.readthedocs.io)
-[![Github Action](https://github.com/lwaekfjlk/python-project-template/actions/workflows/pytest.yml/badge.svg?branch=main)]()
+An Astro portfolio presenting selected engineering work, research, music, writing, inspirations, and a dated résumé through a shared botanical editorial design.
 
-## 🔨 Continuous Integration (CI) Workflow
+The current redesign is a local release candidate under review. Do not infer that uncommitted work has been published.
 
-Here's a clearer and more straightforward guideline of the steps for working with your codebase. If working in a small group or working on a simple project, some of the steps can be skipped.
+## Local development
 
-1. **Create Issue**
+The application lives in `frontend/`.
 
-   Before starting, open a new issue in the repository detailing what you plan to implement. Assign the issue to yourself.
-2. **Sync Repo**
+```sh
+cd frontend
+pnpm install
+pnpm dev
+```
 
-   Update your local repository to match the latest version of the remote repository.
-3. **Create Branch**
+Create a production build with:
 
-   Create a new branch for your task. Name it appropriately based on the type of task, such as `feature/feature-name`, `bug/bug-name`, or `exp/exp-name`.
-4. **Implement Code**
+```sh
+pnpm build
+```
 
-   Work on your task and make necessary changes to the codebase.
-5. **Test Locally**
+Run the supported regression suite with:
 
-   Run tests using tools like mypy, pytest, and pre-commit. Ensure all tests pass before proceeding.
-6. **Change Commit**
+```sh
+node --test scripts/*.test.mjs scripts/test-about-audio.mjs scripts/test-vine-growth.mjs
+```
 
-   Add and commit your changes to the branch, then push the branch to the repository.
-7. **Create PR**
+The optional native Work-artwork screenshot test additionally requires `@napi-rs/canvas`; that package is not currently declared or installed and should not be added implicitly.
 
-   Open a Pull Request (PR) for the branch you've pushed.
-8. **Link PR to Issue**
+## Repository map
 
-   In your PR, include "Closes #ISSUE_NUM" to link it to the original issue.
-9. **Pass Continuous Integration**
+- `frontend/src/` — Astro, React, styles, scripts, and content sources.
+- `frontend/public/` — static artwork and downloadable assets.
+- `frontend/scripts/` — supported regression and preview helpers.
+- `docs/superpowers/specs/` — approved product and architecture decisions.
+- `docs/superpowers/plans/` — approved implementation plans.
+- `docs/release-session-2026-09-25.md` — current release evidence and review gates.
+- `docs/collaboration-protocol.md` — Git, branching, documentation, and collaboration workflow.
+- `AGENTS.md` — mandatory additional rules for automated contributors.
 
-   Ensure all GitHub Actions checks pass. If they fail, revise your code based on the errors reported.
-10. **Review PR Checklist**
+## Collaboration
 
-    Verify that all items in the PR checklist are completed, such as updating documentation or adding package requirements.
-11. **Ask for Code Review**
+Read [the collaboration protocol](docs/collaboration-protocol.md) before changing the repository. Its main safeguards are:
 
-    Invite a colleague to review your PR. One approved, Use the "Squash and Merge" option to merge your PR, ensuring a clean commit history.
-12. **Troubleshooting**
+- inspect the live checkout and preserve existing changes;
+- work within explicitly owned paths;
+- use one scoped branch per reviewable outcome;
+- isolate concurrent work in non-overlapping worktrees;
+- stage exact files instead of using broad Git staging;
+- keep specifications, plans, and release evidence in their designated locations;
+- treat commits, pushes, merges, and deployments as separate approval gates.
 
-    If you break down the commit history or main branch, contact the repository owner for assistance with `rebase` or other needed actions.
+The release branch is `master`. Automated branches use `codex/<short-scope>`. Human branches use `feature/`, `fix/`, or `docs/` prefixes.
 
-## 💼 Template Structure
+## Deployment boundary
 
-The current project template supports the final package release of our codebase.
+`.github/workflows/deploy.yml` builds and deploys GitHub Pages on a push to `master` or a manual workflow dispatch. Therefore, pushing `master` is a production action—not merely repository synchronization—and requires explicit release approval followed by live verification.
 
-## ❓ Issue & Pull Request
-
-An issue typically describes a new feature (`feature`), fixing an old bug (`bug`), launching a group of experiments (`exp`), or refactoring part of the code (`refactor`). Using different issue templates for different issues.
-
-A PR typically implements the content mentioned in one issue.
-
-Notice about the development:
-
-1. When creating an issue, assign the responsible member for fixing that if possible
-2. When creating a PR, make sure you uses `feature/feature-name`, `bug/bug-name`, `exp/exp-name` for its branch
-3. When finishing one PR, make sure all the github action is passed and all the checks are done.
-4. When merging one PR, make sure using `squash and merge` instead of `merge a pull request`.
-5. Avoid making any direct commit to the `main` branch and try to avoid any `--force` push to any branch unless you are pretty sure about that.
-
-## 👷 Type Checking
-
-- Tools
-
-  - static type checking (`mypy`)
-  - dynamic type checking (`beartype`)
-- Guidelines
-
-  - Run `mypy --strict ./` under the root of the current repo to test the static type.
-
-## 🏅️ Unit Testing
-
-- Tools
-
-  - testing code components based on testing function (`pytest`)
-- Guidelines
-
-  - Run `pytest` under the root of the current repo to check unit test results.
-
-## 🧐 Code Spell Checking
-
-- Tools
-
-  - code spell checking (`codespell`)
-- Guidelines
-
-  - Commonly need to ignore part of the files in the repository like `/data`.
-
-## 🪝 Pre-commit Hook
-
-- Tools
-
-  - code formatting (`prettier`)
-  - import package sorting (`isort`)
-  - ipynb output clear (`nbstripout`)
-  - code bug checking (`ruff`)
-- Guidelines
-
-  - Run `python -m pip install pre-commit` to install `pre-commit`
-  - Run `pre-commit install` to allow hooking pre-commit with any `git commit` commands.
+The source includes a narrow production-only analytics contract. Localhost and preview routes remain inactive. Production analytics must not be enabled until the documented privacy settings and release gates are satisfied.
