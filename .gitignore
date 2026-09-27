@@ -73,6 +73,9 @@ coverage/
 *.tmp
 *.temp
 
+# Local review-only artifacts (never deploy or commit)
+.private-review/
+
 # Database files
 *.db
 *.sqlite

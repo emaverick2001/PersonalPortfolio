@@ -9,10 +9,11 @@ const focusHref = preview ? '/preview/#current-project' : '/#current-project'
   <h1>Questions worth testing.<br /><em>Evidence worth showing.</em></h1>
   <p class="work-lead">Research systems, creative instruments, and tools that help people understand and act. Each project is presented at the level its evidence supports.</p>
   <nav class="work-jumps" aria-label="Selected projects">
-    <a href="#molecule-generation">AI research</a>
+    <a href="#symbiotic-swe">Software repair</a>
+    <a href="#molecule-generation">Molecular ML</a>
+    <a href="#sackv">Efficient inference</a>
     <a href="#synthesizer">Sound &amp; visuals</a>
-    <a href="#revostep">Assistive technology</a>
-    <a href="#daily-focus-coach">Parked lab</a>
+    <a href="#daily-focus-coach">Next product</a>
   </nav>
 </header>
 
@@ -25,8 +26,26 @@ const focusHref = preview ? '/preview/#current-project' : '/#current-project'
     </div>
   </div>
 
-  <article class="project-entry" id="molecule-generation">
+  <article class="project-entry" id="symbiotic-swe">
     <div class="project-meta"><span>01 / AI systems research</span><span class="project-status">Course research · 2026</span></div>
+    <div class="project-feature">
+      <div>
+        <h2>Turn failure<br />into feedback.</h2>
+        <p class="project-name">Symbiotic-SWE</p>
+        <p>I built a neuro-symbolic software-repair system that combines LLM-generated patches, program slicing, solver checks, counterexample-guided feedback, and real tests. In a held-out SymPy study, the full loop resolved more tasks—at a higher token and runtime cost.</p>
+        <a class="button" href="/projects/symbiotic-swe/">Explore the case study <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="evidence-preview" role="img" aria-label="On a held-out 14-task SymPy subset, the neural-only condition resolved 2 tasks and the full counterexample-guided condition resolved 5 tasks, with higher token and runtime cost.">
+        <p class="diagram-label">The held-out result</p>
+        <div class="evidence-preview-row"><span>Neural only</span><strong>2 / 14</strong><small>14.3% resolved</small></div>
+        <div class="evidence-preview-row"><span>Full feedback loop</span><strong>5 / 14</strong><small>35.7% resolved</small></div>
+        <p class="diagram-note">One repository family; the stronger result cost more tokens and time.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="project-entry" id="molecule-generation">
+    <div class="project-meta"><span>02 / AI systems research</span><span class="project-status">Course research · 2026</span></div>
     <div class="project-feature">
       <div>
         <h2>Build the loop.<br />Test what survives.</h2>
@@ -43,8 +62,26 @@ const focusHref = preview ? '/preview/#current-project' : '/#current-project'
     </div>
   </article>
 
+  <article class="project-entry" id="sackv">
+    <div class="project-meta"><span>03 / Efficient inference research</span><span class="project-status">Five-person course collaboration · 2026</span></div>
+    <div class="project-feature">
+      <div>
+        <h2>Evict less useful<br />context.</h2>
+        <p class="project-name">Semantic-Aware Chunk-Level KV Cache Eviction</p>
+        <p>I helped build a semantic approach to evicting whole context chunks from an LLM cache. A small live warmup recovered cache capacity without changing answer quality at a moderate budget, while exposing latency and robustness costs that still need work.</p>
+        <a class="button" href="/projects/semantic-aware-kv-cache-eviction/">Explore the case study <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="evidence-preview" role="img" aria-label="In a 50-example MuSiQue warmup at 30 percent eviction, the system freed 713 cache blocks, an estimated 654 megabytes, with no quality delta and a 56 percent latency increase.">
+        <p class="diagram-label">The live warmup</p>
+        <div class="evidence-preview-row"><span>Cache released</span><strong>713 blocks</strong><small>Estimated 654 MB</small></div>
+        <div class="evidence-preview-row caution"><span>Tradeoff</span><strong>+56% latency</strong><small>0% answer-quality delta</small></div>
+        <p class="diagram-note">50 MuSiQue examples at 30% eviction; early evidence, not a production claim.</p>
+      </div>
+    </div>
+  </article>
+
   <article class="project-entry" id="synthesizer">
-    <div class="project-meta"><span>02 / Creative instruments</span><span class="project-status">Completed class project · 2024</span></div>
+    <div class="project-meta"><span>04 / Creative instruments</span><span class="project-status">Completed class project · 2024</span></div>
     <div class="project-feature">
       <div>
         <h2>One gesture.<br />Two ways to understand it.</h2>
@@ -64,24 +101,11 @@ const focusHref = preview ? '/preview/#current-project' : '/#current-project'
     </div>
   </article>
 
-  <article class="project-entry" id="revostep">
-    <div class="project-meta"><span>03 / Data &amp; assistive technology</span><span class="project-status in-progress">In progress</span></div>
-    <h2>RevoStep Visualization Dashboard</h2>
-    <p class="project-question">How can movement data become evidence someone can inspect?</p>
-    <p>I’m helping the RevoStep team build a visualization dashboard from biomechanics data. This stays a concise work-in-progress note until validated findings can support a fuller case study.</p>
-  </article>
-
-  <article class="project-entry project-entry-parked" id="daily-focus-coach">
-    <div class="project-meta"><span>04 / Attention &amp; everyday workflows</span><span class="project-status parked">Parked</span></div>
+  <article class="project-entry" id="daily-focus-coach">
+    <div class="project-meta"><span>05 / Attention &amp; everyday workflows</span><span class="project-status in-progress">In development</span></div>
     <h2>Daily Focus Coach</h2>
     <p class="project-question">How can a tool help someone return to what matters?</p>
-    <p>The concept is intentionally parked while I finish the portfolio redesign and strengthen the work already ready for review. The homepage interaction illustrates the direction; it is not a product demo.</p>
+    <p>Daily Focus Coach is my next product project after Portfolio v1. The homepage interaction illustrates the direction: helping someone return to what matters. It is not yet a product demo, trial result, or persistent personal-data system.</p>
     <a class="quiet-link" href={focusHref}>See the illustrative interaction ↗</a>
   </article>
 </div>
-
-<section class="work-collection work-collection-note">
-  <p class="eyebrow">The standard</p>
-  <h2>Question. System. Evidence.<br /><em>Friction. Next action.</em></h2>
-  <p>Each case study shows the question, what I built, what happened, what challenged it, and what comes next.</p>
-</section>

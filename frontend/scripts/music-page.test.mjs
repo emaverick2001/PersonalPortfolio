@@ -18,6 +18,7 @@ const tracks = [
 ]
 
 const html = await readFile("dist/music/index.html", "utf8")
+const css = await readFile("src/styles/music.css", "utf8")
 const cardBlocks = html.match(/<a\b[^>]*data-music-card[^>]*>[\s\S]*?<\/a>/g) ?? []
 
 test("Music uses the approved shared shell", () => {
@@ -25,6 +26,16 @@ test("Music uses the approved shared shell", () => {
   assert.match(html, /href="\/music\/"[^>]*aria-current="page"/)
   assert.match(html, /class="[^"]*music-page/)
   assert.equal((html.match(/<h1(?:\s|>)/g) ?? []).length, 1)
+})
+
+test("Music keeps the botanical page background authoritative in both themes", () => {
+  assert.match(css, /body\.music-page\s*\{[^}]*background:\s*var\(--paper\)/)
+  assert.match(css, /body\.music-page\s*\{[^}]*color:\s*var\(--ink\)/)
+})
+
+test("Music cards visibly lift for pointer and keyboard focus without forcing motion", () => {
+  assert.match(css, /\.music-card:is\(:hover,\s*:focus-visible\)\s*\{[^}]*transform:\s*translateY\(-6px\)[^}]*box-shadow:/)
+  assert.match(css, /@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.music-card:is\(:hover,\s*:focus-visible\)\s*\{[^}]*transform:\s*none/)
 })
 
 test("Music preserves every track and destination in the approved order", () => {

@@ -1,0 +1,75 @@
+---
+import '../styles/growth-preview.css'
+import '../styles/profile-pages.css'
+import GrowthHeader from './GrowthHeader.astro'
+import GrowthFooterLinks from './GrowthFooterLinks.astro'
+import ThemeBootstrap from './ThemeBootstrap.astro'
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <ThemeBootstrap />
+    <link rel="canonical" href="https://maverickespinosa.com/personal/" />
+    <title>Personal | Maverick Espinosa</title>
+    <meta name="description" content="The interests and practices that shape how Maverick Espinosa listens, learns, and creates." />
+  </head>
+  <body class="profile-page personal-page">
+    <a class="skip" href="#personal-content">Skip to content</a>
+    <GrowthHeader homeHref="/" aboutHref="/about/" activeExplore="/personal/" />
+
+    <main id="personal-content">
+      <section class="profile-hero" aria-labelledby="personal-title">
+        <div class="profile-hero-copy">
+          <p class="eyebrow">Personal</p>
+          <h1 id="personal-title">Sound. Movement. Curiosity.</h1>
+          <p class="profile-lead">
+            The practices and relationships that keep me attentive to the world around me.
+          </p>
+        </div>
+        <div class="personal-orbit" role="img" aria-label="Sound, movement, connection, and curiosity orbit attention">
+          <div class="orbit-ring" aria-hidden="true"></div>
+          <span class="orbit-center" aria-hidden="true">Attention</span>
+          <span class="orbit-node orbit-sound" aria-hidden="true">Sound</span>
+          <span class="orbit-node orbit-movement" aria-hidden="true">Movement</span>
+          <span class="orbit-node orbit-connection" aria-hidden="true">Connection</span>
+          <span class="orbit-node orbit-curiosity" aria-hidden="true">Curiosity</span>
+        </div>
+      </section>
+
+      <section class="profile-grid" aria-label="Personal interests">
+        <article>
+          <p class="profile-index" aria-hidden="true">01</p>
+          <h2>Music</h2>
+          <p>I make music to explore texture, rhythm, and feeling. Sound gives an idea another form.</p>
+          <a class="quiet-link" href="/music/">Hear the work <span aria-hidden="true">↗</span></a>
+        </article>
+        <article>
+          <p class="profile-index" aria-hidden="true">02</p>
+          <h2>Movement</h2>
+          <p>Training and time outside help me return to the present. Progress becomes something practiced.</p>
+        </article>
+        <article>
+          <p class="profile-index" aria-hidden="true">03</p>
+          <h2>Connection</h2>
+          <p>Conversation changes what I notice. I care about listening well and finding shared understanding.</p>
+          <a class="quiet-link" href="/about/">About my approach <span aria-hidden="true">↗</span></a>
+        </article>
+        <article>
+          <p class="profile-index" aria-hidden="true">04</p>
+          <h2>Curiosity</h2>
+          <p>I collect questions across design, systems, research, and culture, then follow the ones that keep opening.</p>
+          <a class="quiet-link" href="/inspirations/">Browse inspirations <span aria-hidden="true">↗</span></a>
+        </article>
+      </section>
+    </main>
+
+    <footer class="profile-footer">
+      <GrowthFooterLinks />
+      <div class="footer-meta"><span>Maverick Espinosa</span><a href="#personal-content">Back to the beginning ↑</a></div>
+    </footer>
+
+    <script src="../scripts/growth-theme.ts"></script>
+  </body>
+</html>

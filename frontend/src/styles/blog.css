@@ -1,6 +1,10 @@
 .writing-page {
   --writing-max: 1320px;
 }
+body.writing-page {
+  background: var(--paper);
+  color: var(--ink);
+}
 .writing-page main {
   overflow: clip;
 }
@@ -111,14 +115,20 @@
   outline-offset: 6px;
 }
 .writing-card {
+  position: relative;
   min-width: 0;
   background: var(--paper);
   display: flex;
   flex-direction: column;
-  transition: background 0.2s;
+  transition: background 0.2s, transform 0.22s ease, box-shadow 0.22s ease;
 }
 .writing-card:hover {
   background: color-mix(in srgb, var(--paper) 94%, var(--green) 6%);
+}
+.writing-card:is(:hover, :focus-visible) {
+  z-index: 1;
+  transform: translateY(-6px);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.2);
 }
 .writing-card.hidden {
   display: none;
@@ -375,6 +385,14 @@
 }
 .article-footer .portfolio-links {
   margin-top: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .writing-card {
+    transition: background 0.2s;
+  }
+  .writing-card:is(:hover, :focus-visible) {
+    transform: none;
+  }
 }
 @media (max-width: 950px) {
   .writing-hero-grid {

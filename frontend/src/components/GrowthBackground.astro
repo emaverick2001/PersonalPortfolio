@@ -1,0 +1,93 @@
+---
+import '../styles/growth-preview.css'
+import '../styles/profile-pages.css'
+import GrowthHeader from './GrowthHeader.astro'
+import GrowthFooterLinks from './GrowthFooterLinks.astro'
+import ThemeBootstrap from './ThemeBootstrap.astro'
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <ThemeBootstrap />
+    <link rel="canonical" href="https://maverickespinosa.com/background/" />
+    <title>Background &amp; Experience | Maverick Espinosa</title>
+    <meta name="description" content="Maverick Espinosa’s path through mathematics, physics, chemistry, neuroscience, computer science, research systems, and creative technology." />
+  </head>
+  <body class="profile-page background-page">
+    <a class="skip" href="#background-content">Skip to content</a>
+    <GrowthHeader homeHref="/" aboutHref="/about/" activeExplore="/background/" />
+
+    <main id="background-content">
+      <section class="profile-hero background-hero" aria-labelledby="background-title">
+        <div class="profile-hero-copy">
+          <p class="eyebrow">Background &amp; experience</p>
+          <h1 id="background-title">A path through mathematics, science, software, research, and creative systems.</h1>
+          <p class="profile-lead">
+            My background crosses mathematics, physics, the natural sciences, computer science, data engineering, research infrastructure, product building, and music technology.
+          </p>
+        </div>
+        <div class="path-map" role="img" aria-label="A connected path from mathematics through physics, chemistry and neuroscience, computer science, research data, and creative technology toward human-centered systems">
+          <span aria-hidden="true">Mathematics</span>
+          <span aria-hidden="true">Physics</span>
+          <span aria-hidden="true">Chemistry + neuroscience</span>
+          <span aria-hidden="true">Computer science</span>
+          <span aria-hidden="true">Research data</span>
+          <span aria-hidden="true">Creative technology</span>
+          <span aria-hidden="true">Human-centered systems</span>
+        </div>
+      </section>
+
+      <section class="profile-path" aria-labelledby="path-title">
+        <header class="profile-section-heading">
+          <p class="eyebrow">Path</p>
+          <h2 id="path-title">Different settings. One connecting question.</h2>
+        </header>
+        <div class="path-list">
+          <article>
+            <p class="profile-index" aria-hidden="true">01</p>
+            <div><h2>Mathematics</h2><p>During the summer after seventh grade, I became absorbed in mathematics. It gave me a way to test whether what I was doing was right—or, more precisely, whether it made sense.</p></div>
+          </article>
+          <article>
+            <p class="profile-index" aria-hidden="true">02</p>
+            <div><h2>Physics</h2><p>That interest expanded into physics, where mathematics became a way to connect abstract reasoning with how the world behaves.</p></div>
+          </article>
+          <article>
+            <p class="profile-index" aria-hidden="true">03</p>
+            <div><h2>Chemistry and neuroscience</h2><p>From there, I pursued chemistry and neuroscience as academic majors and completed substantial coursework in both. That foundation still shapes how I think about complex systems across molecular, biological, cognitive, and technical scales.</p></div>
+          </article>
+          <article>
+            <p class="profile-index" aria-hidden="true">04</p>
+            <div><h2>Computer science</h2><p>My formal studies span computer science at Johns Hopkins and graduate computer science at UIUC, with foundations in software, data, machine learning, and systems.</p></div>
+          </article>
+          <article>
+            <p class="profile-index" aria-hidden="true">05</p>
+            <div><h2>Research and data systems</h2><p>At Johns Hopkins APL and the Center for Psychedelic and Consciousness Research, my work has involved data ingestion, automation, harmonization, and tools that support research workflows.</p></div>
+          </article>
+          <article>
+            <p class="profile-index" aria-hidden="true">06</p>
+            <div><h2>Products and creative technology</h2><p>Across product teams and independent projects, I have worked on web systems, discovery tools, interactive software, and music technology.</p></div>
+          </article>
+          <article>
+            <p class="profile-index" aria-hidden="true">07</p>
+            <div><h2>Direction</h2><p>The connecting question is how technical systems can make complexity easier to understand and useful action easier to choose.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <nav class="profile-actions" aria-label="Continue through Maverick's work">
+        <a href="/projects/" aria-label="Selected work"><span>Selected work</span><span aria-hidden="true">↗</span></a>
+        <a href="/research/" aria-label="Research"><span>Research</span><span aria-hidden="true">↗</span></a>
+        <a href="/resume/" aria-label="Résumé"><span>Résumé</span><span aria-hidden="true">↗</span></a>
+      </nav>
+    </main>
+
+    <footer class="profile-footer">
+      <GrowthFooterLinks />
+      <div class="footer-meta"><span>Maverick Espinosa</span><a href="#background-content">Back to the beginning ↑</a></div>
+    </footer>
+
+    <script src="../scripts/growth-theme.ts"></script>
+  </body>
+</html>

@@ -34,8 +34,8 @@ test("Research separates interests from experience without dropping existing mat
 test("Research keeps production navigation and a single page heading", () => {
   assert.match(html, /href="\/projects\/"/)
   assert.match(html, /href="\/resume\/"/)
-  assert.doesNotMatch(html, /href="\/personal\/"/)
-  assert.doesNotMatch(html, /href="\/background\/"/)
+  assert.match(html, /href="\/personal\/"/)
+  assert.match(html, /href="\/background\/"/)
   assert.equal((html.match(/<h1(?:\s|>)/g) ?? []).length, 1)
 })
 

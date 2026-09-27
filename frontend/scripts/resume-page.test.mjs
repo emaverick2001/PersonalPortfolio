@@ -12,40 +12,42 @@ const background = await readBuilt("dist/background/index.html")
 const generatedSitemap = await readBuilt("dist/sitemap-0.xml")
 const publicSitemap = await readBuilt("dist/sitemap.xml")
 
-test("Resume hub presents the one dated source PDF with distinct actions", () => {
+test("Resume page presents one current primary PDF with distinct actions", () => {
   assert.ok(resume, "expected /resume/ to be built")
   assert.match(resume, /class="site-header"/)
   assert.equal((resume.match(/<h1(?:\s|>)/g) ?? []).length, 1)
   assert.equal((resume.match(/data-resume-entry(?:\s|=|>)/g) ?? []).length, 1)
-  assert.match(resume, /September 20, 2025/)
+  assert.match(resume, /AI\/ML &amp; Data Engineer Résumé/)
+  assert.match(resume, /September 2026/)
   assert.match(
     resume,
-    /href="\/assets\/files\/Resume_09_20_2025\.pdf"[^>]*target="_blank"[^>]*>\s*View PDF/,
+    /href="\/assets\/files\/Maverick_Espinosa_Resume\.pdf"[^>]*target="_blank"[^>]*>\s*View PDF/,
   )
   assert.match(
     resume,
-    /href="\/assets\/files\/Resume_09_20_2025\.pdf"[^>]*download[^>]*>\s*Download PDF/,
+    /href="\/assets\/files\/Maverick_Espinosa_Resume\.pdf"[^>]*download[^>]*>\s*Download PDF/,
   )
-  assert.doesNotMatch(resume, /AI Engineer Résumé|Data Engineer Résumé|coming soon|TBD/i)
+  assert.equal((resume.match(/\/assets\/files\/Maverick_Espinosa_Resume\.pdf/g) ?? []).length, 2)
+  assert.doesNotMatch(resume, /Resume_09_20_2025\.pdf|coming soon|TBD|future role-specific versions/i)
 })
 
-test("Shared navigation exposes Resume but parks stale Personal and Background pages", () => {
+test("Shared navigation exposes Resume, Personal, and Background", () => {
   for (const html of [home, inspirations, resume]) {
     assert.match(html, /href="\/resume\/"/)
-    assert.doesNotMatch(html, /href="\/personal\/"/)
-    assert.doesNotMatch(html, /href="\/background\/"/)
+    assert.match(html, /href="\/personal\/"/)
+    assert.match(html, /href="\/background\/"/)
   }
 
   assert.doesNotMatch(home, /href="\/assets\/files\/Resume_09_20_2025\.pdf"/)
 })
 
-test("Retained Personal and Background routes stay out of search indexing", () => {
-  assert.match(personal, /<meta name="robots" content="noindex, nofollow"/)
-  assert.match(background, /<meta name="robots" content="noindex, nofollow"/)
+test("Released Personal and Background routes are available to search indexing", () => {
+  assert.doesNotMatch(personal, /<meta name="robots" content="noindex/i)
+  assert.doesNotMatch(background, /<meta name="robots" content="noindex/i)
 
   for (const sitemap of [generatedSitemap, publicSitemap]) {
-    assert.doesNotMatch(sitemap, /maverickespinosa\.com\/personal\//)
-    assert.doesNotMatch(sitemap, /maverickespinosa\.com\/background\//)
+    assert.match(sitemap, /maverickespinosa\.com\/personal\//)
+    assert.match(sitemap, /maverickespinosa\.com\/background\//)
     assert.match(sitemap, /maverickespinosa\.com\/resume\//)
   }
 })

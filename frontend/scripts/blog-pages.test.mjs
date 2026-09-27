@@ -12,6 +12,7 @@ const posts = [
 ]
 
 const index = await readFile("dist/blog/index.html", "utf8")
+const css = await readFile("src/styles/blog.css", "utf8")
 
 test("Writing index uses the shared shell and preserves discovery controls", () => {
   assert.match(index, /class="[^"]*writing-index/)
@@ -20,6 +21,16 @@ test("Writing index uses the shared shell and preserves discovery controls", () 
   assert.match(index, /data-tag-filter-root/)
   assert.match(index, /data-pagination-root/)
   assert.equal((index.match(/<a\b[^>]*data-post-card(?:\s|=|>)/g) ?? []).length, posts.length)
+})
+
+test("Writing keeps the botanical page background authoritative in both themes", () => {
+  assert.match(css, /body\.writing-page\s*\{[^}]*background:\s*var\(--paper\)/)
+  assert.match(css, /body\.writing-page\s*\{[^}]*color:\s*var\(--ink\)/)
+})
+
+test("Writing cards visibly lift for pointer and keyboard focus without forcing motion", () => {
+  assert.match(css, /\.writing-card:is\(:hover,\s*:focus-visible\)\s*\{[^}]*transform:\s*translateY\(-6px\)[^}]*box-shadow:/)
+  assert.match(css, /@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.writing-card:is\(:hover,\s*:focus-visible\)\s*\{[^}]*transform:\s*none/)
 })
 
 test("Writing index keeps every post in newest-first order and features the newest", () => {

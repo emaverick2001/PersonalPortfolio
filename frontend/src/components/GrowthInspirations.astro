@@ -90,26 +90,7 @@ const categories: InspirationCategory[] = [
           <h2 id="inspirations-library-title">People, ideas, and works.</h2>
         </header>
 
-        <nav class="inspirations-category-index" aria-label="Browse inspiration categories">
-          {categories.map(category => (
-            <a href={`#inspiration-${category.key}`} data-inspiration-index={category.key}>
-              <span>{category.label}</span>
-              <span data-inspiration-count>{category.items.length}</span>
-            </a>
-          ))}
-        </nav>
-
         <form class="inspirations-controls" data-inspiration-controls>
-          <label class="inspirations-control">
-            <span>Show</span>
-            <select name="category" data-inspiration-category-filter>
-              <option value="all">All categories</option>
-              {categories.map(category => (
-                <option value={category.key}>{category.label}</option>
-              ))}
-            </select>
-          </label>
-
           <label class="inspirations-control">
             <span>Order</span>
             <select name="sort" data-inspiration-sort>
@@ -126,42 +107,48 @@ const categories: InspirationCategory[] = [
 
         <div class="inspirations-grid">
           {categories.map((category, categoryIndex) => (
-            <section
+            <details
               class="inspiration-category"
-              aria-labelledby={`inspiration-${category.key}`}
+              open={categoryIndex === 0}
+              name="inspiration-categories"
               data-inspiration-category={category.key}
+              id={`inspiration-${category.key}`}
             >
-              <header>
+              <summary data-inspiration-summary>
                 <p aria-hidden="true">{String(categoryIndex + 1).padStart(2, '0')}</p>
-                <h2 id={`inspiration-${category.key}`}>{category.label}</h2>
-              </header>
-              <ul>
-                {category.items.map((item, itemIndex) => (
-                  <li
-                    data-inspiration-item
-                    data-inspiration-title={item.title}
-                    data-curated-index={itemIndex}
-                  >
-                    {item.link ? (
-                      <a
-                        href={item.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        referrerpolicy="no-referrer"
-                      >
-                        <span>
-                          <strong>{item.title}</strong>
-                          {item.author && <small>by {item.author}</small>}
-                        </span>
-                        <span aria-hidden="true">↗</span>
-                      </a>
-                    ) : (
-                      <span>{item.title}</span>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </section>
+                <h2>{category.label}</h2>
+                <span class="inspiration-category-count" data-inspiration-count>{category.items.length}</span>
+                <span class="inspiration-disclosure-icon" aria-hidden="true">+</span>
+              </summary>
+              <div class="inspiration-category-panel">
+                <ul>
+                  {category.items.map((item, itemIndex) => (
+                    <li
+                      data-inspiration-item
+                      data-inspiration-title={item.title}
+                      data-curated-index={itemIndex}
+                    >
+                      {item.link ? (
+                        <a
+                          href={item.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          referrerpolicy="no-referrer"
+                        >
+                          <span>
+                            <strong>{item.title}</strong>
+                            {item.author && <small>by {item.author}</small>}
+                          </span>
+                          <span aria-hidden="true">↗</span>
+                        </a>
+                      ) : (
+                        <span>{item.title}</span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </details>
           ))}
         </div>
       </section>
@@ -178,28 +165,19 @@ const categories: InspirationCategory[] = [
       const controls = document.querySelector('[data-inspiration-controls]')
 
       if (controls instanceof HTMLFormElement) {
-        const categorySelect = controls.querySelector('[data-inspiration-category-filter]')
         const sortSelect = controls.querySelector('[data-inspiration-sort]')
         const status = controls.querySelector('[data-inspiration-status]')
-        const sections = Array.from(document.querySelectorAll('[data-inspiration-category]'))
-        const indexLinks = Array.from(document.querySelectorAll('[data-inspiration-index]'))
+        const sections = Array.from(document.querySelectorAll('[data-inspiration-category]')).filter(
+          (section): section is HTMLDetailsElement => section instanceof HTMLDetailsElement,
+        )
         const collator = new Intl.Collator('en', { sensitivity: 'base' })
 
         const applyControls = () => {
-          if (!(categorySelect instanceof HTMLSelectElement) || !(sortSelect instanceof HTMLSelectElement)) return
+          if (!(sortSelect instanceof HTMLSelectElement)) return
 
-          const selectedCategory = categorySelect.value
           const selectedSort = sortSelect.value
-          let visibleEntries = 0
-          let selectedLabel = 'All categories'
 
           sections.forEach(section => {
-            if (!(section instanceof HTMLElement)) return
-
-            const category = section.dataset.inspirationCategory ?? ''
-            const isVisible = selectedCategory === 'all' || selectedCategory === category
-            section.hidden = !isVisible
-
             const list = section.querySelector('ul')
             if (!(list instanceof HTMLUListElement)) return
 
@@ -219,42 +197,47 @@ const categories: InspirationCategory[] = [
             })
 
             orderedItems.forEach(item => list.append(item))
-            if (isVisible) visibleEntries += items.length
-
-            if (category === selectedCategory) {
-              selectedLabel = section.querySelector('h2')?.textContent?.trim() ?? selectedLabel
-            }
           })
 
           if (status) {
-            const entryLabel = visibleEntries === 1 ? 'entry' : 'entries'
             const orderLabel = selectedSort === 'az' ? 'A–Z' : selectedSort === 'za' ? 'Z–A' : 'Curated'
-            const categoryLabel = selectedCategory === 'all' ? '' : ` in ${selectedLabel}`
-            status.textContent = `${visibleEntries} ${entryLabel}${categoryLabel} · ${orderLabel} order`
+            status.textContent = `58 entries · ${orderLabel} order`
           }
         }
 
+        const openHashCategory = () => {
+          const target = document.getElementById(decodeURIComponent(window.location.hash.slice(1)))
+          if (!(target instanceof HTMLDetailsElement) || !target.matches('[data-inspiration-category]')) return
+
+          sections.forEach(section => {
+            section.open = section === target
+          })
+          window.requestAnimationFrame(() => target.scrollIntoView({ block: 'start' }))
+        }
+
         controls.addEventListener('submit', event => event.preventDefault())
-        categorySelect?.addEventListener('change', () => {
-          applyControls()
-          if (categorySelect instanceof HTMLSelectElement) {
-            trackInspirationsFilterChanged(categorySelect.value)
-          }
-        })
         sortSelect?.addEventListener('change', () => {
           applyControls()
           if (sortSelect instanceof HTMLSelectElement) {
             trackInspirationsSortChanged(sortSelect.value)
           }
         })
-        indexLinks.forEach(link => link.addEventListener('click', () => {
-          if (!(categorySelect instanceof HTMLSelectElement) || !(link instanceof HTMLElement)) return
-          if (categorySelect.value === 'all') return
-
-          categorySelect.value = link.dataset.inspirationIndex ?? 'all'
-          applyControls()
-          trackInspirationsFilterChanged(categorySelect.value)
-        }))
+        sections.forEach(section => {
+          section.querySelector('summary')?.addEventListener('click', () => {
+            if (!section.open) {
+              const category = section.dataset.inspirationCategory
+              if (category) trackInspirationsFilterChanged(category)
+            }
+          })
+          section.addEventListener('toggle', () => {
+            if (!section.open) return
+            sections.forEach(otherSection => {
+              if (otherSection !== section) otherSection.open = false
+            })
+          })
+        })
+        window.addEventListener('hashchange', openHashCategory)
+        openHashCategory()
       }
     </script>
     <script src="../scripts/growth-theme.ts"></script>

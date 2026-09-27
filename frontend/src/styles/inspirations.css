@@ -67,49 +67,12 @@
   letter-spacing: -0.045em;
 }
 
-.inspirations-category-index {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin-bottom: 34px;
-  border-top: 1px solid var(--line);
-  border-left: 1px solid var(--line);
-}
-
-.inspirations-category-index a {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 16px;
-  align-items: center;
-  min-height: 68px;
-  padding: 15px 18px;
-  border-right: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  font: 14px/1.4 Arial, sans-serif;
-  transition: background-color 0.2s, color 0.2s;
-}
-
-.inspirations-category-index a > span {
-  display: block;
-}
-
-.inspirations-category-index a:hover,
-.inspirations-category-index a:focus-visible {
-  color: var(--paper);
-  background: var(--ink);
-}
-
-.inspirations-category-index [data-inspiration-count] {
-  color: var(--green);
-  font-size: 12px;
-  font-variant-numeric: tabular-nums;
-}
-
 .inspirations-controls {
   display: grid;
-  grid-template-columns: minmax(170px, 240px) minmax(170px, 240px) minmax(260px, 1fr);
+  grid-template-columns: minmax(170px, 240px) minmax(260px, 1fr);
   gap: 18px;
   align-items: end;
-  margin-bottom: clamp(72px, 9vw, 120px);
+  margin-bottom: 34px;
   padding: 20px;
   border: 1px solid var(--line);
 }
@@ -152,32 +115,35 @@
 }
 
 .inspirations-grid {
-  columns: 2;
-  column-gap: clamp(48px, 8vw, 120px);
+  border-bottom: 1px solid var(--line);
 }
 
 .inspiration-category {
-  display: inline-block;
-  width: 100%;
-  margin-bottom: 78px;
-  break-inside: avoid;
   border-top: 1px solid var(--line);
   scroll-margin-top: 110px;
 }
 
-.inspiration-category[hidden] {
+.inspiration-category > summary {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto 30px;
+  gap: clamp(14px, 2vw, 28px);
+  align-items: center;
+  min-height: 104px;
+  padding: 22px 0;
+  cursor: pointer;
+  list-style: none;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.inspiration-category > summary::-webkit-details-marker {
   display: none;
 }
 
-.inspiration-category > header {
-  display: grid;
-  grid-template-columns: 42px minmax(0, 1fr);
-  gap: 18px;
-  align-items: baseline;
-  padding: 28px 0 22px;
+.inspiration-category > summary:hover {
+  background: color-mix(in srgb, var(--green) 5%, transparent);
 }
 
-.inspiration-category > header p {
+.inspiration-category > summary p {
   margin: 0;
   color: var(--green);
   font: 12px/1.5 Arial, sans-serif;
@@ -186,11 +152,35 @@
 
 .inspiration-category h2 {
   margin: 0;
-  font-size: clamp(34px, 3.5vw, 48px);
+  font-size: clamp(34px, 3.8vw, 54px);
   letter-spacing: -0.035em;
 }
 
+.inspiration-category-count {
+  color: var(--muted);
+  font: 13px/1.5 Arial, sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+.inspiration-disclosure-icon {
+  color: var(--green);
+  font: 28px/1 Arial, sans-serif;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.inspiration-category[open] .inspiration-disclosure-icon {
+  transform: rotate(45deg);
+}
+
+.inspiration-category-panel {
+  padding: 0 0 54px 72px;
+}
+
 .inspiration-category ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(38px, 6vw, 90px);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -303,20 +293,10 @@
     font-size: 44px;
   }
 
-  .inspirations-category-index {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    margin-bottom: 24px;
-  }
-
-  .inspirations-category-index a {
-    min-height: 62px;
-    padding: 13px 14px;
-  }
-
   .inspirations-controls {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 16px 12px;
-    margin-bottom: 72px;
+    margin-bottom: 24px;
     padding: 16px;
   }
 
@@ -327,15 +307,22 @@
     text-align: left;
   }
 
-  .inspirations-grid {
-    columns: 1;
+  .inspiration-category > summary {
+    grid-template-columns: 34px minmax(0, 1fr) auto 24px;
+    min-height: 86px;
+    gap: 12px;
+    padding: 18px 0;
   }
 
-  .inspiration-category {
-    margin-bottom: 58px;
+  .inspiration-category h2 {
+    font-size: 34px;
   }
 
-  .inspiration-category > header {
-    padding-top: 24px;
+  .inspiration-category-panel {
+    padding: 0 0 42px 46px;
+  }
+
+  .inspiration-category ul {
+    grid-template-columns: 1fr;
   }
 }

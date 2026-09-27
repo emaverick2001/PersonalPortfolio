@@ -23,37 +23,32 @@ test("Inspirations preserves all seven categories and 58 entries", () => {
   assert.doesNotMatch(html, /Isabel Lopez Santiago/)
 })
 
-test("Inspirations offers a compact index with live category counts", () => {
-  const indexEntries = [...html.matchAll(/data-inspiration-index="([^"]+)"[^>]*>[\s\S]*?<span[^>]*data-inspiration-count>(\d+)<\/span>/g)]
+test("Inspirations presents the curated categories as one single-open accordion", () => {
+  const disclosures = [...html.matchAll(/<details\b([^>]*)data-inspiration-category="([^"]+)"([^>]*)>/g)]
 
   assert.deepEqual(
-    indexEntries.map(([, category, count]) => [category, Number(count)]),
-    [
-      ["people", 11],
-      ["posts", 11],
-      ["talks", 7],
-      ["videos", 1],
-      ["music", 9],
-      ["games", 1],
-      ["media", 18],
-    ],
+    disclosures.map(([, , category]) => category),
+    ["people", "posts", "talks", "videos", "music", "games", "media"],
   )
+  assert.equal(disclosures.length, 7)
+  assert.equal(disclosures.filter(([attributes]) => /\bopen\b/.test(attributes)).length, 1)
+  assert.match(disclosures[0][1], /\bopen\b/)
+  assert.equal((html.match(/<summary\b[^>]*data-inspiration-summary/g) ?? []).length, 7)
+  assert.equal((html.match(/name="inspiration-categories"/g) ?? []).length, 7)
+  assert.equal((html.match(/data-inspiration-count/g) ?? []).length, 7)
 
   for (const category of ["people", "posts", "talks", "videos", "music", "games", "media"]) {
-    assert.match(html, new RegExp(`href="#inspiration-${category}"`))
+    assert.match(html, new RegExp(`id="inspiration-${category}"`))
   }
 
-  assert.match(css, /\.inspirations-category-index a > span\s*\{[^}]*display:\s*block;/)
+  assert.match(css, /\.inspiration-category\s*>\s*summary\s*\{[^}]*cursor:\s*pointer;/)
+  assert.match(css, /\.inspiration-category\[open\]\s+\.inspiration-disclosure-icon/)
 })
 
-test("Inspirations provides category filtering and three explicit sort modes", () => {
+test("Inspirations preserves curated ordering with optional alphabetical sorting", () => {
   assert.match(html, /data-inspiration-controls/)
-  assert.match(html, /<select[^>]*data-inspiration-category-filter/)
-  assert.match(html, /<option value="all"[^>]*>All categories<\/option>/)
-
-  for (const category of ["people", "posts", "talks", "videos", "music", "games", "media"]) {
-    assert.match(html, new RegExp(`<option value="${category}"`))
-  }
+  assert.doesNotMatch(html, /data-inspiration-category-filter/)
+  assert.doesNotMatch(html, />Show</)
 
   assert.match(html, /<select[^>]*data-inspiration-sort/)
   assert.match(html, /<option value="curated"[^>]*>Curated<\/option>/)
@@ -62,7 +57,6 @@ test("Inspirations provides category filtering and three explicit sort modes", (
   assert.match(html, /data-inspiration-status[^>]*>\s*58 entries · Curated order\s*</)
   assert.equal((html.match(/data-inspiration-title=/g) ?? []).length, 58)
   assert.equal((html.match(/data-curated-index=/g) ?? []).length, 58)
-  assert.match(css, /\.inspiration-category\[hidden\]\s*\{[^}]*display:\s*none;/)
 })
 
 test("Every linked inspiration is an explicit safe outbound action", () => {

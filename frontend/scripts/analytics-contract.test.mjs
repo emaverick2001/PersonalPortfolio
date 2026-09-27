@@ -13,7 +13,7 @@ const legacyHeaderSource = await readFile("src/components/Header.tsx", "utf8")
 const projectGridSource = await readFile("src/components/ProjectGrid.tsx", "utf8")
 const socialSource = await readFile("src/content/socials.tsx", "utf8")
 const projectSource = await readFile("src/content/projects.ts", "utf8")
-const legacyProject = await readFile("dist/projects/pactspace/index.html", "utf8")
+const releasedProject = await readFile("dist/projects/molecule-generation-with-rl/index.html", "utf8")
 
 const analyticsBundle = await build({
   entryPoints: ["src/utils/analytics.ts"],
@@ -46,7 +46,7 @@ test("PostHog initializes only for the public production experience", () => {
     assert.match(analyticsSource, new RegExp(route.replaceAll("/", "\\/")))
   }
   assert.match(growthHeaderSource, /PostHog/)
-  assert.equal((legacyProject.match(/_astro\/PostHog[^"']+\.js/g) ?? []).length, 1)
+  assert.equal((releasedProject.match(/_astro\/PostHog[^"']+\.js/g) ?? []).length, 1)
 })
 
 test("PostHog uses the approved cookieless and non-recording configuration", () => {
@@ -138,6 +138,7 @@ test("Analytics never reads or sends the homepage perspective interaction", () =
 })
 
 test("Inspirations emits controlled filter and sort values", () => {
-  assert.match(inspirationsSource, /trackInspirationsFilterChanged\(categorySelect\.value\)/)
+  assert.match(inspirationsSource, /const category = section\.dataset\.inspirationCategory/)
+  assert.match(inspirationsSource, /if \(category\) trackInspirationsFilterChanged\(category\)/)
   assert.match(inspirationsSource, /trackInspirationsSortChanged\(sortSelect\.value\)/)
 })

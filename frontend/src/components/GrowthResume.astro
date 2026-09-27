@@ -14,7 +14,10 @@ import ThemeBootstrap from './ThemeBootstrap.astro'
     <ThemeBootstrap />
     <link rel="canonical" href="https://maverickespinosa.com/resume/" />
     <title>Résumé | Maverick Espinosa</title>
-    <meta name="description" content="View or download Maverick Espinosa's dated résumé." />
+    <meta
+      name="description"
+      content="View or download Maverick Espinosa's current AI/ML and data engineering résumé."
+    />
   </head>
   <body class="resume-page">
     <a class="skip" href="#resume-content">Skip to content</a>
@@ -23,14 +26,14 @@ import ThemeBootstrap from './ThemeBootstrap.astro'
     <main id="resume-content">
       <header class="resume-hero">
         <p class="eyebrow">Résumé</p>
-        <h1>One source.<br /><em>Clearly dated.</em></h1>
-        <p>The available résumé is presented as a dated document while future role-specific versions remain under review.</p>
+        <h1>Current work.<br /><em>One clear résumé.</em></h1>
+        <p>A concise overview of my experience across AI/ML, data engineering, research software, and interactive systems.</p>
       </header>
 
       <section class="resume-list" aria-labelledby="resume-list-title">
         <div class="resume-list-heading">
-          <p class="eyebrow">Available document</p>
-          <h2 id="resume-list-title">Résumé archive.</h2>
+          <p class="eyebrow">Current document</p>
+          <h2 id="resume-list-title">Primary résumé.</h2>
         </div>
 
         {resumeEntries.map(entry => (

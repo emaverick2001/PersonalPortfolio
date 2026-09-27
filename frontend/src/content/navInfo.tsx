@@ -6,6 +6,8 @@ export interface Route {
 export const navLink: Route[] = [
   { title: "Projects", route: "/projects/" },
   { title: "Research", route: "/research/" },
+  { title: "Background", route: "/background/" },
+  { title: "Personal", route: "/personal/" },
   { title: "Music", route: "/music/" },
   { title: "Blog", route: "/blog/" },
   { title: "Inspirations", route: "/inspirations/" },

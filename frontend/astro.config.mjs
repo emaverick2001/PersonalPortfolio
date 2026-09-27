@@ -19,9 +19,7 @@ export default defineConfig({
         !page.endsWith("/preview/") &&
         !page.endsWith("/about-preview/") &&
         !page.endsWith("/work-preview/") &&
-        !page.endsWith("/synthesizer-preview/") &&
-        !page.endsWith("/personal/") &&
-        !page.endsWith("/background/"),
+        !page.endsWith("/synthesizer-preview/"),
     }),
     mdx(),
     react(),

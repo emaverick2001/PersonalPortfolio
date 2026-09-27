@@ -1,0 +1,110 @@
+---
+import GrowthPage from '../../components/GrowthPage.astro'
+
+const repo = 'https://github.com/emaverick2001/CS-527-Symbiotic-SWE'
+const system = [
+  ['01', 'Select context', 'Use the failure and repository structure to collect the code most likely to matter.'],
+  ['02', 'Generate a patch', 'Ask the language model for a concrete repair against that bounded context.'],
+  ['03', 'Check behavior', 'Apply the patch, run tests, and optionally inspect affected paths with slicing and a solver.'],
+  ['04', 'Return evidence', 'Convert failures and symbolic counterexamples into feedback for the next repair attempt.'],
+]
+const conditions = [
+  ['neural_only', '2 of 14', '14.3%', 14.3],
+  ['neural_slicing', '3 of 14', '21.4%', 21.4],
+  ['neural_solver', '3 of 14', '21.4%', 21.4],
+  ['neural_cegf', '5 of 14', '35.7%', 35.7],
+]
+---
+<GrowthPage title="Symbiotic-SWE" description="A bounded case study of a neuro-symbolic software-repair system, its held-out SymPy result, costs, and limitations.">
+  <header class="case-intro">
+    <a class="quiet-link" href="/projects/">← Back to Work</a>
+    <p class="eyebrow">AI systems research / Course research / 2026</p>
+    <h1>Can symbolic counterexamples<br /><em>help an AI repair code?</em></h1>
+    <p class="work-lead">I built a software-repair loop that combines language-model patches with program context, solver checks, counterexamples, and real tests. On one held-out SymPy subset, the full feedback loop solved more tasks—while using more time and tokens.</p>
+    <div class="case-facts">
+      <div><span>My focus</span>System design &amp; implementation</div>
+      <div><span>Built with</span>Python · CrossHair · Z3 · pytest</div>
+      <div><span>Evidence status</span>Held-out 14-task study</div>
+    </div>
+    <a class="button" href={repo} target="_blank" rel="noopener noreferrer">Inspect the repository <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <section class="case-section">
+    <p class="eyebrow">01 / The research question</p>
+    <h2>A failed patch contains<br />information for the next one.</h2>
+    <p>Language models can propose plausible edits, but plausibility is not the same as correctness. The project asked whether program structure and symbolic counterexamples could turn a failed attempt into useful, targeted feedback for another repair.</p>
+    <p>The test was deliberately narrow: compare four repair conditions through the same harness, then judge each result with the repository’s real tests.</p>
+  </section>
+
+  <section class="case-section">
+    <p class="eyebrow">02 / System</p>
+    <h2>Generate. Check.<br />Learn from the failure.</h2>
+    <p>The system preserves a simple loop: choose relevant context, generate a patch, test it, and send structured failure evidence back into the next attempt.</p>
+    <div class="system-loop" role="img" aria-label="The Symbiotic-SWE loop selects repository context, generates a patch, checks the patch with tests and optional program analysis, and returns failure evidence or symbolic counterexamples for another attempt.">
+      {system.map(([step, title, detail], index) => (
+        <div class="system-loop-step">
+          <span>{step}</span>
+          <h3>{title}</h3>
+          <p>{detail}</p>
+          {index < system.length - 1 && <i aria-hidden="true">→</i>}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="case-section">
+    <p class="eyebrow">03 / Role</p>
+    <h2>My contribution</h2>
+    <p>I built the Python repair system that connects LLM patch generation, repository context selection, program slicing, CrossHair and Z3 verification, counterexample-guided critique, patch application, pytest evaluation, and reproducible experiment artifacts.</p>
+    <div class="implementation-grid role-grid">
+      <div><h3>Repair orchestration</h3><p>Coordinated prompt context, patch attempts, application failures, feedback, and iteration budgets.</p></div>
+      <div><h3>Symbolic feedback</h3><p>Translated solver checks and counterexamples into critique the next repair attempt could use.</p></div>
+      <div><h3>Evaluation</h3><p>Ran the same held-out tasks across four conditions and retained per-task evidence instead of only aggregate scores.</p></div>
+    </div>
+    <p class="source-note">The public repository documents the implementation and reproducible experiment workflows. The result below describes one final held-out study, not a general benchmark claim.</p>
+  </section>
+
+  <section class="case-section findings-section">
+    <p class="eyebrow">04 / Evidence</p>
+    <h2>The complete loop solved more.<br />It also cost more.</h2>
+    <p>Across a held-out 14-task SymPy subset, the neural-only condition resolved 2 of 14 tasks (14.3%). The full counterexample-guided condition resolved 5 of 14 (35.7%).</p>
+    <div class="condition-chart" role="img" aria-label="Resolved tasks on a held-out 14-task SymPy subset: neural only 2 of 14 or 14.3 percent; neural with slicing 3 of 14 or 21.4 percent; neural with solver checks 3 of 14 or 21.4 percent; and the full counterexample-guided loop 5 of 14 or 35.7 percent.">
+      <div class="condition-chart-heading"><span>Condition</span><span>Resolved</span></div>
+      {conditions.map(([name, count, percent, width]) => (
+        <div class="condition-row">
+          <code>{name}</code>
+          <div class="condition-bar" aria-hidden="true"><i style={`width:${width}%`}></i></div>
+          <span>{count} · {percent}</span>
+        </div>
+      ))}
+    </div>
+    <div class="case-callout evidence-caveat">
+      <h3>The tradeoff matters</h3>
+      <p>The strongest condition also had a higher token and runtime cost: about 30,026 average tokens and 16.6 seconds, compared with about 16,747 tokens and 8.6 seconds for <code>neural_only</code>.</p>
+    </div>
+  </section>
+
+  <section class="case-section">
+    <p class="eyebrow">05 / Friction</p>
+    <h2>What the result does not prove</h2>
+    <div class="limitation-list">
+      <div><span>01</span><p><strong>Narrow scope.</strong> The study covers one repository family and 14 tasks; it cannot establish performance across software repair broadly.</p></div>
+      <div><span>02</span><p><strong>Incomplete solver reach.</strong> Symbolic checks covered 11 of the 14 tasks, so the feedback mechanism was not equally available everywhere.</p></div>
+      <div><span>03</span><p><strong>Patch reliability.</strong> Some generated edits still failed to apply cleanly, limiting how much the later checks could help.</p></div>
+      <div><span>04</span><p><strong>Resource cost.</strong> More context and feedback improved this small result while nearly doubling average runtime and substantially increasing tokens.</p></div>
+    </div>
+  </section>
+
+  <section class="case-section case-next">
+    <p class="eyebrow">06 / Next action</p>
+    <h2>Make the loop more selective.</h2>
+    <ol class="next-actions">
+      <li><span>Apply reliably</span>Reduce malformed and conflicting edits before adding more reasoning steps.</li>
+      <li><span>Choose context</span>Measure whether smaller, more exact slices improve both cost and repair quality.</li>
+      <li><span>Broaden carefully</span>Repeat the fixed protocol across more repositories before drawing general conclusions.</li>
+      <li><span>Spend adaptively</span>Reserve solver and counterexample budgets for failures likely to benefit from them.</li>
+    </ol>
+    <p>The supported conclusion is modest: symbolic feedback improved one small held-out result, and the next problem is making that gain cheaper, more reliable, and repeatable.</p>
+    <a class="button" href="/projects/">Return to selected work <span aria-hidden="true">↗</span></a>
+  </section>
+</GrowthPage>

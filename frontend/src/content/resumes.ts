@@ -6,8 +6,8 @@ export interface ResumeEntry {
 
 export const resumeEntries: ResumeEntry[] = [
   {
-    title: "Software and Data Engineering Résumé",
-    updatedLabel: "September 20, 2025",
-    pdfPath: "/assets/files/Resume_09_20_2025.pdf",
+    title: "AI/ML & Data Engineer Résumé",
+    updatedLabel: "September 2026",
+    pdfPath: "/assets/files/Maverick_Espinosa_Resume.pdf",
   },
 ]

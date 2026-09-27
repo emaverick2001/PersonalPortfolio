@@ -71,3 +71,39 @@
 @media(max-width:960px){.research-pipeline{grid-template-columns:1fr 1fr}.pipeline-step:nth-child(3) i{right:-14px;left:auto;top:50%;bottom:auto;transform:none}.pipeline-step:nth-child(even) i{right:auto;left:50%;top:auto;bottom:-23px;transform:rotate(90deg)}}
 @media(max-width:720px){.seed-comparison,.next-actions,.research-pipeline{grid-template-columns:1fr}.pipeline-step i,.pipeline-step:nth-child(3) i,.pipeline-step:nth-child(even) i{right:auto;left:50%;top:auto;bottom:-23px;transform:rotate(90deg)}}
 @media(max-width:600px){.evidence-preview{padding:20px}.seed-card{padding:20px}.seed-card-heading{align-items:flex-start;flex-direction:column}.metric-legend{justify-content:flex-start;flex-wrap:wrap}.research-pipeline{margin-top:28px}.pipeline-step{min-height:0}}
+
+/* Shared evidence visuals for the software-repair and cache-efficiency studies. */
+.system-loop{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:38px 0}
+.system-loop-step{position:relative;min-height:210px;padding:24px;border:1px solid var(--line);border-radius:10px;background:color-mix(in srgb,var(--green) 3%,var(--paper))}
+.system-loop-step>span{font:12px/1.4 Arial,sans-serif;letter-spacing:1.4px;color:var(--green)}
+.system-loop-step h3{font-size:23px;margin:24px 0 10px}
+.system-loop-step p{font:14px/1.6 Arial,sans-serif;color:var(--muted);margin:0}
+.system-loop-step i{position:absolute;right:-13px;top:50%;z-index:2;width:26px;height:26px;border:1px solid var(--line);border-radius:50%;background:var(--paper);color:var(--green);font:17px/24px Arial,sans-serif;text-align:center;font-style:normal}
+.condition-chart{max-width:850px;margin:38px 0;padding:28px;border:1px solid var(--line);border-radius:10px;background:color-mix(in srgb,var(--green) 3%,var(--paper));font:14px/1.5 Arial,sans-serif}
+.condition-chart-heading{display:flex;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid var(--line);font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted)}
+.condition-row{display:grid;grid-template-columns:minmax(130px,1fr) 2fr auto;gap:18px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
+.condition-row:last-child{border-bottom:0}
+.condition-row code{font-size:13px;color:var(--ink)}
+.condition-row>span{min-width:112px;text-align:right;color:var(--green)}
+.condition-bar{height:8px;border-radius:6px;background:color-mix(in srgb,var(--muted) 14%,transparent);overflow:hidden}
+.condition-bar i{display:block;height:100%;border-radius:inherit;background:var(--green)}
+.evidence-caveat code{color:var(--green)}
+@media(max-width:960px){.system-loop{grid-template-columns:1fr 1fr}.system-loop-step:nth-child(2) i{right:auto;left:50%;top:auto;bottom:-21px;transform:rotate(90deg)}}
+@media(max-width:720px){.system-loop{grid-template-columns:1fr}.system-loop-step{min-height:0}.system-loop-step i,.system-loop-step:nth-child(2) i{right:auto;left:50%;top:auto;bottom:-21px;transform:rotate(90deg)}.condition-row{grid-template-columns:1fr auto}.condition-bar{grid-column:1/-1;grid-row:2}.condition-row>span{min-width:0}}
+@media(max-width:420px){.condition-chart{padding:20px}.condition-row{gap:10px}.condition-row code{overflow-wrap:anywhere}}
+
+.cache-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:38px 0}
+.cache-flow-step{padding:24px;border:1px solid var(--line);border-radius:10px;background:color-mix(in srgb,var(--green) 3%,var(--paper))}
+.cache-flow-step>span{font:12px/1.4 Arial,sans-serif;letter-spacing:1.4px;color:var(--green)}
+.cache-flow-step h3{font-size:23px;margin:24px 0 10px}
+.cache-flow-step p{min-height:92px;font:14px/1.6 Arial,sans-serif;color:var(--muted)}
+.cache-blocks{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:22px}
+.cache-blocks i{height:12px;border:1px solid var(--green);border-radius:2px;background:color-mix(in srgb,var(--green) 15%,transparent)}
+.cache-blocks i.released{border-style:dashed;background:transparent;opacity:.45}
+.cache-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:38px 0}
+.cache-metrics>div{display:flex;min-height:180px;flex-direction:column;justify-content:space-between;padding:26px;border:1px solid var(--line);border-radius:10px;background:color-mix(in srgb,var(--green) 3%,var(--paper))}
+.cache-metrics span,.cache-metrics small{font:12px/1.5 Arial,sans-serif;text-transform:uppercase;letter-spacing:1px;color:var(--muted)}
+.cache-metrics strong{font:clamp(30px,3.4vw,47px)/1.1 Charter,Georgia,serif;color:var(--green);font-weight:400}
+.cache-metrics small{text-transform:none;letter-spacing:0}
+@media(max-width:960px){.cache-flow{grid-template-columns:1fr 1fr}.cache-flow-step p{min-height:0}}
+@media(max-width:720px){.cache-flow,.cache-metrics{grid-template-columns:1fr}.cache-metrics>div{min-height:145px}}
