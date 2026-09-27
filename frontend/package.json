@@ -11,6 +11,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "typecheck": "tsc --noEmit",
+    "test": "node --test scripts/*.test.mjs scripts/test-about-audio.mjs scripts/test-vine-growth.mjs",
+    "verify": "pnpm run build && pnpm run test && pnpm run typecheck",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx,astro}\" --fix",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,astro,md,mdx,json,css,html}\""
   },
