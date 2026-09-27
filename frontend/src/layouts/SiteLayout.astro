@@ -3,6 +3,7 @@ import Head from "@components/Head.astro"
 import { HeaderSection } from "@components/Header"
 import { FooterSection } from "@components/Footer"
 import ThemeBootstrap from "@components/ThemeBootstrap.astro"
+import ReleaseMetadata from "@components/ReleaseMetadata.astro"
 
 interface Props {
   title?: string
@@ -19,6 +20,7 @@ const noindex = Astro.props.noindex ?? false
 <html lang="en">
   <head>
     <Head {title} {description} {noindex} />
+    <ReleaseMetadata />
     <ThemeBootstrap />
   </head>
 

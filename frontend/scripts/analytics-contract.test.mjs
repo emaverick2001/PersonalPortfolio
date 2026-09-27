@@ -27,7 +27,7 @@ vm.runInNewContext(analyticsBundle.outputFiles[0].text, {
   module: analyticsModule,
   exports: analyticsModule.exports,
 })
-const { filterAnalyticsEvent } = analyticsModule.exports
+const { filterAnalyticsEvent, resolveReleaseEnvironment, shouldEnableAnalytics } = analyticsModule.exports
 
 const approvedEvents = [
   "contact_clicked",
@@ -47,6 +47,32 @@ test("PostHog initializes only for the public production experience", () => {
   }
   assert.match(growthHeaderSource, /PostHog/)
   assert.equal((releasedProject.match(/_astro\/PostHog[^"']+\.js/g) ?? []).length, 1)
+})
+
+test("analytics requires an explicit production release on the canonical public route", () => {
+  assert.equal(
+    shouldEnableAnalytics({ hostname: "maverickespinosa.com", pathname: "/research/" }, "production", true),
+    true,
+  )
+
+  for (const [location, environment, enabled] of [
+    [{ hostname: "maverickespinosa.com", pathname: "/research/" }, "staging", true],
+    [{ hostname: "maverickespinosa.com", pathname: "/research/" }, "invalid", true],
+    [{ hostname: "maverickespinosa.com", pathname: "/research/" }, "production", false],
+    [{ hostname: "maverickespinosa.com", pathname: "/preview/" }, "production", true],
+    [{ hostname: "localhost", pathname: "/research/" }, "production", true],
+    [{ hostname: "review-123.maverick-portfolio-staging.pages.dev", pathname: "/research/" }, "production", true],
+  ]) {
+    assert.equal(shouldEnableAnalytics(location, environment, enabled), false)
+  }
+})
+
+test("release environments reject missing or invalid production-build values", () => {
+  assert.equal(resolveReleaseEnvironment(undefined, true), "production")
+  assert.equal(resolveReleaseEnvironment("production", false), "production")
+  assert.equal(resolveReleaseEnvironment("staging", false), "staging")
+  assert.throws(() => resolveReleaseEnvironment(undefined, false), /PUBLIC_SITE_ENV/)
+  assert.throws(() => resolveReleaseEnvironment("preview", false), /PUBLIC_SITE_ENV/)
 })
 
 test("PostHog uses the approved cookieless and non-recording configuration", () => {

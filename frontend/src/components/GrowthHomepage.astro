@@ -3,6 +3,7 @@ import '../styles/growth-preview.css'
 import GrowthHeader from './GrowthHeader.astro'
 import GrowthFooterLinks from './GrowthFooterLinks.astro'
 import ThemeBootstrap from './ThemeBootstrap.astro'
+import ReleaseMetadata from './ReleaseMetadata.astro'
 interface Props { preview?: boolean }
 const { preview = false } = Astro.props
 const aboutHref = preview ? "/about-preview/" : "/about/"
@@ -12,6 +13,7 @@ const aboutHref = preview ? "/about-preview/" : "/about/"
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <ReleaseMetadata />
     <ThemeBootstrap />
     {preview && <meta name="robots" content="noindex, nofollow" />}
     {!preview && <link rel="canonical" href="https://maverickespinosa.com/" />}

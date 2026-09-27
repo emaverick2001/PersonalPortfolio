@@ -9,6 +9,7 @@ import GrowthFooterLinks from './GrowthFooterLinks.astro'
 import TagFilterSearchBar from './TagFilterSearchBar.astro'
 import PaginationArrows from './PaginationArrows.astro'
 import ThemeBootstrap from './ThemeBootstrap.astro'
+import ReleaseMetadata from './ReleaseMetadata.astro'
 
 const posts = (await getCollection('blog')).sort(
   (postA, postB) => +postB.data.publishDate - +postA.data.publishDate,
@@ -32,6 +33,7 @@ const formatter = new Intl.DateTimeFormat('en', {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <ReleaseMetadata />
     <ThemeBootstrap />
     <link rel="canonical" href="https://maverickespinosa.com/blog/" />
     <title>Writing | Maverick Espinosa</title>

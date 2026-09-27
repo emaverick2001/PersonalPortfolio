@@ -4,6 +4,7 @@ import '../styles/about-preview.css'
 import GrowthHeader from '../components/GrowthHeader.astro'
 import GrowthFooterLinks from '../components/GrowthFooterLinks.astro'
 import ThemeBootstrap from './ThemeBootstrap.astro'
+import ReleaseMetadata from './ReleaseMetadata.astro'
 interface Props { preview?: boolean }
 const { preview = false } = Astro.props
 const notes = ['C','C♯','D','D♯','E','F','F♯','G','G♯','A','A♯','B','C']
@@ -12,7 +13,7 @@ const shortcuts = ['A','W','S','E','D','F','T','G','Y','H','U','J','K']
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />{preview && <meta name="robots" content="noindex,nofollow" />}
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><ReleaseMetadata />{preview && <meta name="robots" content="noindex,nofollow" />}
 <title>About Maverick | Design Engineer &amp; Builder</title>
 <ThemeBootstrap />
 </head>

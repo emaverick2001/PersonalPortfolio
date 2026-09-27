@@ -5,6 +5,7 @@ import { inspirations } from '../content/inspirations'
 import GrowthHeader from './GrowthHeader.astro'
 import GrowthFooterLinks from './GrowthFooterLinks.astro'
 import ThemeBootstrap from './ThemeBootstrap.astro'
+import ReleaseMetadata from './ReleaseMetadata.astro'
 
 interface InspirationItem {
   title: string
@@ -61,6 +62,7 @@ const categories: InspirationCategory[] = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <ReleaseMetadata />
     <ThemeBootstrap />
     <link rel="canonical" href="https://maverickespinosa.com/inspirations/" />
     <title>Inspirations | Maverick Espinosa</title>

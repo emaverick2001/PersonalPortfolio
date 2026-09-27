@@ -1,7 +1,10 @@
 <script>
   import { filterAnalyticsEvent, installAnalytics, shouldEnableAnalytics } from "../utils/analytics"
 
-  if (shouldEnableAnalytics(window.location)) {
+  const environment = document.querySelector<HTMLMetaElement>('meta[name="portfolio-environment"]')?.content
+  const analyticsEnabled = document.querySelector<HTMLMetaElement>('meta[name="portfolio-analytics"]')?.content === "enabled"
+
+  if (shouldEnableAnalytics(window.location, environment, analyticsEnabled)) {
     // IP discard must be enabled in PostHog project settings before publication.
     import("posthog-js").then(({ default: posthog }) => posthog.init("phc_voeq3JqisO7ajA23SvGRdLrHgVKJJhQG13tfrukNGb", {
       api_host: "https://us.i.posthog.com",

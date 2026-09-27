@@ -47,8 +47,23 @@ export function filterAnalyticsEvent(capture: CaptureResult | null): CaptureResu
 const productionHosts = new Set(["maverickespinosa.com"])
 const previewRoutes = ["/preview/", "/about-preview/", "/work-preview/", "/synthesizer-preview/"]
 
-export function shouldEnableAnalytics(location: Pick<Location, "hostname" | "pathname">) {
-  return productionHosts.has(location.hostname) && !previewRoutes.some(route => location.pathname.startsWith(route))
+export type ReleaseEnvironment = "production" | "staging"
+
+export function resolveReleaseEnvironment(value: string | undefined, isDevelopment: boolean): ReleaseEnvironment {
+  if (!value && isDevelopment) return "production"
+  if (value === "production" || value === "staging") return value
+  throw new Error('PUBLIC_SITE_ENV must be "production" or "staging" for release builds')
+}
+
+export function shouldEnableAnalytics(
+  location: Pick<Location, "hostname" | "pathname">,
+  environment: string | null | undefined,
+  enabled: boolean,
+) {
+  return environment === "production"
+    && enabled
+    && productionHosts.has(location.hostname)
+    && !previewRoutes.some(route => location.pathname.startsWith(route))
 }
 
 function currentPath() {

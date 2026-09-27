@@ -6,6 +6,7 @@ import type { CollectionEntry } from 'astro:content'
 import GrowthHeader from './GrowthHeader.astro'
 import GrowthFooterLinks from './GrowthFooterLinks.astro'
 import ThemeBootstrap from './ThemeBootstrap.astro'
+import ReleaseMetadata from './ReleaseMetadata.astro'
 
 interface Props { entry: CollectionEntry<'blog'> }
 const { entry } = Astro.props
@@ -17,6 +18,7 @@ const categories = entry.data.categories ?? ['Reflection']
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <ReleaseMetadata />
     <ThemeBootstrap />
     <link rel="canonical" href={`https://maverickespinosa.com/blog/${entry.slug}/`} />
     <title>{entry.data.title} | Maverick Espinosa</title>
