@@ -79,15 +79,15 @@ const aboutHref = preview ? "/about-preview/" : "/about/"
             <div class="demo-heading"><span>Attention → perspective → action</span><span class="demo-label">Local demonstration</span></div>
             <form id="perspective-form">
               <label for="focus">What has your attention right now?</label>
-              <textarea id="focus" name="focus" rows="2" maxlength="240" required placeholder="A decision, problem, or responsibility..."></textarea>
+              <textarea id="focus" rows="2" maxlength="240" required placeholder="A decision, problem, or responsibility..."></textarea>
               <label class="field-label" for="perspective-lens">Choose another perspective</label>
-              <select id="perspective-lens" name="perspective-lens">
+              <select id="perspective-lens">
                 <option value="self">Your perspective</option>
                 <option value="other">Another person</option>
                 <option value="system">The system</option>
                 <option value="future">Your future self</option>
               </select>
-              <button class="button" type="submit">Shift perspective <span aria-hidden="true">+</span></button>
+              <button id="perspective-submit" class="button" type="submit" disabled>Shift perspective <span aria-hidden="true">+</span></button>
               <p class="demo-note">Nothing you enter is sent or saved.</p>
             </form>
             <div id="perspective-result" hidden>
@@ -97,8 +97,8 @@ const aboutHref = preview ? "/about-preview/" : "/about/"
               <p class="support" id="perspective-prompt"></p>
               <form id="action-form">
                 <label for="next-action">What is one useful next action?</label>
-                <textarea id="next-action" name="next-action" rows="2" maxlength="240" required placeholder="Make it small enough to try..."></textarea>
-                <button class="button" type="submit">Choose this action <span aria-hidden="true">+</span></button>
+                <textarea id="next-action" rows="2" maxlength="240" required placeholder="Make it small enough to try..."></textarea>
+                <button id="action-submit" class="button" type="submit" disabled>Choose this action <span aria-hidden="true">+</span></button>
               </form>
               <div id="action-result" hidden>
                 <p class="saved-label">Next action</p>

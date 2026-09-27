@@ -63,10 +63,12 @@ const lenses = {
   future: ['Future perspective', 'Looking back from later, what choice would you want to have made?'],
 } as const
 const perspectiveForm = document.getElementById('perspective-form') as HTMLFormElement
+const perspectiveSubmit = document.getElementById('perspective-submit') as HTMLButtonElement
 const focus = document.getElementById('focus') as HTMLTextAreaElement
 const lens = document.getElementById('perspective-lens') as HTMLSelectElement
 const perspectiveResult = document.getElementById('perspective-result')!
 const actionForm = document.getElementById('action-form') as HTMLFormElement
+const actionSubmit = document.getElementById('action-submit') as HTMLButtonElement
 const action = document.getElementById('next-action') as HTMLTextAreaElement
 const actionResult = document.getElementById('action-result')!
 const reset = document.getElementById('try-again') as HTMLButtonElement
@@ -84,6 +86,7 @@ perspectiveForm.addEventListener('submit', event => {
   action.focus({ preventScroll: true })
   requestUpdate()
 })
+perspectiveSubmit.disabled = false
 focus.addEventListener('input', () => focus.setCustomValidity(''))
 actionForm.addEventListener('submit', event => {
   event.preventDefault()
@@ -96,6 +99,7 @@ actionForm.addEventListener('submit', event => {
   reset.focus({ preventScroll: true })
   requestUpdate()
 })
+actionSubmit.disabled = false
 action.addEventListener('input', () => action.setCustomValidity(''))
 reset.addEventListener('click', () => {
   perspectiveResult.hidden = true

@@ -1,6 +1,8 @@
 import test from "node:test"
 import assert from "node:assert/strict"
 import { readFile } from "node:fs/promises"
+import vm from "node:vm"
+import { build } from "esbuild"
 
 const posthogSource = await readFile("src/components/PostHog.astro", "utf8")
 const analyticsSource = await readFile("src/utils/analytics.ts", "utf8")
@@ -12,6 +14,20 @@ const projectGridSource = await readFile("src/components/ProjectGrid.tsx", "utf8
 const socialSource = await readFile("src/content/socials.tsx", "utf8")
 const projectSource = await readFile("src/content/projects.ts", "utf8")
 const legacyProject = await readFile("dist/projects/pactspace/index.html", "utf8")
+
+const analyticsBundle = await build({
+  entryPoints: ["src/utils/analytics.ts"],
+  bundle: true,
+  write: false,
+  format: "cjs",
+  platform: "node",
+})
+const analyticsModule = { exports: {} }
+vm.runInNewContext(analyticsBundle.outputFiles[0].text, {
+  module: analyticsModule,
+  exports: analyticsModule.exports,
+})
+const { filterAnalyticsEvent } = analyticsModule.exports
 
 const approvedEvents = [
   "contact_clicked",
@@ -44,7 +60,11 @@ test("PostHog uses the approved cookieless and non-recording configuration", () 
     /respect_dnt:\s*true/,
     /disable_surveys:\s*true/,
     /disable_web_experiments:\s*true/,
+    /advanced_disable_flags:\s*true/,
     /advanced_disable_feature_flags:\s*true/,
+    /capture_heatmaps:\s*false/,
+    /capture_performance:\s*false/,
+    /before_send:\s*filterAnalyticsEvent/,
   ]) {
     assert.match(posthogSource, setting)
   }
@@ -56,6 +76,39 @@ test("PostHog uses the approved cookieless and non-recording configuration", () 
   assert.doesNotMatch(posthogSource, /import posthog from ["']posthog-js["']/)
   assert.doesNotMatch(posthogSource, /persistence:\s*["']localStorage/)
   assert.equal((siteLayoutSource.match(/<PostHog\s*\/>/g) ?? []).length, 0)
+})
+
+test("the final analytics payload filter rejects SDK events and strips undeclared properties", () => {
+  const transport = {
+    token: "project-token",
+    distinct_id: "cookieless-request",
+    $cookieless_mode: "always",
+  }
+  const sdkPayload = {
+    uuid: "00000000-0000-4000-8000-000000000000",
+    event: "$$heatmap",
+    properties: {
+      ...transport,
+      $heatmap_data: { x: 42, y: 19, href: "https://example.com/?focus=private#thought" },
+    },
+  }
+  assert.equal(filterAnalyticsEvent(sdkPayload), null)
+  assert.equal(filterAnalyticsEvent({ ...sdkPayload, event: "$web_vitals" }), null)
+  assert.equal(filterAnalyticsEvent({ ...sdkPayload, event: "constructor" }), null)
+
+  const approved = filterAnalyticsEvent({
+    ...sdkPayload,
+    event: "page_viewed",
+    properties: {
+      ...transport,
+      path: "/research/",
+      $current_url: "https://example.com/?focus=private#thought",
+      $referrer: "https://private.example/",
+      $heatmap_data: { x: 42, y: 19 },
+      arbitrary: "not approved",
+    },
+  })
+  assert.deepEqual({ ...approved.properties }, { ...transport, path: "/research/" })
 })
 
 test("Only the seven approved event names are captured", () => {

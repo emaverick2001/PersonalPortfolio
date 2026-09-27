@@ -30,6 +30,7 @@ test('reduced motion keeps the final illustration still', () => {
 test('attention moves through a chosen perspective before asking for an action', () => {
   const ui = setup(), input = ui.node('focus'), form = ui.node('perspective-form'), lens = ui.node('perspective-lens')
   assert.equal(typeof form.handlers.submit, 'function')
+  assert.equal(ui.node('perspective-submit').disabled, false)
   input.value = '   '; form.handlers.submit({ preventDefault() {} }); assert.ok(input.validity)
   input.value = 'The project feels too broad.'; lens.value = 'system'; input.handlers.input(); form.handlers.submit({ preventDefault() {} })
   assert.equal(ui.node('focused-thought').textContent, input.value)
@@ -43,6 +44,7 @@ test('attention moves through a chosen perspective before asking for an action',
 test('the next action remains local, renders as text, and clears on reset', () => {
   const ui = setup(), focus = ui.node('focus'), perspectiveForm = ui.node('perspective-form'), action = ui.node('next-action'), actionForm = ui.node('action-form')
   assert.equal(typeof perspectiveForm.handlers.submit, 'function')
+  assert.equal(ui.node('action-submit').disabled, false)
   focus.value = 'Understand the next step.'; ui.node('perspective-lens').value = 'self'; perspectiveForm.handlers.submit({ preventDefault() {} })
   action.value = '   '; actionForm.handlers.submit({ preventDefault() {} }); assert.ok(action.validity)
   action.value = '<strong>Write one question.</strong>'; action.handlers.input(); actionForm.handlers.submit({ preventDefault() {} })

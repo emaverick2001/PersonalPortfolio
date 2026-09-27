@@ -1,5 +1,5 @@
 <script>
-  import { installAnalytics, shouldEnableAnalytics } from "../utils/analytics"
+  import { filterAnalyticsEvent, installAnalytics, shouldEnableAnalytics } from "../utils/analytics"
 
   if (shouldEnableAnalytics(window.location)) {
     // IP discard must be enabled in PostHog project settings before publication.
@@ -18,8 +18,12 @@
       disable_surveys_automatic_display: true,
       disable_web_experiments: true,
       disable_external_dependency_loading: true,
+      advanced_disable_flags: true,
       advanced_disable_feature_flags: true,
       advanced_disable_feature_flags_on_first_load: true,
+      capture_heatmaps: false,
+      capture_performance: false,
+      before_send: filterAnalyticsEvent,
       property_denylist: [
         "$current_url",
         "$pathname",

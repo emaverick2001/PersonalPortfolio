@@ -1,3 +1,5 @@
+import type { CaptureResult } from "posthog-js"
+
 type AnalyticsEventProperties = {
   page_viewed: { path: string }
   navigation_clicked: { destination: string; region: string; source_path: string }
@@ -9,6 +11,38 @@ type AnalyticsEventProperties = {
 }
 
 type AnalyticsEvent = keyof AnalyticsEventProperties
+
+const analyticsPropertyAllowlist = {
+  page_viewed: ["path"],
+  navigation_clicked: ["destination", "region", "source_path"],
+  project_opened: ["project_slug", "source_path"],
+  resume_clicked: ["action", "source_path"],
+  contact_clicked: ["channel", "source_path"],
+  inspirations_filter_changed: ["category"],
+  inspirations_sort_changed: ["order"],
+} as const satisfies Record<AnalyticsEvent, readonly string[]>
+
+const transportProperties = ["token", "distinct_id", "$cookieless_mode"] as const
+
+export function filterAnalyticsEvent(capture: CaptureResult | null): CaptureResult | null {
+  if (!capture || !Object.prototype.hasOwnProperty.call(analyticsPropertyAllowlist, capture.event)) return null
+
+  const event = capture.event as AnalyticsEvent
+  const properties: CaptureResult["properties"] = {}
+  for (const key of [...transportProperties, ...analyticsPropertyAllowlist[event]]) {
+    if (Object.prototype.hasOwnProperty.call(capture.properties, key)) {
+      properties[key] = capture.properties[key]
+    }
+  }
+
+  const filtered: CaptureResult = {
+    uuid: capture.uuid,
+    event,
+    properties,
+  }
+  if (capture.timestamp) filtered.timestamp = capture.timestamp
+  return filtered
+}
 
 const productionHosts = new Set(["maverickespinosa.com"])
 const previewRoutes = ["/preview/", "/about-preview/", "/work-preview/", "/synthesizer-preview/"]
