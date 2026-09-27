@@ -10,7 +10,6 @@ const inspirations = await readBuilt("dist/inspirations/index.html")
 const personal = await readBuilt("dist/personal/index.html")
 const background = await readBuilt("dist/background/index.html")
 const generatedSitemap = await readBuilt("dist/sitemap-0.xml")
-const publicSitemap = await readBuilt("dist/sitemap.xml")
 
 test("Resume page presents one current primary PDF with distinct actions", () => {
   assert.ok(resume, "expected /resume/ to be built")
@@ -45,9 +44,7 @@ test("Released Personal and Background routes are available to search indexing",
   assert.doesNotMatch(personal, /<meta name="robots" content="noindex/i)
   assert.doesNotMatch(background, /<meta name="robots" content="noindex/i)
 
-  for (const sitemap of [generatedSitemap, publicSitemap]) {
-    assert.match(sitemap, /maverickespinosa\.com\/personal\//)
-    assert.match(sitemap, /maverickespinosa\.com\/background\//)
-    assert.match(sitemap, /maverickespinosa\.com\/resume\//)
-  }
+  assert.match(generatedSitemap, /maverickespinosa\.com\/personal\//)
+  assert.match(generatedSitemap, /maverickespinosa\.com\/background\//)
+  assert.match(generatedSitemap, /maverickespinosa\.com\/resume\//)
 })

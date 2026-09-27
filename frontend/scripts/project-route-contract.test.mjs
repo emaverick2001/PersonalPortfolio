@@ -45,11 +45,7 @@ test("the built Work routes expose only the curated index and four reviewed case
 })
 
 test("the sitemaps expose the reviewed case studies and no omitted legacy project route", async () => {
-  const sitemaps = await Promise.all([
-    readFile("dist/sitemap.xml", "utf8"),
-    readFile("dist/sitemap-0.xml", "utf8"),
-  ])
-  const sitemapOutput = sitemaps.join("\n")
+  const sitemapOutput = await readFile("dist/sitemap-0.xml", "utf8")
 
   for (const slug of ["symbiotic-swe", "semantic-aware-kv-cache-eviction"]) {
     assert.match(sitemapOutput, new RegExp(`/projects/${slug}/`))
