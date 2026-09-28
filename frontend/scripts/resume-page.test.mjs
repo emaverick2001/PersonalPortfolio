@@ -40,9 +40,17 @@ test("Shared navigation exposes Resume, Personal, and Background", () => {
   assert.doesNotMatch(home, /href="\/assets\/files\/Resume_09_20_2025\.pdf"/)
 })
 
-test("Released Personal and Background routes are available to search indexing", () => {
-  assert.doesNotMatch(personal, /<meta name="robots" content="noindex/i)
-  assert.doesNotMatch(background, /<meta name="robots" content="noindex/i)
+test("Released Personal and Background routes follow the release indexing boundary", () => {
+  for (const html of [personal, background]) {
+    const environment = html.match(/<meta name="portfolio-environment" content="(production|staging)"/)?.[1]
+    assert.ok(environment, "expected a production or staging release environment")
+
+    if (environment === "production") {
+      assert.doesNotMatch(html, /<meta name="robots" content="noindex/i)
+    } else {
+      assert.match(html, /<meta name="robots" content="noindex, nofollow"/i)
+    }
+  }
 
   assert.match(generatedSitemap, /maverickespinosa\.com\/personal\//)
   assert.match(generatedSitemap, /maverickespinosa\.com\/background\//)
