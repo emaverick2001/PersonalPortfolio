@@ -1,0 +1,103 @@
+---
+import GrowthPage from '../../components/GrowthPage.astro'
+
+const stages = [
+  ['Retrieved context', 'Keep meaningful passages as whole chunks rather than unrelated token fragments.'],
+  ['Shared features', 'Compute the same relevance and cache signals in offline experiments and live serving.'],
+  ['Utility score', 'Rank chunks with a parameterized combination of semantic and system features.'],
+  ['Chunk eviction', 'Release the lowest-utility cache blocks while preserving the remaining context structure.'],
+]
+const metrics = [
+  ['Cache released', '713 blocks', 'Estimated 654 MB'],
+  ['Answer quality', '0% quality delta', 'At the 30% budget'],
+  ['Request latency', '+56%', 'Latency increase'],
+]
+---
+<GrowthPage title="Semantic-Aware KV Cache Eviction" description="A five-person course research case study of semantic chunk-level KV-cache eviction, including bounded contribution and early live evidence.">
+  <header class="case-intro">
+    <a class="quiet-link" href="/projects/">← Back to Work</a>
+    <p class="eyebrow">AI systems research / Five-person course collaboration / 2026</p>
+    <h1>Can a cache forget less useful context<br /><em>and keep the answer?</em></h1>
+    <p class="work-lead">We explored semantic-aware, chunk-level KV-cache eviction for retrieval-augmented generation. The system could release meaningful cache capacity without changing answer quality at one moderate budget, but the first live result also exposed substantial latency and robustness costs.</p>
+    <div class="case-facts">
+      <div><span>My focus</span>Offline pipeline &amp; utility formulation</div>
+      <div><span>Built with</span>Python · vLLM · RAG</div>
+      <div><span>Evidence status</span>50-example live warmup</div>
+    </div>
+  </header>
+
+  <section class="case-section">
+    <p class="eyebrow">01 / The research question</p>
+    <h2>Memory is limited.<br />Not every context chunk is equally useful.</h2>
+    <p>Long-context language-model serving stores key and value tensors for earlier tokens so the model does not recompute them on every step. That cache improves generation speed, but it also consumes enough memory to limit how many requests a system can serve.</p>
+    <p>We asked whether the system could rank retrieved context by semantic utility, evict whole low-value chunks, and preserve answer quality more coherently than dropping isolated tokens.</p>
+  </section>
+
+  <section class="case-section">
+    <p class="eyebrow">02 / System</p>
+    <h2>Make the unit of memory<br />match the unit of meaning.</h2>
+    <p>The system treats a retrieved passage as a chunk, computes a utility score, and evicts complete low-utility chunks from the live cache. A shared offline/online feature contract keeps training-time traces and serving-time decisions comparable.</p>
+    <div class="cache-flow" role="img" aria-label="Retrieved context stays grouped into meaningful chunks. A shared offline and online feature contract provides semantic and system signals to a utility scorer. The scorer ranks whole chunks, and low-utility cache blocks are released before answer generation continues.">
+      {stages.map(([title, detail], index) => (
+        <div class="cache-flow-step">
+          <span>{String(index + 1).padStart(2, '0')}</span>
+          <h3>{title}</h3>
+          <p>{detail}</p>
+          <div class="cache-blocks" aria-hidden="true"><i></i><i></i><i></i><i class={index === 3 ? 'released' : ''}></i></div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="case-section">
+    <p class="eyebrow">03 / Role</p>
+    <h2>My contribution</h2>
+    <p>I led the offline pipeline and chunk-level utility formulation: creating trace data, defining parameterized utility signals, and keeping the shared offline/online feature contract aligned with the live vLLM path.</p>
+    <div class="implementation-grid role-grid">
+      <div><h3>Offline traces</h3><p>Prepared the examples and cache-level observations needed to compare eviction choices before live serving.</p></div>
+      <div><h3>Utility model</h3><p>Combined semantic relevance with system signals so whole chunks could be ranked under different memory budgets.</p></div>
+      <div><h3>Interface alignment</h3><p>Kept feature names and meanings consistent between the offline pipeline and online eviction logic.</p></div>
+    </div>
+    <p class="source-note">Built with Aarul Dhawan, Yu Fu, Naman Raina, and Keshav Trikha. The numerical outcome is a team result; this page distinguishes that result from my individual contribution.</p>
+  </section>
+
+  <section class="case-section findings-section">
+    <p class="eyebrow">04 / Evidence</p>
+    <h2>Capacity returned.<br />Quality held. Latency rose.</h2>
+    <p>In a live warmup using 50 MuSiQue examples at 30% eviction, the system released 713 cache blocks—an estimated 654 MB—with a 0% quality delta against the unpruned answers.</p>
+    <div class="cache-metrics" role="img" aria-label="At 30 percent eviction across a 50-example MuSiQue live warmup, the system released 713 cache blocks, an estimated 654 megabytes, with zero percent answer-quality delta and a 56 percent latency increase.">
+      {metrics.map(([label, value, detail]) => (
+        <div><span>{label}</span><strong>{value}</strong><small>{detail}</small></div>
+      ))}
+    </div>
+    <div class="case-callout evidence-caveat">
+      <h3>The serving cost was real</h3>
+      <p>The same comparison showed a 56% latency increase. At a more aggressive 40% eviction budget, answer quality degraded, so the moderate result did not extend safely to every setting.</p>
+    </div>
+  </section>
+
+  <section class="case-section">
+    <p class="eyebrow">05 / Friction</p>
+    <h2>An encouraging mechanism.<br />Not production-ready.</h2>
+    <div class="limitation-list">
+      <div><span>01</span><p><strong>Small live sample.</strong> Fifty examples are enough to expose behavior, not enough to establish a reliable quality boundary across tasks.</p></div>
+      <div><span>02</span><p><strong>Latency overhead.</strong> Feature extraction and eviction logic added 56% latency in the measured warmup.</p></div>
+      <div><span>03</span><p><strong>Coarse decisions.</strong> Whole chunks preserve meaning, but a mixed-quality chunk may contain both essential and disposable tokens.</p></div>
+      <div><span>04</span><p><strong>Budget sensitivity.</strong> The 30% setting held quality in this sample; the 40% setting did not.</p></div>
+      <div><span>05</span><p><strong>Estimated memory.</strong> The 654 MB figure is derived from released blocks rather than an independent device-memory measurement.</p></div>
+    </div>
+  </section>
+
+  <section class="case-section case-next">
+    <p class="eyebrow">06 / Next action</p>
+    <h2>Find the safe boundary<br />before optimizing beyond it.</h2>
+    <ol class="next-actions">
+      <li><span>Reduce overhead</span>Move reusable feature work off the critical request path and profile each remaining stage.</li>
+      <li><span>Refine chunks</span>Compare paragraph, sentence, and adaptive boundaries without losing cache-layout efficiency.</li>
+      <li><span>Test broadly</span>Repeat across larger datasets, context lengths, models, and hardware with fixed baselines.</li>
+      <li><span>Protect quality</span>Add a per-request safeguard that backs off when the utility margin is too uncertain.</li>
+    </ol>
+    <p class="source-note">These results come from the team’s final course report. No public report or repository is linked here while the shareable source and contribution boundaries remain under review.</p>
+    <a class="button" href="/projects/">Return to selected work <span aria-hidden="true">↗</span></a>
+  </section>
+</GrowthPage>

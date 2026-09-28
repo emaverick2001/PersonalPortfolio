@@ -1,0 +1,82 @@
+---
+import '../styles/global.css'
+import '../styles/growth-preview.css'
+import '../styles/music.css'
+import { music } from '../content/music'
+import GrowthHeader from './GrowthHeader.astro'
+import GrowthFooterLinks from './GrowthFooterLinks.astro'
+import ThemeBootstrap from './ThemeBootstrap.astro'
+import ReleaseMetadata from './ReleaseMetadata.astro'
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <ReleaseMetadata />
+    <ThemeBootstrap />
+    <link rel="canonical" href="https://maverickespinosa.com/music/" />
+    <title>Music | Maverick Espinosa</title>
+    <meta name="description" content="Music by Maverick Espinosa: tracks, sketches, and experiments in sound." />
+  </head>
+  <body class="music-page">
+    <a class="skip" href="#music-content">Skip to content</a>
+    <GrowthHeader homeHref="/" aboutHref="/about/" activeExplore="/music/" />
+
+    <main id="music-content">
+      <header class="music-hero">
+        <p class="eyebrow">Music</p>
+        <div class="music-hero-grid">
+          <h1>Sound<br /><em>studies.</em></h1>
+        </div>
+      </header>
+
+      <section class="music-library" aria-labelledby="music-library-title">
+        <header class="music-library-heading">
+          <div>
+            <p class="eyebrow">The archive</p>
+            <h2 id="music-library-title">Selected tracks</h2>
+          </div>
+        </header>
+
+        <div class="music-grid">
+          {music.map((performance, index) => (
+            <a
+              class:list={['music-card', index === 0 && 'music-card-featured']}
+              href={performance.hrefLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              referrerpolicy="no-referrer"
+              data-music-card
+              data-featured={index === 0 ? '' : undefined}
+            >
+              <div class="music-art">
+                <img
+                  src={performance.thumbnailLink}
+                  alt={`${performance.name} artwork`}
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                  decoding="async"
+                />
+              </div>
+              <div class="music-card-copy">
+                <p class="music-index">{String(index + 1).padStart(2, '0')}</p>
+                <h3>{performance.name}</h3>
+                <span class="music-card-link">
+                  Open track <span aria-hidden="true">↗</span>
+                  <span class="sr-only">(opens in a new tab)</span>
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    </main>
+
+    <footer class="music-footer">
+      <GrowthFooterLinks />
+      <div class="footer-meta"><span>Maverick Espinosa</span><a href="#music-content">Back to the beginning ↑</a></div>
+    </footer>
+
+    <script src="../scripts/growth-theme.ts"></script>
+  </body>
+</html>

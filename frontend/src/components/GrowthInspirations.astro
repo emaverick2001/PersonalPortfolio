@@ -1,0 +1,247 @@
+---
+import '../styles/growth-preview.css'
+import '../styles/inspirations.css'
+import { inspirations } from '../content/inspirations'
+import GrowthHeader from './GrowthHeader.astro'
+import GrowthFooterLinks from './GrowthFooterLinks.astro'
+import ThemeBootstrap from './ThemeBootstrap.astro'
+import ReleaseMetadata from './ReleaseMetadata.astro'
+
+interface InspirationItem {
+  title: string
+  author?: string
+  link?: string
+}
+
+interface InspirationCategory {
+  key: string
+  label: string
+  items: InspirationItem[]
+}
+
+const categories: InspirationCategory[] = [
+  {
+    key: 'people',
+    label: 'People',
+    items: inspirations.people.map(person => ({ title: person.name, link: person.link })),
+  },
+  {
+    key: 'posts',
+    label: 'Posts',
+    items: inspirations.posts.map(post => ({ title: post.title, author: post.author, link: post.link })),
+  },
+  {
+    key: 'talks',
+    label: 'Talks',
+    items: inspirations.talks.map(talk => ({ title: talk.title, author: talk.author, link: talk.link })),
+  },
+  {
+    key: 'videos',
+    label: 'Videos',
+    items: inspirations.videos.map(video => ({ title: video.title, author: video.author, link: video.link })),
+  },
+  {
+    key: 'music',
+    label: 'Music',
+    items: inspirations.music.map(item => ({ title: item.title, link: item.link })),
+  },
+  {
+    key: 'games',
+    label: 'Games',
+    items: inspirations.games.map(item => ({ title: item.title })),
+  },
+  {
+    key: 'media',
+    label: 'Media',
+    items: inspirations.media.map(item => ({ title: item.title })),
+  },
+]
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <ReleaseMetadata />
+    <ThemeBootstrap />
+    <link rel="canonical" href="https://maverickespinosa.com/inspirations/" />
+    <title>Inspirations | Maverick Espinosa</title>
+    <meta name="description" content="People, writing, talks, music, games, and media that inspire Maverick Espinosa." />
+  </head>
+  <body class="inspirations-page">
+    <a class="skip" href="#inspirations-content">Skip to content</a>
+    <GrowthHeader homeHref="/" aboutHref="/about/" activeExplore="/inspirations/" />
+
+    <main id="inspirations-content">
+      <header class="inspirations-hero">
+        <div class="inspirations-introduction">
+          <p class="eyebrow">Inspirations</p>
+          <h1>What stays<br /><em>with me.</em></h1>
+          <p>A living collection of people, ideas, and media that have shaped how I understand, create, and choose.</p>
+        </div>
+
+        <aside class="inspirations-note" aria-label="A note on perspective">
+          <p class="eyebrow">A note on perspective</p>
+          <p>Media lets us borrow another perspective. I keep what helps me see more clearly, act with intention, and move one thing forward.</p>
+        </aside>
+      </header>
+
+      <section class="inspirations-library" aria-labelledby="inspirations-library-title">
+        <header class="inspirations-library-heading">
+          <p class="eyebrow">Index</p>
+          <h2 id="inspirations-library-title">People, ideas, and works.</h2>
+        </header>
+
+        <form class="inspirations-controls" data-inspiration-controls>
+          <label class="inspirations-control">
+            <span>Order</span>
+            <select name="sort" data-inspiration-sort>
+              <option value="curated">Curated</option>
+              <option value="az">A–Z</option>
+              <option value="za">Z–A</option>
+            </select>
+          </label>
+
+          <p class="inspirations-status" role="status" aria-live="polite" data-inspiration-status>
+            58 entries · Curated order
+          </p>
+        </form>
+
+        <div class="inspirations-grid">
+          {categories.map((category, categoryIndex) => (
+            <details
+              class="inspiration-category"
+              open={categoryIndex === 0}
+              name="inspiration-categories"
+              data-inspiration-category={category.key}
+              id={`inspiration-${category.key}`}
+            >
+              <summary data-inspiration-summary>
+                <p aria-hidden="true">{String(categoryIndex + 1).padStart(2, '0')}</p>
+                <h2>{category.label}</h2>
+                <span class="inspiration-category-count" data-inspiration-count>{category.items.length}</span>
+                <span class="inspiration-disclosure-icon" aria-hidden="true">+</span>
+              </summary>
+              <div class="inspiration-category-panel">
+                <ul>
+                  {category.items.map((item, itemIndex) => (
+                    <li
+                      data-inspiration-item
+                      data-inspiration-title={item.title}
+                      data-curated-index={itemIndex}
+                    >
+                      {item.link ? (
+                        <a
+                          href={item.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          referrerpolicy="no-referrer"
+                        >
+                          <span>
+                            <strong>{item.title}</strong>
+                            {item.author && <small>by {item.author}</small>}
+                          </span>
+                          <span aria-hidden="true">↗</span>
+                        </a>
+                      ) : (
+                        <span>{item.title}</span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </details>
+          ))}
+        </div>
+      </section>
+    </main>
+
+    <footer class="inspirations-footer">
+      <GrowthFooterLinks />
+      <div class="footer-meta"><span>Maverick Espinosa</span><a href="#inspirations-content">Back to the beginning ↑</a></div>
+    </footer>
+
+    <script>
+      import { trackInspirationsFilterChanged, trackInspirationsSortChanged } from '../utils/analytics'
+
+      const controls = document.querySelector('[data-inspiration-controls]')
+
+      if (controls instanceof HTMLFormElement) {
+        const sortSelect = controls.querySelector('[data-inspiration-sort]')
+        const status = controls.querySelector('[data-inspiration-status]')
+        const sections = Array.from(document.querySelectorAll('[data-inspiration-category]')).filter(
+          (section): section is HTMLDetailsElement => section instanceof HTMLDetailsElement,
+        )
+        const collator = new Intl.Collator('en', { sensitivity: 'base' })
+
+        const applyControls = () => {
+          if (!(sortSelect instanceof HTMLSelectElement)) return
+
+          const selectedSort = sortSelect.value
+
+          sections.forEach(section => {
+            const list = section.querySelector('ul')
+            if (!(list instanceof HTMLUListElement)) return
+
+            const items = Array.from(list.querySelectorAll('[data-inspiration-item]'))
+            const orderedItems = items.sort((first, second) => {
+              if (!(first instanceof HTMLElement) || !(second instanceof HTMLElement)) return 0
+
+              if (selectedSort === 'curated') {
+                return Number(first.dataset.curatedIndex) - Number(second.dataset.curatedIndex)
+              }
+
+              const comparison = collator.compare(
+                first.dataset.inspirationTitle ?? '',
+                second.dataset.inspirationTitle ?? '',
+              )
+              return selectedSort === 'za' ? -comparison : comparison
+            })
+
+            orderedItems.forEach(item => list.append(item))
+          })
+
+          if (status) {
+            const orderLabel = selectedSort === 'az' ? 'A–Z' : selectedSort === 'za' ? 'Z–A' : 'Curated'
+            status.textContent = `58 entries · ${orderLabel} order`
+          }
+        }
+
+        const openHashCategory = () => {
+          const target = document.getElementById(decodeURIComponent(window.location.hash.slice(1)))
+          if (!(target instanceof HTMLDetailsElement) || !target.matches('[data-inspiration-category]')) return
+
+          sections.forEach(section => {
+            section.open = section === target
+          })
+          window.requestAnimationFrame(() => target.scrollIntoView({ block: 'start' }))
+        }
+
+        controls.addEventListener('submit', event => event.preventDefault())
+        sortSelect?.addEventListener('change', () => {
+          applyControls()
+          if (sortSelect instanceof HTMLSelectElement) {
+            trackInspirationsSortChanged(sortSelect.value)
+          }
+        })
+        sections.forEach(section => {
+          section.querySelector('summary')?.addEventListener('click', () => {
+            if (!section.open) {
+              const category = section.dataset.inspirationCategory
+              if (category) trackInspirationsFilterChanged(category)
+            }
+          })
+          section.addEventListener('toggle', () => {
+            if (!section.open) return
+            sections.forEach(otherSection => {
+              if (otherSection !== section) otherSection.open = false
+            })
+          })
+        })
+        window.addEventListener('hashchange', openHashCategory)
+        openHashCategory()
+      }
+    </script>
+    <script src="../scripts/growth-theme.ts"></script>
+  </body>
+</html>

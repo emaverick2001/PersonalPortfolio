@@ -1,0 +1,10 @@
+---
+import { resolveReleaseEnvironment } from '../utils/analytics'
+
+const environment = resolveReleaseEnvironment(import.meta.env.PUBLIC_SITE_ENV, import.meta.env.DEV)
+const analyticsEnabled = environment === 'production' && import.meta.env.PUBLIC_ANALYTICS_ENABLED === 'true'
+---
+
+<meta name="portfolio-environment" content={environment} />
+<meta name="portfolio-analytics" content={analyticsEnabled ? 'enabled' : 'disabled'} />
+{environment === 'staging' && <meta name="robots" content="noindex, nofollow" />}

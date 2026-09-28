@@ -1,0 +1,49 @@
+---
+import '../styles/growth-preview.css'
+import '../styles/about-preview.css'
+import GrowthHeader from '../components/GrowthHeader.astro'
+import GrowthFooterLinks from '../components/GrowthFooterLinks.astro'
+import ThemeBootstrap from './ThemeBootstrap.astro'
+import ReleaseMetadata from './ReleaseMetadata.astro'
+interface Props { preview?: boolean }
+const { preview = false } = Astro.props
+const notes = ['C','C♯','D','D♯','E','F','F♯','G','G♯','A','A♯','B','C']
+const shortcuts = ['A','W','S','E','D','F','T','G','Y','H','U','J','K']
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><ReleaseMetadata />{preview && <meta name="robots" content="noindex,nofollow" />}
+<title>About Maverick | Design Engineer &amp; Builder</title>
+<ThemeBootstrap />
+</head>
+<body>
+<a class="skip" href="#introduction">Skip to content</a>
+<GrowthHeader preview={preview} homeHref={preview ? "/preview/" : "/"} aboutHref={preview ? "/about-preview/" : "/about/"} activeAbout />
+<main class="about-page" id="introduction">
+<section class="about-hero">
+<div><p class="eyebrow">About the builder</p><h1>Curiosity gives me<br />a place to begin.</h1><p class="intro">I’m a design engineer and builder interested in how tools can protect attention, deepen understanding, and help people flourish.</p><p class="about-copy">I love a good challenge: understanding a difficult problem, building something useful, and seeing how it grows as people make it part of their lives.</p></div>
+<div class="about-botanical" aria-hidden="true"><canvas id="about-plant" width="600" height="800"></canvas><img id="plant-sheet" src="/assets/images/growth/plant-keyframes.png" alt="" hidden /></div>
+</section>
+<section class="about-section"><h2>How I approach a challenge</h2><div class="about-loop" role="img" aria-label="Understand, try, learn, then return to understand"><p>Understand <span>→</span> Try <span>→</span> Learn</p><svg viewBox="0 0 280 30" aria-hidden="true" class="return-arrow"><path d="M260 2 V10 Q260 23 247 23 H48 Q35 23 35 10 V3 M30 8 L35 3 L40 8" /></svg></div><p class="about-copy centered">Observe carefully. Test a small idea. Let the result change the next question.</p></section>
+<section class="about-section"><h2>What shapes my questions</h2><div class="about-columns"><div><h3>Research experience</h3><p>My data work at CPCR supports psychological research. My broader interests include consciousness, perception, and how people understand their experiences.</p></div><div><h3>Questions I’m exploring</h3><p>How can tools support focused attention?<br />What becomes clearer when an idea is seen, heard, or explored through interaction?</p></div></div></section>
+<section class="about-section" id="music"><h2>Music is another way I build.</h2><p class="about-copy">An idea becomes a sound. Listening shapes what comes next.</p>
+<div class="music-workbench" id="instrument">
+<div class="sound-toolbar"><button class="button" type="button" id="sound-toggle" aria-pressed="false">Enable sound</button><p id="sound-status" role="status">Sound is off.</p></div>
+<fieldset id="sound-controls" disabled><legend class="sr-only">Shape the sound</legend><div class="sound-parameters">
+<label for="pitch">Pitch <output id="pitch-value">0 semitones</output><input id="pitch" type="range" min="-12" max="12" step="1" value="0" /></label>
+<label for="delay">Delay <output id="delay-value">0%</output><input id="delay" type="range" min="0" max="70" value="0" /></label>
+<label for="reverb">Reverb <output id="reverb-value">0%</output><input id="reverb" type="range" min="0" max="70" value="0" /></label>
+</div></fieldset>
+<div class="piano" role="group" aria-label="Playable keyboard">
+{notes.map((note,i)=><button type="button" disabled class:list={['piano-key',{'sharp':note.includes('♯')}]} style={note.includes("♯") ? `left:${([1,3,6,8,10].indexOf(i) + (i>4 ? 1 : 0) + 1)*12.5-4}%` : undefined} data-note={60+i} aria-label={`${note} ${i===12 ? 5 : 4}, keyboard ${shortcuts[i]}`} aria-pressed="false"><span>{note}</span><small>{shortcuts[i]}</small></button>)}
+</div>
+<canvas id="waveform" width="1000" height="100" role="img" aria-label="Live waveform of the sound you are playing"></canvas>
+<p class="instrument-help">Enable sound, then hold a key. You can also use A W S E D F T G Y H U J K while focused inside the instrument. Adjust the controls to hear what changes.</p>
+<noscript><p>Enable JavaScript to play the keyboard.</p></noscript>
+</div></section>
+<section class="about-section book-section"><div class="book-label"><p class="eyebrow">On my bookshelf</p><h3><cite>Difficult<br />Conversations</cite></h3><p>Douglas Stone<br />Bruce Patton<br />Sheila Heen</p></div><div><h2>What shapes how I listen</h2><p class="about-copy"><cite>Difficult Conversations</cite> taught me to listen for the experience underneath someone’s words, not just the literal message. It made me more conscious of the gap between intent and impact and more willing to question my own interpretation. I bring that same mindset into building: understand the person and the friction first, then design the solution.</p></div></section>
+</main>
+<footer id="about"><GrowthFooterLinks /><div class="footer-meta"><span>Maverick Espinosa</span>{preview && <span>Unpublished About preview</span>}<a href="mailto:emaverick2001@gmail.com">Start a conversation ↗</a></div></footer>
+<script src="../scripts/growth-theme.ts"></script><script src="../scripts/about-preview.ts"></script>
+</body></html>

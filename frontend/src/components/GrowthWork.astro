@@ -1,0 +1,111 @@
+---
+interface Props { preview?: boolean }
+const { preview = false } = Astro.props
+const synthesizerHref = preview ? '/synthesizer-preview/' : '/projects/pure-data-synthesizer--visualizer/'
+const focusHref = preview ? '/preview/#current-project' : '/#current-project'
+---
+<header class="work-intro">
+  <p class="eyebrow">Selected work</p>
+  <h1>Questions worth testing.<br /><em>Evidence worth showing.</em></h1>
+  <p class="work-lead">Research systems, creative instruments, and tools that help people understand and act. Each project is presented at the level its evidence supports.</p>
+  <nav class="work-jumps" aria-label="Selected projects">
+    <a href="#symbiotic-swe">Software repair</a>
+    <a href="#molecule-generation">Molecular ML</a>
+    <a href="#sackv">Efficient inference</a>
+    <a href="#synthesizer">Sound &amp; visuals</a>
+    <a href="#daily-focus-coach">Next product</a>
+  </nav>
+</header>
+
+<div class="project-journey" id="project-journey">
+  <div class="work-vine-origin" aria-hidden="true"></div>
+  <div class="vine-rail" aria-hidden="true">
+    <div class="vine-stage">
+      <canvas id="work-vine-canvas" width="400" height="950"></canvas>
+      <img id="work-vine-sheet" src="/assets/images/growth/ivy-journey-states.png" alt="" hidden />
+    </div>
+  </div>
+
+  <article class="project-entry" id="symbiotic-swe">
+    <div class="project-meta"><span>01 / AI systems research</span><span class="project-status">Course research · 2026</span></div>
+    <div class="project-feature">
+      <div>
+        <h2>Turn failure<br />into feedback.</h2>
+        <p class="project-name">Symbiotic-SWE</p>
+        <p>I built a neuro-symbolic software-repair system that combines LLM-generated patches, program slicing, solver checks, counterexample-guided feedback, and real tests. In a held-out SymPy study, the full loop resolved more tasks—at a higher token and runtime cost.</p>
+        <a class="button" href="/projects/symbiotic-swe/">Explore the case study <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="evidence-preview" role="img" aria-label="On a held-out 14-task SymPy subset, the neural-only condition resolved 2 tasks and the full counterexample-guided condition resolved 5 tasks, with higher token and runtime cost.">
+        <p class="diagram-label">The held-out result</p>
+        <div class="evidence-preview-row"><span>Neural only</span><strong>2 / 14</strong><small>14.3% resolved</small></div>
+        <div class="evidence-preview-row"><span>Full feedback loop</span><strong>5 / 14</strong><small>35.7% resolved</small></div>
+        <p class="diagram-note">One repository family; the stronger result cost more tokens and time.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="project-entry" id="molecule-generation">
+    <div class="project-meta"><span>02 / AI systems research</span><span class="project-status">Course research · 2026</span></div>
+    <div class="project-feature">
+      <div>
+        <h2>Build the loop.<br />Test what survives.</h2>
+        <p class="project-name">Molecule Generation with Reinforcement Learning</p>
+        <p>I implemented an end-to-end GRPO-style post-training path for DiffDock, then tested whether an apparent improvement held across another seed. It did not—and that instability became the most useful finding.</p>
+        <a class="button" href="/projects/molecule-generation-with-rl/">Explore the case study <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="evidence-preview" role="img" aria-label="Seed 44 improved after one GRPO update, while Seed 45 did not reproduce the improvement.">
+        <p class="diagram-label">The honest result</p>
+        <div class="evidence-preview-row"><span>Seed 44</span><strong>Improved</strong><small>Mean RMSD 7.49 → 3.03 Å</small></div>
+        <div class="evidence-preview-row caution"><span>Seed 45</span><strong>Unstable</strong><small>Success@1 0.80 → 0.40</small></div>
+        <p class="diagram-note">A functional training loop, not yet a robust benchmark result.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="project-entry" id="sackv">
+    <div class="project-meta"><span>03 / Efficient inference research</span><span class="project-status">Five-person course collaboration · 2026</span></div>
+    <div class="project-feature">
+      <div>
+        <h2>Evict less useful<br />context.</h2>
+        <p class="project-name">Semantic-Aware Chunk-Level KV Cache Eviction</p>
+        <p>I helped build a semantic approach to evicting whole context chunks from an LLM cache. A small live warmup recovered cache capacity without changing answer quality at a moderate budget, while exposing latency and robustness costs that still need work.</p>
+        <a class="button" href="/projects/semantic-aware-kv-cache-eviction/">Explore the case study <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="evidence-preview" role="img" aria-label="In a 50-example MuSiQue warmup at 30 percent eviction, the system freed 713 cache blocks, an estimated 654 megabytes, with no quality delta and a 56 percent latency increase.">
+        <p class="diagram-label">The live warmup</p>
+        <div class="evidence-preview-row"><span>Cache released</span><strong>713 blocks</strong><small>Estimated 654 MB</small></div>
+        <div class="evidence-preview-row caution"><span>Tradeoff</span><strong>+56% latency</strong><small>0% answer-quality delta</small></div>
+        <p class="diagram-note">50 MuSiQue examples at 30% eviction; early evidence, not a production claim.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="project-entry" id="synthesizer">
+    <div class="project-meta"><span>04 / Creative instruments</span><span class="project-status">Completed class project · 2024</span></div>
+    <div class="project-feature">
+      <div>
+        <h2>One gesture.<br />Two ways to understand it.</h2>
+        <p class="project-name">Pure Data Synthesizer + Visualizer</p>
+        <p>A MIDI keyboard becomes a control surface for sound and visuals. Notes, knobs, and an arpeggiator connect musical expression with a changing visual scene.</p>
+        <a class="button" href={synthesizerHref}>Explore the case study <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="signal-map" role="img" aria-label="MIDI controls feed a Pure Data patch, which produces both sound and GEM visuals.">
+        <p class="diagram-label">The interaction</p>
+        <div class="signal-origin">Your MIDI keyboard<small>Notes + eight knobs</small></div>
+        <div class="signal-arrow" aria-hidden="true">↓</div>
+        <div class="signal-engine">Pure Data patch</div>
+        <div class="signal-arrow" aria-hidden="true">↙ &nbsp; &nbsp; ↘</div>
+        <div class="signal-outputs"><div>Hear it<small>Synth + effects</small></div><div>See it<small>GEM visuals</small></div></div>
+        <p class="diagram-note">System overview, based on the original project documentation.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="project-entry" id="daily-focus-coach">
+    <div class="project-meta"><span>05 / Attention &amp; everyday workflows</span><span class="project-status in-progress">In development</span></div>
+    <h2>Daily Focus Coach</h2>
+    <p class="project-question">How can a tool help someone return to what matters?</p>
+    <p>Daily Focus Coach is my next product project after Portfolio v1. The homepage interaction illustrates the direction: helping someone return to what matters. It is not yet a product demo, trial result, or persistent personal-data system.</p>
+    <a class="quiet-link" href={focusHref}>See the illustrative interaction ↗</a>
+  </article>
+</div>

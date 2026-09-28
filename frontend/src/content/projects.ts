@@ -1,12 +1,9 @@
-import { trackProjectOpened } from "../utils/analytics"
-
 interface Project {
   name: string
   image: string
   tags: string[]
   sourceCode: string
   projectLink?: string
-  onclick: () => void
   desc: string
   gallery?: string[]
   overview: string
@@ -31,7 +28,6 @@ export const projects: Project[] = [
     tags: ["B2B Marketplace", "Workflow Systems", "AI (Roadmap)", "Verification", "Payments"],
     sourceCode: "https://github.com/emaverick2001/PactSpace",
     projectLink: "https://www.pactspace.co/",
-    onclick: () => trackProjectOpened("PactSpace", "projectCard"),
 
     desc: "A structured B2B marketplace for partner discovery, negotiation, and milestone-based execution.",
 
@@ -102,7 +98,6 @@ export const projects: Project[] = [
     image: "/assets/images/project-9.jpg",
     tags: ["DataScience", "DataEngineering"],
     sourceCode: "https://github.com/emaverick2001/DataCatalog",
-    onclick: () => trackProjectOpened("CPCR DataCatalog", "projectCard"),
     desc: "Centralized metadata & discovery tool to support ingestion, harmonization, documentation, and secure distribution of CPCR datasets",
     overview:
       "CPCR DataCatalog is a centralized data-asset metadata and discovery tool designed to support ingestion, harmonization, documentation, and exploration of datasets across teams and analytic workflows. It helps researchers and engineers find the right datasets faster, understand what each dataset contains, trace where it came from, and enforce appropriate access rules—reducing duplicated work and improving reliability in downstream analysis.",
@@ -173,7 +168,6 @@ export const projects: Project[] = [
     image: "/assets/images/project-3.jpg",
     tags: ["DataScience", "AI", "DataMining"],
     sourceCode: "https://github.com/emaverick2001/CTRAnalysis",
-    onclick: () => trackProjectOpened("CTR Analysis", "projectCard"),
     desc: "Exploring CTR classification algorithms and model pipelines",
     overview:
       "This project explores click-through rate (CTR) prediction using the Avazu CTR dataset (Kaggle). CTR prediction is a core supervised-learning problem in online advertising, where the goal is to estimate the probability a user will click an ad given anonymized contextual + device + placement features. Using Avazu’s multi-day click log data (10 days for training, 1 day for testing), this repo walks through a practical end-to-end pipeline—loading compressed data, preparing features, training baseline models, and comparing results to understand how different classification approaches behave on large, sparse, categorical datasets.",
@@ -233,7 +227,6 @@ CTRAnalysis/
     image: "/assets/images/project-7.jpg",
     tags: ["AI", "Policy", "Python", "Information Retrieval"],
     sourceCode: "https://github.com/emaverick2001/AIPolicyWebCrawler",
-    onclick: () => trackProjectOpened("AI Policy Web Crawler", "projectCard"),
     desc: "Crawl + categorize AI policy resources and visualize “attention” via a heat-style distribution map",
     overview:
       "AI Policy Web Crawler is a course project built for an Information Retrieval & Web Agents final (Option #11). The goal is to automatically collect notable AI/ML policy resources (past + present), organize them into meaningful categories, and produce an output that can be hosted as part of a policy timeline (“ancestry tree”) visualization. The project combines web crawling, lightweight IR-style processing, and visualization formatting to surface where policy attention concentrates over time and across themes.",
@@ -295,7 +288,6 @@ AIPolicyWebCrawler/
     image: "/assets/images/project-6.jpg",
     tags: ["DataScience", "AI", "HealthCare"],
     sourceCode: "https://github.com/emaverick2001/PHI-redactor",
-    onclick: () => trackProjectOpened("PHI-redactor", "projectCard"),
     desc: "Auto-detect and redact PHI information in datasets",
     overview:
       "A privacy-focused text/document processing tool designed to identify and redact Protected Health Information (PHI) from documents and images. PHI-redactor supports multiple file types (text, CSV/Excel, DOCX, and image/PDF inputs) and produces both redacted outputs and a structured audit report, making it easy to integrate into research workflows that require privacy-preserving data handling.",
@@ -400,7 +392,6 @@ Option B — Script:
     tags: ["Python", "PyQt", "C++", "Music Technology", "GUI Systems"],
     sourceCode: "https://github.com/emaverick2001/VisualScore",
     projectLink: "https://visual-score.com/",
-    onclick: () => trackProjectOpened("VisualScore", "projectCard"),
 
     desc: "Sheet music scoring software designed to support avant-garde and experimental composition.",
 
@@ -460,7 +451,6 @@ Option B — Script:
     image: "/assets/images/project-8.jpg",
     tags: ["Music", "Audio", "Visualization"],
     sourceCode: "https://github.com/emaverick2001/Pure-Data-Synthesizer",
-    onclick: () => trackProjectOpened("Pure Data Synthesizer", "projectCard"),
     desc: "Virtual modular-style synth + arpeggiator mapped to a MIDI keyboard, paired with a live GEM visualizer",
     overview:
       "A real-time creative instrument built in Pure Data that combines a playable synthesizer, an arpeggiator mode, and a live visualizer powered by GEM. A MIDI keyboard is used as the control surface: knobs modulate audio effects (volume, BPM/tempo, glide, resonance, reverb, chorus, delay, panning) and those same parameters also drive visual behaviors such as object size, spawn rate, particle life, rotation, and motion. The result is a hands-on environment for sound design, performance, and learning through immediate audio-visual feedback.",
@@ -545,7 +535,6 @@ Pure-Data-Synthesizer/
     tags: ["Databases", "SQL", "JavaScript"],
     sourceCode: "https://github.com/emaverick2001/Music-Recommendation-system",
     projectLink: "https://music-information-system.vercel.app/",
-    onclick: () => trackProjectOpened("Music Recommendation-system", "projectCard"),
     desc: "Music recommendation system powered by SQL queries over a relational music database",
     overview:
       "A user-centric music recommendation system that suggests songs using SQL-driven logic over a structured music database. The project emphasizes database design and query composition to support discovery—e.g., recommending tracks based on genres/artists, listening history, and similarity signals derived from metadata. A lightweight web interface allows users to submit preferences and receive recommended results.",

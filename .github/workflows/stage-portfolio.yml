@@ -1,0 +1,84 @@
+name: Stage Portfolio Preview
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit_sha:
+        description: Full 40-character commit SHA to stage
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate staging input
+        env:
+          COMMIT_SHA: ${{ inputs.commit_sha }}
+        run: |
+          if [[ ! "$COMMIT_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "commit_sha must be a full lowercase 40-character commit SHA" >&2
+            exit 1
+          fi
+
+      - name: Check out requested commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.commit_sha }}
+          fetch-depth: 1
+
+      - name: Verify checked-out commit
+        env:
+          COMMIT_SHA: ${{ inputs.commit_sha }}
+        run: |
+          ACTUAL_SHA="$(git rev-parse HEAD)"
+          if [[ "$ACTUAL_SHA" != "$COMMIT_SHA" ]]; then
+            echo "Checked-out commit does not match commit_sha" >&2
+            exit 1
+          fi
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.20.0
+          run_install: false
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: frontend/pnpm-lock.yaml
+
+      - name: Install frozen dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: frontend
+
+      - name: Verify staging release
+        run: pnpm run verify
+        working-directory: frontend
+        env:
+          PUBLIC_SITE_ENV: staging
+          PUBLIC_ANALYTICS_ENABLED: "false"
+
+      - name: Upload authenticated preview
+        id: deploy
+        uses: cloudflare/wrangler-action@v4
+        with:
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          command: pages deploy frontend/dist --project-name=${{ vars.CLOUDFLARE_PAGES_PROJECT }} --branch=review-${{ inputs.commit_sha }}
+
+      - name: Record preview locations
+        env:
+          COMMIT_SHA: ${{ inputs.commit_sha }}
+          DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment-url }}
+          BRANCH_ALIAS_URL: ${{ steps.deploy.outputs.pages-deployment-alias-url }}
+        run: |
+          echo "### Authenticated staging candidate" >> "$GITHUB_STEP_SUMMARY"
+          echo "Commit: \`$COMMIT_SHA\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "Immutable URL: $DEPLOYMENT_URL" >> "$GITHUB_STEP_SUMMARY"
+          echo "Branch alias: $BRANCH_ALIAS_URL" >> "$GITHUB_STEP_SUMMARY"

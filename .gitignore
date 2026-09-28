@@ -7,7 +7,8 @@ node_modules/
 # Package managers
 package-lock.json
 yarn.lock
-pnpm-lock.yaml
+/pnpm-lock.yaml
+/application/pnpm-lock.yaml
 
 # Python virtual environments
 __pycache__/
@@ -72,6 +73,9 @@ coverage/
 # Temporary files
 *.tmp
 *.temp
+
+# Local review-only artifacts (never deploy or commit)
+.private-review/
 
 # Database files
 *.db

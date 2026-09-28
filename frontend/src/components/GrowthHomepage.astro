@@ -1,0 +1,141 @@
+---
+import '../styles/growth-preview.css'
+import GrowthHeader from './GrowthHeader.astro'
+import GrowthFooterLinks from './GrowthFooterLinks.astro'
+import ThemeBootstrap from './ThemeBootstrap.astro'
+import ReleaseMetadata from './ReleaseMetadata.astro'
+interface Props { preview?: boolean }
+const { preview = false } = Astro.props
+const aboutHref = preview ? "/about-preview/" : "/about/"
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <ReleaseMetadata />
+    <ThemeBootstrap />
+    {preview && <meta name="robots" content="noindex, nofollow" />}
+    {!preview && <link rel="canonical" href="https://maverickespinosa.com/" />}
+    <title>AI/ML · Data · Interactive Systems | Maverick Espinosa</title>
+    <meta name="description" content="I build AI, data, and interactive systems that help people investigate difficult problems and act on what they learn." />
+  </head>
+  <body>
+    <a class="skip" href="#introduction">Skip to content</a>
+    <GrowthHeader preview={preview} {aboutHref} />
+    <main>
+    <div id="story">
+      <div class="botanical-stage" aria-hidden="true">
+        <div class="botanical-frame">
+          <canvas id="growth-canvas" width="768" height="768"></canvas>
+          <img data-growth-sheet src="/assets/images/growth/seed-keyframes.png" alt="" hidden />
+          <img data-growth-sheet src="/assets/images/growth/seedling-keyframes.png" alt="" hidden />
+          <img data-growth-sheet src="/assets/images/growth/plant-keyframes.png" alt="" hidden />
+        </div>
+        <div class="stage-key"><span class="stage-dot"></span><span id="stage-caption">Curiosity</span><span class="stage-number" id="stage-number">01 / 03</span></div>
+      </div>
+      <div class="story-copy">
+        <section id="introduction" class="chapter hero" data-stage="0" aria-labelledby="hero-title">
+          <p class="eyebrow">AI/ML · Data · Interactive Systems</p>
+          <h1 id="hero-title">Make complexity easier to understand.</h1>
+          <p class="intro">I build AI, data, and interactive systems that help people investigate difficult problems and act on what they learn.</p>
+          <a class="button" href="/projects/molecule-generation-with-rl/">Explore the molecule research <span aria-hidden="true">↗</span></a>
+          <p class="hero-secondary-actions">
+            <a class="resume-link" href="/projects/">View selected work</a>
+            <span class="divider" aria-hidden="true">·</span>
+            <a class="resume-link" href="/resume/">Resume</a>
+          </p>
+          <a class="quiet-link scroll-cue" href="#understand">Find shared understanding <span aria-hidden="true">↓</span></a>
+        </section>
+        <section id="understand" class="chapter" data-stage="1" aria-labelledby="need-title">
+          <p class="eyebrow">Shared understanding</p>
+          <h2 id="need-title">Get on the<br />same page.</h2>
+          <p class="intro">A conversation can change how we see a problem.</p>
+          <p class="support">I listen, ask questions, and make assumptions visible. With attention and dialogue, we can clarify what matters, what resources we have, and which constraints shape the next step.</p>
+          <a class="quiet-link" href="#work">Give the idea a form <span aria-hidden="true">↓</span></a>
+        </section>
+        <section id="work" class="chapter work" data-stage="2" aria-labelledby="work-title">
+          <p class="eyebrow">Useful action</p>
+          <h2 id="work-title">Make a new<br />perspective useful.</h2>
+          <p class="intro">Software, models, and visualization give us different ways to understand a problem.</p>
+          <p class="support">I start with a small interaction we can try and learn from. What happens next shapes the next question, and the next version of the tool.</p>
+          <a class="quiet-link" href="/projects/">Explore the work <span aria-hidden="true">↗</span></a>
+          <div class="method-loop" role="img" aria-label="Understand, try, learn, then return to understand.">
+            <p class="method" aria-hidden="true">Understand <span>→</span> Try <span>→</span> Learn</p>
+            <svg class="return-arrow" viewBox="0 0 280 30" aria-hidden="true"><path d="M260 2 V10 Q260 23 247 23 H48 Q35 23 35 10 V3 M30 8 L35 3 L40 8" /></svg>
+          </div>
+        </section>
+      </div>
+    </div>
+    <section class="home-note" id="current-project" aria-labelledby="coach-title">
+      <div>
+        <p class="eyebrow">Currently building</p>
+        <h2 id="coach-title">Daily Focus Coach</h2>
+        <p class="note-status">In development</p>
+      </div>
+      <div class="home-note-copy">
+        <p>I’m developing Daily Focus Coach to help people notice what has their attention, examine it from another perspective, and choose a useful next action.</p>
+        <p>I’m also exploring perspective-shifting techniques and higher-order algorithms and data structures for metacognitive thinking and complex problem solving.</p>
+        <a class="quiet-link" href={preview ? "/work-preview/#daily-focus-coach" : "/projects/"}>Explore the project <span aria-hidden="true">↗</span></a>
+        <details class="project-details concept-details">
+          <summary>Try a perspective shift <span aria-hidden="true">+</span></summary>
+          <p>A small demonstration of the coach’s core loop: notice what has your attention, change the frame, and choose one next action.</p>
+          <div class="demo">
+            <div class="demo-heading"><span>Attention → perspective → action</span><span class="demo-label">Local demonstration</span></div>
+            <form id="perspective-form">
+              <label for="focus">What has your attention right now?</label>
+              <textarea id="focus" rows="2" maxlength="240" required placeholder="A decision, problem, or responsibility..."></textarea>
+              <label class="field-label" for="perspective-lens">Choose another perspective</label>
+              <select id="perspective-lens">
+                <option value="self">Your perspective</option>
+                <option value="other">Another person</option>
+                <option value="system">The system</option>
+                <option value="future">Your future self</option>
+              </select>
+              <button id="perspective-submit" class="button" type="submit" disabled>Shift perspective <span aria-hidden="true">+</span></button>
+              <p class="demo-note">Nothing you enter is sent or saved.</p>
+            </form>
+            <div id="perspective-result" hidden>
+              <p class="saved-label">What has your attention</p>
+              <p id="focused-thought"></p>
+              <p class="saved-label" id="lens-name"></p>
+              <p class="support" id="perspective-prompt"></p>
+              <form id="action-form">
+                <label for="next-action">What is one useful next action?</label>
+                <textarea id="next-action" rows="2" maxlength="240" required placeholder="Make it small enough to try..."></textarea>
+                <button id="action-submit" class="button" type="submit" disabled>Choose this action <span aria-hidden="true">+</span></button>
+              </form>
+              <div id="action-result" hidden>
+                <p class="saved-label">Next action</p>
+                <p id="chosen-action"></p>
+                <p class="support">Try it, notice what happens, and let the result shape the next question.</p>
+                <button id="try-again" type="button" class="text-button">Try another focus <span aria-hidden="true">↗</span></button>
+              </div>
+            </div>
+            <p class="sr-only" id="capture-status" role="status"></p>
+            <noscript><p>This illustrative interaction needs JavaScript. No data is sent or stored.</p></noscript>
+          </div>
+        </details>
+      </div>
+    </section>
+    <section class="home-note" id="writing" aria-labelledby="writing-title">
+      <div>
+        <p class="eyebrow">Writing</p>
+        <h2 id="writing-title">Making an<br />idea clearer.</h2>
+      </div>
+      <div class="home-note-copy">
+        <p>I want this to be a place to think out loud, share ideas, and learn through explaining.</p>
+        <p>I’m interested in feedback loops, systems engineering, and how a different perspective can make a difficult problem easier to understand. My aim is to explore one question at a time, through examples and visual diagrams.</p>
+        <a class="quiet-link" href="/blog/">Visit my blog <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+    </main>
+    <footer id="about">
+      <div class="about-row"><div><p class="eyebrow">Research</p><h2>Attention.<br />Understanding.<br />Agency.</h2></div><div><p>I’m interested in tools that help people notice what matters, make informed choices, and grow in directions they choose.</p><a class="quiet-link" href={aboutHref}>About my approach <span aria-hidden="true">↗</span></a></div></div>
+      <GrowthFooterLinks />
+      <div class="footer-meta"><span>Maverick Espinosa</span>{preview && <span>Unpublished concept · Project content is illustrative</span>}<a href="#introduction">Back to the beginning ↑</a></div>
+    </footer>
+    <script src="../scripts/growth-preview.ts"></script>
+    <script src="../scripts/growth-theme.ts"></script>
+  </body>
+</html>

@@ -1,34 +1,92 @@
-name: Github Pages Astro CI
+name: Release Portfolio to GitHub Pages
 
 on:
-  push:
-    branches: [master]
   workflow_dispatch:
+    inputs:
+      commit_sha:
+        description: Full 40-character commit SHA to release
+        required: true
+        type: string
+      staged_sha:
+        description: Full 40-character SHA approved in authenticated staging
+        required: true
+        type: string
+      enable_analytics:
+        description: Enable the approved production-only analytics contract
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
+
+concurrency:
+  group: github-pages-production
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Validate release inputs
+        env:
+          COMMIT_SHA: ${{ inputs.commit_sha }}
+          STAGED_SHA: ${{ inputs.staged_sha }}
+        run: |
+          if [[ ! "$COMMIT_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "commit_sha must be a full lowercase 40-character commit SHA" >&2
+            exit 1
+          fi
+          if [[ ! "$STAGED_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "staged_sha must be a full lowercase 40-character commit SHA" >&2
+            exit 1
+          fi
+          if [[ "$COMMIT_SHA" != "$STAGED_SHA" ]]; then
+            echo "Production commit must match the reviewed staging commit" >&2
+            exit 1
+          fi
+
+      - name: Check out requested commit
         uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.commit_sha }}
+          fetch-depth: 1
+
+      - name: Verify checked-out commit
+        env:
+          COMMIT_SHA: ${{ inputs.commit_sha }}
+        run: |
+          ACTUAL_SHA="$(git rev-parse HEAD)"
+          if [[ "$ACTUAL_SHA" != "$COMMIT_SHA" ]]; then
+            echo "Checked-out commit does not match commit_sha" >&2
+            exit 1
+          fi
 
       - name: Install pnpm
-        run: npm install -g pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.20.0
+          run_install: false
 
-      - name: Install dependencies
-        run: pnpm install
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: frontend/pnpm-lock.yaml
+
+      - name: Install frozen dependencies
+        run: pnpm install --frozen-lockfile
         working-directory: frontend
 
-      - name: Build site
-        run: pnpx astro build
+      - name: Verify production release
+        run: pnpm run verify
         working-directory: frontend
+        env:
+          PUBLIC_SITE_ENV: production
+          PUBLIC_ANALYTICS_ENABLED: ${{ inputs.enable_analytics && 'true' || 'false' }}
 
-      - name: Upload pages artifact
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
           path: frontend/dist
@@ -41,6 +99,17 @@ jobs:
       id-token: write
     environment:
       name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Record deployed revision
+        env:
+          COMMIT_SHA: ${{ inputs.commit_sha }}
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          echo "### Production release" >> "$GITHUB_STEP_SUMMARY"
+          echo "Deployed commit: \`$COMMIT_SHA\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "Public URL: $PAGE_URL" >> "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,57 @@
+---
+import '../styles/global.css'
+import '../styles/growth-preview.css'
+import '../styles/blog.css'
+import type { CollectionEntry } from 'astro:content'
+import GrowthHeader from './GrowthHeader.astro'
+import GrowthFooterLinks from './GrowthFooterLinks.astro'
+import ThemeBootstrap from './ThemeBootstrap.astro'
+import ReleaseMetadata from './ReleaseMetadata.astro'
+
+interface Props { entry: CollectionEntry<'blog'> }
+const { entry } = Astro.props
+const formatter = new Intl.DateTimeFormat('en', { dateStyle: 'long', timeZone: 'UTC' })
+const categories = entry.data.categories ?? ['Reflection']
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <ReleaseMetadata />
+    <ThemeBootstrap />
+    <link rel="canonical" href={`https://maverickespinosa.com/blog/${entry.slug}/`} />
+    <title>{entry.data.title} | Maverick Espinosa</title>
+    <meta name="description" content={entry.data.description ?? ''} />
+  </head>
+  <body class="writing-article writing-page">
+    <a class="skip" href="#article-content">Skip to article</a>
+    <GrowthHeader homeHref="/" aboutHref="/about/" activeExplore="/blog/" />
+
+    <main id="article-content">
+      <header class="article-header">
+        <a class="article-back" href="/blog/"><span aria-hidden="true">←</span> All writing</a>
+        <p class="eyebrow">Writing</p>
+        <h1>{entry.data.title}</h1>
+        {entry.data.description && <p class="article-deck">{entry.data.description}</p>}
+        <div class="article-meta">
+          <time datetime={entry.data.publishDate.toISOString()}>{formatter.format(entry.data.publishDate)}</time>
+          <span aria-hidden="true">·</span>
+          <span>{categories.join(' · ')}</span>
+        </div>
+      </header>
+      {entry.data.image && <figure class="article-image"><img src={entry.data.image} alt="" /></figure>}
+      <article class="article-body"><slot /></article>
+      <nav class="article-end" aria-label="Article navigation">
+        <p class="eyebrow">Continue</p>
+        <a href="/blog/">Return to all writing <span aria-hidden="true">↗</span></a>
+      </nav>
+    </main>
+
+    <footer class="writing-footer article-footer">
+      <GrowthFooterLinks />
+      <div class="footer-meta"><span>Maverick Espinosa</span><a href="#article-content">Back to the beginning ↑</a></div>
+    </footer>
+    <script src="../scripts/growth-theme.ts"></script>
+  </body>
+</html>

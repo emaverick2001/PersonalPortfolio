@@ -1,0 +1,36 @@
+---
+import { navLink } from '../content/navInfo'
+import PostHog from './PostHog.astro'
+interface Props { preview?: boolean; homeHref?: string; aboutHref?: string; activeAbout?: boolean; activeWork?: boolean; activeExplore?: string }
+const { preview = false, homeHref = '#introduction', aboutHref = '/about/', activeAbout = false, activeWork = false, activeExplore } = Astro.props
+// About and Work are already visible in the main navigation, including aliases.
+const primaryRoutes = new Set(['/about/', '/about-preview/', '/projects/', '/work-preview/'])
+const exploreLinks = navLink.filter(link => !primaryRoutes.has(link.route))
+---
+    <PostHog />
+    <header class="site-header">
+      <a class="wordmark" href={homeHref}>Maverick Espinosa{preview && <span class="preview-label">Design preview</span>}</a>
+      <nav aria-label="Main navigation">
+        <div class="theme-choice" role="group" aria-label="Color theme"><button id="theme-day" type="button" aria-pressed="false">Day</button><button id="theme-night" type="button" aria-pressed="true">Night</button></div>
+        <a href={aboutHref} aria-current={activeAbout ? "page" : undefined}>About</a>
+        <a href={preview ? "/work-preview/" : "/projects/"} aria-current={activeWork ? "page" : undefined}>Work</a>
+        <details class="portfolio-menu"><summary>Explore</summary><div class="portfolio-menu-links">{exploreLinks.map(link => <a href={link.route} aria-current={activeExplore === link.route ? "page" : undefined}>{link.title}</a>)}</div></details>
+        <a href="mailto:emaverick2001@gmail.com">Contact <span aria-hidden="true">↗</span></a>
+      </nav>
+      <div class="reading-progress" aria-hidden="true"></div>
+    </header>
+
+<script>
+  const menu = document.querySelector<HTMLDetailsElement>('.portfolio-menu')
+  const trigger = menu?.querySelector('summary')
+  document.addEventListener('click', event => {
+    if (!menu?.open || !(event.target instanceof Node)) return
+    if (!menu.contains(event.target) ||
+        (event.target instanceof Element && event.target.closest('a'))) menu.open = false
+  })
+  document.addEventListener('keydown', event => {
+    if (event.key !== 'Escape' || !menu?.open) return
+    menu.open = false
+    trigger?.focus()
+  })
+</script>

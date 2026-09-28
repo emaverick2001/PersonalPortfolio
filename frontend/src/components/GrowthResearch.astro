@@ -1,0 +1,129 @@
+---
+import '../styles/growth-preview.css'
+import '../styles/research.css'
+import GrowthHeader from './GrowthHeader.astro'
+import GrowthFooterLinks from './GrowthFooterLinks.astro'
+import ThemeBootstrap from './ThemeBootstrap.astro'
+import ReleaseMetadata from './ReleaseMetadata.astro'
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <ReleaseMetadata />
+    <ThemeBootstrap />
+    <link rel="canonical" href="https://maverickespinosa.com/research/" />
+    <title>Research | Maverick Espinosa</title>
+    <meta name="description" content="Research interests and experience spanning graph-based systems, data engineering, clinical research workflows, and reactive sulfur species chemistry." />
+  </head>
+  <body class="research-page">
+    <a class="skip" href="#research-content">Skip to content</a>
+    <GrowthHeader homeHref="/" aboutHref="/about/" activeExplore="/research/" />
+
+    <main id="research-content">
+      <section id="research-interests" class="research-hero" aria-labelledby="research-title">
+        <div class="research-hero-copy">
+          <p class="eyebrow">Research</p>
+          <h1 id="research-title">Research</h1>
+          <p class="research-lead">
+            My research interests lie at the intersection of <strong>Graph Neural Networks</strong>, <strong>Agentic AI Systems</strong>, and <strong>Data Engineering</strong>. I’m drawn to problems that require bridging structured data processing with intelligent reasoning systems, enabling more robust, personalized, and explainable learning experiences. My current work spans from graph-based retrieval systems to data automation pipelines for clinical research.
+          </p>
+        </div>
+        <aside class="trajectory-card" aria-labelledby="trajectory-title">
+          <p class="research-index" aria-hidden="true">01</p>
+          <h2 id="trajectory-title">Research trajectory</h2>
+          <p>
+            My long-term research vision focuses on building <strong>graph-based intelligent systems</strong> capable of structured reasoning, multi-hop retrieval, and personalized interaction. I’m especially excited by opportunities that bridge machine learning, data engineering, and human-centered design, whether in education, research, or healthcare contexts.
+          </p>
+        </aside>
+      </section>
+
+      <section id="research-experience" class="research-experience" aria-labelledby="experience-title">
+        <header class="section-heading">
+          <p class="eyebrow">Experience</p>
+          <h2 id="experience-title">Following questions across disciplines.</h2>
+          <p>The material below retains the existing research descriptions while separating active interests, early-stage ideas, and prior lab work.</p>
+        </header>
+
+        <article class="research-entry research-entry-featured">
+          <header class="entry-heading">
+            <div>
+              <p class="entry-number" aria-hidden="true">02</p>
+              <h2>U Lab: Graph Neural Networks &amp; Intelligent Systems</h2>
+            </div>
+            <span class="entry-tag">Graph systems</span>
+          </header>
+          <p>
+            Directed by <strong>Professor Jiaxuan You</strong>, U Lab focuses on leveraging Graph Neural Networks for reasoning, representation learning, and multi-hop knowledge access. Our work explores how graph structure can enable models to move beyond static prompts and towards structured, explainable intelligence.
+          </p>
+          <div class="research-subentry">
+            <div class="subentry-heading"><h3>TinyTutor</h3><span>Ideation</span></div>
+            <p>
+              TinyTutor is an early-stage research project that explores how graph-based reasoning can support <strong>adaptive tutoring systems</strong>. The core idea is to create a graph-enhanced backbone that links concepts, dependencies, and skill progressions, enabling a small language model to act as an interactive, concept-aware tutor. I’m currently designing the system architecture, retrieval pipeline, and evaluation framework for multi-hop question answering and content personalization.
+            </p>
+          </div>
+        </article>
+
+        <article class="research-entry">
+          <header class="entry-heading">
+            <div>
+              <p class="entry-number" aria-hidden="true">03</p>
+              <h2>Center for Psychedelic &amp; Consciousness Research (CPCR)</h2>
+            </div>
+            <span class="entry-tag">Data workflows</span>
+          </header>
+          <p>
+            At <strong>Johns Hopkins CPCR</strong>, my work centers on automating and scaling clinical research data workflows, from ingestion to reporting. CPCR conducts world-leading psychedelic clinical trials, aiming to uncover therapeutic mechanisms and expand responsible psychedelic science. My contributions focus on building reliable, reproducible systems to support researchers and clinicians.
+          </p>
+          <div class="project-grid">
+            <section>
+              <h3>QA Library</h3>
+              <p>A centralized Python library that automates scoring for over <strong>100+ questionnaires and psychometric measures</strong> used in CPCR studies. It ensures reproducibility, version control, and harmonization of data across multiple clinical protocols.</p>
+            </section>
+            <section>
+              <h3>PHI Redactor</h3>
+              <p>A pipeline that <strong>automatically detects and redacts Protected Health Information (PHI)</strong> from unstructured text and tabular datasets. This enables compliant downstream processing and model training on de-identified data.</p>
+            </section>
+            <section>
+              <h3>Data Catalog System</h3>
+              <p>An internal data management platform for organizing, distributing, and versioning scored study datasets. This tool integrates tightly with the QA Library, AE/PD report generator, and other automation scripts to reduce manual overhead in research workflows.</p>
+            </section>
+            <section>
+              <h3>Protocol Deviations + Adverse Events (AE/PD) Automation</h3>
+              <p>A RedCap-based automation pipeline that ingests adverse event and protocol deviation data, parses and harmonizes it, and generates <strong>human-readable HTML reports</strong> for IRB and clinical teams. This reduced manual reporting time and improved standardization across studies.</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="research-entry">
+          <header class="entry-heading">
+            <div>
+              <p class="entry-number" aria-hidden="true">04</p>
+              <h2>Toscano Lab: Reactive Sulfur Species Chemistry</h2>
+            </div>
+            <span class="entry-tag">Wet lab</span>
+          </header>
+          <p>
+            In <strong>Toscano Lab</strong>, I contributed to experimental research investigating the chemistry and biological roles of <strong>hydropersulfides</strong>. Our work focused on developing reagents and methods to understand protein persulfidation and its biochemical effects.
+          </p>
+          <div class="research-subentry">
+            <h3>Lab Work</h3>
+            <ul>
+              <li>Developed and executed wet-lab protocols for hydropersulfide generation.</li>
+              <li>Contributed to characterization and analysis of reactive sulfur species.</li>
+              <li>Collaborated with interdisciplinary researchers to align experimental workflows with downstream data processing and visualization.</li>
+            </ul>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="research-footer">
+      <GrowthFooterLinks />
+      <div class="footer-meta"><span>Maverick Espinosa</span><a href="#research-content">Back to the beginning ↑</a></div>
+    </footer>
+
+    <script src="../scripts/growth-theme.ts"></script>
+  </body>
+</html>

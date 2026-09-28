@@ -1,0 +1,6 @@
+---
+import { navLink } from '../content/navInfo'
+import GrowthSocialLinks from './GrowthSocialLinks'
+---
+      <nav class="portfolio-links" aria-label="Portfolio pages">{navLink.map(link => <a href={link.route}>{link.title}</a>)}</nav>
+      <GrowthSocialLinks />

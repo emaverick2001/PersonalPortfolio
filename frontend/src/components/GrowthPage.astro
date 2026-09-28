@@ -1,0 +1,19 @@
+---
+import '../styles/growth-preview.css'
+import '../styles/work-preview.css'
+import GrowthHeader from './GrowthHeader.astro'
+import GrowthFooterLinks from './GrowthFooterLinks.astro'
+import ThemeBootstrap from './ThemeBootstrap.astro'
+import ReleaseMetadata from './ReleaseMetadata.astro'
+interface Props { title: string; description: string; preview?: boolean }
+const {title,description,preview=false}=Astro.props
+const canonical = `https://maverickespinosa.com${Astro.url.pathname}`
+---
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><ReleaseMetadata />{preview ? <meta name="robots" content="noindex,nofollow" /> : <link rel="canonical" href={canonical} />}<title>{title} | Maverick Espinosa</title><meta name="description" content={description} />
+<ThemeBootstrap />
+</head><body><a class="skip" href="#introduction">Skip to content</a><GrowthHeader {preview} homeHref={preview ? "/preview/" : "/"} aboutHref={preview ? "/about-preview/" : "/about/"} activeWork />
+<main class="work-page" id="introduction"><slot /></main>
+<footer><GrowthFooterLinks /><div class="footer-meta"><span>Maverick Espinosa</span>{preview && <span>Unpublished design preview</span>}<a href="mailto:emaverick2001@gmail.com">Start a conversation ↗</a></div></footer>
+<script src="../scripts/growth-theme.ts"></script><script src="../scripts/work-preview.ts"></script>
+</body></html>

@@ -5,9 +5,7 @@ import { RadioIcon, CodeIcon } from "lucide-react"
 import SiteLayout from "@layouts/SiteLayout.astro"
 
 export function getStaticPaths() {
-  return projects.map((project) => ({
-    params: { slug: slugify(project.name) },
-  }))
+  return []
 }
 
 const { slug } = Astro.params
