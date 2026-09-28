@@ -1,7 +1,7 @@
 # PostHog Analytics v1 Activation Design
 
 Date: 2026-09-28
-Status: Draft for owner review
+Status: Approved 2026-09-28
 
 ## Goal
 
