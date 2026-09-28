@@ -72,17 +72,7 @@ exclude_lines = [
 
 [tool.codespell]
 ignore-words-list = "dout, te, indicies, astroid, retuned, SME"
-skip = [
-    "data",
-    ".git",
-    "*.pyc",
-    "*.csv",
-    "*.json",
-    "*dist*",
-    "*pnpm-lock.yaml",
-    "*frontend/src/content/blog*",
-    "*inspirations.ts",
-]
+skip = "data,.git,*.pyc,*.csv,*.json,*dist*,*pnpm-lock.yaml,*frontend/src/content/blog*,*inspirations.ts"
 quiet-level = 3
 
 [tool.ruff]
