@@ -5,12 +5,23 @@ import { readFile } from "node:fs/promises"
 const personal = await readFile("dist/personal/index.html", "utf8")
 const background = await readFile("dist/background/index.html", "utf8")
 
+function assertReleaseIndexing(html) {
+  const environment = html.match(/<meta name="portfolio-environment" content="(production|staging)"/)?.[1]
+  assert.ok(environment, "expected a production or staging release environment")
+
+  if (environment === "production") {
+    assert.doesNotMatch(html, /<meta name="robots" content="noindex/i)
+  } else {
+    assert.match(html, /<meta name="robots" content="noindex, nofollow"/i)
+  }
+}
+
 function assertReleasedProfilePage(html, route) {
   assert.match(html, /class="site-header"/)
   assert.match(html, /id="theme-day"/)
   assert.match(html, /id="theme-night"/)
   assert.match(html, new RegExp(`rel="canonical" href="https://maverickespinosa\\.com${route}"`))
-  assert.doesNotMatch(html, /<meta name="robots" content="noindex/i)
+  assertReleaseIndexing(html)
   assert.equal((html.match(/<h1(?:\s|>)/g) ?? []).length, 1)
   assert.match(html, /aria-label="Portfolio pages"/)
 }
