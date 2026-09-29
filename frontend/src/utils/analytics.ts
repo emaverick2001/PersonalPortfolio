@@ -102,10 +102,15 @@ function trackAnchor(anchor: HTMLAnchorElement) {
   }
 
   const url = new URL(anchor.href, window.location.href)
+  const resumeAction = anchor.dataset.resumeAction
 
-  if (url.pathname === "/resume/" || url.pathname.endsWith("/Resume_09_20_2025.pdf")) {
-    const action = url.pathname === "/resume/" ? "open_hub" : anchor.hasAttribute("download") ? "download_pdf" : "view_pdf"
-    captureAnalytics("resume_clicked", { action, source_path: sourcePath })
+  if (url.pathname === "/resume/") {
+    captureAnalytics("resume_clicked", { action: "open_hub", source_path: sourcePath })
+    return
+  }
+
+  if (resumeAction === "view_pdf" || resumeAction === "download_pdf") {
+    captureAnalytics("resume_clicked", { action: resumeAction, source_path: sourcePath })
     return
   }
 

@@ -20,11 +20,11 @@ test("Resume page presents one current primary PDF with distinct actions", () =>
   assert.match(resume, /September 2026/)
   assert.match(
     resume,
-    /href="\/assets\/files\/Maverick_Espinosa_Resume\.pdf"[^>]*target="_blank"[^>]*>\s*View PDF/,
+    /href="\/assets\/files\/Maverick_Espinosa_Resume\.pdf"[^>]*target="_blank"[^>]*data-resume-action="view_pdf"[^>]*>\s*View PDF/,
   )
   assert.match(
     resume,
-    /href="\/assets\/files\/Maverick_Espinosa_Resume\.pdf"[^>]*download[^>]*>\s*Download PDF/,
+    /href="\/assets\/files\/Maverick_Espinosa_Resume\.pdf"[^>]*download[^>]*data-resume-action="download_pdf"[^>]*>\s*Download PDF/,
   )
   assert.equal((resume.match(/\/assets\/files\/Maverick_Espinosa_Resume\.pdf/g) ?? []).length, 2)
   assert.doesNotMatch(resume, /Resume_09_20_2025\.pdf|coming soon|TBD|future role-specific versions/i)
