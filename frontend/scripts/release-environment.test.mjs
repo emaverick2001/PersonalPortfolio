@@ -33,9 +33,16 @@ test("every built page exposes one valid release environment", () => {
 
 test("the built release environment applies one private-indexing and analytics boundary", () => {
   const environment = metaContent(pages[0].html, "portfolio-environment")
+  const analyticsExpected = environment === "production" && process.env.PUBLIC_ANALYTICS_ENABLED === "true"
+    ? "enabled"
+    : "disabled"
 
   for (const { path, html } of pages) {
-    assert.equal(metaContent(html, "portfolio-analytics"), "disabled", `${path} should keep analytics disabled`)
+    assert.equal(
+      metaContent(html, "portfolio-analytics"),
+      analyticsExpected,
+      `${path} should expose the expected analytics state`,
+    )
 
     if (environment === "staging") {
       const robotsDirectives = [...html.matchAll(/<meta name=["']robots["'] content=["']([^"']+)["']/g)]
