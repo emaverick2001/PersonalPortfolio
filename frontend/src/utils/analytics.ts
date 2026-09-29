@@ -1,4 +1,4 @@
-import type { CaptureResult } from "posthog-js"
+import type { CaptureOptions, CaptureResult } from "posthog-js"
 
 type AnalyticsEventProperties = {
   page_viewed: { path: string }
@@ -70,8 +70,12 @@ function currentPath() {
   return window.location.pathname
 }
 
-function captureAnalytics<Event extends AnalyticsEvent>(event: Event, properties: AnalyticsEventProperties[Event]) {
-  window.posthog?.capture(event, properties)
+function captureAnalytics<Event extends AnalyticsEvent>(
+  event: Event,
+  properties: AnalyticsEventProperties[Event],
+  options?: CaptureOptions,
+) {
+  window.posthog?.capture(event, properties, options)
 }
 
 function navigationRegion(nav: HTMLElement) {
@@ -105,7 +109,11 @@ function trackAnchor(anchor: HTMLAnchorElement) {
   const resumeAction = anchor.dataset.resumeAction
 
   if (url.pathname === "/resume/") {
-    captureAnalytics("resume_clicked", { action: "open_hub", source_path: sourcePath })
+    captureAnalytics(
+      "resume_clicked",
+      { action: "open_hub", source_path: sourcePath },
+      { send_instantly: true, transport: "sendBeacon" },
+    )
     return
   }
 
