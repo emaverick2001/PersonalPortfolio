@@ -45,10 +45,16 @@ import ReleaseMetadata from './ReleaseMetadata.astro'
               <p>Updated {entry.updatedLabel}</p>
             </div>
             <div class="resume-actions">
-              <a href={entry.pdfPath} target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">
+              <a
+                href={entry.pdfPath}
+                target="_blank"
+                rel="noopener noreferrer"
+                referrerpolicy="no-referrer"
+                data-resume-action="view_pdf"
+              >
                 View PDF
               </a>
-              <a href={entry.pdfPath} download>
+              <a href={entry.pdfPath} download data-resume-action="download_pdf">
                 Download PDF
               </a>
             </div>

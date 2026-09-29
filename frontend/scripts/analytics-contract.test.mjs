@@ -7,6 +7,7 @@ import { build } from "esbuild"
 const posthogSource = await readFile("src/components/PostHog.astro", "utf8")
 const analyticsSource = await readFile("src/utils/analytics.ts", "utf8")
 const inspirationsSource = await readFile("src/components/GrowthInspirations.astro", "utf8")
+const growthResumeSource = await readFile("src/components/GrowthResume.astro", "utf8")
 const growthHeaderSource = await readFile("src/components/GrowthHeader.astro", "utf8")
 const siteLayoutSource = await readFile("src/layouts/SiteLayout.astro", "utf8")
 const legacyHeaderSource = await readFile("src/components/Header.tsx", "utf8")
@@ -153,6 +154,13 @@ test("Delegated tracking remains the only click capture path", () => {
   for (const source of [legacyHeaderSource, projectGridSource, socialSource, projectSource]) {
     assert.doesNotMatch(source, /trackCTA|trackProjectOpened|\.onclick\(\)|onClick=\{[^}]*\.onclick\}/)
   }
+})
+
+test("Résumé actions use stable explicit markers instead of a versioned filename", () => {
+  assert.match(growthResumeSource, /data-resume-action=["']view_pdf["']/)
+  assert.match(growthResumeSource, /data-resume-action=["']download_pdf["']/)
+  assert.match(analyticsSource, /anchor\.dataset\.resumeAction/)
+  assert.doesNotMatch(analyticsSource, /Resume_09_20_2025/)
 })
 
 test("Analytics never reads or sends the homepage perspective interaction", () => {
