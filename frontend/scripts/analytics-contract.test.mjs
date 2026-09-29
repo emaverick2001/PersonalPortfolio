@@ -30,6 +30,82 @@ vm.runInNewContext(analyticsBundle.outputFiles[0].text, {
 })
 const { filterAnalyticsEvent, resolveReleaseEnvironment, shouldEnableAnalytics } = analyticsModule.exports
 
+function loadAnalyticsClickRuntime() {
+  class FakeElement {
+    closest() {
+      return null
+    }
+  }
+
+  class FakeHTMLElement extends FakeElement {
+    getAttribute() {
+      return null
+    }
+  }
+
+  class FakeAnchorElement extends FakeHTMLElement {
+    constructor(href) {
+      super()
+      this.href = href
+      this.dataset = {}
+    }
+
+    getAttribute(name) {
+      return name === "href" ? new URL(this.href).pathname : null
+    }
+
+    closest(selector) {
+      return selector === "a" ? this : null
+    }
+  }
+
+  const listeners = new Map()
+  const captures = []
+  const document = {
+    documentElement: { dataset: {} },
+    addEventListener(type, listener) {
+      listeners.set(type, listener)
+    },
+  }
+  const window = {
+    location: {
+      href: "https://maverickespinosa.com/",
+      hostname: "maverickespinosa.com",
+      origin: "https://maverickespinosa.com",
+      pathname: "/",
+    },
+    posthog: {
+      capture(...args) {
+        captures.push(args)
+      },
+    },
+  }
+  const module = { exports: {} }
+  const context = vm.createContext({
+    module,
+    exports: module.exports,
+    document,
+    window,
+    listeners,
+    URL,
+    Element: FakeElement,
+    HTMLElement: FakeHTMLElement,
+    HTMLAnchorElement: FakeAnchorElement,
+  })
+  vm.runInContext(analyticsBundle.outputFiles[0].text, context)
+
+  return {
+    analytics: module.exports,
+    captures,
+    clickResumeLink() {
+      vm.runInContext(
+        'listeners.get("click")({ target: new HTMLAnchorElement("https://maverickespinosa.com/resume/") })',
+        context,
+      )
+    },
+  }
+}
+
 const approvedEvents = [
   "contact_clicked",
   "inspirations_filter_changed",
@@ -161,6 +237,21 @@ test("Résumé actions use stable explicit markers instead of a versioned filena
   assert.match(growthResumeSource, /data-resume-action=["']download_pdf["']/)
   assert.match(analyticsSource, /anchor\.dataset\.resumeAction/)
   assert.doesNotMatch(analyticsSource, /Resume_09_20_2025/)
+})
+
+test("Résumé hub navigation uses an immediate beacon capture before leaving the page", () => {
+  const { analytics, captures, clickResumeLink } = loadAnalyticsClickRuntime()
+  analytics.installAnalytics()
+
+  clickResumeLink()
+
+  assert.deepEqual(captures.map(([event]) => event), ["page_viewed", "resume_clicked"])
+  const resumeCapture = captures.find(([event]) => event === "resume_clicked")
+  assert.deepEqual(JSON.parse(JSON.stringify(resumeCapture)), [
+    "resume_clicked",
+    { action: "open_hub", source_path: "/" },
+    { send_instantly: true, transport: "sendBeacon" },
+  ])
 })
 
 test("Analytics never reads or sends the homepage perspective interaction", () => {
