@@ -14,6 +14,7 @@ const projectGridSource = await readFile("src/components/ProjectGrid.tsx", "utf8
 const socialSource = await readFile("src/content/socials.tsx", "utf8")
 const projectSource = await readFile("src/content/projects.ts", "utf8")
 const releasedProject = await readFile("dist/projects/molecule-generation-with-rl/index.html", "utf8")
+const releasedResume = await readFile("dist/resume/index.html", "utf8")
 
 const analyticsBundle = await build({
   entryPoints: ["src/utils/analytics.ts"],
@@ -26,8 +27,151 @@ const analyticsModule = { exports: {} }
 vm.runInNewContext(analyticsBundle.outputFiles[0].text, {
   module: analyticsModule,
   exports: analyticsModule.exports,
+  URL,
 })
-const { filterAnalyticsEvent, resolveReleaseEnvironment, shouldEnableAnalytics } = analyticsModule.exports
+const {
+  filterAnalyticsEvent,
+  resolveAnalyticsExclusion,
+  resolveReleaseEnvironment,
+  shouldEnableAnalytics,
+} = analyticsModule.exports
+
+function createSessionStorage(sharedValues = new Map(), failure = null) {
+  return {
+    getItem(key) {
+      if (failure === "read") throw new Error("storage read failed")
+      return sharedValues.get(key) ?? null
+    },
+    setItem(key, value) {
+      if (failure === "write") throw new Error("storage write failed")
+      sharedValues.set(key, value)
+    },
+    removeItem(key) {
+      if (failure === "remove") throw new Error("storage remove failed")
+      sharedValues.delete(key)
+    },
+  }
+}
+
+function loadAnalyticsRuntime({
+  pathname = "/",
+  sharedStorage = new Map(),
+  storageFailure = null,
+  now = 1_000_000,
+} = {}) {
+  class FakeElement {
+    closest() {
+      return null
+    }
+  }
+
+  class FakeHTMLElement extends FakeElement {
+    getAttribute() {
+      return null
+    }
+  }
+
+  class FakeAnchorElement extends FakeHTMLElement {
+    constructor(href, options = {}) {
+      super()
+      this.rawHref = href
+      this.href = new URL(href, `https://maverickespinosa.com${pathname}`).href
+      this.dataset = options.dataset ?? {}
+      this.target = options.target ?? ""
+      this.download = options.download ?? false
+      this.nav = options.nav ?? null
+    }
+
+    getAttribute(name) {
+      if (name === "href") return this.rawHref
+      if (name === "target") return this.target || null
+      if (name === "aria-label" && this.nav) return this.nav
+      return null
+    }
+
+    hasAttribute(name) {
+      return name === "download" ? this.download : false
+    }
+
+    closest(selector) {
+      if (selector === "a") return this
+      if (selector === "nav" && this.nav) {
+        return new FakeHTMLElementWithLabel(this.nav)
+      }
+      return null
+    }
+  }
+
+  class FakeHTMLElementWithLabel extends FakeHTMLElement {
+    constructor(label) {
+      super()
+      this.label = label
+    }
+
+    getAttribute(name) {
+      return name === "aria-label" ? this.label : null
+    }
+  }
+
+  const listeners = new Map()
+  const captures = []
+  const document = {
+    documentElement: { dataset: {} },
+    addEventListener(type, listener) {
+      listeners.set(type, listener)
+    },
+  }
+  const window = {
+    location: {
+      href: `https://maverickespinosa.com${pathname}`,
+      hostname: "maverickespinosa.com",
+      origin: "https://maverickespinosa.com",
+      pathname,
+    },
+    posthog: {
+      capture(...args) {
+        captures.push(args)
+      },
+    },
+    sessionStorage: createSessionStorage(sharedStorage, storageFailure),
+  }
+  const module = { exports: {} }
+  const context = vm.createContext({
+    module,
+    exports: module.exports,
+    document,
+    window,
+    URL,
+    Date: class extends Date {
+      static now() {
+        return now
+      }
+    },
+    Element: FakeElement,
+    HTMLElement: FakeHTMLElement,
+    HTMLAnchorElement: FakeAnchorElement,
+  })
+  vm.runInContext(analyticsBundle.outputFiles[0].text, context)
+
+  return {
+    analytics: module.exports,
+    captures,
+    sharedStorage,
+    click(href, options = {}) {
+      const event = {
+        target: new FakeAnchorElement(href, options),
+        defaultPrevented: false,
+        metaKey: false,
+        ctrlKey: false,
+        shiftKey: false,
+        altKey: false,
+        button: 0,
+        ...options.event,
+      }
+      listeners.get("click")(event)
+    },
+  }
+}
 
 const approvedEvents = [
   "contact_clicked",
@@ -51,7 +195,7 @@ test("PostHog initializes only for the public production experience", () => {
 
 test("analytics requires an explicit production release on the canonical public route", () => {
   assert.equal(
-    shouldEnableAnalytics({ hostname: "maverickespinosa.com", pathname: "/research/" }, "production", true),
+    shouldEnableAnalytics({ hostname: "maverickespinosa.com", pathname: "/research/" }, "production", true, false),
     true,
   )
 
@@ -63,8 +207,80 @@ test("analytics requires an explicit production release on the canonical public 
     [{ hostname: "localhost", pathname: "/research/" }, "production", true],
     [{ hostname: "review-123.maverick-portfolio-staging.pages.dev", pathname: "/research/" }, "production", true],
   ]) {
-    assert.equal(shouldEnableAnalytics(location, environment, enabled), false)
+    assert.equal(shouldEnableAnalytics(location, environment, enabled, false), false)
   }
+
+  assert.equal(
+    shouldEnableAnalytics({ hostname: "maverickespinosa.com", pathname: "/research/" }, "production", true, true),
+    false,
+  )
+})
+
+test("the local exclusion control persists, clears, and cleans its URL before analytics initialization", () => {
+  const values = new Map()
+  const storage = createSessionStorage(values)
+  const replacements = []
+  const history = {
+    state: { preserved: true },
+    replaceState(...args) {
+      replacements.push(args)
+    },
+  }
+
+  assert.equal(resolveAnalyticsExclusion(
+    { href: "https://maverickespinosa.com/research/?topic=systems&analytics=exclude#evidence" },
+    history,
+    storage,
+  ), true)
+  assert.equal(values.get("portfolio.analytics.excluded.v1"), "true")
+  assert.deepEqual(replacements.at(-1), [history.state, "", "/research/?topic=systems#evidence"])
+
+  assert.equal(resolveAnalyticsExclusion(
+    { href: "https://maverickespinosa.com/projects/" },
+    history,
+    storage,
+  ), true)
+
+  assert.equal(resolveAnalyticsExclusion(
+    { href: "https://maverickespinosa.com/projects/?analytics=include#selected" },
+    history,
+    storage,
+  ), false)
+  assert.equal(values.has("portfolio.analytics.excluded.v1"), false)
+  assert.deepEqual(replacements.at(-1), [history.state, "", "/projects/#selected"])
+})
+
+test("local exclusion fails closed when browser storage is unavailable", () => {
+  const replacements = []
+  const history = {
+    state: null,
+    replaceState(...args) {
+      replacements.push(args)
+    },
+  }
+
+  for (const failure of ["read", "write", "remove"]) {
+    const command = failure === "write" ? "exclude" : failure === "remove" ? "include" : null
+    const href = command
+      ? `https://maverickespinosa.com/?analytics=${command}`
+      : "https://maverickespinosa.com/"
+    assert.equal(resolveAnalyticsExclusion(
+      { href },
+      history,
+      createSessionStorage(new Map(), failure),
+    ), true)
+  }
+
+  assert.deepEqual(replacements, [
+    [history.state, "", "/"],
+    [history.state, "", "/"],
+  ])
+})
+
+test("PostHog resolves the local exclusion before evaluating the production boundary", () => {
+  assert.match(posthogSource, /resolveAnalyticsExclusion/)
+  assert.match(posthogSource, /shouldEnableAnalytics\([^)]*analyticsExcluded/s)
+  assert.ok(posthogSource.indexOf("resolveAnalyticsExclusion") < posthogSource.indexOf("import(\"posthog-js\")"))
 })
 
 test("release environments reject missing or invalid production-build values", () => {
@@ -138,10 +354,16 @@ test("the final analytics payload filter rejects SDK events and strips undeclare
 })
 
 test("Only the seven approved event names are captured", () => {
-  const capturedEvents = [
-    ...analyticsSource.matchAll(/captureAnalytics\(["']([^"']+)["']/g),
-  ].map((match) => match[1]).sort()
+  const runtime = loadAnalyticsRuntime({ pathname: "/" })
+  runtime.analytics.installAnalytics()
+  runtime.click("mailto:hello@example.com")
+  runtime.click("/resume/", { target: "_blank" })
+  runtime.click("/projects/molecule-generation-with-rl/", { target: "_blank" })
+  runtime.click("https://github.com/emaverick2001", { nav: "Social and contact links" })
+  runtime.analytics.trackInspirationsFilterChanged("Games")
+  runtime.analytics.trackInspirationsSortChanged("desc")
 
+  const capturedEvents = runtime.captures.map(([event]) => event).sort()
   assert.deepEqual([...new Set(capturedEvents)], approvedEvents)
   assert.doesNotMatch(analyticsSource, /cta_clicked|section_viewed|doc_downloaded|web_vital/)
   assert.match(analyticsSource, /type AnalyticsEventProperties\s*=\s*\{/)
@@ -153,6 +375,96 @@ test("Delegated tracking remains the only click capture path", () => {
   for (const source of [legacyHeaderSource, projectGridSource, socialSource, projectSource]) {
     assert.doesNotMatch(source, /trackCTA|trackProjectOpened|\.onclick\(\)|onClick=\{[^}]*\.onclick\}/)
   }
+})
+
+test("same-tab résumé navigation is captured exactly once on the destination page", () => {
+  const sharedStorage = new Map()
+  const source = loadAnalyticsRuntime({ pathname: "/", sharedStorage })
+  source.analytics.installAnalytics()
+
+  source.click("/resume/")
+
+  assert.deepEqual(source.captures.map(([event]) => event), ["page_viewed"])
+  assert.equal(sharedStorage.size, 1)
+
+  const destination = loadAnalyticsRuntime({ pathname: "/resume/", sharedStorage, now: 1_000_500 })
+  destination.analytics.installAnalytics()
+
+  assert.deepEqual(JSON.parse(JSON.stringify(destination.captures)), [
+    ["resume_clicked", { action: "open_hub", source_path: "/" }],
+    ["page_viewed", { path: "/resume/" }],
+  ])
+  assert.equal(sharedStorage.size, 0)
+
+  const reload = loadAnalyticsRuntime({ pathname: "/resume/", sharedStorage, now: 1_001_000 })
+  reload.analytics.installAnalytics()
+  assert.deepEqual(reload.captures.map(([event]) => event), ["page_viewed"])
+})
+
+test("invalid or stale pending navigation payloads are removed without capture", () => {
+  for (const value of [
+    "not json",
+    JSON.stringify({ version: 1, event: "thought_submitted", properties: { thought: "private" }, created_at_ms: 1_000_000 }),
+    JSON.stringify({
+      version: 1,
+      event: "navigation_clicked",
+      properties: { destination: "/research/", region: "private note", source_path: "/" },
+      created_at_ms: 1_000_000,
+    }),
+    JSON.stringify({ version: 1, event: "resume_clicked", properties: { action: "open_hub", source_path: "/" }, created_at_ms: 1 }),
+  ]) {
+    const sharedStorage = new Map([["portfolio.analytics.pending.v1", value]])
+    const runtime = loadAnalyticsRuntime({ pathname: "/resume/", sharedStorage, now: 1_000_000 })
+    runtime.analytics.installAnalytics()
+
+    assert.deepEqual(runtime.captures.map(([event]) => event), ["page_viewed"])
+    assert.equal(sharedStorage.size, 0)
+  }
+})
+
+test("storage failure falls back to an immediate beacon capture without blocking navigation", () => {
+  const runtime = loadAnalyticsRuntime({ pathname: "/", storageFailure: "write" })
+  runtime.analytics.installAnalytics()
+
+  assert.doesNotThrow(() => runtime.click("/resume/"))
+  assert.deepEqual(JSON.parse(JSON.stringify(runtime.captures)), [
+    ["page_viewed", { path: "/" }],
+    [
+      "resume_clicked",
+      { action: "open_hub", source_path: "/" },
+      { send_instantly: true, transport: "sendBeacon" },
+    ],
+  ])
+})
+
+test("résumé PDF actions use stable explicit markers and immediate delivery", () => {
+  const runtime = loadAnalyticsRuntime({ pathname: "/resume/" })
+  runtime.analytics.installAnalytics()
+
+  runtime.click("/assets/files/Maverick_Espinosa_Resume.pdf", {
+    dataset: { resumeAction: "view_pdf" },
+    target: "_blank",
+  })
+  runtime.click("/assets/files/Maverick_Espinosa_Resume.pdf", {
+    dataset: { resumeAction: "download_pdf" },
+    download: true,
+  })
+
+  assert.deepEqual(JSON.parse(JSON.stringify(runtime.captures.slice(1))), [
+    [
+      "resume_clicked",
+      { action: "view_pdf", source_path: "/resume/" },
+      { send_instantly: true, transport: "sendBeacon" },
+    ],
+    [
+      "resume_clicked",
+      { action: "download_pdf", source_path: "/resume/" },
+      { send_instantly: true, transport: "sendBeacon" },
+    ],
+  ])
+  assert.match(releasedResume, /data-resume-action="view_pdf"/)
+  assert.match(releasedResume, /data-resume-action="download_pdf"/)
+  assert.doesNotMatch(analyticsSource, /Resume_09_20_2025/)
 })
 
 test("Analytics never reads or sends the homepage perspective interaction", () => {
