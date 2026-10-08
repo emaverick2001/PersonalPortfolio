@@ -29,7 +29,7 @@ const analyticsPropertyAllowlist = {
   inspirations_sort_changed: ["order"],
 } as const satisfies Record<AnalyticsEvent, readonly string[]>
 
-const transportProperties = ["token", "distinct_id", "$cookieless_mode"] as const
+const transportProperties = ["token", "distinct_id", "$cookieless_mode", "$process_person_profile"] as const
 const pendingAnalyticsKey = "portfolio.analytics.pending.v1"
 const pendingAnalyticsLifetimeMs = 60_000
 const analyticsExclusionKey = "portfolio.analytics.excluded.v1"
