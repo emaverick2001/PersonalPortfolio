@@ -186,6 +186,7 @@ test("the final analytics payload filter rejects SDK events and strips undeclare
     token: "project-token",
     distinct_id: "cookieless-request",
     $cookieless_mode: "always",
+    $process_person_profile: false,
   }
   const sdkPayload = {
     uuid: "00000000-0000-4000-8000-000000000000",

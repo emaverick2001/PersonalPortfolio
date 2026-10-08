@@ -22,7 +22,7 @@ const analyticsPropertyAllowlist = {
   inspirations_sort_changed: ["order"],
 } as const satisfies Record<AnalyticsEvent, readonly string[]>
 
-const transportProperties = ["token", "distinct_id", "$cookieless_mode"] as const
+const transportProperties = ["token", "distinct_id", "$cookieless_mode", "$process_person_profile"] as const
 
 export function filterAnalyticsEvent(capture: CaptureResult | null): CaptureResult | null {
   if (!capture || !Object.prototype.hasOwnProperty.call(analyticsPropertyAllowlist, capture.event)) return null
