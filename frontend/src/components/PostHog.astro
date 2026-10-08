@@ -1,10 +1,20 @@
 <script>
-  import { filterAnalyticsEvent, installAnalytics, shouldEnableAnalytics } from "../utils/analytics"
+  import {
+    filterAnalyticsEvent,
+    installAnalytics,
+    resolveAnalyticsExclusion,
+    shouldEnableAnalytics,
+  } from "../utils/analytics"
 
   const environment = document.querySelector<HTMLMetaElement>('meta[name="portfolio-environment"]')?.content
   const analyticsEnabled = document.querySelector<HTMLMetaElement>('meta[name="portfolio-analytics"]')?.content === "enabled"
+  const analyticsExcluded = resolveAnalyticsExclusion(window.location, window.history, {
+    getItem: key => window.localStorage.getItem(key),
+    setItem: (key, value) => window.localStorage.setItem(key, value),
+    removeItem: key => window.localStorage.removeItem(key),
+  })
 
-  if (shouldEnableAnalytics(window.location, environment, analyticsEnabled)) {
+  if (shouldEnableAnalytics(window.location, environment, analyticsEnabled, analyticsExcluded)) {
     // IP discard must be enabled in PostHog project settings before publication.
     import("posthog-js").then(({ default: posthog }) => posthog.init("phc_voeq3JqisO7ajA23SvGRdLrHgVKJJhQG13tfrukNGb", {
       api_host: "https://us.i.posthog.com",
